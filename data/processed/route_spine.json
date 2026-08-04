@@ -1,0 +1,191 @@
+{
+  "generated_by": "scripts/04_route.py",
+  "source": {
+    "chapter": 3,
+    "sha256": "a056bf7302e9a6e0640b7e061e53a02b2573d50e3ef5dd06a4c1ac9e8029dbce",
+    "note": "Fogg's own itinerary, as he reads it out in chapter 3"
+  },
+  "total_days_printed": 80,
+  "cumulative_days": [
+    0,
+    7,
+    20,
+    23,
+    36,
+    42,
+    64,
+    71,
+    80
+  ],
+  "nodes": [
+    {
+      "index": 0,
+      "name_in_text": "London",
+      "key": "london",
+      "printed_forms": [
+        "London"
+      ]
+    },
+    {
+      "index": 1,
+      "name_in_text": "Suez",
+      "key": "suez",
+      "printed_forms": [
+        "Suez",
+        "Suez viâ Mont Cenis and Brindisi"
+      ]
+    },
+    {
+      "index": 2,
+      "name_in_text": "Bombay",
+      "key": "bombay",
+      "printed_forms": [
+        "Bombay"
+      ]
+    },
+    {
+      "index": 3,
+      "name_in_text": "Calcutta",
+      "key": "calcutta",
+      "printed_forms": [
+        "Calcutta"
+      ]
+    },
+    {
+      "index": 4,
+      "name_in_text": "Hong Kong",
+      "key": "hong kong",
+      "printed_forms": [
+        "Hong Kong"
+      ]
+    },
+    {
+      "index": 5,
+      "name_in_text": "Yokohama",
+      "key": "yokohama",
+      "printed_forms": [
+        "Yokohama",
+        "Yokohama (Japan)"
+      ]
+    },
+    {
+      "index": 6,
+      "name_in_text": "San Francisco",
+      "key": "san francisco",
+      "printed_forms": [
+        "San Francisco"
+      ]
+    },
+    {
+      "index": 7,
+      "name_in_text": "New York",
+      "key": "new york",
+      "printed_forms": [
+        "New York"
+      ]
+    },
+    {
+      "index": 8,
+      "name_in_text": "London",
+      "key": "london",
+      "printed_forms": [
+        "London"
+      ]
+    }
+  ],
+  "legs": [
+    {
+      "index": 0,
+      "origin": 0,
+      "destination": 1,
+      "days": 7,
+      "mode_as_written": "rail and steamboats",
+      "modes": [
+        "railway",
+        "steamer"
+      ],
+      "via_as_written": [
+        "Mont Cenis",
+        "Brindisi"
+      ]
+    },
+    {
+      "index": 1,
+      "origin": 1,
+      "destination": 2,
+      "days": 13,
+      "mode_as_written": "steamer",
+      "modes": [
+        "steamer"
+      ],
+      "via_as_written": []
+    },
+    {
+      "index": 2,
+      "origin": 2,
+      "destination": 3,
+      "days": 3,
+      "mode_as_written": "rail",
+      "modes": [
+        "railway"
+      ],
+      "via_as_written": []
+    },
+    {
+      "index": 3,
+      "origin": 3,
+      "destination": 4,
+      "days": 13,
+      "mode_as_written": "steamer",
+      "modes": [
+        "steamer"
+      ],
+      "via_as_written": []
+    },
+    {
+      "index": 4,
+      "origin": 4,
+      "destination": 5,
+      "days": 6,
+      "mode_as_written": "steamer",
+      "modes": [
+        "steamer"
+      ],
+      "via_as_written": []
+    },
+    {
+      "index": 5,
+      "origin": 5,
+      "destination": 6,
+      "days": 22,
+      "mode_as_written": "steamer",
+      "modes": [
+        "steamer"
+      ],
+      "via_as_written": []
+    },
+    {
+      "index": 6,
+      "origin": 6,
+      "destination": 7,
+      "days": 7,
+      "mode_as_written": "rail",
+      "modes": [
+        "railway"
+      ],
+      "via_as_written": []
+    },
+    {
+      "index": 7,
+      "origin": 7,
+      "destination": 8,
+      "days": 9,
+      "mode_as_written": "steamer and rail",
+      "modes": [
+        "steamer",
+        "railway"
+      ],
+      "via_as_written": []
+    }
+  ]
+}

@@ -13,7 +13,8 @@ from verne80.evidence import MatchKind, QuoteCheck, check_quote
 from verne80.extractions import load_extraction, parse_extraction_json
 from verne80.normalize import fold_typography, match_key, normalize_quote
 from verne80.prompt import PROMPT_TEMPLATE, render_prompt
-from verne80.schema import ChapterExtraction, check_extraction
+from verne80.route import RouteLeg, RouteNode, RouteSpine, check_spine, parse_itinerary
+from verne80.schema import ChapterExtraction, Narrative, check_extraction, is_stale
 from verne80.sources import BOOK, GutenbergSource
 
 try:
@@ -28,16 +29,23 @@ __all__ = [
     "ChapterExtraction",
     "GutenbergSource",
     "MatchKind",
+    "Narrative",
     "QuoteCheck",
+    "RouteLeg",
+    "RouteNode",
+    "RouteSpine",
     "__version__",
     "check_chapters",
     "check_extraction",
     "check_quote",
+    "check_spine",
     "fold_typography",
+    "is_stale",
     "load_extraction",
     "match_key",
     "normalize_quote",
     "parse_extraction_json",
+    "parse_itinerary",
     "render_prompt",
     "split_chapters",
 ]

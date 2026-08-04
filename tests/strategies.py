@@ -26,12 +26,15 @@ _FAMILIES = {
 
 
 @st.composite
-def typographic_variant(draw: st.DrawFn, text: str) -> str:
+def typographic_variant(draw: st.DrawFn, text: str, *, vary_space: bool = True) -> str:
     """Re-spell punctuation and re-wrap whitespace without changing the words.
 
     Args:
         draw: Hypothesis' draw function.
         text: The string to vary.
+        vary_space: Whether to re-wrap whitespace too. Turn it off for text whose line
+            structure carries meaning — the itinerary table is one line per leg, so
+            re-wrapping it is not a typographic variant but a different document.
 
     Returns:
         A string that folds to the same key as ``text``.
@@ -43,7 +46,11 @@ def typographic_variant(draw: st.DrawFn, text: str) -> str:
             out.append(char)
         elif family is SPACES:
             # Whitespace collapses, so any run of any whitespace is equivalent.
-            out.append(draw(st.sampled_from([" ", "\n", "  ", " \n", "\t"])))
+            out.append(
+                draw(st.sampled_from([" ", "\n", "  ", " \n", "\t"]))
+                if vary_space
+                else char
+            )
         else:
             out.append(draw(st.sampled_from(family)))
     return "".join(out)
@@ -131,6 +138,55 @@ def gutenberg_document(
         )
     parts.append("*** END OF THE PROJECT GUTENBERG EBOOK TEST ***")
     return "\n".join(parts), count
+
+
+@st.composite
+def itinerary_table(draw: st.DrawFn) -> tuple[str, list[str], list[int]]:
+    """Render a synthetic itinerary in the book's printed form.
+
+    Reproduces all four traps at random: the first entry may wrap, the unit is a ditto
+    mark after the first line, a via clause may be italicised, and a destination may
+    carry a parenthetical that the next origin drops.
+
+    Returns:
+        The table text, the node names in order, and the leg day counts.
+    """
+    places = draw(
+        st.lists(
+            st.text(alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ", min_size=3, max_size=8),
+            min_size=3,
+            max_size=9,
+            unique=True,
+        )
+    )
+    # Close the cycle, as the real table does.
+    names = [*places, places[0]]
+    days = draw(
+        st.lists(
+            st.integers(min_value=1, max_value=40),
+            min_size=len(names) - 1,
+            max_size=len(names) - 1,
+        )
+    )
+
+    lines: list[str] = []
+    for index, day in enumerate(days):
+        origin, destination = names[index], names[index + 1]
+        printed = destination
+        if draw(st.booleans()):
+            printed = f"{destination} (SOMEWHERE)"
+        if draw(st.booleans()):
+            printed = f"{printed} _viâ_ {draw(st.sampled_from(['ALPHA', 'BETA']))}"
+        mode = draw(st.sampled_from(["steamer", "rail", "rail and steamboats"]))
+        unit = "days" if index == 0 else "”"
+        entry = f"From {origin} to {printed}, by {mode} ...... {day} {unit}"
+        if index == 0 and draw(st.booleans()):
+            # Wrap it the way the real first entry wraps: after "by <word> and".
+            entry = entry.replace(" ......", "\n......", 1)
+        lines.append(entry)
+    lines.append("--------")
+    lines.append(f"Total ............ {sum(days)} days.”")
+    return "\n".join(lines) + "\n", names, days
 
 
 @st.composite

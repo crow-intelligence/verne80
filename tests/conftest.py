@@ -178,6 +178,17 @@ def valid_extraction() -> dict:
 
 
 @pytest.fixture
+def real_spine():
+    """Fogg's itinerary, parsed from the committed chapter 3."""
+    from verne80.route import parse_itinerary
+
+    source = CHAPTERS_DIR / "chapter_03.txt"
+    if not source.exists():
+        pytest.skip("run `uv run python scripts/01_chapters.py` first")
+    return parse_itinerary(source.read_text(encoding="utf-8"))
+
+
+@pytest.fixture
 def pg103_raw() -> str:
     """The committed Gutenberg text, for the integration tests."""
     if not PG103.exists():
