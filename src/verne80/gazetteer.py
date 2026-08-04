@@ -18,16 +18,14 @@ traded off against them:
    are separated by one of them not being a place, not by being three thousand
    kilometres from the route.
 1. **name** — bucketed, not continuous, so proximity can break ties *within* a bucket
-  and
-   never across one. A differently-named place near the route must not beat an
+   and never across one. A differently-named place near the route must not beat an
    exactly-named one further off; the text named a station, and its name is stronger
    evidence than its neighbourhood.
 2. **route proximity** — the signal that is ours alone. A "Springfield" two hundred
    kilometres off the Pacific Railroad beats a "Springfield" in Queensland, and no
    measure of Wikidata prominence would ever have said so.
-3. **prominence** — last, on purpose. Prominence is exactly the thing that sends a
-  village
-   on the route to the wrong continent's capital city, so it may only break a tie the
+3. **prominence** — last, on purpose. Prominence is exactly what sends a village on
+   the route to the wrong continent's capital city, so it may only break a tie the
    first three terms left standing.
 
 **Confidence is not the winner's score.** It is the score discounted by how close the
@@ -41,15 +39,27 @@ from __future__ import annotations
 
 import json
 import math
+import time
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, field, replace
 from datetime import UTC, datetime
 from pathlib import Path
 
+import httpx
+from tenacity import (
+    retry,
+    retry_if_exception,
+    stop_after_attempt,
+    wait_exponential,
+)
+
 from verne80.normalize import match_key, normalize_quote, place_key
 
 __all__ = [
     "GazetteerCache",
+    "GazetteerClient",
+    "OfflineError",
+    "RateLimiter",
     "PlaceCandidate",
     "Resolution",
     "best_candidate",
@@ -75,6 +85,10 @@ USER_AGENT = (
 # requests for nothing, whereas incrementing an integer is a decision visible in the
 # diff.
 QUERY_VERSION = 1
+
+# The statuses worth trying again: rate limiting, and the transient server faults
+# a public endpoint occasionally returns under load.
+_RETRY_STATUS = frozenset({429, 500, 502, 503, 504})
 
 EARTH_RADIUS_KM = 6371.0088
 
@@ -107,10 +121,9 @@ class PlaceCandidate:
 
     Attributes:
         qid: ``"Q1156"`` for Wikidata, ``"osm:relation/2088990"`` for Nominatim.
-        Prefixed
-            so an OSM identifier can never masquerade as a Wikidata entity — the two
-            carry different licences and the distinction has to survive into the
-            attribution.
+            Prefixed so an OSM identifier can never masquerade as a Wikidata entity —
+            the two carry different licences, and that distinction has to survive into
+            the attribution.
         label: The modern English label, e.g. ``"Mumbai"``.
         matched_alias: The string that actually matched, e.g. ``"Bombay"``. This is what
             makes the 1872→modern change legible: the alias is the old name and the
@@ -150,11 +163,10 @@ class Resolution:
     """One place name, answered, with the reason and the doubt recorded beside it.
 
     Attributes:
-        modern_name: The entity's present-day label, or ``None`` when nothing
-        resolved. name_changed: Whether the 1872 spelling and the modern label are
-        different names. confidence: How sure, discounted by how close the runner-up
-        came. n_candidates: How many the source offered. More than one means the popup
-        shows
+        modern_name: The entity's present-day label, or ``None`` when nothing resolved.
+        name_changed: Whether the 1872 spelling and the modern label differ.
+        confidence: How sure, discounted by how close the runner-up came.
+        n_candidates: How many the source offered. More than one means the popup shows
             runners-up, which is what makes a correction a ten-second decision.
         source: ``wikidata`` | ``nominatim`` | ``curated`` | ``local`` | ``none``.
         why: One line saying how this was arrived at, in the house register.
@@ -857,3 +869,154 @@ class GazetteerCache:
         self.path.write_text(
             json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
         )
+
+
+def _worth_retrying(error: BaseException) -> bool:
+    """Whether an error is one the endpoint might answer differently next time.
+
+    Retrying every ``HTTPError`` would try a 400 four times over half a minute, which
+    cannot succeed and is rude to a free public service. Only rate limiting, transient
+    server faults and transport failures earn another attempt.
+
+    Args:
+        error: What was raised.
+
+    Returns:
+        True when trying again might help.
+    """
+    if isinstance(error, httpx.HTTPStatusError):
+        return error.response.status_code in _RETRY_STATUS
+    return isinstance(error, httpx.TransportError)
+
+
+class OfflineError(RuntimeError):
+    """Raised when an answer is wanted, the cache does not have it, and we may not ask.
+
+    Attributes:
+        args: The key that was missing, so the message names what to fetch.
+    """
+
+
+@dataclass(slots=True)
+class RateLimiter:
+    """One request per interval, because both endpoints ask for that in writing.
+
+    Wikidata's query service and Nominatim both publish usage policies with a one-per-
+    second ceiling for unauthenticated clients. Three hundred and fifty lookups at that
+    rate is six minutes, which is a coffee — and the cache means it happens once.
+
+    Attributes:
+        interval: Seconds between requests.
+    """
+
+    interval: float = 1.1
+    _last: float = 0.0
+
+    def wait(self) -> None:
+        """Sleep for whatever is left of the interval."""
+        elapsed = time.monotonic() - self._last
+        if self._last and elapsed < self.interval:
+            time.sleep(self.interval - elapsed)
+        self._last = time.monotonic()
+
+
+@dataclass(slots=True)
+class GazetteerClient:
+    """Ask Wikidata for candidates, through the cache.
+
+    The only part of this module that touches the network, and it is a thin shell: it
+    finds candidates and hands them to :func:`resolve_place`, which decides. Everything
+    interesting happens on the pure side.
+
+    ``offline=True`` never opens a socket. A key the cache does not have raises
+    :class:`OfflineError` rather than silently returning nothing, so an offline run
+    missing data says which key it wants rather than quietly producing a thinner map.
+
+    Attributes:
+        cache: Where answers are kept.
+        offline: Whether a cache miss may go to the network.
+        limiter: The rate limiter, shared across every endpoint.
+    """
+
+    cache: GazetteerCache
+    offline: bool = False
+    limiter: RateLimiter = field(default_factory=RateLimiter)
+    transport: object | None = None
+    _fetched: int = 0
+
+    @property
+    def fetched(self) -> int:
+        """How many requests this client has actually made.
+
+        Returns:
+            The count, which the run log prints so the etiquette budget is visible.
+        """
+        return self._fetched
+
+    def lookup(self, name: str) -> list[PlaceCandidate]:
+        """Candidates for one place name, from the cache or from Wikidata.
+
+        Args:
+            name: The place as the 1872 text spells it, or a curated modern spelling.
+
+        Returns:
+            The candidates, possibly empty — an endpoint that had nothing is an answer.
+
+        Raises:
+            OfflineError: If the cache lacks the key and the network is not allowed.
+
+        Contract:
+            - A cached key never goes to the network, including one that cached an
+              empty list.
+            - Never raises for a network failure: a failed fetch is reported as no
+              candidates and is not cached, so a later run retries it.
+        """
+        key = GazetteerCache.key("wikidata", name)
+        cached = self.cache.get(key)
+        if cached is not None:
+            return cached
+        if self.offline:
+            raise OfflineError(
+                f"{key} is not cached and --offline was given; "
+                "re-run without it to fetch this one"
+            )
+
+        candidates = self._fetch(name)
+        self.cache.put(key, name, candidates, WDQS_ENDPOINT)
+        return candidates
+
+    def _fetch(self, name: str) -> list[PlaceCandidate]:
+        """One SPARQL round-trip, rate-limited and retried where that could help."""
+        self.limiter.wait()
+        self._fetched += 1
+        try:
+            response = self._get(place_search_query(name))
+        except httpx.HTTPError:
+            return []
+        bindings = response.get("results", {}).get("bindings", [])
+        return merge_candidates(parse_binding(row) for row in bindings)
+
+    @retry(
+        stop=stop_after_attempt(4),
+        wait=wait_exponential(multiplier=2, max=30),
+        retry=retry_if_exception(_worth_retrying),
+        reraise=True,
+    )
+    def _get(self, query: str) -> dict:
+        """Send one query, honouring Retry-After when asked to slow down."""
+        headers = {
+            "User-Agent": USER_AGENT,
+            "Accept": "application/sparql-results+json",
+        }
+        kwargs = {"transport": self.transport} if self.transport is not None else {}
+        with httpx.Client(timeout=60.0, headers=headers, **kwargs) as client:
+            response = client.get(
+                WDQS_ENDPOINT, params={"query": query, "format": "json"}
+            )
+            if response.status_code in _RETRY_STATUS:
+                after = response.headers.get("Retry-After")
+                if after and after.isdigit():
+                    time.sleep(min(int(after), 60))
+                response.raise_for_status()
+            response.raise_for_status()
+            return response.json()

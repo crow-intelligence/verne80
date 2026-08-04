@@ -360,3 +360,103 @@ class TestGazetteerProperties:
         assert all(
             nearest <= haversine_km((lat, lon), anchor) + 1e-6 for anchor in anchors
         )
+
+
+class TestTheClient:
+    """The only part that touches the network — and never in a test."""
+
+    @staticmethod
+    def _transport(payload, status=200, calls=None):
+        import httpx
+
+        def handler(request):
+            if calls is not None:
+                calls.append(request)
+            return httpx.Response(status, json=payload)
+
+        return httpx.MockTransport(handler)
+
+    def _client(self, tmp_path, payload, **kwargs):
+        from verne80.gazetteer import GazetteerClient
+
+        return GazetteerClient(
+            cache=GazetteerCache(path=tmp_path / "cache.json"),
+            transport=self._transport(payload),
+            **kwargs,
+        )
+
+    def test_a_lookup_parses_what_the_endpoint_returned(self, tmp_path):
+        payload = {
+            "results": {
+                "bindings": [
+                    {
+                        "item": {"value": "http://www.wikidata.org/entity/Q1156"},
+                        "enLabel": {"value": "Mumbai"},
+                        "alias": {"value": "Bombay"},
+                        "lat": {"value": "19.0761"},
+                        "lon": {"value": "72.8775"},
+                    }
+                ]
+            }
+        }
+        candidates = self._client(tmp_path, payload).lookup("Bombay")
+        assert [c.qid for c in candidates] == ["Q1156"]
+
+    def test_a_cached_name_never_reaches_the_network(self, tmp_path):
+        import httpx
+
+        calls = []
+        from verne80.gazetteer import GazetteerClient
+
+        cache = GazetteerCache(path=tmp_path / "cache.json")
+        cache.put(GazetteerCache.key("wikidata", "Bombay"), "Bombay", [MUMBAI], "x")
+        client = GazetteerClient(
+            cache=cache, transport=httpx.MockTransport(lambda r: calls.append(r))
+        )
+        assert client.lookup("Bombay") == [MUMBAI]
+        assert calls == []
+        assert client.fetched == 0
+
+    def test_a_cached_empty_answer_also_never_refetches(self, tmp_path):
+        """An endpoint that had nothing is an answer; asking again would be rude."""
+        from verne80.gazetteer import GazetteerClient
+
+        cache = GazetteerCache(path=tmp_path / "cache.json")
+        cache.put(GazetteerCache.key("wikidata", "Kholby"), "Kholby", [], "x")
+        client = GazetteerClient(cache=cache, transport=self._transport({}))
+        assert client.lookup("Kholby") == []
+        assert client.fetched == 0
+
+    def test_offline_names_the_key_it_is_missing(self, tmp_path):
+        from verne80.gazetteer import GazetteerClient, OfflineError
+
+        client = GazetteerClient(
+            cache=GazetteerCache(path=tmp_path / "cache.json"), offline=True
+        )
+        with pytest.raises(OfflineError, match="wikidata:search:v1:kholby"):
+            client.lookup("Kholby")
+
+    def test_a_network_failure_is_no_candidates_not_a_crash(self, tmp_path):
+        """A 400 is not worth retrying, so the failure path runs in no time."""
+        client = self._client(tmp_path, {"error": "boom"}, offline=False)
+        client.transport = self._transport({}, status=400)
+        client.limiter.interval = 0.0
+        assert client.lookup("Suez") == []
+
+    def test_the_statuses_worth_retrying_are_the_ones_that_pass(self):
+        """Rate limits and server faults. A 400 is our mistake, not theirs."""
+        from verne80.gazetteer import _RETRY_STATUS
+
+        assert 429 in _RETRY_STATUS and 503 in _RETRY_STATUS
+        assert 400 not in _RETRY_STATUS and 404 not in _RETRY_STATUS
+
+    def test_the_user_agent_names_a_contact(self):
+        from verne80.gazetteer import USER_AGENT
+
+        assert "crowintelligence.org" in USER_AGENT
+        assert "verne80" in USER_AGENT
+
+    def test_the_limiter_defaults_above_one_second(self):
+        from verne80.gazetteer import RateLimiter
+
+        assert RateLimiter().interval >= 1.0

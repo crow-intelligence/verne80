@@ -68,6 +68,9 @@ ignore = ["D105", "D107"]
 # tests/test_prompt.py asserts. Two of its lines are 89 characters; rewrapping them to
 # satisfy the linter would break the thing the module exists to guarantee.
 "src/verne80/prompt.py" = ["E501"]
+# MAP_TEMPLATE is HTML, CSS and JavaScript in a string. Wrapping it to Python's column
+# limit would make the page harder to read to satisfy a rule about Python.
+"src/verne80/reviewmap.py" = ["E501"]
 # The `mode="before"` validators receive whatever JSON the model emitted, before any
 # coercion has happened. `Any` is the honest annotation there — narrowing it would be a
 # claim about untrusted input that the validator exists precisely to check.

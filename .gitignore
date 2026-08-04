@@ -3,6 +3,7 @@
 # confirmations and are project data. Only the regenerable reports are ignored.
 data/prompts/chapter_*.txt
 data/review/evidence_queue.md
+data/review/places_map.html
 data/review/evidence_report.json
 
 # Python-generated files
