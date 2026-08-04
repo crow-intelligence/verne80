@@ -1,8 +1,8 @@
 {
 "chapter": 4,
 "title": "IN WHICH PHILEAS FOGG ASTOUNDS PASSEPARTOUT, HIS SERVANT",
-"summary_hover": "Phileas Fogg surprises Passepartout by announcing their immediate departure on a journey around the world in eighty days.",
-"summary_detail": "Fogg returns home unexpectedly and orders a stunned Passepartout to pack a single carpet-bag for an immediate journey around the world. Fogg places twenty thousand pounds in the bag, gives his whist winnings to a beggar, and they board a train at Charing Cross, just as Passepartout realizes he left his gas light burning.",
+"summary_hover": "Phileas Fogg stuns Passepartout by announcing their immediate departure to travel around the world in eighty days, boarding a train that very evening.",
+"summary_detail": "Returning home earlier than usual, Phileas Fogg shocks his new servant, Passepartout, with the news that they are leaving for a journey around the world. Packing only a carpet-bag containing twenty thousand pounds, they rush to Charing Cross station. After Fogg gives his whist winnings to a beggar and bids his Reform Club friends farewell, the two depart by train.",
 "places_visited": [
 {
 "name_in_text": "Reform Club",
@@ -12,12 +12,12 @@
 {
 "name_in_text": "Saville Row",
 "role": "departure",
-"evidence": "at the end of Saville Row they took a cab and drove rapidly to Charing Cross."
+"evidence": "he was not due in Saville Row until precisely midnight."
 },
 {
 "name_in_text": "Charing Cross",
-"role": "arrival",
-"evidence": "The cab stopped before the railway station at twenty minutes past eight."
+"role": "departure",
+"evidence": "at the end of Saville Row they took a cab and drove rapidly to Charing Cross."
 },
 {
 "name_in_text": "Sydenham",
@@ -28,52 +28,182 @@
 "places_mentioned": [
 {
 "name_in_text": "Dover",
-"evidence": "We start for Dover and Calais in ten minutes."
+"evidence": "“We start for Dover and Calais in ten minutes.”"
 },
 {
 "name_in_text": "Calais",
-"evidence": "We start for Dover and Calais in ten minutes."
+"evidence": "“We start for Dover and Calais in ten minutes.”"
 },
 {
 "name_in_text": "France",
-"evidence": "Passepartout, who had been away from France five years, would not be sorry to set foot on his native soil again."
+"evidence": "Passepartout, who had been away from France five years"
 },
 {
 "name_in_text": "Paris",
-"evidence": "Perhaps they would go as far as Paris, and it would do his eyes good to see Paris once more."
+"evidence": "Perhaps they would go as far as Paris"
+},
+{
+"name_in_text": "Bank of England",
+"evidence": "a goodly roll of Bank of England notes"
 },
 {
 "name_in_text": "London",
-"evidence": "You do not forget when you are due in London again?"
+"evidence": "“You do not forget when you are due in London again?”"
 }
 ],
 "people": [
 {
 "name_in_text": "Phileas Fogg",
-"role": "The master departing on a journey around the world.",
-"evidence": "“Yes,” returned Phileas Fogg. “We are going round the world.”"
+"role": "the master embarking on the journey",
+"evidence": "Having won twenty guineas at whist, and taken leave of his friends, Phileas Fogg, at twenty-five minutes past seven, left the Reform Club."
 },
 {
 "name_in_text": "Passepartout",
-"role": "Fogg's servant, who is astounded by the sudden departure.",
-"evidence": "Passepartout opened wide his eyes, raised his eyebrows, held up his hands, and seemed about to collapse, so overcome was he with stupefied astonishment."
+"role": "Fogg's servant",
+"evidence": "Passepartout, who had conscientiously studied the programme of his duties, was more than surprised"
+},
+{
+"name_in_text": "cabman",
+"role": "driver who took them to the station",
+"evidence": "after paying the cabman, was about to enter the station"
 },
 {
 "name_in_text": "beggar-woman",
-"role": "A poor woman with a child who asks for alms at the station.",
+"role": "a poor woman at the station who asks for alms",
 "evidence": "when a poor beggar-woman, with a child in her arms... approached, and mournfully asked for alms."
 },
 {
+"name_in_text": "child",
+"role": "carried by the beggar-woman",
+"evidence": "with a child in her arms"
+},
+{
+"name_in_text": "five friends of the Reform",
+"role": "Fogg's whist partners seeing him off",
+"evidence": "he perceived his five friends of the Reform."
+},
+{
 "name_in_text": "Ralph",
-"role": "One of Fogg's friends from the Reform Club, present at the station.",
+"role": "one of Fogg's friends at the station",
 "evidence": "“Oh, that would be quite unnecessary, Mr. Fogg,” said Ralph politely."
 },
 {
 "name_in_text": "Stuart",
-"role": "One of Fogg's friends from the Reform Club, present at the station.",
+"role": "one of Fogg's friends at the station",
 "evidence": "“You do not forget when you are due in London again?” asked Stuart."
 }
 ],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Reform Club",
+"between_from": null,
+"between_to": null,
+"evidence": "Phileas Fogg, at twenty-five minutes past seven, left the Reform Club."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Saville Row",
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg repaired to his bedroom, and called out, “Passepartout!”"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Saville Row",
+"between_from": null,
+"between_to": null,
+"evidence": "Passepartout made his appearance."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": "Saville Row",
+"between_to": "Charing Cross",
+"evidence": "at the end of Saville Row they took a cab and drove rapidly to Charing Cross."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": null,
+"between_from": "Saville Row",
+"between_to": "Charing Cross",
+"evidence": "at the end of Saville Row they took a cab and drove rapidly to Charing Cross."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Charing Cross",
+"between_from": null,
+"between_to": null,
+"evidence": "The cab stopped before the railway station at twenty minutes past eight."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Charing Cross",
+"between_from": null,
+"between_to": null,
+"evidence": "Passepartout jumped off the box and followed his master"
+},
+{
+"name_in_text": "cabman",
+"at_name_in_text": "Charing Cross",
+"between_from": null,
+"between_to": null,
+"evidence": "after paying the cabman, was about to enter the station"
+},
+{
+"name_in_text": "beggar-woman",
+"at_name_in_text": "Charing Cross",
+"between_from": null,
+"between_to": null,
+"evidence": "when a poor beggar-woman, with a child in her arms... approached, and mournfully asked for alms."
+},
+{
+"name_in_text": "child",
+"at_name_in_text": "Charing Cross",
+"between_from": null,
+"between_to": null,
+"evidence": "with a child in her arms"
+},
+{
+"name_in_text": "five friends of the Reform",
+"at_name_in_text": "Charing Cross",
+"between_from": null,
+"between_to": null,
+"evidence": "he perceived his five friends of the Reform."
+},
+{
+"name_in_text": "Ralph",
+"at_name_in_text": "Charing Cross",
+"between_from": null,
+"between_to": null,
+"evidence": "“Oh, that would be quite unnecessary, Mr. Fogg,” said Ralph politely."
+},
+{
+"name_in_text": "Stuart",
+"at_name_in_text": "Charing Cross",
+"between_from": null,
+"between_to": null,
+"evidence": "“You do not forget when you are due in London again?” asked Stuart."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Sydenham",
+"between_from": null,
+"between_to": null,
+"evidence": "Just as the train was whirling through Sydenham, Passepartout suddenly uttered a cry of despair.\n\n“What’s the matter?” asked Mr. Fogg."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Sydenham",
+"between_from": null,
+"between_to": null,
+"evidence": "Just as the train was whirling through Sydenham, Passepartout suddenly uttered a cry of despair."
+}
+],
+"named_but_not_present": [],
+"notes": null
+},
 "transport": [
 {
 "mode": "carriage",
@@ -87,7 +217,7 @@
 "vessel_or_line_name": null,
 "from": "Charing Cross",
 "to": "Paris",
-"evidence": "Two first-class tickets for Paris having been speedily purchased, Mr. Fogg was crossing the station to the train"
+"evidence": "Two first-class tickets for Paris having been speedily purchased... the train slowly glided out of the station."
 }
 ],
 "time": {
@@ -100,19 +230,19 @@
 "days_elapsed_or_remaining": "eighty days",
 "schedule_status": "unknown",
 "schedule_detail": null,
-"evidence": "“In eighty days,” responded Mr. Fogg. “So we haven’t a moment to lose.”"
+"evidence": "“In eighty days; on Saturday, the 21st of December, 1872, at a quarter before nine p.m."
 },
 "money": {
 "amounts": [
 {
 "amount_as_written": "twenty guineas",
-"purpose": "given as alms to a beggar-woman",
+"purpose": "winnings at whist, handed to a beggar",
 "evidence": "Mr. Fogg took out the twenty guineas he had just won at whist, and handed them to the beggar"
 },
 {
 "amount_as_written": "twenty thousand pounds",
-"purpose": "money placed in the carpet-bag for the journey",
-"evidence": "Take good care of it, for there are twenty thousand pounds in it."
+"purpose": "travel funds packed in the carpet-bag",
+"evidence": "“Take good care of it, for there are twenty thousand pounds in it.”"
 }
 ],
 "fogg_remaining_stated": null

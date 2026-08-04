@@ -1,8 +1,8 @@
 {
 "chapter": 2,
 "title": "IN WHICH PASSEPARTOUT IS CONVINCED THAT HE HAS AT LAST FOUND HIS IDEAL",
-"summary_hover": "Left alone at Saville Row, Passepartout inspects his new quarters and rejoices at the strict, clockwork routine of his new master.",
-"summary_detail": "Following Mr. Fogg's departure, Passepartout explores the meticulously organized house at Saville Row. He discovers a detailed daily schedule, electric clocks, and a numbered wardrobe system. Delighted by this predictable, machine-like environment, Passepartout feels he has finally found the tranquil home he has been seeking.",
+"summary_hover": "Left alone in the house at Saville Row, Passepartout explores his new quarters and happily embraces the strict, orderly routine required by his master.",
+"summary_detail": "Passepartout reflects on his new employer, Phileas Fogg, comparing the gentleman's extreme composure to a precise machine or a wax figure. Upon exploring the mansion at Saville Row, Passepartout is delighted by its comfort and the meticulous daily schedule laid out for him. After serving unpredictable masters in the past, he feels he has finally found the tranquil, predictable domestic life he desires.",
 "places_visited": [
 {
 "name_in_text": "Saville Row",
@@ -11,10 +11,6 @@
 }
 ],
 "places_mentioned": [
-{
-"name_in_text": "Madame Tussaud’s",
-"evidence": "I’ve seen people at Madame Tussaud’s as lively as my new master!"
-},
 {
 "name_in_text": "London",
 "evidence": "Madame Tussaud’s “people,” let it be said, are of wax, and are much visited in London"
@@ -25,58 +21,115 @@
 },
 {
 "name_in_text": "England",
-"evidence": "Since he had abandoned his own country for England, taking service as a valet, he had in vain searched for a master after his own heart."
+"evidence": "Since he had abandoned his own country for England"
 },
 {
 "name_in_text": "Haymarket taverns",
-"evidence": "after passing his nights in the Haymarket taverns, was too often brought home in the morning on policemen’s shoulders."
+"evidence": "after passing his nights in the Haymarket taverns"
 },
 {
 "name_in_text": "Reform Club",
-"evidence": "till half-past eleven, when he left the house for the Reform Club"
-},
-{
-"name_in_text": "Reform",
-"evidence": "for at the Reform two libraries, one of general literature and the other of law and politics, were at his service."
+"evidence": "when he left the house for the Reform Club"
 }
 ],
 "people": [
 {
 "name_in_text": "Passepartout",
-"role": "Fogg's newly hired servant who explores the house.",
-"evidence": "At half-past eleven, then, Passepartout found himself alone in the house in Saville Row. He began its inspection without delay"
+"role": "the newly hired servant",
+"evidence": "As for Passepartout, he was a true Parisian of Paris."
+},
+{
+"name_in_text": "Madame Tussaud",
+"role": "creator of wax figures",
+"evidence": "“I’ve seen people at Madame Tussaud’s as lively as my new master!”"
 },
 {
 "name_in_text": "Mr. Fogg",
-"role": "Passepartout's highly exacting and methodical master.",
-"evidence": "Phileas Fogg was, indeed, exactitude personified, and this was betrayed even in the expression of his very hands and feet"
+"role": "Passepartout's new master",
+"evidence": "During his brief interview with Mr. Fogg, Passepartout had been carefully observing him."
 },
 {
 "name_in_text": "Angelica Kauffmann",
-"role": "An artist referenced to describe Fogg's composure.",
-"evidence": "Mr. Fogg seemed a perfect type of that English composure which Angelica Kauffmann has so skilfully represented on canvas."
+"role": "painter",
+"evidence": "that English composure which Angelica Kauffmann has so skilfully represented on canvas."
+},
+{
+"name_in_text": "Leroy",
+"role": "chronometer maker",
+"evidence": "as exactly regulated as a Leroy chronometer."
 },
 {
 "name_in_text": "Molière",
-"role": "A playwright mentioned to contrast with Passepartout's character.",
-"evidence": "Passepartout was by no means one of those pert dunces depicted by Molière with a bold gaze and a nose held high in the air"
+"role": "playwright",
+"evidence": "one of those pert dunces depicted by Molière with a bold gaze"
+},
+{
+"name_in_text": "Minerva",
+"role": "mythological figure",
+"evidence": "eighteen methods of arranging Minerva’s tresses"
 },
 {
 "name_in_text": "Lord Longferry",
-"role": "Passepartout's previous master, a Member of Parliament known for irregular habits.",
-"evidence": "His last master, young Lord Longferry, Member of Parliament, after passing his nights in the Haymarket taverns, was too often brought home in the morning on policemen’s shoulders."
+"role": "Passepartout's previous master",
+"evidence": "His last master, young Lord Longferry, Member of Parliament"
 },
 {
 "name_in_text": "Sheridan",
-"role": "Illustrious previous occupant of the Saville Row house.",
-"evidence": "the house in Saville Row, which must have been a very temple of disorder and unrest under the illustrious but dissipated Sheridan"
+"role": "former occupant of the house",
+"evidence": "under the illustrious but dissipated Sheridan"
 }
 ],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Saville Row",
+"between_from": null,
+"between_to": null,
+"evidence": "At half-past eleven, then, Passepartout found himself alone in the house in Saville Row."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Madame Tussaud",
+"evidence": "“I’ve seen people at Madame Tussaud’s as lively as my new master!”"
+},
+{
+"name_in_text": "Mr. Fogg",
+"evidence": "During his brief interview with Mr. Fogg, Passepartout had been carefully observing him."
+},
+{
+"name_in_text": "Angelica Kauffmann",
+"evidence": "that English composure which Angelica Kauffmann has so skilfully represented on canvas."
+},
+{
+"name_in_text": "Leroy",
+"evidence": "as exactly regulated as a Leroy chronometer."
+},
+{
+"name_in_text": "Molière",
+"evidence": "one of those pert dunces depicted by Molière with a bold gaze"
+},
+{
+"name_in_text": "Minerva",
+"evidence": "eighteen methods of arranging Minerva’s tresses"
+},
+{
+"name_in_text": "Lord Longferry",
+"evidence": "His last master, young Lord Longferry, Member of Parliament"
+},
+{
+"name_in_text": "Sheridan",
+"evidence": "under the illustrious but dissipated Sheridan"
+}
+],
+"notes": "Although Mr. Fogg is extensively described and his previous interview with Passepartout is recalled, within the real-time events of this chapter Passepartout is alone in the house."
+},
 "transport": [],
 "time": {
 "dates_mentioned": [],
 "days_elapsed_or_remaining": null,
-"schedule_status": null,
+"schedule_status": "unknown",
 "schedule_detail": null,
 "evidence": null
 },

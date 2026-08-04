@@ -1,0 +1,173 @@
+{
+"chapter": 6,
+"title": "IN WHICH FIX, THE DETECTIVE, BETRAYS A VERY NATURAL IMPATIENCE",
+"summary_hover": "At Suez, Detective Fix awaits the steamer Mongolia, hoping to catch the bank robber, and is soon approached by a passenger with a familiar passport.",
+"summary_detail": "Detective Fix and the British consul pace the wharves at Suez, anticipating the arrival of the steamer Mongolia. Fix explains his strategy for identifying the bank robber and firmly believes the suspect will pass through Suez. Once the ship arrives ahead of schedule, a passenger approaches Fix to ask for the consulate, handing over a passport that perfectly matches the description of the wanted man.",
+"places_visited": [
+{
+"name_in_text": "Suez",
+"role": "setting",
+"evidence": "Two men were promenading up and down the wharves, among the crowd of natives and strangers who were sojourning at this once straggling village"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Brindisi",
+"evidence": "The “Mongolia” plied regularly between Brindisi and Bombay"
+},
+{
+"name_in_text": "Bombay",
+"evidence": "The “Mongolia” plied regularly between Brindisi and Bombay"
+},
+{
+"name_in_text": "Suez Canal",
+"evidence": "viâ the Suez Canal"
+},
+{
+"name_in_text": "England",
+"evidence": "the old roundabout route from England to India"
+},
+{
+"name_in_text": "India",
+"evidence": "the old roundabout route from England to India"
+},
+{
+"name_in_text": "Cape of Good Hope",
+"evidence": "by the Cape of Good Hope was abridged by at least a half."
+},
+{
+"name_in_text": "London",
+"evidence": "police headquarters at London."
+},
+{
+"name_in_text": "Port Said",
+"evidence": "“She was bespoken yesterday at Port Said"
+},
+{
+"name_in_text": "Aden",
+"evidence": "thirteen hundred and ten miles from Suez to Aden"
+},
+{
+"name_in_text": "Red Sea",
+"evidence": "at the other end of the Red Sea"
+},
+{
+"name_in_text": "Asia",
+"evidence": "reach the Dutch or French colonies in Asia"
+},
+{
+"name_in_text": "New World",
+"evidence": "intending to reach the New World"
+},
+{
+"name_in_text": "Atlantic",
+"evidence": "more difficult to watch than that of the Atlantic."
+},
+{
+"name_in_text": "Scotland Yard",
+"evidence": "which he had received from Scotland Yard."
+}
+],
+"people": [
+{
+"name_in_text": "British consul",
+"role": "consul at Suez",
+"evidence": "One was the British consul at Suez"
+},
+{
+"name_in_text": "Fix",
+"role": "detective",
+"evidence": "This was Fix, one of the detectives who had been dispatched from England"
+},
+{
+"name_in_text": "one of the passengers",
+"role": "passenger from the Mongolia who speaks to Fix",
+"evidence": "Presently one of the passengers, after vigorously pushing his way through the importunate crowd of porters, came up to him"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "British consul",
+"at_name_in_text": "Suez",
+"between_from": null,
+"between_to": null,
+"evidence": "One was the British consul at Suez"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "Suez",
+"between_from": null,
+"between_to": null,
+"evidence": "This was Fix, one of the detectives"
+},
+{
+"name_in_text": "one of the passengers",
+"at_name_in_text": "Suez",
+"between_from": null,
+"between_to": null,
+"evidence": "Presently one of the passengers, after vigorously pushing his way through the importunate crowd of porters, came up to him"
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Phileas Fogg",
+"evidence": "The circumstances under which this telegraphic dispatch about Phileas Fogg was sent"
+},
+{
+"name_in_text": "M. Lesseps",
+"evidence": "thanks to the enterprise of M. Lesseps"
+},
+{
+"name_in_text": "Stephenson",
+"evidence": "the unfavourable predictions of Stephenson"
+},
+{
+"name_in_text": "master",
+"evidence": "“I’ll go and fetch my master, who won’t be much pleased, however, to be disturbed.”"
+}
+],
+"notes": "The passenger is Passepartout and the master is Fogg, but neither are explicitly named by those terms during their on-stage interaction in this specific chapter."
+},
+"transport": [
+{
+"mode": "steamer",
+"vessel_or_line_name": "Mongolia",
+"from": "Brindisi",
+"to": "Bombay",
+"evidence": "The “Mongolia” plied regularly between Brindisi and Bombay viâ the Suez Canal"
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "Wednesday, the 9th of October",
+"evidence": "due at eleven o’clock a.m. on Wednesday, the 9th of October, at Suez."
+},
+{
+"as_written": "Saturday",
+"evidence": "she left there Saturday at five p.m."
+}
+],
+"days_elapsed_or_remaining": null,
+"schedule_status": "ahead",
+"schedule_detail": "in advance of the time required",
+"evidence": "I repeat that the ‘Mongolia’ has been in advance of the time required by the company’s regulations, and gained the prize awarded for excess of speed."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "fifty-five thousand pounds",
+"purpose": "the amount of the bank robbery",
+"evidence": "“A magnificent robbery, consul; fifty-five thousand pounds!"
+},
+{
+"amount_as_written": "a handful of shillings",
+"purpose": "the amount for which a common burglar gets hanged",
+"evidence": "A fellow gets hung for a handful of shillings!”"
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

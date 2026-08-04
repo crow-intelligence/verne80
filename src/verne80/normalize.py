@@ -17,6 +17,11 @@ is *spelled*, not in what the sentence *says*.
 **Italics.** Gutenberg marks them with underscores — ``_Times_``, ``_viâ_`` — and a
 model quoting the passage silently drops them.
 
+**Quotation marks at the edges.** A model quoting a fragment of dialogue will sometimes
+wrap it in marks the text does not have at that point. That one is handled by
+:func:`strip_edge_quotes`, which is applied to the quote being looked up and never
+to the text being searched — see its docstring for why the distinction matters.
+
 Folding weakens the word "verbatim", and it is worth being precise about how far. The
 fold can only ever collapse punctuation variants and whitespace onto a canonical form;
 it cannot invent, delete or reorder a word. A quote that passes because the model wrote
@@ -34,7 +39,7 @@ from __future__ import annotations
 import re
 import unicodedata
 
-__all__ = ["fold_typography", "match_key", "normalize_quote"]
+__all__ = ["fold_typography", "match_key", "normalize_quote", "strip_edge_quotes"]
 
 # Fold families. Each maps a set of codepoints onto one canonical ASCII spelling, so
 # that two texts differing only in typographic convention reduce to the same key.
@@ -115,6 +120,44 @@ def fold_typography(text: str) -> str:
         'one\ntwo'
     """
     return unicodedata.normalize("NFC", text).translate(_FOLD)
+
+
+def strip_edge_quotes(text: str) -> str:
+    r"""Drop quotation marks sitting at the very ends of a string.
+
+    A model asked to quote a fragment of dialogue will sometimes wrap it in quotation
+    marks that are not there. Chapter 4 is the real case: the text reads *"I know it; I
+    don't blame you. We start for Dover and Calais in ten minutes."* and the extraction
+    came back with ``"We start for Dover and Calais in ten minutes."`` — the closing
+    mark is real, the opening one was added to make the fragment look like speech.
+    Every word was right.
+
+    Deliberately **not** part of :func:`normalize_quote`. That function is applied one
+    character at a time when a chapter's offset map is built, and edge-stripping there
+    would delete every quotation mark in the book. This is applied to the quote being
+    looked up, never to the text being searched.
+
+    Args:
+        text: A quotation, normally already normalised.
+
+    Returns:
+        The same string without leading or trailing quotation marks or whitespace.
+
+    Contract:
+        - Idempotent.
+        - Never lengthens the input, and only ever removes characters at its ends.
+        - Total: never raises.
+
+    Examples:
+        >>> strip_edge_quotes('"We start for Dover and Calais in ten minutes."')
+        'We start for Dover and Calais in ten minutes.'
+
+        An interior mark is content and survives:
+
+        >>> strip_edge_quotes('he said "no" twice')
+        'he said "no" twice'
+    """
+    return text.strip().strip("\"'").strip()
 
 
 def normalize_quote(text: str) -> str:

@@ -30,7 +30,7 @@ from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
 from enum import StrEnum
 
-from verne80.normalize import match_key, normalize_quote
+from verne80.normalize import match_key, normalize_quote, strip_edge_quotes
 from verne80.schema import ChapterExtraction, EvidenceRef
 
 __all__ = [
@@ -362,6 +362,17 @@ def check_quote(ref: EvidenceRef, chapter: NormalisedChapter) -> QuoteCheck:
         return QuoteCheck(
             ref, MatchKind.NORMALISED, 1.0, None, chapter.line_of(position)
         )
+
+    # Same rung, one more spelling: a quotation mark the model added at an edge to
+    # make a fragment of dialogue look like speech. Stripped from the needle only —
+    # the chapter keeps every mark it has.
+    unquoted = strip_edge_quotes(needle)
+    if unquoted and unquoted != needle:
+        position = chapter.norm.find(unquoted)
+        if position >= 0:
+            return QuoteCheck(
+                ref, MatchKind.NORMALISED, 1.0, None, chapter.line_of(position)
+            )
 
     folded_position = match_key(chapter.raw).find(match_key(quote))
     if folded_position >= 0:

@@ -545,18 +545,25 @@ def _check_narrative(extraction: ChapterExtraction, label: str) -> list[str]:
         ):
             problems.append(f"{where} travels from {item.between_from!r} to itself")
 
+    # Only `on_stage` is cross-checked. That array is what position resolution reads,
+    # so a name in it has to be identifiable — and the model does enumerate even unnamed
+    # on-stage actors ("cabman", "beggar-woman") in `people`. `named_but_not_present`
+    # collects collectives instead ("robber", "detectives", "the principal cashier"),
+    # which are correctly absent from `people`; it feeds nothing downstream, existing
+    # only as the pressure valve that keeps Fogg out of `on_stage` in chapter 5.
+    # Checking it would buy nothing and cost a false alarm in most chapters.
     people_keys = {match_key(person.name_in_text) for person in extraction.people}
     if people_keys:
         strangers = sorted(
             {
                 item.name_in_text
-                for item in (*narrative.on_stage, *narrative.named_but_not_present)
+                for item in narrative.on_stage
                 if match_key(item.name_in_text) not in people_keys
             }
         )
         if strangers:
             problems.append(
-                f"{label} names {strangers} in narrative but not in people — "
+                f"{label} puts {strangers} on stage but does not list them in people — "
                 "the two rosters for the same chapter disagree"
             )
 

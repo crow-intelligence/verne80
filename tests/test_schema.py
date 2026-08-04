@@ -243,6 +243,25 @@ class TestNarrative:
         problems = check_extraction(ChapterExtraction(**data), expected_number=1)
         assert any("to itself" in p for p in problems)
 
+    def test_a_collective_in_named_but_not_present_is_not_a_roster_error(self):
+        """Collectives belong nowhere near the people roster.
+
+        Chapter 3 names "robber", "detectives" and "the principal cashier"; none of
+        them belongs in people, and none of them feeds position resolution.
+        """
+        data = {
+            **MINIMAL,
+            "people": [{"name_in_text": "Fogg", "evidence": "x"}],
+            "narrative": {
+                "on_stage": [{"name_in_text": "Fogg", "evidence": "y"}],
+                "named_but_not_present": [
+                    {"name_in_text": "robber", "evidence": "the robber"},
+                    {"name_in_text": "detectives", "evidence": "Skilful detectives"},
+                ],
+            },
+        }
+        assert check_extraction(ChapterExtraction(**data), expected_number=1) == []
+
     def test_a_roster_disagreement_is_reported(self):
         data = {
             **MINIMAL,

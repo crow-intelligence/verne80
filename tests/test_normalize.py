@@ -4,7 +4,12 @@ import hypothesis.strategies as st
 from hypothesis import given, settings
 
 from tests.strategies import italicised, typographic_variant
-from verne80.normalize import fold_typography, match_key, normalize_quote
+from verne80.normalize import (
+    fold_typography,
+    match_key,
+    normalize_quote,
+    strip_edge_quotes,
+)
 
 
 class TestFolding:
@@ -43,6 +48,24 @@ class TestItalics:
         assert normalize_quote("_Daily Telegraph_") == normalize_quote(
             "Daily Telegraph"
         )
+
+
+class TestEdgeQuotes:
+    def test_a_quote_mark_the_model_added_is_stripped(self):
+        """Chapter 4: the closing mark is real, the opening one was invented."""
+        quoted = normalize_quote(
+            "\u201cWe start for Dover and Calais in ten minutes.\u201d"
+        )
+        assert (
+            strip_edge_quotes(quoted) == "We start for Dover and Calais in ten minutes."
+        )
+
+    def test_an_interior_quote_mark_is_content_and_survives(self):
+        assert strip_edge_quotes('he said "no" twice') == 'he said "no" twice'
+
+    def test_stripping_is_idempotent(self):
+        once = strip_edge_quotes('"a quotation."')
+        assert strip_edge_quotes(once) == once
 
 
 class TestWhitespaceCollapse:
@@ -122,6 +145,18 @@ class TestNormalizeProperties:
     def test_inserting_italic_markers_never_changes_the_key(self, data, text):
         variant = data.draw(italicised(text))
         assert normalize_quote(variant) == normalize_quote(text)
+
+    @settings(max_examples=150, deadline=None)
+    @given(st.text(min_size=1))
+    def test_wrapping_a_quote_in_marks_never_changes_the_stripped_key(self, text):
+        inner = strip_edge_quotes(normalize_quote(text))
+        wrapped = strip_edge_quotes(normalize_quote(f'"{text}"'))
+        assert wrapped == inner
+
+    @settings(max_examples=150, deadline=None)
+    @given(st.text())
+    def test_stripping_edge_quotes_never_lengthens(self, text):
+        assert len(strip_edge_quotes(text)) <= len(text)
 
     @settings(max_examples=150, deadline=None)
     @given(st.text())

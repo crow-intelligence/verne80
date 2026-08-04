@@ -1,18 +1,13 @@
 {
 "chapter": 1,
 "title": "IN WHICH PHILEAS FOGG AND PASSEPARTOUT ACCEPT EACH OTHER, THE ONE AS MASTER, THE OTHER AS MAN",
-"summary_hover": "Phileas Fogg, an enigmatic and exceedingly punctual English gentleman, hires a new French servant named Jean Passepartout to maintain his strict daily routine.",
-"summary_detail": "In 1872 London, the mysterious and wealthy Phileas Fogg lives a solitary, mathematically precise life revolving around his home at Saville Row and the Reform Club. After firing his previous servant for bringing shaving water that was two degrees too cold, he interviews and hires Jean Passepartout. Passepartout is a Frenchman seeking a quiet, stable life after a varied career, and he gladly accepts the rigid schedule of his new master.",
+"summary_hover": "Phileas Fogg, an enigmatic and precise English gentleman, hires a new French servant named Jean Passepartout to maintain his strictly regimented household.",
+"summary_detail": "Mr. Phileas Fogg is an eccentric, extremely punctual, and wealthy member of the Reform Club in London. He lives a solitary and meticulously routine life at his home in Saville Row. Having dismissed his previous servant for bringing shaving water at the wrong temperature, Fogg interviews and hires Jean Passepartout, a Frenchman seeking a quiet life. Fogg then departs for his club exactly on schedule.",
 "places_visited": [
 {
-"name_in_text": "No. 7, Saville Row, Burlington Gardens",
+"name_in_text": "Saville Row",
 "role": "setting",
-"evidence": "Mr. Phileas Fogg lived, in 1872, at No. 7, Saville Row, Burlington Gardens, the house in which Sheridan died in 1814."
-},
-{
-"name_in_text": "Reform Club",
-"role": "setting",
-"evidence": "He was one of the most noticeable members of the Reform Club"
+"evidence": "Mr. Phileas Fogg lived, in 1872, at No. 7, Saville Row, Burlington Gardens"
 },
 {
 "name_in_text": "London",
@@ -22,16 +17,24 @@
 ],
 "places_mentioned": [
 {
-"name_in_text": "American lakes",
-"evidence": "brought at great cost from the American lakes."
+"name_in_text": "Burlington Gardens",
+"evidence": "at No. 7, Saville Row, Burlington Gardens"
+},
+{
+"name_in_text": "London docks",
+"evidence": "no ships ever came into London docks of which he was the owner"
+},
+{
+"name_in_text": "“City”",
+"evidence": "nor in the counting-rooms of the “City”"
 },
 {
 "name_in_text": "Paris",
-"evidence": "sergeant fireman at Paris"
+"evidence": "and then I was a sergeant fireman at Paris"
 },
 {
 "name_in_text": "France",
-"evidence": "quitted France five years ago"
+"evidence": "But I quitted France five years ago"
 },
 {
 "name_in_text": "England",
@@ -39,46 +42,103 @@
 },
 {
 "name_in_text": "United Kingdom",
-"evidence": "most exact and settled gentleman in the United Kingdom"
+"evidence": "the most exact and settled gentleman in the United Kingdom"
+},
+{
+"name_in_text": "American lakes",
+"evidence": "cooled with ice, brought at great cost from the American lakes."
 }
 ],
 "people": [
 {
-"name_in_text": "Mr. Phileas Fogg",
-"role": "An enigmatic, wealthy, and mathematically precise English gentleman.",
-"evidence": "an enigmatical personage, about whom little was known, except that he was a polished man of the world."
+"name_in_text": "Phileas Fogg",
+"role": "an enigmatic, exacting, and wealthy member of the Reform Club",
+"evidence": "Mr. Phileas Fogg lived, in 1872, at No. 7, Saville Row"
 },
 {
 "name_in_text": "Sheridan",
-"role": "Former resident of Fogg's house who died in 1814.",
+"role": "former resident of the house",
 "evidence": "the house in which Sheridan died in 1814."
 },
 {
 "name_in_text": "Byron",
-"role": "Famous figure to whom Fogg is compared by others.",
+"role": "famous poet whom Fogg is said to resemble",
 "evidence": "People said that he resembled Byron"
 },
 {
+"name_in_text": "the Barings",
+"role": "bankers who recommended Fogg to the Reform Club",
+"evidence": "He was recommended by the Barings, with whom he had an open credit."
+},
+{
 "name_in_text": "James Forster",
-"role": "Fogg's dismissed servant.",
-"evidence": "he had dismissed James Forster, because that luckless youth had brought him shaving-water at eighty-four degrees Fahrenheit instead of eighty-six"
+"role": "the dismissed servant",
+"evidence": "James Forster, the dismissed servant, appeared."
 },
 {
 "name_in_text": "Jean Passepartout",
-"role": "Fogg's newly hired French servant, formerly of various trades.",
-"evidence": "Jean Passepartout, a surname which has clung to me because I have a natural aptness for going out of one business into another."
+"role": "the new French servant",
+"evidence": "“Jean, if monsieur pleases,” replied the newcomer, “Jean Passepartout"
 },
 {
 "name_in_text": "Leotard",
-"role": "Famous vaulter mentioned by Passepartout.",
+"role": "acrobat mentioned by Passepartout",
 "evidence": "when I used to vault like Leotard"
 },
 {
 "name_in_text": "Blondin",
-"role": "Famous rope dancer mentioned by Passepartout.",
+"role": "rope dancer mentioned by Passepartout",
 "evidence": "and dance on a rope like Blondin."
 }
 ],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Saville Row",
+"between_from": null,
+"between_to": null,
+"evidence": "Phileas Fogg was seated squarely in his armchair"
+},
+{
+"name_in_text": "James Forster",
+"at_name_in_text": "Saville Row",
+"between_from": null,
+"between_to": null,
+"evidence": "James Forster, the dismissed servant, appeared."
+},
+{
+"name_in_text": "Jean Passepartout",
+"at_name_in_text": "Saville Row",
+"between_from": null,
+"between_to": null,
+"evidence": "Passepartout remained alone in the house in Saville Row."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Sheridan",
+"evidence": "the house in which Sheridan died in 1814."
+},
+{
+"name_in_text": "Byron",
+"evidence": "People said that he resembled Byron"
+},
+{
+"name_in_text": "the Barings",
+"evidence": "He was recommended by the Barings, with whom he had an open credit."
+},
+{
+"name_in_text": "Leotard",
+"evidence": "when I used to vault like Leotard"
+},
+{
+"name_in_text": "Blondin",
+"evidence": "and dance on a rope like Blondin."
+}
+],
+"notes": null
+},
 "transport": [],
 "time": {
 "dates_mentioned": [
@@ -100,7 +160,7 @@
 }
 ],
 "days_elapsed_or_remaining": null,
-"schedule_status": null,
+"schedule_status": "unknown",
 "schedule_detail": null,
 "evidence": null
 },

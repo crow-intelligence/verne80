@@ -1,0 +1,213 @@
+{
+"chapter": 8,
+"title": "IN WHICH PASSEPARTOUT TALKS RATHER MORE, PERHAPS, THAN IS PRUDENT",
+"summary_hover": "Detective Fix subtly interrogates an unsuspecting Passepartout, confirming his suspicions about Fogg, and subsequently boards the Mongolia in pursuit.",
+"summary_detail": "On the quay at Suez, Detective Fix befriends Passepartout and pumps him for information. Hearing about Phileas Fogg's sudden departure from London, his large stash of brand new banknotes, and his supposed eighty-day journey around the world, Fix is entirely convinced Fogg is the bank robber. Fix wires London for an arrest warrant to be sent to Bombay, takes leave of the consul, and boards the Mongolia.",
+"places_visited": [
+{
+"name_in_text": "quay",
+"role": "setting",
+"evidence": "Fix soon rejoined Passepartout, who was lounging and looking about on the quay"
+},
+{
+"name_in_text": "shop",
+"role": "arrival",
+"evidence": "Passepartout and he had now reached the shop, where Fix left his companion"
+},
+{
+"name_in_text": "consulate",
+"role": "arrival",
+"evidence": "and hurried back to the consulate."
+},
+{
+"name_in_text": "telegraph office",
+"role": "arrival",
+"evidence": "repaired to the telegraph office, whence he sent the dispatch"
+},
+{
+"name_in_text": "“Mongolia”",
+"role": "arrival",
+"evidence": "proceeding on board the “Mongolia;”"
+},
+{
+"name_in_text": "Red Sea",
+"role": "setting",
+"evidence": "the noble steamer rode out at full steam upon the waters of the Red Sea."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Suez",
+"evidence": "“So this is Suez?”"
+},
+{
+"name_in_text": "Egypt",
+"evidence": "“Certainly, in Egypt.”"
+},
+{
+"name_in_text": "Africa",
+"evidence": "“In Africa.”"
+},
+{
+"name_in_text": "Paris",
+"evidence": "I had no idea that we should go farther than Paris; and all that I saw of Paris"
+},
+{
+"name_in_text": "Northern and the Lyons stations",
+"evidence": "between the Northern and the Lyons stations"
+},
+{
+"name_in_text": "Père la Chaise",
+"evidence": "How I regret not having seen once more Père la Chaise"
+},
+{
+"name_in_text": "Champs Elysées",
+"evidence": "and the circus in the Champs Elysées!”"
+},
+{
+"name_in_text": "London",
+"evidence": "“You have kept London time"
+},
+{
+"name_in_text": "Bombay",
+"evidence": "if he gets us to Bombay well in advance of time.”"
+},
+{
+"name_in_text": "India",
+"evidence": "“India.”"
+},
+{
+"name_in_text": "Asia",
+"evidence": "“In Asia?”"
+}
+],
+"people": [
+{
+"name_in_text": "Fix",
+"role": "detective investigating the bank robbery",
+"evidence": "Fix soon rejoined Passepartout, who was lounging and looking about on the quay"
+},
+{
+"name_in_text": "Passepartout",
+"role": "Phileas Fogg's servant",
+"evidence": "Fix soon rejoined Passepartout, who was lounging and looking about on the quay"
+},
+{
+"name_in_text": "consul",
+"role": "British official at Suez",
+"evidence": "“Consul,” said he, “I have no longer any doubt."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Fix",
+"at_name_in_text": "quay",
+"between_from": null,
+"between_to": null,
+"evidence": "Fix soon rejoined Passepartout, who was lounging and looking about on the quay"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "quay",
+"between_from": null,
+"between_to": null,
+"evidence": "Passepartout, who was lounging and looking about on the quay"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "shop",
+"between_from": "quay",
+"between_to": null,
+"evidence": "Passepartout and he had now reached the shop, where Fix left his companion"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "shop",
+"between_from": "quay",
+"between_to": null,
+"evidence": "Passepartout and he had now reached the shop, where Fix left his companion"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "consulate",
+"between_from": "shop",
+"between_to": null,
+"evidence": "and hurried back to the consulate."
+},
+{
+"name_in_text": "consul",
+"at_name_in_text": "consulate",
+"between_from": null,
+"between_to": null,
+"evidence": "“Consul,” said he, “I have no longer any doubt."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "telegraph office",
+"between_from": "consulate",
+"between_to": null,
+"evidence": "and repaired to the telegraph office, whence he sent the dispatch"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "“Mongolia”",
+"between_from": "telegraph office",
+"between_to": null,
+"evidence": "A quarter of an hour later found Fix, with a small bag in his hand, proceeding on board the “Mongolia;”"
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Monsieur Fogg",
+"evidence": "Monsieur Fogg came home from his club, and three-quarters of an hour afterwards we were off.”"
+},
+{
+"name_in_text": "great-grandfather",
+"evidence": "A family watch, monsieur, which has come down from my great-grandfather!"
+},
+{
+"name_in_text": "engineer",
+"evidence": "he has offered a large reward to the engineer of the ‘Mongolia’"
+}
+],
+"notes": null
+},
+"transport": [
+{
+"mode": "steamer",
+"vessel_or_line_name": "‘Mongolia’",
+"from": null,
+"to": "India",
+"evidence": "take passage on board the ‘Mongolia,’ follow my rogue to India"
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "Last Friday at eight o’clock in the evening",
+"evidence": "“I rather think so! Last Friday at eight o’clock in the evening, Monsieur Fogg came home from his club"
+}
+],
+"days_elapsed_or_remaining": "eighty days",
+"schedule_status": "unknown",
+"schedule_detail": null,
+"evidence": "“Yes, and in eighty days!"
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "two shillings",
+"purpose": "daily loss from the forgotten gas-burner",
+"evidence": "I have calculated, monsieur, that I lose two shillings every four and twenty hours"
+},
+{
+"amount_as_written": "sixpence",
+"purpose": "amount more than he earns",
+"evidence": "exactly sixpence more than I earn"
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

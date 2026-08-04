@@ -1,0 +1,257 @@
+{
+"chapter": 7,
+"title": "WHICH ONCE MORE DEMONSTRATES THE USELESSNESS OF PASSPORTS AS AIDS TO DETECTIVES",
+"summary_hover": "Phileas Fogg and Passepartout visit the consul's office in Suez for a passport visa, unwittingly being scrutinized by Detective Fix.",
+"summary_detail": "Detective Fix rushes to the British consul at Suez to explain his suspicions about the bank robber. Shortly after, Phileas Fogg and Passepartout arrive to have Fogg's passport visaed. Although the consul sees nothing amiss, Fix is determined to investigate further. Fogg returns to his cabin on the Mongolia and methodically logs his travel time, noting he is exactly on schedule.",
+"places_visited": [
+{
+"name_in_text": "quay",
+"role": "passing_through",
+"evidence": "The detective passed down the quay, and rapidly made his way to the consul’s office"
+},
+{
+"name_in_text": "consul’s office",
+"role": "setting",
+"evidence": "rapidly made his way to the consul’s office, where he was at once admitted"
+},
+{
+"name_in_text": "consulate",
+"role": "setting",
+"evidence": "Mr. Fogg, after leaving the consulate, repaired to the quay"
+},
+{
+"name_in_text": "Suez",
+"role": "setting",
+"evidence": "“I know it, sir,” replied Phileas Fogg; “but I wish to prove, by your visa, that I came by Suez.”"
+},
+{
+"name_in_text": "‘Mongolia’",
+"role": "arrival",
+"evidence": "went off to the ‘Mongolia’ in a boat, and descended to his cabin."
+},
+{
+"name_in_text": "cabin",
+"role": "setting",
+"evidence": "went off to the ‘Mongolia’ in a boat, and descended to his cabin."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "London",
+"evidence": "“Still, I must keep this man here until I can get a warrant to arrest him from London.”"
+},
+{
+"name_in_text": "Bombay",
+"evidence": "“To Bombay.”"
+},
+{
+"name_in_text": "Paris",
+"evidence": "“Reached Paris, Thursday, October 3rd, at 7.20 a.m."
+},
+{
+"name_in_text": "Turin",
+"evidence": "“Reached Turin by Mont Cenis, Friday, October 4th, at 6.35 a.m."
+},
+{
+"name_in_text": "Mont Cenis",
+"evidence": "“Reached Turin by Mont Cenis, Friday, October 4th, at 6.35 a.m."
+},
+{
+"name_in_text": "Brindisi",
+"evidence": "“Arrived at Brindisi, Saturday, October 5th, at 4 p.m."
+},
+{
+"name_in_text": "Calcutta",
+"evidence": "Paris, Brindisi, Suez, Bombay, Calcutta, Singapore, Hong Kong, Yokohama, San Francisco, New York, and London"
+},
+{
+"name_in_text": "Singapore",
+"evidence": "Paris, Brindisi, Suez, Bombay, Calcutta, Singapore, Hong Kong, Yokohama, San Francisco, New York, and London"
+},
+{
+"name_in_text": "Hong Kong",
+"evidence": "Paris, Brindisi, Suez, Bombay, Calcutta, Singapore, Hong Kong, Yokohama, San Francisco, New York, and London"
+},
+{
+"name_in_text": "Yokohama",
+"evidence": "Paris, Brindisi, Suez, Bombay, Calcutta, Singapore, Hong Kong, Yokohama, San Francisco, New York, and London"
+},
+{
+"name_in_text": "San Francisco",
+"evidence": "Paris, Brindisi, Suez, Bombay, Calcutta, Singapore, Hong Kong, Yokohama, San Francisco, New York, and London"
+},
+{
+"name_in_text": "New York",
+"evidence": "Paris, Brindisi, Suez, Bombay, Calcutta, Singapore, Hong Kong, Yokohama, San Francisco, New York, and London"
+}
+],
+"people": [
+{
+"name_in_text": "detective",
+"role": "investigator trying to catch a bank robber",
+"evidence": "The detective passed down the quay, and rapidly made his way to the consul’s office"
+},
+{
+"name_in_text": "Fix",
+"role": "detective",
+"evidence": "“Well, Mr. Fix,” replied the consul"
+},
+{
+"name_in_text": "consul",
+"role": "official who visas the passport",
+"evidence": "“Consul,” said he, without preamble, “I have strong reasons for believing that my man is a passenger"
+},
+{
+"name_in_text": "Passepartout",
+"role": "Phileas Fogg's servant",
+"evidence": "“He is: a Frenchman, named Passepartout.”"
+},
+{
+"name_in_text": "Phileas Fogg",
+"role": "master requesting a passport visa",
+"evidence": "“You are Mr. Phileas Fogg?” said the consul, after reading the passport."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "detective",
+"at_name_in_text": "quay",
+"between_from": null,
+"between_to": null,
+"evidence": "The detective passed down the quay"
+},
+{
+"name_in_text": "detective",
+"at_name_in_text": "consul’s office",
+"between_from": null,
+"between_to": null,
+"evidence": "and rapidly made his way to the consul’s office, where he was at once admitted"
+},
+{
+"name_in_text": "consul",
+"at_name_in_text": "consul’s office",
+"between_from": null,
+"between_to": null,
+"evidence": "where he was at once admitted to the presence of that official."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "consul’s office",
+"between_from": null,
+"between_to": null,
+"evidence": "two strangers entered, one of whom was the servant whom Fix had met on the quay."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "consul’s office",
+"between_from": null,
+"between_to": null,
+"evidence": "The other, who was his master, held out his passport with the request that the consul would do him the favour to visa it."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "quay",
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg, after leaving the consulate, repaired to the quay, gave some orders to Passepartout"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "quay",
+"between_from": null,
+"between_to": null,
+"evidence": "repaired to the quay, gave some orders to Passepartout"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": "quay",
+"between_to": "‘Mongolia’",
+"evidence": "went off to the ‘Mongolia’ in a boat"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "cabin",
+"between_from": null,
+"between_to": null,
+"evidence": "and descended to his cabin. He took up his note-book"
+}
+],
+"named_but_not_present": [],
+"notes": "Fix is referred to as 'the detective' and 'Fix' interchangeably. Passepartout and Fogg enter the consul's office together as the 'two strangers'."
+},
+"transport": [
+{
+"mode": "other",
+"vessel_or_line_name": null,
+"from": "quay",
+"to": "‘Mongolia’",
+"evidence": "went off to the ‘Mongolia’ in a boat"
+},
+{
+"mode": "steamer",
+"vessel_or_line_name": "‘Mongolia’",
+"from": "Brindisi",
+"to": "Suez",
+"evidence": "“Arrived at Brindisi, Saturday, October 5th, at 4 p.m.\n\n“Sailed on the ‘Mongolia,’ Saturday, at 5 p.m.\n\n“Reached Suez, Wednesday, October 9th, at 11 a.m."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "Wednesday, October 2nd",
+"evidence": "“Left London, Wednesday, October 2nd, at 8.45 p.m."
+},
+{
+"as_written": "Thursday, October 3rd",
+"evidence": "“Reached Paris, Thursday, October 3rd, at 7.20 a.m."
+},
+{
+"as_written": "Thursday",
+"evidence": "“Left Paris, Thursday, at 8.40 a.m."
+},
+{
+"as_written": "Friday, October 4th",
+"evidence": "“Reached Turin by Mont Cenis, Friday, October 4th, at 6.35 a.m."
+},
+{
+"as_written": "Friday",
+"evidence": "“Left Turin, Friday, at 7.20 a.m."
+},
+{
+"as_written": "Saturday, October 5th",
+"evidence": "“Arrived at Brindisi, Saturday, October 5th, at 4 p.m."
+},
+{
+"as_written": "Saturday",
+"evidence": "“Sailed on the ‘Mongolia,’ Saturday, at 5 p.m."
+},
+{
+"as_written": "Wednesday, October 9th",
+"evidence": "“Reached Suez, Wednesday, October 9th, at 11 a.m."
+},
+{
+"as_written": "2nd of October",
+"evidence": "from the 2nd of October to the 21st of December"
+},
+{
+"as_written": "21st of December",
+"evidence": "from the 2nd of October to the 21st of December"
+},
+{
+"as_written": "Friday, October 9th",
+"evidence": "On this Friday, October 9th, he noted his arrival at Suez"
+}
+],
+"days_elapsed_or_remaining": "six days and a half",
+"schedule_status": "on_time",
+"schedule_detail": "neither gained nor lost",
+"evidence": "observed that he had as yet neither gained nor lost."
+},
+"money": {
+"amounts": [],
+"fogg_remaining_stated": null
+},
+"notes": "There is a textual contradiction in the dates: Fogg's itinerary correctly notes reaching Suez on 'Wednesday, October 9th', but the prose immediately following mentions 'On this Friday, October 9th'. This is extracted exactly as printed in the text."
+}

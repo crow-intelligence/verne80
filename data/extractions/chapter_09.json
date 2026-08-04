@@ -1,0 +1,306 @@
+{
+"chapter": 9,
+"title": "IN WHICH THE RED SEA AND THE INDIAN OCEAN PROVE PROPITIOUS TO THE DESIGNS OF PHILEAS FOGG",
+"summary_hover": "Phileas Fogg and Passepartout travel aboard the Mongolia to Bombay, where Fogg plays whist and Fix subtly befriends Passepartout.",
+"summary_detail": "Aboard the steamer Mongolia, Phileas Fogg remains indifferent to the sights of the Red Sea and Indian Ocean, occupying himself entirely with playing whist. Meanwhile, Detective Fix subtly befriends Passepartout to glean information without revealing his true identity. The ship makes excellent time, and Fogg arrives in Bombay two days ahead of schedule.",
+"places_visited": [
+{
+"name_in_text": "Suez",
+"role": "departure",
+"evidence": "The distance between Suez and Aden is precisely thirteen hundred and ten miles"
+},
+{
+"name_in_text": "“Mongolia”",
+"role": "setting",
+"evidence": "the time passed quickly on the “Mongolia.”"
+},
+{
+"name_in_text": "Red Sea",
+"role": "passing_through",
+"evidence": "But the Red Sea is full of caprice, and often boisterous"
+},
+{
+"name_in_text": "Bab-el-Mandeb",
+"role": "passing_through",
+"evidence": "towards the straits of Bab-el-Mandeb."
+},
+{
+"name_in_text": "Mocha",
+"role": "passing_through",
+"evidence": "on the 13th, Mocha, surrounded by its ruined walls whereon date-trees were growing, was sighted"
+},
+{
+"name_in_text": "Steamer Point",
+"role": "arrival",
+"evidence": "the next day they put in at Steamer Point, north-west of Aden harbour, to take in coal."
+},
+{
+"name_in_text": "Aden",
+"role": "arrival",
+"evidence": "Mr. Fogg and his servant went ashore at Aden to have the passport again visaed"
+},
+{
+"name_in_text": "Indian Ocean",
+"role": "setting",
+"evidence": "and was soon once more on the Indian Ocean."
+},
+{
+"name_in_text": "Bombay",
+"role": "arrival",
+"evidence": "at half-past four she hauled up at the quays of Bombay."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Brindisi",
+"evidence": "The greater part of the passengers from Brindisi were bound for India"
+},
+{
+"name_in_text": "India",
+"evidence": "The greater part of the passengers from Brindisi were bound for India"
+},
+{
+"name_in_text": "Calcutta",
+"evidence": "others for Calcutta by way of Bombay"
+},
+{
+"name_in_text": "Indian peninsula",
+"evidence": "now that a railway crosses the Indian peninsula."
+},
+{
+"name_in_text": "Arabic Gulf",
+"evidence": "betrayed no fear of the dangers of the Arabic Gulf"
+},
+{
+"name_in_text": "Goa",
+"evidence": "A tax-collector, on the way to his post at Goa"
+},
+{
+"name_in_text": "Benares",
+"evidence": "who was about to rejoin his brigade at Benares"
+},
+{
+"name_in_text": "Gibraltar of the Indian Ocean",
+"evidence": "which make this place the Gibraltar of the Indian Ocean"
+},
+{
+"name_in_text": "London",
+"evidence": "This was a gain to Phileas Fogg of two days since his departure from London"
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "the eccentric gentleman traveling around the world",
+"evidence": "What was Phileas Fogg doing all this time?"
+},
+{
+"name_in_text": "tax-collector",
+"role": "a passenger and whist partner of Mr. Fogg",
+"evidence": "A tax-collector, on the way to his post at Goa"
+},
+{
+"name_in_text": "Rev. Decimus Smith",
+"role": "a returning parish minister and whist partner of Mr. Fogg",
+"evidence": "the Rev. Decimus Smith, returning to his parish at Bombay"
+},
+{
+"name_in_text": "brigadier-general",
+"role": "an army officer and whist partner of Mr. Fogg",
+"evidence": "a brigadier-general of the English army, who was about to rejoin his brigade at Benares"
+},
+{
+"name_in_text": "Passepartout",
+"role": "Mr. Fogg's servant",
+"evidence": "As for Passepartout, he, too, had escaped sea-sickness"
+},
+{
+"name_in_text": "Fix",
+"role": "a detective trailing Mr. Fogg, posing as a company agent",
+"evidence": "“Monsieur Fix,” resumed Passepartout, “I’m charmed to find you on board."
+},
+{
+"name_in_text": "pilot",
+"role": "local navigator who boards near Bombay",
+"evidence": "two hours later the pilot came on board."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "“Mongolia”",
+"between_from": null,
+"between_to": null,
+"evidence": "How did this eccentric personage pass his time on the “Mongolia”?"
+},
+{
+"name_in_text": "tax-collector",
+"at_name_in_text": "“Mongolia”",
+"between_from": null,
+"between_to": null,
+"evidence": "A tax-collector... made up the party, and, with Mr. Fogg, played whist by the hour together"
+},
+{
+"name_in_text": "Rev. Decimus Smith",
+"at_name_in_text": "“Mongolia”",
+"between_from": null,
+"between_to": null,
+"evidence": "the Rev. Decimus Smith... made up the party, and, with Mr. Fogg, played whist"
+},
+{
+"name_in_text": "brigadier-general",
+"at_name_in_text": "“Mongolia”",
+"between_from": null,
+"between_to": null,
+"evidence": "a brigadier-general... made up the party, and, with Mr. Fogg, played whist"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "“Mongolia”",
+"between_from": null,
+"between_to": null,
+"evidence": "As for Passepartout, he, too, had escaped sea-sickness, and took his meals conscientiously in the forward cabin."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "“Mongolia”",
+"between_from": null,
+"between_to": null,
+"evidence": "“Monsieur Fix,” resumed Passepartout, “I’m charmed to find you on board."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Aden",
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg and his servant went ashore at Aden to have the passport again visaed"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Aden",
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg and his servant went ashore at Aden"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "Aden",
+"between_from": null,
+"between_to": null,
+"evidence": "Fix, unobserved, followed them."
+},
+{
+"name_in_text": "pilot",
+"at_name_in_text": "“Mongolia”",
+"between_from": null,
+"between_to": null,
+"evidence": "two hours later the pilot came on board."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "engineer",
+"evidence": "thanks to the vigorous exertions of the engineer"
+},
+{
+"name_in_text": "purser",
+"evidence": "the hospitable efforts of the purser"
+},
+{
+"name_in_text": "old historians",
+"evidence": "which the old historians always spoke of with horror"
+},
+{
+"name_in_text": "ancient navigators",
+"evidence": "the ancient navigators never ventured without propitiating the gods"
+},
+{
+"name_in_text": "English engineers",
+"evidence": "where the English engineers were still at work"
+},
+{
+"name_in_text": "engineers of Solomon",
+"evidence": "two thousand years after the engineers of Solomon."
+}
+],
+"notes": null
+},
+"transport": [
+{
+"mode": "steamer",
+"vessel_or_line_name": "“Mongolia”",
+"from": "Suez",
+"to": "Bombay",
+"evidence": "The “Mongolia” had still sixteen hundred and fifty miles to traverse before reaching Bombay"
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "13th",
+"evidence": "on the 13th, Mocha... was sighted"
+},
+{
+"as_written": "morning of the 15th",
+"evidence": "instead of reaching Aden on the morning of the 15th"
+},
+{
+"as_written": "evening of the 14th",
+"evidence": "arrived there on the evening of the 14th"
+},
+{
+"as_written": "Sunday, October 20th",
+"evidence": "On Sunday, October 20th, towards noon, they came in sight of the Indian coast"
+},
+{
+"as_written": "22nd",
+"evidence": "The “Mongolia” was due at Bombay on the 22nd"
+},
+{
+"as_written": "20th",
+"evidence": "she arrived on the 20th."
+}
+],
+"days_elapsed_or_remaining": null,
+"schedule_status": "ahead",
+"schedule_detail": "gain of two days",
+"evidence": "This was a gain to Phileas Fogg of two days since his departure from London"
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "£280",
+"purpose": "salary for sub-lieutenants",
+"evidence": "for the sub-lieutenants get £280"
+},
+{
+"amount_as_written": "£2,400",
+"purpose": "salary for brigadiers",
+"evidence": "brigadiers, £2,400"
+},
+{
+"amount_as_written": "£4,000",
+"purpose": "salary for generals of divisions",
+"evidence": "generals of divisions, £4,000"
+},
+{
+"amount_as_written": "half a crown",
+"purpose": "amount Passepartout claims he wouldn't pay to learn Fogg's secret",
+"evidence": "nor would I give half a crown to find out.”"
+},
+{
+"amount_as_written": "eight hundred thousand pounds",
+"purpose": "annual cost of fuelling steamers for the Peninsular Company",
+"evidence": "it costs the Peninsular Company some eight hundred thousand pounds a year."
+},
+{
+"amount_as_written": "three or four pounds sterling",
+"purpose": "cost of a ton of coal in distant seas",
+"evidence": "coal is worth three or four pounds sterling a ton."
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}
