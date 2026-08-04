@@ -33,6 +33,7 @@ dependencies = [
     "tenacity>=8",
     "pydantic>=2.7",
     "json-repair>=0.30",
+    "rapidfuzz>=3.14.5",
 ]
 
 [project.urls]
