@@ -1,0 +1,81 @@
+[project]
+name = "verne80"
+version = "0.1.0"
+description = "Around the World in Eighty Days as a route + calendar dataset"
+readme = "README.md"
+authors = [
+    { name = "Zoltan Varju", email = "zoltan.varju@crowintelligence.org" },
+]
+requires-python = ">=3.11"
+license = { text = "MIT" }
+keywords = [
+    "nlp",
+    "digital-humanities",
+    "named-entity-recognition",
+    "gazetteer",
+    "geovisualisation",
+    "jules-verne",
+    "project-gutenberg",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Text Processing :: Linguistic",
+]
+dependencies = [
+    "httpx>=0.28",
+    "tenacity>=8",
+    "pydantic>=2.7",
+]
+
+[project.urls]
+Homepage = "https://crowintelligence.org/"
+Repository = "https://github.com/crow-intelligence/verne80"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-cov",
+    "hypothesis>=6.100",
+    "ruff>=0.4",
+    "ty",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.22,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "ANN", "D"]
+ignore = ["D105", "D107"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D100", "D101", "D102", "D103", "D104", "ANN"]
+"scripts/**" = ["D100", "D103", "ANN"]
+# PROMPT_TEMPLATE must stay byte-identical to specs/verne80_workflow.md §4, which
+# tests/test_prompt.py asserts. Two of its lines are 89 characters; rewrapping them to
+# satisfy the linter would break the thing the module exists to guarantee.
+"src/verne80/prompt.py" = ["E501"]
+# The `mode="before"` validators receive whatever JSON the model emitted, before any
+# coercion has happened. `Any` is the honest annotation there — narrowing it would be a
+# claim about untrusted input that the validator exists precisely to check.
+"src/verne80/schema.py" = ["ANN401"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.pytest.ini_options]
+addopts = "--doctest-modules --tb=short"
+testpaths = ["src", "tests"]
+
+[tool.ty]

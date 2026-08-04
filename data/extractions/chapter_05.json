@@ -1,0 +1,100 @@
+{
+"chapter": 5,
+"title": "IN WHICH A NEW SPECIES OF FUNDS, UNKNOWN TO THE MONEYED MEN, APPEARS ON 'CHANGE",
+"summary_hover": "News of Fogg's wager sparks intense debate and betting in England, until a telegram from Detective Fix identifies Fogg as the bank robber.",
+"summary_detail": "Phileas Fogg's sudden departure and audacious wager cause a sensation in London, with newspapers and the public heavily debating his chances. Despite overwhelming skepticism, Lord Albemarle wagers five thousand pounds on his success. However, public opinion collapses entirely when Detective Fix sends a telegram from Suez identifying Fogg as the sought-after bank robber.",
+"places_visited": [
+{
+"name_in_text": "London",
+"role": "setting",
+"evidence": "Phileas Fogg rightly suspected that his departure from London would create a lively sensation"
+},
+{
+"name_in_text": "West End",
+"role": "setting",
+"evidence": "create a lively sensation at the West End."
+},
+{
+"name_in_text": "Reform Club",
+"role": "setting",
+"evidence": "The news of the bet spread through the Reform Club"
+},
+{
+"name_in_text": "Scotland Yard",
+"role": "setting",
+"evidence": "ROWAN, COMMISSIONER OF POLICE, SCOTLAND YARD:"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "England",
+"evidence": "From the club it soon got into the papers throughout England."
+},
+{
+"name_in_text": "Europe",
+"evidence": "He might, perhaps, reckon on the arrival of trains at the designated hours, in Europe"
+},
+{
+"name_in_text": "India",
+"evidence": "calculated upon crossing India in three days"
+},
+{
+"name_in_text": "United States",
+"evidence": "and the United States in seven"
+},
+{
+"name_in_text": "Suez",
+"evidence": "Suez to London."
+},
+{
+"name_in_text": "Bombay",
+"evidence": "Send without delay warrant of arrest to Bombay."
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "The subject of the wager who is accused of being a bank robber.",
+"evidence": "The polished gentleman disappeared to give place to the bank robber."
+},
+{
+"name_in_text": "Lord Albemarle",
+"role": "An elderly paralytic gentleman who is Fogg's sole remaining advocate.",
+"evidence": "Lord Albemarle, an elderly paralytic gentleman, was now the only advocate of Phileas Fogg left."
+},
+{
+"name_in_text": "Rowan",
+"role": "Commissioner of Police who receives the telegram.",
+"evidence": "ROWAN, COMMISSIONER OF POLICE, SCOTLAND YARD:"
+},
+{
+"name_in_text": "Fix",
+"role": "A detective who claims to have found Fogg.",
+"evidence": "FIX, Detective."
+}
+],
+"transport": [],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "7th of October",
+"evidence": "At last a long article appeared, on the 7th of October, in the bulletin of the Royal Geographical Society"
+}
+],
+"days_elapsed_or_remaining": "a week after",
+"schedule_status": null,
+"schedule_detail": null,
+"evidence": "a week after his departure an incident occurred which deprived him of backers at any price."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "five thousand pounds",
+"purpose": "A wager placed on Phileas Fogg's success by Lord Albemarle.",
+"evidence": "he bet five thousand pounds on Phileas Fogg."
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": "The chapter's main action occurs in London among the public and police; Fogg is not actively depicted, but Fix's telegram from Suez implies Fogg has reached Suez."
+}

@@ -1,0 +1,121 @@
+{
+"chapter": 4,
+"title": "IN WHICH PHILEAS FOGG ASTOUNDS PASSEPARTOUT, HIS SERVANT",
+"summary_hover": "Phileas Fogg surprises Passepartout by announcing their immediate departure on a journey around the world in eighty days.",
+"summary_detail": "Fogg returns home unexpectedly and orders a stunned Passepartout to pack a single carpet-bag for an immediate journey around the world. Fogg places twenty thousand pounds in the bag, gives his whist winnings to a beggar, and they board a train at Charing Cross, just as Passepartout realizes he left his gas light burning.",
+"places_visited": [
+{
+"name_in_text": "Reform Club",
+"role": "departure",
+"evidence": "Phileas Fogg, at twenty-five minutes past seven, left the Reform Club."
+},
+{
+"name_in_text": "Saville Row",
+"role": "departure",
+"evidence": "at the end of Saville Row they took a cab and drove rapidly to Charing Cross."
+},
+{
+"name_in_text": "Charing Cross",
+"role": "arrival",
+"evidence": "The cab stopped before the railway station at twenty minutes past eight."
+},
+{
+"name_in_text": "Sydenham",
+"role": "passing_through",
+"evidence": "Just as the train was whirling through Sydenham, Passepartout suddenly uttered a cry of despair."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Dover",
+"evidence": "We start for Dover and Calais in ten minutes."
+},
+{
+"name_in_text": "Calais",
+"evidence": "We start for Dover and Calais in ten minutes."
+},
+{
+"name_in_text": "France",
+"evidence": "Passepartout, who had been away from France five years, would not be sorry to set foot on his native soil again."
+},
+{
+"name_in_text": "Paris",
+"evidence": "Perhaps they would go as far as Paris, and it would do his eyes good to see Paris once more."
+},
+{
+"name_in_text": "London",
+"evidence": "You do not forget when you are due in London again?"
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "The master departing on a journey around the world.",
+"evidence": "“Yes,” returned Phileas Fogg. “We are going round the world.”"
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant, who is astounded by the sudden departure.",
+"evidence": "Passepartout opened wide his eyes, raised his eyebrows, held up his hands, and seemed about to collapse, so overcome was he with stupefied astonishment."
+},
+{
+"name_in_text": "beggar-woman",
+"role": "A poor woman with a child who asks for alms at the station.",
+"evidence": "when a poor beggar-woman, with a child in her arms... approached, and mournfully asked for alms."
+},
+{
+"name_in_text": "Ralph",
+"role": "One of Fogg's friends from the Reform Club, present at the station.",
+"evidence": "“Oh, that would be quite unnecessary, Mr. Fogg,” said Ralph politely."
+},
+{
+"name_in_text": "Stuart",
+"role": "One of Fogg's friends from the Reform Club, present at the station.",
+"evidence": "“You do not forget when you are due in London again?” asked Stuart."
+}
+],
+"transport": [
+{
+"mode": "carriage",
+"vessel_or_line_name": null,
+"from": "Saville Row",
+"to": "Charing Cross",
+"evidence": "at the end of Saville Row they took a cab and drove rapidly to Charing Cross."
+},
+{
+"mode": "railway",
+"vessel_or_line_name": null,
+"from": "Charing Cross",
+"to": "Paris",
+"evidence": "Two first-class tickets for Paris having been speedily purchased, Mr. Fogg was crossing the station to the train"
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "Saturday, the 21st of December, 1872",
+"evidence": "on Saturday, the 21st of December, 1872, at a quarter before nine p.m."
+}
+],
+"days_elapsed_or_remaining": "eighty days",
+"schedule_status": "unknown",
+"schedule_detail": null,
+"evidence": "“In eighty days,” responded Mr. Fogg. “So we haven’t a moment to lose.”"
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "twenty guineas",
+"purpose": "given as alms to a beggar-woman",
+"evidence": "Mr. Fogg took out the twenty guineas he had just won at whist, and handed them to the beggar"
+},
+{
+"amount_as_written": "twenty thousand pounds",
+"purpose": "money placed in the carpet-bag for the journey",
+"evidence": "Take good care of it, for there are twenty thousand pounds in it."
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

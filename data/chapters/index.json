@@ -1,0 +1,348 @@
+{
+  "source": {
+    "gutenberg_id": 103,
+    "title": "Around the World in Eighty Days",
+    "url": "https://www.gutenberg.org/cache/epub/103/pg103.txt",
+    "raw_path": "data/raw/pg103.txt",
+    "raw_bytes": 403712,
+    "raw_sha256": "6f608ea2da50caf73245ad2996e4ee3c02ef1aa2152f7fcfe209df9aa39e7512"
+  },
+  "expected_chapters": 37,
+  "total_words": 62197,
+  "generated_by": "scripts/01_chapters.py",
+  "chapters": [
+    {
+      "number": 1,
+      "file": "chapter_01.txt",
+      "title": "IN WHICH PHILEAS FOGG AND PASSEPARTOUT ACCEPT EACH OTHER, THE ONE AS MASTER, THE OTHER AS MAN",
+      "word_count": 1453,
+      "char_count": 8360,
+      "sha256": "b7515b06a75c0e7fe2d91e4c65c34ab4d49d3c6ae6b247cb804c68505c3e4131",
+      "first_line": "Mr. Phileas Fogg lived, in 1872, at No. 7, Saville Row, Burlington"
+    },
+    {
+      "number": 2,
+      "file": "chapter_02.txt",
+      "title": "IN WHICH PASSEPARTOUT IS CONVINCED THAT HE HAS AT LAST FOUND HIS IDEAL",
+      "word_count": 1114,
+      "char_count": 6553,
+      "sha256": "60891728fd12508a498b3b1b42c9181601fe159704f9e3732f483d2f981b349e",
+      "first_line": "“Faith,” muttered Passepartout, somewhat flurried, “I’ve seen people at"
+    },
+    {
+      "number": 3,
+      "file": "chapter_03.txt",
+      "title": "IN WHICH A CONVERSATION TAKES PLACE WHICH SEEMS LIKELY TO COST PHILEAS FOGG DEAR",
+      "word_count": 1991,
+      "char_count": 11685,
+      "sha256": "a056bf7302e9a6e0640b7e061e53a02b2573d50e3ef5dd06a4c1ac9e8029dbce",
+      "first_line": "Phileas Fogg, having shut the door of his house at half-past eleven,"
+    },
+    {
+      "number": 4,
+      "file": "chapter_04.txt",
+      "title": "IN WHICH PHILEAS FOGG ASTOUNDS PASSEPARTOUT, HIS SERVANT",
+      "word_count": 942,
+      "char_count": 5602,
+      "sha256": "f30b3b1d9be676fdbc2c7f638ab4885d19a11aa66e07b98430e6fdabc4636111",
+      "first_line": "Having won twenty guineas at whist, and taken leave of his friends,"
+    },
+    {
+      "number": 5,
+      "file": "chapter_05.txt",
+      "title": "IN WHICH A NEW SPECIES OF FUNDS, UNKNOWN TO THE MONEYED MEN, APPEARS ON 'CHANGE",
+      "word_count": 932,
+      "char_count": 5458,
+      "sha256": "c2da232df3d9231380f368ffca482db9793e63858f0f2876632fe3ceb3623a7a",
+      "first_line": "Phileas Fogg rightly suspected that his departure from London would"
+    },
+    {
+      "number": 6,
+      "file": "chapter_06.txt",
+      "title": "IN WHICH FIX, THE DETECTIVE, BETRAYS A VERY NATURAL IMPATIENCE",
+      "word_count": 1299,
+      "char_count": 7548,
+      "sha256": "75766c3bbdc87b5b2d3c025810e94493e67249c05c0e66f7bc1da3aebcaf225f",
+      "first_line": "The circumstances under which this telegraphic dispatch about Phileas"
+    },
+    {
+      "number": 7,
+      "file": "chapter_07.txt",
+      "title": "WHICH ONCE MORE DEMONSTRATES THE USELESSNESS OF PASSPORTS AS AIDS TO DETECTIVES",
+      "word_count": 763,
+      "char_count": 4368,
+      "sha256": "f9be26b7aaa53bd8a0579ffd69c314bce17e6820bf58c73b7ee0418b7f417844",
+      "first_line": "The detective passed down the quay, and rapidly made his way to the"
+    },
+    {
+      "number": 8,
+      "file": "chapter_08.txt",
+      "title": "IN WHICH PASSEPARTOUT TALKS RATHER MORE, PERHAPS, THAN IS PRUDENT",
+      "word_count": 1076,
+      "char_count": 6056,
+      "sha256": "2549067b90d719607a746eb5eb3c4794ced9c954cec3c9033dbcbe83079304f0",
+      "first_line": "Fix soon rejoined Passepartout, who was lounging and looking about on"
+    },
+    {
+      "number": 9,
+      "file": "chapter_09.txt",
+      "title": "IN WHICH THE RED SEA AND THE INDIAN OCEAN PROVE PROPITIOUS TO THE DESIGNS OF PHILEAS FOGG",
+      "word_count": 1544,
+      "char_count": 9108,
+      "sha256": "da8f5e568b3688559a348dc0844d925493e30fb56bd8c82effa7f553ad940e7e",
+      "first_line": "The distance between Suez and Aden is precisely thirteen hundred and"
+    },
+    {
+      "number": 10,
+      "file": "chapter_10.txt",
+      "title": "IN WHICH PASSEPARTOUT IS ONLY TOO GLAD TO GET OFF WITH THE LOSS OF HIS SHOES",
+      "word_count": 1552,
+      "char_count": 9224,
+      "sha256": "95c1b4d8207cec6e65e9a2168ecfeb45404b27cb30b8bd17890db8ad6e48cae7",
+      "first_line": "Everybody knows that the great reversed triangle of land, with its base"
+    },
+    {
+      "number": 11,
+      "file": "chapter_11.txt",
+      "title": "IN WHICH PHILEAS FOGG SECURES A CURIOUS MEANS OF CONVEYANCE AT A FABULOUS PRICE",
+      "word_count": 2530,
+      "char_count": 15177,
+      "sha256": "e790abd72be4fe6a243a4ff126c7933e30c865f2fdda36253f04a5b2441d20e5",
+      "first_line": "The train had started punctually. Among the passengers were a number of"
+    },
+    {
+      "number": 12,
+      "file": "chapter_12.txt",
+      "title": "IN WHICH PHILEAS FOGG AND HIS COMPANIONS VENTURE ACROSS THE INDIAN FORESTS, AND WHAT ENSUED",
+      "word_count": 2083,
+      "char_count": 12405,
+      "sha256": "6d794b0627fab922eadee89158efa8034cef32f9d7f29e1cae352690d4ad1a64",
+      "first_line": "In order to shorten the journey, the guide passed to the left of the"
+    },
+    {
+      "number": 13,
+      "file": "chapter_13.txt",
+      "title": "IN WHICH PASSEPARTOUT RECEIVES A NEW PROOF THAT FORTUNE FAVORS THE BRAVE",
+      "word_count": 2035,
+      "char_count": 11617,
+      "sha256": "8a2af73bd583f16ce6f02a0e711723c51ba6e0290fc7ee1921d627152169f96a",
+      "first_line": "The project was a bold one, full of difficulty, perhaps impracticable."
+    },
+    {
+      "number": 14,
+      "file": "chapter_14.txt",
+      "title": "IN WHICH PHILEAS FOGG DESCENDS THE WHOLE LENGTH OF THE BEAUTIFUL VALLEY OF THE GANGES WITHOUT EVER THINKING OF SEEING IT",
+      "word_count": 1917,
+      "char_count": 11385,
+      "sha256": "70a604ce8d6945716409c4a3fc03368b0a83a6858eaacae2acf87da2c8bb7a75",
+      "first_line": "The rash exploit had been accomplished; and for an hour Passepartout"
+    },
+    {
+      "number": 15,
+      "file": "chapter_15.txt",
+      "title": "IN WHICH THE BAG OF BANKNOTES DISGORGES SOME THOUSANDS OF POUNDS MORE",
+      "word_count": 1829,
+      "char_count": 10798,
+      "sha256": "36110be30a33ce211ebe0dd0e4d2dfcf8c4dc96dba96c200b61fe5f2a7cc1f84",
+      "first_line": "The train entered the station, and Passepartout jumping out first, was"
+    },
+    {
+      "number": 16,
+      "file": "chapter_16.txt",
+      "title": "IN WHICH FIX DOES NOT SEEM TO UNDERSTAND IN THE LEAST WHAT IS SAID TO HIM",
+      "word_count": 1609,
+      "char_count": 9254,
+      "sha256": "71956448d69dc21f7b93a09e280f808427229846882b6cc70b470120448a9758",
+      "first_line": "The “Rangoon”—one of the Peninsular and Oriental Company’s boats plying"
+    },
+    {
+      "number": 17,
+      "file": "chapter_17.txt",
+      "title": "SHOWING WHAT HAPPENED ON THE VOYAGE FROM SINGAPORE TO HONG KONG",
+      "word_count": 1718,
+      "char_count": 10126,
+      "sha256": "ecf9db6fe25f701ef77c7ec6a2dd515fc3af2ebfac3f1e411d9078cf81940b7b",
+      "first_line": "The detective and Passepartout met often on deck after this interview,"
+    },
+    {
+      "number": 18,
+      "file": "chapter_18.txt",
+      "title": "IN WHICH PHILEAS FOGG, PASSEPARTOUT, AND FIX GO EACH ABOUT HIS BUSINESS",
+      "word_count": 1340,
+      "char_count": 7817,
+      "sha256": "69433193c010e28563a1e32f0d3d142d2ff1ada972901b5363571876bd90dafd",
+      "first_line": "The weather was bad during the latter days of the voyage. The wind,"
+    },
+    {
+      "number": 19,
+      "file": "chapter_19.txt",
+      "title": "IN WHICH PASSEPARTOUT TAKES A TOO GREAT INTEREST IN HIS MASTER, AND WHAT COMES OF IT",
+      "word_count": 2060,
+      "char_count": 11957,
+      "sha256": "d90997aa2b90251c88d9c616ac9ee8ca75c30d45569da1bfa6077605fcec9bc9",
+      "first_line": "Hong Kong is an island which came into the possession of the English by"
+    },
+    {
+      "number": 20,
+      "file": "chapter_20.txt",
+      "title": "IN WHICH FIX COMES FACE TO FACE WITH PHILEAS FOGG",
+      "word_count": 1740,
+      "char_count": 9993,
+      "sha256": "6bd75492ef0745e1dd3a387182712345b60c4a8fbf8587810e5be64685364fea",
+      "first_line": "While these events were passing at the opium-house, Mr. Fogg,"
+    },
+    {
+      "number": 21,
+      "file": "chapter_21.txt",
+      "title": "IN WHICH THE MASTER OF THE \"TANKADERE\" RUNS GREAT RISK OF LOSING A REWARD OF TWO HUNDRED POUNDS",
+      "word_count": 2563,
+      "char_count": 14368,
+      "sha256": "40d96c19f4c47ccf06ca5d948047140b357f410039a2264d71c169eb9d49b40b",
+      "first_line": "This voyage of eight hundred miles was a perilous venture on a craft of"
+    },
+    {
+      "number": 22,
+      "file": "chapter_22.txt",
+      "title": "IN WHICH PASSEPARTOUT FINDS OUT THAT, EVEN AT THE ANTIPODES, IT IS CONVENIENT TO HAVE SOME MONEY IN ONE'S POCKET",
+      "word_count": 2064,
+      "char_count": 12135,
+      "sha256": "840ad5d31691887e169725ae4cb253a636fd1b39dbaa7374724824224c6ea285",
+      "first_line": "The “Carnatic,” setting sail from Hong Kong at half-past six on the 7th"
+    },
+    {
+      "number": 23,
+      "file": "chapter_23.txt",
+      "title": "IN WHICH PASSEPARTOUT'S NOSE BECOMES OUTRAGEOUSLY LONG",
+      "word_count": 1932,
+      "char_count": 11327,
+      "sha256": "224778fc6d643b3efc687d8a41abf0042b3db4259a7c8cb9b6b9b293e7c00341",
+      "first_line": "The next morning poor, jaded, famished Passepartout said to himself"
+    },
+    {
+      "number": 24,
+      "file": "chapter_24.txt",
+      "title": "DURING WHICH MR. FOGG AND PARTY CROSS THE PACIFIC OCEAN",
+      "word_count": 1948,
+      "char_count": 11302,
+      "sha256": "f7aa79aca3d6576fac499a10bbbafb1bd6b4f06012c94c9a8cafa391ec0a6777",
+      "first_line": "What happened when the pilot-boat came in sight of Shanghai will be"
+    },
+    {
+      "number": 25,
+      "file": "chapter_25.txt",
+      "title": "IN WHICH A SLIGHT GLIMPSE IS HAD OF SAN FRANCISCO",
+      "word_count": 2002,
+      "char_count": 11670,
+      "sha256": "b055f35af3dc681e55ee5e5174785c8e1afb28bff4eeccd8f63c7ffb1c12b482",
+      "first_line": "It was seven in the morning when Mr. Fogg, Aouda, and Passepartout set"
+    },
+    {
+      "number": 26,
+      "file": "chapter_26.txt",
+      "title": "IN WHICH PHILEAS FOGG AND PARTY TRAVEL BY THE PACIFIC RAILROAD",
+      "word_count": 1605,
+      "char_count": 9561,
+      "sha256": "be282e4af08665eba584367ab8fe98af30dd24ef27c309a2a7395505f26eaab7",
+      "first_line": "“From ocean to ocean”—so say the Americans; and these four words"
+    },
+    {
+      "number": 27,
+      "file": "chapter_27.txt",
+      "title": "IN WHICH PASSEPARTOUT UNDERGOES, AT A SPEED OF TWENTY MILES AN HOUR, A COURSE OF MORMON HISTORY",
+      "word_count": 1944,
+      "char_count": 11605,
+      "sha256": "e666cd72815f757295a98872a330e2cb2653fc5d343411a0067d92d1b070b7c1",
+      "first_line": "During the night of the 5th of December, the train ran south-easterly"
+    },
+    {
+      "number": 28,
+      "file": "chapter_28.txt",
+      "title": "IN WHICH PASSEPARTOUT DOES NOT SUCCEED IN MAKING ANYBODY LISTEN TO REASON",
+      "word_count": 2442,
+      "char_count": 14331,
+      "sha256": "f6fc0775df42d1712c6347acfc6501b5e314d6657bda2e39dd14b7528f3ac380",
+      "first_line": "The train, on leaving Great Salt Lake at Ogden, passed northward for an"
+    },
+    {
+      "number": 29,
+      "file": "chapter_29.txt",
+      "title": "IN WHICH CERTAIN INCIDENTS ARE NARRATED WHICH ARE ONLY TO BE MET WITH ON AMERICAN RAILROADS",
+      "word_count": 2124,
+      "char_count": 12381,
+      "sha256": "174569bd173ec4431bff83bfa6d04709afbe5ddf8445fcf2cf406e64c94ef2ac",
+      "first_line": "The train pursued its course, that evening, without interruption,"
+    },
+    {
+      "number": 30,
+      "file": "chapter_30.txt",
+      "title": "IN WHICH PHILEAS FOGG SIMPLY DOES HIS DUTY",
+      "word_count": 2132,
+      "char_count": 12259,
+      "sha256": "034585649edf0f04e7bdb97a4e3c2b20b02b6d767a40976acac4caef06854760",
+      "first_line": "Three passengers including Passepartout had disappeared. Had they been"
+    },
+    {
+      "number": 31,
+      "file": "chapter_31.txt",
+      "title": "IN WHICH FIX, THE DETECTIVE, CONSIDERABLY FURTHERS THE INTERESTS OF PHILEAS FOGG",
+      "word_count": 1842,
+      "char_count": 10431,
+      "sha256": "705a50d10180313ad0e6eeae1627589fbb47d2914584243d3dc2b5e51a153166",
+      "first_line": "Phileas Fogg found himself twenty hours behind time. Passepartout, the"
+    },
+    {
+      "number": 32,
+      "file": "chapter_32.txt",
+      "title": "IN WHICH PHILEAS FOGG ENGAGES IN A DIRECT STRUGGLE WITH BAD FORTUNE",
+      "word_count": 1050,
+      "char_count": 6031,
+      "sha256": "8afa42f8649e82d56c8aa0931cfdb4faf8461722e900b8261cb2d5fd524626d0",
+      "first_line": "The “China,” in leaving, seemed to have carried off Phileas Fogg’s last"
+    },
+    {
+      "number": 33,
+      "file": "chapter_33.txt",
+      "title": "IN WHICH PHILEAS FOGG SHOWS HIMSELF EQUAL TO THE OCCASION",
+      "word_count": 2479,
+      "char_count": 14198,
+      "sha256": "a6feffae4be66f11153f8f9f03346cf3ab36953998438c54b312af3ea2a284f6",
+      "first_line": "An hour after, the “Henrietta” passed the lighthouse which marks the"
+    },
+    {
+      "number": 34,
+      "file": "chapter_34.txt",
+      "title": "IN WHICH PHILEAS FOGG AT LAST REACHES LONDON",
+      "word_count": 975,
+      "char_count": 5503,
+      "sha256": "fe072adb6a7ecc927924e8a80540437dbf540c2e7552d488626aa6a1b14912b4",
+      "first_line": "Phileas Fogg was in prison. He had been shut up in the Custom House,"
+    },
+    {
+      "number": 35,
+      "file": "chapter_35.txt",
+      "title": "IN WHICH PHILEAS FOGG DOES NOT HAVE TO REPEAT HIS ORDERS TO PASSEPARTOUT TWICE",
+      "word_count": 1573,
+      "char_count": 8848,
+      "sha256": "a17e5809bc03729e2147b4c037f5e91e1744e0cf9b7fc6a8ac133e7d74d91639",
+      "first_line": "The dwellers in Saville Row would have been surprised the next day, if"
+    },
+    {
+      "number": 36,
+      "file": "chapter_36.txt",
+      "title": "IN WHICH PHILEAS FOGG'S NAME IS ONCE MORE AT A PREMIUM ON 'CHANGE",
+      "word_count": 1057,
+      "char_count": 6230,
+      "sha256": "a6db25d52a727b373e268e99bee9e1831b70a37c173a7fdfe1f7a3fc7ea106a3",
+      "first_line": "It is time to relate what a change took place in English public opinion"
+    },
+    {
+      "number": 37,
+      "file": "chapter_37.txt",
+      "title": "IN WHICH IT IS SHOWN THAT PHILEAS FOGG GAINED NOTHING BY HIS TOUR AROUND THE WORLD, UNLESS IT WERE HAPPINESS",
+      "word_count": 938,
+      "char_count": 5579,
+      "sha256": "612818b3bb5a389b6c8756f24562d6dfc43ddd31db441b698fc35f3e998f2676",
+      "first_line": "Yes; Phileas Fogg in person."
+    }
+  ]
+}

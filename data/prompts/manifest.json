@@ -1,0 +1,265 @@
+{
+  "generated_by": "scripts/02_prompts.py",
+  "template_sha256": "a661ab894d0ff5763ced9776320e34a39635c161ef8a26a87b3208dce93a4d8e",
+  "prompts": [
+    {
+      "number": 1,
+      "file": "chapter_01.txt",
+      "chars": 11594,
+      "sha256": "ecd97aeea6240303b31dbc176f8689e6225846fb20eb346860a0d02d843d6408",
+      "chapter_sha256": "b7515b06a75c0e7fe2d91e4c65c34ab4d49d3c6ae6b247cb804c68505c3e4131"
+    },
+    {
+      "number": 2,
+      "file": "chapter_02.txt",
+      "chars": 9764,
+      "sha256": "1efc42ba954cdbaf18bef8f214ae6f6e22a613eb199d8b7f520797fc6fd5d21d",
+      "chapter_sha256": "60891728fd12508a498b3b1b42c9181601fe159704f9e3732f483d2f981b349e"
+    },
+    {
+      "number": 3,
+      "file": "chapter_03.txt",
+      "chars": 14906,
+      "sha256": "bf907223c50affd5ffa8a64ed90fd78c393991782058160f2a97999e49de3913",
+      "chapter_sha256": "a056bf7302e9a6e0640b7e061e53a02b2573d50e3ef5dd06a4c1ac9e8029dbce"
+    },
+    {
+      "number": 4,
+      "file": "chapter_04.txt",
+      "chars": 8799,
+      "sha256": "0f6ebc3b8fb76c8cc802626a23da1a1f09e7b4e4a0166d205ebd80a54ed93dc3",
+      "chapter_sha256": "f30b3b1d9be676fdbc2c7f638ab4885d19a11aa66e07b98430e6fdabc4636111"
+    },
+    {
+      "number": 5,
+      "file": "chapter_05.txt",
+      "chars": 8678,
+      "sha256": "d6e8759691b65749b8dbab32f2e43fe6432007e3cd6abe85e48028e3d1f637c1",
+      "chapter_sha256": "c2da232df3d9231380f368ffca482db9793e63858f0f2876632fe3ceb3623a7a"
+    },
+    {
+      "number": 6,
+      "file": "chapter_06.txt",
+      "chars": 10751,
+      "sha256": "9534c1e72182f9ab41fa4a6674e3ffc7bdf6ea8cbb78dc586306b566efb2b716",
+      "chapter_sha256": "75766c3bbdc87b5b2d3c025810e94493e67249c05c0e66f7bc1da3aebcaf225f"
+    },
+    {
+      "number": 7,
+      "file": "chapter_07.txt",
+      "chars": 7588,
+      "sha256": "750211c8560b46d8af96bddf256a5da3b35cd5e95596120a56f7b5225c3ca5e3",
+      "chapter_sha256": "f9be26b7aaa53bd8a0579ffd69c314bce17e6820bf58c73b7ee0418b7f417844"
+    },
+    {
+      "number": 8,
+      "file": "chapter_08.txt",
+      "chars": 9262,
+      "sha256": "d89da0f734844fba7d4edf407afee0164959dae6525928d46cf1521264f71225",
+      "chapter_sha256": "2549067b90d719607a746eb5eb3c4794ced9c954cec3c9033dbcbe83079304f0"
+    },
+    {
+      "number": 9,
+      "file": "chapter_09.txt",
+      "chars": 12338,
+      "sha256": "40bfb40799d486aaeeae8862f20621a281ec5cd5cd3caebd25b575185e4971d5",
+      "chapter_sha256": "da8f5e568b3688559a348dc0844d925493e30fb56bd8c82effa7f553ad940e7e"
+    },
+    {
+      "number": 10,
+      "file": "chapter_10.txt",
+      "chars": 12442,
+      "sha256": "7c10d1bbcd419cd26eb77646f7f73212caa394433258a4cdd90e86db1313522b",
+      "chapter_sha256": "95c1b4d8207cec6e65e9a2168ecfeb45404b27cb30b8bd17890db8ad6e48cae7"
+    },
+    {
+      "number": 11,
+      "file": "chapter_11.txt",
+      "chars": 18398,
+      "sha256": "a5dbb7a7565d3ed50a0429d06294cb0de7ccf3f3d0d03758fc89bda1a010ae64",
+      "chapter_sha256": "e790abd72be4fe6a243a4ff126c7933e30c865f2fdda36253f04a5b2441d20e5"
+    },
+    {
+      "number": 12,
+      "file": "chapter_12.txt",
+      "chars": 15638,
+      "sha256": "0f2ef3c8c3c1e1b6eb23e9e8757af7ed3e3331e4986fce32c12b4b166e35d187",
+      "chapter_sha256": "6d794b0627fab922eadee89158efa8034cef32f9d7f29e1cae352690d4ad1a64"
+    },
+    {
+      "number": 13,
+      "file": "chapter_13.txt",
+      "chars": 14831,
+      "sha256": "9f1727940cbc2dce49e48242aef0ec71575f773c6e2968b40a4b0295eb2743c1",
+      "chapter_sha256": "8a2af73bd583f16ce6f02a0e711723c51ba6e0290fc7ee1921d627152169f96a"
+    },
+    {
+      "number": 14,
+      "file": "chapter_14.txt",
+      "chars": 14647,
+      "sha256": "a0718d508b52d0e6cecad098c261d28960ca846eb03bf7c6c4c8363082e838a9",
+      "chapter_sha256": "70a604ce8d6945716409c4a3fc03368b0a83a6858eaacae2acf87da2c8bb7a75"
+    },
+    {
+      "number": 15,
+      "file": "chapter_15.txt",
+      "chars": 14009,
+      "sha256": "b2843c9707db9f06489d0958b35b77e0cf5e197e77f756914ac770baf96fa14a",
+      "chapter_sha256": "36110be30a33ce211ebe0dd0e4d2dfcf8c4dc96dba96c200b61fe5f2a7cc1f84"
+    },
+    {
+      "number": 16,
+      "file": "chapter_16.txt",
+      "chars": 12469,
+      "sha256": "d6bcbf3c714bb3dc29139aba7ae14ac9da21a027ea5d757b4360449488b55feb",
+      "chapter_sha256": "71956448d69dc21f7b93a09e280f808427229846882b6cc70b470120448a9758"
+    },
+    {
+      "number": 17,
+      "file": "chapter_17.txt",
+      "chars": 13331,
+      "sha256": "c9e6dd89e2385f0f4d859bdcc3e0771244fb3e1374fcd9284f365681e971f465",
+      "chapter_sha256": "ecf9db6fe25f701ef77c7ec6a2dd515fc3af2ebfac3f1e411d9078cf81940b7b"
+    },
+    {
+      "number": 18,
+      "file": "chapter_18.txt",
+      "chars": 11030,
+      "sha256": "293ddfe5894c15cf6b5d71d037ecc8dc9d74f0820c56f2ad2e0a8e273a2c53f4",
+      "chapter_sha256": "69433193c010e28563a1e32f0d3d142d2ff1ada972901b5363571876bd90dafd"
+    },
+    {
+      "number": 19,
+      "file": "chapter_19.txt",
+      "chars": 15183,
+      "sha256": "d80604f25ebe75c7aa921220eaea38201c4d9bda4ea619553ed9d3aea58e47ff",
+      "chapter_sha256": "d90997aa2b90251c88d9c616ac9ee8ca75c30d45569da1bfa6077605fcec9bc9"
+    },
+    {
+      "number": 20,
+      "file": "chapter_20.txt",
+      "chars": 13184,
+      "sha256": "1a156eef859251faca0a6b30ee3b39eb3a726ada89cb41eb3141bb104f69a3c5",
+      "chapter_sha256": "6bd75492ef0745e1dd3a387182712345b60c4a8fbf8587810e5be64685364fea"
+    },
+    {
+      "number": 21,
+      "file": "chapter_21.txt",
+      "chars": 17605,
+      "sha256": "17545a9a1c6f62015507867ae0f50987d4788e35ec595ff0f66a4d6a4853441d",
+      "chapter_sha256": "40d96c19f4c47ccf06ca5d948047140b357f410039a2264d71c169eb9d49b40b"
+    },
+    {
+      "number": 22,
+      "file": "chapter_22.txt",
+      "chars": 15389,
+      "sha256": "8093e144c3b37b23de4ce012e5eb2868930324906c117733fadb587760a34734",
+      "chapter_sha256": "840ad5d31691887e169725ae4cb253a636fd1b39dbaa7374724824224c6ea285"
+    },
+    {
+      "number": 23,
+      "file": "chapter_23.txt",
+      "chars": 14523,
+      "sha256": "71fd30235fa08eb56810b8a1641ab380a917c35afcb826c2e0a6ddf03e41fba8",
+      "chapter_sha256": "224778fc6d643b3efc687d8a41abf0042b3db4259a7c8cb9b6b9b293e7c00341"
+    },
+    {
+      "number": 24,
+      "file": "chapter_24.txt",
+      "chars": 14499,
+      "sha256": "8449cff33410771103b6a519fd99bb49c5648d44316ab713f7fa567c0c8929b0",
+      "chapter_sha256": "f7aa79aca3d6576fac499a10bbbafb1bd6b4f06012c94c9a8cafa391ec0a6777"
+    },
+    {
+      "number": 25,
+      "file": "chapter_25.txt",
+      "chars": 14861,
+      "sha256": "bc862b06511b72fe5891b09c802458c2922c0d35510b1f4d616bd5f731df333d",
+      "chapter_sha256": "b055f35af3dc681e55ee5e5174785c8e1afb28bff4eeccd8f63c7ffb1c12b482"
+    },
+    {
+      "number": 26,
+      "file": "chapter_26.txt",
+      "chars": 12765,
+      "sha256": "bf39054e44bcaa2099e9d1750cf922c12f756b074383c9cbfbbab322d7da314e",
+      "chapter_sha256": "be282e4af08665eba584367ab8fe98af30dd24ef27c309a2a7395505f26eaab7"
+    },
+    {
+      "number": 27,
+      "file": "chapter_27.txt",
+      "chars": 14842,
+      "sha256": "b829be876c2e0f05569f9cae7c2f67f6771c2479afc39737b2de222aa6a7a6f9",
+      "chapter_sha256": "e666cd72815f757295a98872a330e2cb2653fc5d343411a0067d92d1b070b7c1"
+    },
+    {
+      "number": 28,
+      "file": "chapter_28.txt",
+      "chars": 17546,
+      "sha256": "f0283653b96e8cde757c49861d2c13d1a8432c46aa261800335367a1bd4e8093",
+      "chapter_sha256": "f6fc0775df42d1712c6347acfc6501b5e314d6657bda2e39dd14b7528f3ac380"
+    },
+    {
+      "number": 29,
+      "file": "chapter_29.txt",
+      "chars": 15614,
+      "sha256": "9c4f381d933d0682e29fed843be3621f37021fd7d9de906c206de9f36cdcf587",
+      "chapter_sha256": "174569bd173ec4431bff83bfa6d04709afbe5ddf8445fcf2cf406e64c94ef2ac"
+    },
+    {
+      "number": 30,
+      "file": "chapter_30.txt",
+      "chars": 15443,
+      "sha256": "1a700f89beeccdc00f5c932c880ffc2a304187d279eb88772c016aeb7106bf1e",
+      "chapter_sha256": "034585649edf0f04e7bdb97a4e3c2b20b02b6d767a40976acac4caef06854760"
+    },
+    {
+      "number": 31,
+      "file": "chapter_31.txt",
+      "chars": 13653,
+      "sha256": "66a3c31d9425351410b7c42b9481e3ae021d326b1d16a8b9580d80d2560c1bc0",
+      "chapter_sha256": "705a50d10180313ad0e6eeae1627589fbb47d2914584243d3dc2b5e51a153166"
+    },
+    {
+      "number": 32,
+      "file": "chapter_32.txt",
+      "chars": 9240,
+      "sha256": "b3111c3190112d3ad07b25b4a6e88ee542fb603de458fb9b4f0722442b3f2047",
+      "chapter_sha256": "8afa42f8649e82d56c8aa0931cfdb4faf8461722e900b8261cb2d5fd524626d0"
+    },
+    {
+      "number": 33,
+      "file": "chapter_33.txt",
+      "chars": 17397,
+      "sha256": "5bf12bfa02e521b1beaec6979d051146d20c4239d5752e83896f0eb6118c74f0",
+      "chapter_sha256": "a6feffae4be66f11153f8f9f03346cf3ab36953998438c54b312af3ea2a284f6"
+    },
+    {
+      "number": 34,
+      "file": "chapter_34.txt",
+      "chars": 8689,
+      "sha256": "13539b2a3ca8063e39ede7f9617daa093f5526d70d65a4f018caf610cfc7480e",
+      "chapter_sha256": "fe072adb6a7ecc927924e8a80540437dbf540c2e7552d488626aa6a1b14912b4"
+    },
+    {
+      "number": 35,
+      "file": "chapter_35.txt",
+      "chars": 12068,
+      "sha256": "1ceb1c0eb2995d7e02991909b07bade3f70c23bd603c37ff09c93e647687074f",
+      "chapter_sha256": "a17e5809bc03729e2147b4c037f5e91e1744e0cf9b7fc6a8ac133e7d74d91639"
+    },
+    {
+      "number": 36,
+      "file": "chapter_36.txt",
+      "chars": 9437,
+      "sha256": "b9a6026bad6231122e7c77c778f065fedcfb0944af3a32df05092b55f2141027",
+      "chapter_sha256": "a6db25d52a727b373e268e99bee9e1831b70a37c173a7fdfe1f7a3fc7ea106a3"
+    },
+    {
+      "number": 37,
+      "file": "chapter_37.txt",
+      "chars": 8829,
+      "sha256": "296850b09a144c642b54b4e5ca13e6f728cb5cf5511a4aa80c0ec25df183d977",
+      "chapter_sha256": "612818b3bb5a389b6c8756f24562d6dfc43ddd31db441b698fc35f3e998f2676"
+    }
+  ]
+}

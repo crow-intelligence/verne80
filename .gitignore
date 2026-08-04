@@ -1,0 +1,27 @@
+# Derived data. Raw text, chapters and extractions ARE committed — see README.
+# data/review/ is NOT ignored wholesale: places.csv and positions.csv carry human
+# confirmations and are project data. Only the regenerable reports are ignored.
+data/prompts/chapter_*.txt
+data/review/evidence_queue.md
+data/review/evidence_report.json
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Test artifacts
+.coverage
+.hypothesis/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Local harness / session state
+.claude/

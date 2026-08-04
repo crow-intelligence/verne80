@@ -1,0 +1,202 @@
+{
+"chapter": 3,
+"title": "IN WHICH A CONVERSATION TAKES PLACE WHICH SEEMS LIKELY TO COST PHILEAS FOGG DEAR",
+"summary_hover": "At the Reform Club, Phileas Fogg discusses a recent bank robbery and accepts a twenty thousand pound wager to circle the globe in eighty days.",
+"summary_detail": "Phileas Fogg arrives at the Reform Club and joins his whist partners, who are debating a recent fifty-five thousand pound theft from the Bank of England. The conversation turns to the size of the world and a newspaper estimate that it can be traversed in eighty days. Confident in his mathematical precision, Fogg accepts a wager of twenty thousand pounds to complete the journey himself, planning to leave that very evening.",
+"places_visited": [
+{
+"name_in_text": "Reform Club",
+"role": "setting",
+"evidence": "reached the Reform Club, an imposing edifice in Pall Mall"
+},
+{
+"name_in_text": "Pall Mall",
+"role": "setting",
+"evidence": "an imposing edifice in Pall Mall"
+},
+{
+"name_in_text": "London",
+"role": "setting",
+"evidence": "I shall be due in London in this very room of the Reform Club"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "America",
+"evidence": "Skilful detectives have been sent to all the principal ports of America and the Continent"
+},
+{
+"name_in_text": "Continent",
+"evidence": "Skilful detectives have been sent to all the principal ports of America and the Continent"
+},
+{
+"name_in_text": "Bank of England",
+"evidence": "occurred three days before at the Bank of England."
+},
+{
+"name_in_text": "Liverpool",
+"evidence": "hastened off to Liverpool, Glasgow, Havre, Suez, Brindisi, New York, and other ports"
+},
+{
+"name_in_text": "Glasgow",
+"evidence": "hastened off to Liverpool, Glasgow, Havre, Suez, Brindisi, New York, and other ports"
+},
+{
+"name_in_text": "Havre",
+"evidence": "hastened off to Liverpool, Glasgow, Havre, Suez, Brindisi, New York, and other ports"
+},
+{
+"name_in_text": "Suez",
+"evidence": "hastened off to Liverpool, Glasgow, Havre, Suez, Brindisi, New York, and other ports"
+},
+{
+"name_in_text": "Brindisi",
+"evidence": "hastened off to Liverpool, Glasgow, Havre, Suez, Brindisi, New York, and other ports"
+},
+{
+"name_in_text": "New York",
+"evidence": "hastened off to Liverpool, Glasgow, Havre, Suez, Brindisi, New York, and other ports"
+},
+{
+"name_in_text": "Rothal",
+"evidence": "now that the section between Rothal and Allahabad, on the Great Indian Peninsula Railway, has been opened."
+},
+{
+"name_in_text": "Allahabad",
+"evidence": "now that the section between Rothal and Allahabad, on the Great Indian Peninsula Railway, has been opened."
+},
+{
+"name_in_text": "Bombay",
+"evidence": "From Suez to Bombay, by steamer"
+},
+{
+"name_in_text": "Calcutta",
+"evidence": "From Bombay to Calcutta, by rail"
+},
+{
+"name_in_text": "Hong Kong",
+"evidence": "From Calcutta to Hong Kong, by steamer"
+},
+{
+"name_in_text": "Yokohama (Japan)",
+"evidence": "From Hong Kong to Yokohama (Japan), by steamer"
+},
+{
+"name_in_text": "San Francisco",
+"evidence": "From Yokohama to San Francisco, by steamer"
+},
+{
+"name_in_text": "Mont Cenis",
+"evidence": "From London to Suez viâ Mont Cenis and Brindisi"
+},
+{
+"name_in_text": "Dover",
+"evidence": "The train leaves for Dover at a quarter before nine."
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "A mathematically precise gentleman who accepts a wager to travel the world in 80 days.",
+"evidence": "I will bet twenty thousand pounds against anyone who wishes that I will make the tour of the world in eighty days or less"
+},
+{
+"name_in_text": "Andrew Stuart",
+"role": "An engineer and whist partner who doubts the eighty-day journey is possible.",
+"evidence": "They were Mr. Fogg’s usual partners at whist: Andrew Stuart, an engineer"
+},
+{
+"name_in_text": "John Sullivan",
+"role": "A banker and whist partner.",
+"evidence": "John Sullivan and Samuel Fallentin, bankers"
+},
+{
+"name_in_text": "Samuel Fallentin",
+"role": "A banker and whist partner.",
+"evidence": "John Sullivan and Samuel Fallentin, bankers"
+},
+{
+"name_in_text": "Thomas Flanagan",
+"role": "A brewer and whist partner.",
+"evidence": "Thomas Flanagan, a brewer"
+},
+{
+"name_in_text": "Gauthier Ralph",
+"role": "A Director of the Bank of England and whist partner.",
+"evidence": "Gauthier Ralph, one of the Directors of the Bank of England"
+}
+],
+"transport": [
+{
+"mode": "railway",
+"vessel_or_line_name": "Great Indian Peninsula Railway",
+"from": "Rothal",
+"to": "Allahabad",
+"evidence": "now that the section between Rothal and Allahabad, on the Great Indian Peninsula Railway, has been opened."
+},
+{
+"mode": "railway",
+"vessel_or_line_name": null,
+"from": "London",
+"to": "Dover",
+"evidence": "The train leaves for Dover at a quarter before nine. I will take it."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "Wednesday, the 2nd of October",
+"evidence": "As today is Wednesday, the 2nd of October, I shall be due in London"
+},
+{
+"as_written": "Saturday, the 21st of December",
+"evidence": "on Saturday, the 21st of December, at a quarter before nine p.m."
+}
+],
+"days_elapsed_or_remaining": "80 days",
+"schedule_status": "unknown",
+"schedule_detail": null,
+"evidence": "I will make the tour of the world in eighty days or less"
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "three millions",
+"purpose": "estimated cost of the Reform Club building",
+"evidence": "reached the Reform Club, an imposing edifice in Pall Mall, which could not have cost less than three millions."
+},
+{
+"amount_as_written": "fifty-five thousand pounds",
+"purpose": "value of the banknotes stolen from the Bank of England",
+"evidence": "A package of banknotes, to the value of fifty-five thousand pounds, had been taken from the principal cashier’s table"
+},
+{
+"amount_as_written": "three shillings and sixpence",
+"purpose": "receipt registered by the cashier at the time of the robbery",
+"evidence": "engaged in registering the receipt of three shillings and sixpence."
+},
+{
+"amount_as_written": "two thousand pounds",
+"purpose": "reward offered to detectives for recovering the stolen money",
+"evidence": "inspired by the proffered reward of two thousand pounds, and five per cent. on the sum that might be recovered."
+},
+{
+"amount_as_written": "four thousand pounds",
+"purpose": "Stuart's proposed wager against the journey being possible",
+"evidence": "But I would wager four thousand pounds that such a journey, made under these conditions, is impossible."
+},
+{
+"amount_as_written": "twenty thousand",
+"purpose": "Fogg's deposit at Baring's that he offers to risk on the wager",
+"evidence": "I have a deposit of twenty thousand at Baring’s which I will willingly risk upon it."
+},
+{
+"amount_as_written": "twenty thousand pounds",
+"purpose": "Fogg's formal wager to travel the world in 80 days",
+"evidence": "I will bet twenty thousand pounds against anyone who wishes that I will make the tour of the world in eighty days or less"
+}
+],
+"fogg_remaining_stated": "twenty thousand pounds"
+},
+"notes": "The chapter lists an 80-day itinerary from the Daily Telegraph, establishing the planned travel route and timeline for the wager. Fogg's remaining fortune is stated to be twenty thousand pounds, as he wagers half of his total fortune of forty thousand pounds."
+}
