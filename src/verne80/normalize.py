@@ -14,12 +14,19 @@ marks and unspaced em dashes; a language model asked to copy a sentence verbatim
 sometimes hand back the ASCII spellings instead. That is a difference in how punctuation
 is *spelled*, not in what the sentence *says*.
 
+**Italics.** Gutenberg marks them with underscores — ``_Times_``, ``_viâ_`` — and a
+model quoting the passage silently drops them.
+
 Folding weakens the word "verbatim", and it is worth being precise about how far. The
 fold can only ever collapse punctuation variants and whitespace onto a canonical form;
 it cannot invent, delete or reorder a word. A quote that passes because the model wrote
 ``--`` where Verne wrote an em dash is still the same sentence. A quote the model made
-up cannot be folded into existence. Note also that the fold is applied to the *matching
-key* only: the evidence string stored in ``data/extractions/`` is never rewritten.
+up cannot be folded into existence. Deleting the underscore does cost something real —
+``_Times_`` and ``Times`` become one key, so emphasis is no longer distinguishable — but
+nothing downstream reads emphasis, and the alternative is a permanent drizzle of false
+alarms on every italicised quotation. Note also that the fold is applied to the
+*matching key* only: the evidence string stored in ``data/extractions/`` is never
+rewritten.
 """
 
 from __future__ import annotations
@@ -44,6 +51,14 @@ _SPACES = dict.fromkeys(
 _DELETE: dict[int, str | None] = dict.fromkeys(map(ord, "­​﻿"), None)
 _ELLIPSIS = {ord("…"): "..."}
 
+# Project Gutenberg marks italics with underscores. In #103 there are 78 of them, in 39
+# balanced spans and none free-standing: newspaper titles (``_Times_``), foreign words
+# (``_viâ_``, ``_visa_``) and emphasis on the words the plot turns on (``_eighty_``,
+# ``_eastward_``, ``_westward_``). One span crosses a wrapped line. A model quoting such
+# a passage drops the markers, which is a difference in how emphasis is *typeset*, not
+# in what the sentence says.
+_ITALICS: dict[int, str | None] = {ord("_"): None}
+
 _FOLD: dict[int, str | None] = {
     **_APOSTROPHES,
     **_QUOTES,
@@ -51,6 +66,7 @@ _FOLD: dict[int, str | None] = {
     **_SPACES,
     **_ELLIPSIS,
     **_DELETE,
+    **_ITALICS,
 }
 
 _WHITESPACE = re.compile(r"\s+")
@@ -68,7 +84,8 @@ def fold_typography(text: str) -> str:
 
     Returns:
         The NFC-normalised string with apostrophes, quotation marks, dashes, exotic
-        spaces and ellipses folded, and zero-width characters removed.
+        spaces and ellipses folded, and zero-width characters and Gutenberg's underscore
+        italic markers removed.
 
     Contract:
         - Idempotent: folding a folded string changes nothing.
@@ -86,6 +103,11 @@ def fold_typography(text: str) -> str:
 
         >>> fold_typography("Suez—Bombay…")
         'Suez-Bombay...'
+
+        Gutenberg's underscore italic markers go:
+
+        >>> fold_typography("From London to Suez _viâ_ Mont Cenis")
+        'From London to Suez viâ Mont Cenis'
 
         Line structure is preserved:
 

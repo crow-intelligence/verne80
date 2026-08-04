@@ -10,6 +10,7 @@ from verne80.schema import (
     TransportLeg,
     TransportMode,
     check_extraction,
+    is_stale,
 )
 
 MINIMAL = {
@@ -136,11 +137,191 @@ class TestEvidenceItems:
 
     def test_the_count_matches_the_non_empty_evidence_strings(self, valid_extraction):
         extraction = ChapterExtraction(**valid_extraction)
-        assert len(extraction.evidence_items()) == 4
+        assert len(extraction.evidence_items()) == 5
 
     def test_a_null_time_evidence_contributes_nothing(self):
         extraction = ChapterExtraction(**MINIMAL)
         assert extraction.evidence_items() == []
+
+
+def narrative_data(**narrative):
+    """A minimal extraction whose people roster covers whoever the narrative names."""
+    names = {
+        item["name_in_text"]
+        for key in ("on_stage", "named_but_not_present")
+        for item in narrative.get(key, [])
+    }
+    places = {
+        item[field]
+        for item in narrative.get("on_stage", [])
+        for field in ("at_name_in_text", "between_from", "between_to")
+        if item.get(field) and item[field].strip()
+    }
+    return {
+        **MINIMAL,
+        "people": [{"name_in_text": n, "evidence": "x"} for n in sorted(names)],
+        "places_mentioned": [
+            {"name_in_text": p, "evidence": "x"} for p in sorted(places)
+        ],
+        "narrative": narrative,
+    }
+
+
+class TestNarrative:
+    def test_a_null_narrative_becomes_empty(self):
+        extraction = ChapterExtraction(**MINIMAL, narrative=None)
+        assert extraction.narrative.on_stage == []
+        assert extraction.narrative.named_but_not_present == []
+
+    def test_null_narrative_lists_become_empty(self):
+        extraction = ChapterExtraction(
+            **MINIMAL, narrative={"on_stage": None, "named_but_not_present": None}
+        )
+        assert extraction.narrative.on_stage == []
+
+    def test_a_blank_place_name_becomes_none(self):
+        """A blank would key a phantom row into the containment map."""
+        data = narrative_data(
+            on_stage=[
+                {"name_in_text": "Fogg", "at_name_in_text": "  ", "evidence": "x"}
+            ]
+        )
+        assert ChapterExtraction(**data).narrative.on_stage[0].at_name_in_text is None
+
+    def test_an_absent_narrative_still_validates(self):
+        """An old file must load, or the migration is unsurvivable mid-paste."""
+        assert ChapterExtraction(**MINIMAL).narrative.on_stage == []
+
+    def test_evidence_items_covers_the_narrative_block(self):
+        data = narrative_data(
+            on_stage=[
+                {
+                    "name_in_text": "Fix",
+                    "at_name_in_text": "Suez",
+                    "evidence": "at Suez",
+                }
+            ],
+            named_but_not_present=[{"name_in_text": "Fogg", "evidence": "of Mr. Fogg"}],
+        )
+        paths = [ref.path for ref in ChapterExtraction(**data).evidence_items()]
+        assert "narrative.on_stage[0].evidence" in paths
+        assert "narrative.named_but_not_present[0].evidence" in paths
+
+    def test_a_person_on_stage_and_not_present_is_reported(self):
+        data = narrative_data(
+            on_stage=[{"name_in_text": "Fogg", "evidence": "x"}],
+            named_but_not_present=[{"name_in_text": "fogg", "evidence": "y"}],
+        )
+        problems = check_extraction(ChapterExtraction(**data), expected_number=1)
+        assert any("both on stage and not present" in p for p in problems)
+
+    def test_a_place_and_a_transit_together_are_reported(self):
+        data = narrative_data(
+            on_stage=[
+                {
+                    "name_in_text": "Fogg",
+                    "at_name_in_text": "Suez",
+                    "between_to": "Bombay",
+                    "evidence": "x",
+                }
+            ]
+        )
+        problems = check_extraction(ChapterExtraction(**data), expected_number=1)
+        assert any("they are alternatives" in p for p in problems)
+
+    def test_a_journey_to_the_same_place_is_reported(self):
+        data = narrative_data(
+            on_stage=[
+                {
+                    "name_in_text": "Fogg",
+                    "between_from": "Suez",
+                    "between_to": "suez",
+                    "evidence": "x",
+                }
+            ]
+        )
+        problems = check_extraction(ChapterExtraction(**data), expected_number=1)
+        assert any("to itself" in p for p in problems)
+
+    def test_a_roster_disagreement_is_reported(self):
+        data = {
+            **MINIMAL,
+            "people": [{"name_in_text": "Fogg", "evidence": "x"}],
+            "narrative": {"on_stage": [{"name_in_text": "Fix", "evidence": "y"}]},
+        }
+        problems = check_extraction(ChapterExtraction(**data), expected_number=1)
+        assert any("the two rosters" in p for p in problems)
+
+    def test_a_place_invented_in_the_narrative_block_is_reported(self):
+        """The strongest cross-check: a location that appears in no other array."""
+        data = {
+            **MINIMAL,
+            "people": [{"name_in_text": "Fogg", "evidence": "x"}],
+            "places_mentioned": [{"name_in_text": "London", "evidence": "x"}],
+            "narrative": {
+                "on_stage": [
+                    {
+                        "name_in_text": "Fogg",
+                        "at_name_in_text": "Atlantis",
+                        "evidence": "y",
+                    }
+                ]
+            },
+        }
+        problems = check_extraction(ChapterExtraction(**data), expected_number=1)
+        assert any("Atlantis" in p and "places_mentioned" in p for p in problems)
+
+    def test_an_extraction_from_the_old_template_is_reported_as_stale(self):
+        data = {**MINIMAL, "people": [{"name_in_text": "Fogg", "evidence": "x"}]}
+        extraction = ChapterExtraction(**data)
+        assert is_stale(extraction)
+        problems = check_extraction(extraction, expected_number=1)
+        assert any("re-paste" in p for p in problems)
+
+    def test_a_chapter_with_nobody_in_it_is_not_stale(self):
+        """No people means no question to have been asked — not a missing block."""
+        assert not is_stale(ChapterExtraction(**MINIMAL))
+
+    def test_a_chapter_the_party_is_absent_from_is_not_an_error(self):
+        """Chapter 5: an empty on_stage beside a full places_visited is correct."""
+        data = {
+            **MINIMAL,
+            "people": [{"name_in_text": "Lord Albemarle", "evidence": "x"}],
+            "places_visited": [
+                {"name_in_text": "London", "role": "setting", "evidence": "in London"}
+            ],
+            "narrative": {
+                "named_but_not_present": [
+                    {"name_in_text": "Lord Albemarle", "evidence": "x"}
+                ]
+            },
+        }
+        problems = check_extraction(ChapterExtraction(**data), expected_number=1)
+        assert problems == []
+
+    def test_the_same_person_twice_is_movement_not_an_error(self):
+        data = narrative_data(
+            on_stage=[
+                {
+                    "name_in_text": "Fogg",
+                    "at_name_in_text": "Saville Row",
+                    "evidence": "x",
+                },
+                {
+                    "name_in_text": "Fogg",
+                    "at_name_in_text": "Reform Club",
+                    "evidence": "y",
+                },
+            ]
+        )
+        problems = check_extraction(ChapterExtraction(**data), expected_number=1)
+        assert problems == []
+
+    def test_an_entry_with_no_place_at_all_is_not_an_error(self):
+        """Rule 1 being obeyed: the chapter did not say where."""
+        data = narrative_data(on_stage=[{"name_in_text": "Fogg", "evidence": "x"}])
+        problems = check_extraction(ChapterExtraction(**data), expected_number=1)
+        assert problems == []
 
 
 class TestEditorialChecks:

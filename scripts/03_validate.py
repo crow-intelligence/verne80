@@ -30,7 +30,7 @@ from verne80.report import (
     write_json_report,
     write_markdown,
 )
-from verne80.schema import check_extraction
+from verne80.schema import check_extraction, is_stale
 
 DEFAULT_CHAPTERS_DIR = Path("data/chapters")
 DEFAULT_EXTRACTIONS_DIR = Path("data/extractions")
@@ -78,6 +78,11 @@ def main(argv: list[str] | None = None) -> int:
         help="just list the chapters not yet pasted, and stop",
     )
     parser.add_argument(
+        "--stale-only",
+        action="store_true",
+        help="just list the chapters pasted before the narrative block existed",
+    )
+    parser.add_argument(
         "--strict",
         action="store_true",
         help="fail on anything short of an exact or normalised match",
@@ -103,6 +108,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.missing_only:
         return _report_missing(args.extractions_dir, wanted)
+
+    if args.stale_only:
+        return _report_stale(args.extractions_dir, wanted)
 
     extractions, problems = load_all(args.extractions_dir, wanted)
     checks = []
@@ -134,6 +142,33 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(f"  FAIL  {blocking} quotes {what} — see {md_path}", file=sys.stderr)
     return 1 if problems or blocking else 0
+
+
+def _report_stale(extractions_dir: Path, wanted: list[int]) -> int:
+    """List the chapters extracted before the prompt carried a narrative block.
+
+    Only files that exist are considered. A chapter nobody has pasted yet is not stale,
+    it is absent, and ``--missing-only`` already answers that question — reporting both
+    here would bury the five rows that matter under thirty-two that do not.
+    """
+    present = [
+        number
+        for number in wanted
+        if (extractions_dir / f"chapter_{number:02d}.json").exists()
+    ]
+    loaded, problems = load_all(extractions_dir, present)
+    for problem in problems:
+        print(f"  skip  {problem}")
+    stale = sorted(number for number, ex in loaded.items() if is_stale(ex))
+    if not stale:
+        print(f"  all {len(loaded)} pasted extractions carry a narrative block")
+        return 0
+    print(f"  {len(stale)} of {len(loaded)} pasted extractions predate the block:")
+    for number in stale:
+        print(
+            f"    chapter {number:02d}   re-paste data/prompts/chapter_{number:02d}.txt"
+        )
+    return 1
 
 
 def _report_missing(extractions_dir: Path, wanted: list[int]) -> int:

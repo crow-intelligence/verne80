@@ -47,8 +47,27 @@ For each chapter, in order:
 To see what is still outstanding:
 
 ```bash
-uv run python scripts/03_validate.py --missing-only
+uv run python scripts/03_validate.py --missing-only   # not yet pasted
+uv run python scripts/03_validate.py --stale-only     # pasted under an older prompt
 ```
+
+## The `narrative` block, and why it exists
+
+The map has to know where Fogg's party actually is in each chapter, and `places_visited`
+cannot say. Chapter 5 lists London, the Reform Club and Scotland Yard as its settings while
+Fogg is already on a train to Paris. Chapter 6 is set at Suez, where Fix is waiting and the
+party has not yet arrived. The chapter's setting and the party's position come apart in both
+directions, so position has to be resolved from who was actually on stage.
+
+Note what the block does *not* ask: it never asks where Fogg is. Chapter 5 does not say, and
+asking would invite exactly the invention rule 1 forbids. It asks who is physically in this
+chapter's scene — which one chapter can answer on its own — and lets an empty `on_stage`
+array be the signal that the travellers were elsewhere.
+
+**Chapter 5 is the acceptance test for the whole change.** Its `on_stage` should hold the club
+members and Lord Albemarle; Fogg belongs in `named_but_not_present`. If the model puts Fogg on
+stage there because the chapter is *about* him, tell me — the fix is a sharper warning in the
+prompt, not code, and it is worth catching now rather than at chapter 37.
 
 ## What the validator checks, and what it does not
 

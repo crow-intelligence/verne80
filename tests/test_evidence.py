@@ -1,3 +1,6 @@
+from pathlib import Path
+
+import pytest
 from hypothesis import HealthCheck, given, settings
 from hypothesis import strategies as st
 
@@ -78,6 +81,19 @@ class TestTheLadder:
         assert check_quote(ref("   "), chapter()).kind is MatchKind.MISSING
 
 
+class TestGutenbergItalics:
+    def test_an_italicised_word_is_not_a_near_miss(self):
+        """Gemini strips Gutenberg's underscores; the fold is what stops the drizzle."""
+        real = Path("data/chapters/chapter_03.txt")
+        if not real.exists():
+            pytest.skip("run `uv run python scripts/01_chapters.py` first")
+        chapter = NormalisedChapter.from_text(3, real.read_text(encoding="utf-8"))
+        quote = "From London to Suez viâ Mont Cenis and Brindisi"
+        assert check_quote(
+            EvidenceRef(3, "places_mentioned[0].evidence", quote), chapter
+        ).passed
+
+
 class TestLineNumbers:
     def test_line_number_points_at_the_right_line(self):
         result = check_quote(ref("beast was sold to him"), chapter())
@@ -154,7 +170,7 @@ class TestWholeExtraction:
     def test_every_quote_in_a_good_extraction_passes(self, valid_extraction, chapters):
         prepared = NormalisedChapter.from_text(3, chapters[2].to_text())
         checks = check_chapter_quotes(ChapterExtraction(**valid_extraction), prepared)
-        assert len(checks) == 4
+        assert len(checks) == 5
         assert all(check.passed for check in checks), [
             (c.ref.path, c.kind, c.ratio) for c in checks if not c.passed
         ]

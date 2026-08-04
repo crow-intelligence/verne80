@@ -54,6 +54,8 @@ CRITICAL RULES:
 3. Use the spellings AS THEY APPEAR in the 1872 text (e.g. "Bombay", not "Mumbai").
    Modernisation happens later, not here.
 4. Distinguish places the travellers ARE IN or PASS THROUGH from places merely MENTIONED.
+5. Distinguish people who ARE PRESENT in this chapter's scene from people who are
+   only TALKED ABOUT, written to, or reported on.
 
 Schema:
 
@@ -79,6 +81,21 @@ Schema:
       "evidence": "<verbatim quote>"
     }
   ],
+  "narrative": {
+    "on_stage": [
+      {
+        "name_in_text": "<person, as printed — ONLY people physically present in this chapter>",
+        "at_name_in_text": "<the place THIS CHAPTER puts them, as printed, or null>",
+        "between_from": "<if in transit, the place left, as printed, or null>",
+        "between_to": "<if in transit, the place bound for, as printed, or null>",
+        "evidence": "<verbatim quote placing this person here>"
+      }
+    ],
+    "named_but_not_present": [
+      { "name_in_text": "<as printed>", "evidence": "<verbatim quote>" }
+    ],
+    "notes": "<anything ambiguous about who is where, or null>"
+  },
   "transport": [
     {
       "mode": "<steamer|railway|elephant|sledge|carriage|on_foot|other>",
@@ -113,6 +130,14 @@ Schema:
 MONEY WARNING: Verne mentions sums irregularly. Most chapters state NO amount at all.
 An empty "amounts" array and a null "fogg_remaining_stated" are the CORRECT and EXPECTED
 answer for most chapters. Do not invent figures to fill the schema.
+
+NARRATIVE WARNING: "on_stage" is about THIS chapter's scene, not about the story. A
+person the chapter discusses, writes to, telegraphs, or reports on is NOT on stage —
+they go in "named_but_not_present". If the chapter does not say where someone is, leave
+all three place fields null; do not work it out from anywhere else. A chapter in which
+the travellers never appear is a real chapter, and an empty "on_stage" array is the
+CORRECT and EXPECTED answer for it. If a person moves during the chapter, give one entry
+for each place the text puts them in, in the order the chapter puts them there.
 
 CHAPTER TEXT:
 ---

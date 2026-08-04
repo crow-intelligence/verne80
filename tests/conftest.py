@@ -134,6 +134,19 @@ def valid_extraction() -> dict:
                 "evidence": "which Mr. Fogg paid",
             }
         ],
+        "narrative": {
+            "on_stage": [
+                {
+                    "name_in_text": "Mr. Fogg",
+                    "at_name_in_text": "the forest",
+                    "between_from": None,
+                    "between_to": None,
+                    "evidence": "They mounted upon the elephant",
+                }
+            ],
+            "named_but_not_present": [],
+            "notes": None,
+        },
         "transport": [
             {
                 "mode": "elephant",

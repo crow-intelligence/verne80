@@ -3,7 +3,7 @@ import unicodedata
 import hypothesis.strategies as st
 from hypothesis import given, settings
 
-from tests.strategies import typographic_variant
+from tests.strategies import italicised, typographic_variant
 from verne80.normalize import fold_typography, match_key, normalize_quote
 
 
@@ -25,6 +25,24 @@ class TestFolding:
 
     def test_non_breaking_space_is_ordinary_space(self):
         assert normalize_quote("two days") == "two days"
+
+
+class TestItalics:
+    def test_gutenberg_italic_underscores_do_not_break_a_quote(self):
+        assert normalize_quote(
+            "From London to Suez _viâ_ Mont Cenis"
+        ) == normalize_quote("From London to Suez viâ Mont Cenis")
+
+    def test_an_italic_spanning_a_line_break_still_joins(self):
+        """Chapter 29's italicised Railway Pioneer — the one span that wraps."""
+        assert (
+            normalize_quote("the _Railway\nPioneer_ said") == "the Railway Pioneer said"
+        )
+
+    def test_an_italicised_newspaper_title_matches_its_plain_form(self):
+        assert normalize_quote("_Daily Telegraph_") == normalize_quote(
+            "Daily Telegraph"
+        )
 
 
 class TestWhitespaceCollapse:
@@ -98,6 +116,12 @@ class TestNormalizeProperties:
         casefold actually behaves rather than the way one might wish it did.
         """
         assert match_key(text.casefold()) == match_key(text)
+
+    @settings(max_examples=150, deadline=None)
+    @given(st.data(), st.text(min_size=1))
+    def test_inserting_italic_markers_never_changes_the_key(self, data, text):
+        variant = data.draw(italicised(text))
+        assert normalize_quote(variant) == normalize_quote(text)
 
     @settings(max_examples=150, deadline=None)
     @given(st.text())

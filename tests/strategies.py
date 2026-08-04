@@ -50,6 +50,30 @@ def typographic_variant(draw: st.DrawFn, text: str) -> str:
 
 
 @st.composite
+def italicised(draw: st.DrawFn, text: str) -> str:
+    """Wrap random word runs in Gutenberg's underscore italic markers.
+
+    A different shape from :func:`typographic_variant`: that one *re-spells*
+    characters, this one *inserts* them. Both must leave the matching key alone.
+
+    Args:
+        draw: Hypothesis' draw function.
+        text: The string to italicise parts of.
+
+    Returns:
+        A string that folds to the same key as ``text``.
+    """
+    words = text.split(" ")
+    out: list[str] = []
+    for word in words:
+        if word and draw(st.booleans()):
+            out.append(f"_{word}_")
+        else:
+            out.append(word)
+    return " ".join(out)
+
+
+@st.composite
 def chapter_body(draw: st.DrawFn, min_words: int = 5, max_words: int = 40) -> str:
     """Build a plausible chapter body: real words, hard-wrapped."""
     words = draw(

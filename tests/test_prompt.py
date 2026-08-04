@@ -44,6 +44,11 @@ class TestSingleSourceOfTruth:
     def test_the_template_has_exactly_one_text_placeholder(self):
         assert PROMPT_TEMPLATE.count(PLACEHOLDER_TEXT) == 1
 
+    def test_the_template_documents_the_narrative_block(self):
+        assert '"narrative"' in PROMPT_TEMPLATE
+        assert '"on_stage"' in PROMPT_TEMPLATE
+        assert "NARRATIVE WARNING" in PROMPT_TEMPLATE
+
     def test_format_braces_would_have_broken_this(self):
         """Documents why substitution is str.replace and never str.format."""
         assert "{" in PROMPT_TEMPLATE

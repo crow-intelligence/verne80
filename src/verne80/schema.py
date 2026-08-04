@@ -34,6 +34,9 @@ from verne80.normalize import match_key
 
 __all__ = [
     "ChapterExtraction",
+    "Narrative",
+    "NamedElsewhere",
+    "OnStage",
     "DateMention",
     "EvidenceRef",
     "MoneyAmount",
@@ -47,6 +50,8 @@ __all__ = [
     "TransportLeg",
     "TransportMode",
     "check_extraction",
+    "is_stale",
+    "normalise_mode",
 ]
 
 MAX_HOVER_WORDS = 25
@@ -152,6 +157,67 @@ class Person(Evidenced):
     role: str | None = None
 
 
+class OnStage(Evidenced):
+    """One person, and where this chapter puts them.
+
+    A person who moves during a chapter gets one entry per place, in narrative order,
+    so the last entry is where they are when the chapter ends. That is why this is its
+    own array rather than fields on :class:`Person`: chapter 4 puts Fogg in four places,
+    and one row per person cannot hold that.
+
+    ``at_name_in_text`` and the ``between_`` pair are alternatives, not a pair. A model
+    that fills both is well-shaped and confused, which is why
+    :func:`check_extraction` reports it rather than a validator raising on it.
+    """
+
+    name_in_text: str = Field(min_length=1)
+    at_name_in_text: str | None = None
+    between_from: str | None = None
+    between_to: str | None = None
+
+    @field_validator("at_name_in_text", "between_from", "between_to", mode="before")
+    @classmethod
+    def _blank_to_none(cls, value: Any) -> Any:
+        """Treat a blank place name as "not stated", which is what it means.
+
+        The other optional strings here tolerate ``""`` because a blank purpose or role
+        is merely useless. A blank place name is worse than useless: it would key a
+        phantom row into the containment map that resolves positions.
+        """
+        return None if isinstance(value, str) and not value.strip() else value
+
+
+class NamedElsewhere(Evidenced):
+    """A person the chapter talks about who is not in its scene."""
+
+    name_in_text: str = Field(min_length=1)
+
+
+class Narrative(_Base):
+    """Who is physically on stage in this chapter, and where the text puts them.
+
+    This block exists because ``places_visited`` cannot say where the travellers are.
+    Chapter 5 lists London, the Reform Club and Scotland Yard as settings while Fogg is
+    already on a train to Paris; chapter 6 is set at Suez, where Fix is waiting and the
+    party has not yet arrived. The chapter's setting and the party's position come apart
+    in both directions, so the position has to be resolved from who was actually there.
+
+    An empty ``on_stage`` is the correct answer for a chapter the travellers never
+    appear in — and the silence is the signal, which is why nothing here asks "where is
+    Fogg". Chapter 5 does not say, and asking would invite exactly the invention the
+    prompt's first rule forbids.
+    """
+
+    on_stage: list[OnStage] = Field(default_factory=list)
+    named_but_not_present: list[NamedElsewhere] = Field(default_factory=list)
+    notes: str | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def _absorb_nulls(cls, data: Any) -> Any:
+        return _absorb(data, lists=("on_stage", "named_but_not_present"))
+
+
 class TransportLeg(Evidenced):
     """One leg of the journey, and how it was travelled.
 
@@ -169,7 +235,7 @@ class TransportLeg(Evidenced):
     @classmethod
     def _coerce_mode(cls, value: Any) -> Any:
         """Fold spelling variants onto the schema's terms; unknowns become ``other``."""
-        return _normalise_mode(value)
+        return normalise_mode(value)
 
 
 class DateMention(Evidenced):
@@ -243,6 +309,7 @@ class ChapterExtraction(_Base):
     places_visited: list[PlaceVisited] = Field(default_factory=list)
     places_mentioned: list[PlaceMentioned] = Field(default_factory=list)
     people: list[Person] = Field(default_factory=list)
+    narrative: Narrative = Field(default_factory=Narrative)
     transport: list[TransportLeg] = Field(default_factory=list)
     time: TimeInfo = Field(default_factory=TimeInfo)
     money: MoneyInfo = Field(default_factory=MoneyInfo)
@@ -262,7 +329,7 @@ class ChapterExtraction(_Base):
             lists=("places_visited", "places_mentioned", "people", "transport"),
         )
         if isinstance(data, dict):
-            for key in ("time", "money"):
+            for key in ("narrative", "time", "money"):
                 if data.get(key) is None:
                     data[key] = {}
         return data
@@ -297,6 +364,8 @@ class ChapterExtraction(_Base):
             ("places_visited", self.places_visited),
             ("places_mentioned", self.places_mentioned),
             ("people", self.people),
+            ("narrative.on_stage", self.narrative.on_stage),
+            ("narrative.named_but_not_present", self.narrative.named_but_not_present),
             ("transport", self.transport),
             ("time.dates_mentioned", self.time.dates_mentioned),
             ("money.amounts", self.money.amounts),
@@ -324,8 +393,27 @@ def _absorb(data: Any, lists: tuple[str, ...]) -> Any:
     return data
 
 
-def _normalise_mode(value: Any) -> Any:
-    """Fold a transport mode onto a schema term, or ``other`` if it is unrecognised."""
+def normalise_mode(value: Any) -> Any:
+    """Fold a transport mode onto a schema term, or ``other`` if it is unrecognised.
+
+    Public because :mod:`verne80.route` needs it to read "rail and steamboats" out of
+    the itinerary table in chapter 3. A second copy of the synonym table is how you end
+    up with two that disagree.
+
+    Args:
+        value: Whatever the model wrote, or anything else.
+
+    Returns:
+        The schema term, or the input unchanged when it is not a string.
+
+    Examples:
+        >>> normalise_mode("train")
+        <TransportMode.RAILWAY: 'railway'>
+        >>> normalise_mode("wind-sled")
+        <TransportMode.SLEDGE: 'sledge'>
+        >>> normalise_mode("balloon")
+        <TransportMode.OTHER: 'other'>
+    """
     if not isinstance(value, str):
         return value
     key = re.sub(r"[\s\-/]+", "_", value.strip().lower())
@@ -419,4 +507,119 @@ def check_extraction(
             f"{extraction.title[:50]!r} vs {expected_title[:50]!r}"
         )
 
+    problems.extend(_check_narrative(extraction, label))
     return problems
+
+
+def _check_narrative(extraction: ChapterExtraction, label: str) -> list[str]:
+    """Report what looks wrong about the narrative block.
+
+    Deliberately silent about three things that look like errors and are not: the same
+    person appearing twice in ``on_stage`` (that is movement within a chapter), an entry
+    with every place field null (that is the "do not work it out" rule being obeyed),
+    and an empty ``on_stage`` beside a non-empty ``places_visited`` (that is chapter 5
+    being right about Fogg having left).
+    """
+    problems: list[str] = []
+    narrative = extraction.narrative
+
+    on_stage_keys = {match_key(item.name_in_text) for item in narrative.on_stage}
+    both = sorted(
+        item.name_in_text
+        for item in narrative.named_but_not_present
+        if match_key(item.name_in_text) in on_stage_keys
+    )
+    if both:
+        problems.append(f"{label} says {both} are both on stage and not present")
+
+    for position, item in enumerate(narrative.on_stage):
+        where = f"{label} narrative.on_stage[{position}]"
+        if item.at_name_in_text and (item.between_from or item.between_to):
+            problems.append(
+                f"{where} gives both a place and a transit — they are alternatives"
+            )
+        if (
+            item.between_from
+            and item.between_to
+            and match_key(item.between_from) == match_key(item.between_to)
+        ):
+            problems.append(f"{where} travels from {item.between_from!r} to itself")
+
+    people_keys = {match_key(person.name_in_text) for person in extraction.people}
+    if people_keys:
+        strangers = sorted(
+            {
+                item.name_in_text
+                for item in (*narrative.on_stage, *narrative.named_but_not_present)
+                if match_key(item.name_in_text) not in people_keys
+            }
+        )
+        if strangers:
+            problems.append(
+                f"{label} names {strangers} in narrative but not in people — "
+                "the two rosters for the same chapter disagree"
+            )
+
+    # The strongest cross-check here: it catches a location invented in the new block
+    # that the model did not enumerate in the two it has been filling all along.
+    known_places = {
+        match_key(place.name_in_text)
+        for place in (*extraction.places_visited, *extraction.places_mentioned)
+    }
+    if known_places:
+        invented = sorted(
+            {
+                name
+                for item in narrative.on_stage
+                for name in (item.at_name_in_text, item.between_from, item.between_to)
+                if name and match_key(name) not in known_places
+            }
+        )
+        if invented:
+            problems.append(
+                f"{label} places someone at {invented}, which appears in neither "
+                "places_visited nor places_mentioned"
+            )
+
+    if (
+        extraction.people
+        and not narrative.on_stage
+        and not narrative.named_but_not_present
+    ):
+        problems.append(
+            f"{label} has no narrative block — re-paste it under the current prompt "
+            "(see data/prompts/README.md)"
+        )
+
+    return problems
+
+
+def is_stale(extraction: ChapterExtraction) -> bool:
+    """Whether an extraction predates the prompt's narrative block.
+
+    Sound as a discriminator: if anyone is named in the chapter at all, then each of
+    them is either in its scene or not, so both narrative arrays being empty means the
+    question was never asked.
+
+    Args:
+        extraction: The parsed extraction.
+
+    Returns:
+        True when the file needs re-pasting.
+
+    Examples:
+        >>> old = ChapterExtraction(
+        ...     chapter=1,
+        ...     summary_hover="Fogg wagers.",
+        ...     summary_detail="Fogg wagers. He leaves.",
+        ...     people=[{"name_in_text": "Fogg", "evidence": "Mr. Fogg"}],
+        ... )
+        >>> is_stale(old)
+        True
+    """
+    narrative = extraction.narrative
+    return bool(
+        extraction.people
+        and not narrative.on_stage
+        and not narrative.named_but_not_present
+    )
