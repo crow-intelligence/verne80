@@ -1,0 +1,210 @@
+{
+"chapter": 12,
+"title": "IN WHICH PHILEAS FOGG AND HIS COMPANIONS VENTURE ACROSS THE INDIAN FORESTS, AND WHAT ENSUED",
+"summary_hover": "Fogg and his companions cross the Indian forests by elephant and encounter a religious procession preparing to sacrifice a young woman.",
+"summary_detail": "Phileas Fogg, Sir Francis Cromarty, and Passepartout travel by elephant through the wild territory of Bundelcund. Their guide leads them through dense forests and over the Vindhia Mountains to bypass the unfinished railway. During their journey, they hide from a passing procession of Brahmins and fakirs who are leading a young drugged woman to a forced suttee sacrifice, prompting Fogg to propose a rescue since he has time to spare.",
+"places_visited": [
+{
+"name_in_text": "Vindhia Mountains",
+"role": "passing_through",
+"evidence": "owing to the capricious turnings of the Vindhia Mountains"
+},
+{
+"name_in_text": "Bundelcund",
+"role": "passing_through",
+"evidence": "All this portion of Bundelcund, which is little frequented by travellers"
+},
+{
+"name_in_text": "ruined bungalow",
+"role": "arrival",
+"evidence": "another halt was made on the northern slope, in a ruined bungalow."
+},
+{
+"name_in_text": "Kallenger",
+"role": "passing_through",
+"evidence": "passed by the village of Kallenger"
+},
+{
+"name_in_text": "Cani",
+"role": "passing_through",
+"evidence": "on the Cani, one of the branches of the Ganges."
+},
+{
+"name_in_text": "thick forest",
+"role": "passing_through",
+"evidence": "the guide entered a thick forest which extended several miles"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Allahabad",
+"evidence": "separated them from the station of Allahabad."
+},
+{
+"name_in_text": "Kholby",
+"evidence": "provisions purchased at Kholby"
+},
+{
+"name_in_text": "Saville Row",
+"evidence": "serene mansion in Saville Row."
+},
+{
+"name_in_text": "Ganges",
+"evidence": "one of the branches of the Ganges."
+},
+{
+"name_in_text": "India",
+"evidence": "barbarous customs still exist in India"
+},
+{
+"name_in_text": "Bombay",
+"evidence": "Several years ago, when I was living at Bombay"
+},
+{
+"name_in_text": "Pillaji",
+"evidence": "To the pagoda of Pillaji, two miles from here"
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "Traveller attempting to go round the world",
+"evidence": "Phileas Fogg and Sir Francis Cromarty, plunged to the neck in the peculiar howdahs"
+},
+{
+"name_in_text": "Sir Francis Cromarty",
+"role": "Traveller and general accompanying Fogg",
+"evidence": "Phileas Fogg and Sir Francis Cromarty, plunged to the neck in the peculiar howdahs"
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant",
+"evidence": "As for Passepartout, who was mounted on the beast’s back"
+},
+{
+"name_in_text": "Parsee",
+"role": "Guide and elephant driver",
+"evidence": "spurred on as he was by the skilful Parsee"
+},
+{
+"name_in_text": "bands of ferocious Indians",
+"role": "Hostile locals observed from afar",
+"evidence": "The travellers several times saw bands of ferocious Indians"
+},
+{
+"name_in_text": "priests",
+"role": "Religious leaders in the procession",
+"evidence": "First came the priests, with mitres on their heads"
+},
+{
+"name_in_text": "men, women, and children",
+"role": "Procession followers singing a psalm",
+"evidence": "They were surrounded by men, women, and children, who sang a kind of lugubrious psalm"
+},
+{
+"name_in_text": "fakirs",
+"role": "Fanatics performing in the procession",
+"evidence": "A group of old fakirs were capering and making a wild ado"
+},
+{
+"name_in_text": "Brahmins",
+"role": "Religious figures leading the woman",
+"evidence": "Some Brahmins, clad in all the sumptuousness of Oriental apparel"
+},
+{
+"name_in_text": "woman",
+"role": "A young widow destined for suttee",
+"evidence": "leading a woman who faltered at every step"
+},
+{
+"name_in_text": "guards",
+"role": "Armed men following the woman",
+"evidence": "The guards who followed the young woman presented a violent contrast"
+},
+{
+"name_in_text": "musicians",
+"role": "Performers in the procession",
+"evidence": "Next came the musicians"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "thick forest",
+"between_from": null,
+"between_to": null,
+"evidence": "the guide entered a thick forest... Mr. Fogg patiently waited without a word."
+},
+{
+"name_in_text": "Sir Francis Cromarty",
+"at_name_in_text": "thick forest",
+"between_from": null,
+"between_to": null,
+"evidence": "the guide entered a thick forest... "What’s the matter?" asked Sir Francis"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "thick forest",
+"between_from": null,
+"between_to": null,
+"evidence": "the guide entered a thick forest... Passepartout was all eyes and ears."
+},
+{
+"name_in_text": "Parsee",
+"at_name_in_text": "thick forest",
+"between_from": null,
+"between_to": null,
+"evidence": "the guide entered a thick forest... The Parsee jumped to the ground"
+},
+{
+"name_in_text": "woman",
+"at_name_in_text": "thick forest",
+"between_from": null,
+"between_to": null,
+"evidence": "The head of the procession soon appeared beneath the trees... leading a woman who faltered at every step"
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "governor",
+"evidence": "asked permission of the governor to be burned"
+},
+{
+"name_in_text": "rajah",
+"evidence": "took refuge with an independent rajah"
+}
+],
+"notes": "The old man gorgeously arrayed on the palanquin is explicitly noted as a corpse; he is mentioned as part of the procession but is deceased."
+},
+"transport": [
+{
+"mode": "elephant",
+"vessel_or_line_name": "Kiouni",
+"from": null,
+"to": null,
+"evidence": "were horribly jostled by the swift trotting of the elephant... inserted it in Kiouni’s trunk"
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "to-morrow at the dawn of day",
+"evidence": "The woman you have just seen will be burned to-morrow at the dawn of day."
+},
+{
+"as_written": "To-morrow, at the first light of dawn",
+"evidence": "To-morrow, at the first light of dawn."
+}
+],
+"days_elapsed_or_remaining": "forty-eight hours saved",
+"schedule_status": "ahead",
+"schedule_detail": "forty-eight hours saved since the beginning of the tour.",
+"evidence": "Mr. Fogg would only lose a part of the forty-eight hours saved since the beginning of the tour."
+},
+"money": {
+"amounts": [],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

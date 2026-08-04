@@ -1,0 +1,230 @@
+{
+  "chapter": 20,
+  "title": "IN WHICH FIX COMES FACE TO FACE WITH PHILEAS FOGG",
+  "summary_hover": "Fogg discovers the Carnatic sailed early without them. Unfazed, he charters the Tankadere to take his party and a secretly thwarted Fix to Shanghai.",
+  "summary_detail": "Unaware of Passepartout's drug-induced stupor, Fogg and Aouda arrive at the quay only to discover the Carnatic has sailed early. Undeterred by the setback, Fogg searches the docks and charters a small pilot-boat, the Tankadere, captained by John Bunsby, to reach Shanghai in time to catch the Pacific steamer. After leaving funds with the police to search for his missing servant, Fogg, Aouda, and a secretly disappointed Fix set sail.",
+  "places_visited": [
+    {
+      "name_in_text": "English quarter",
+      "role": "passing_through",
+      "evidence": "quietly escorting Aouda about the streets of the English quarter"
+    },
+    {
+      "name_in_text": "hotel",
+      "role": "setting",
+      "evidence": "they returned to the hotel, where they dined"
+    },
+    {
+      "name_in_text": "harbour",
+      "role": "setting",
+      "evidence": "the “Carnatic” would leave the harbour."
+    },
+    {
+      "name_in_text": "quay",
+      "role": "arrival",
+      "evidence": "stepped upon the quay whence they were to embark."
+    },
+    {
+      "name_in_text": "Hong Kong",
+      "role": "setting",
+      "evidence": "Fogg detained at Hong Kong for a week!"
+    },
+    {
+      "name_in_text": "docks",
+      "role": "passing_through",
+      "evidence": "directed his steps toward the docks in search of some craft about to start."
+    },
+    {
+      "name_in_text": "wharves",
+      "role": "setting",
+      "evidence": "when he was accosted by a sailor on one of the wharves."
+    },
+    {
+      "name_in_text": "police-station at Hong Kong",
+      "role": "arrival",
+      "evidence": "the others directed their course to the police-station at Hong Kong."
+    },
+    {
+      "name_in_text": "French consulate",
+      "role": "arrival",
+      "evidence": "The same formalities having been gone through at the French consulate"
+    },
+    {
+      "name_in_text": "wharf",
+      "role": "arrival",
+      "evidence": "they returned to the wharf."
+    }
+  ],
+  "places_mentioned": [
+    {
+      "name_in_text": "opium-house",
+      "evidence": "While these events were passing at the opium-house"
+    },
+    {
+      "name_in_text": "Yokohama",
+      "evidence": "steamer was not to leave for Yokohama until the next morning"
+    },
+    {
+      "name_in_text": "Macao",
+      "evidence": "resolved not to stop if he had to resort to Macao"
+    },
+    {
+      "name_in_text": "San Francisco",
+      "evidence": "to take the boat for San Francisco."
+    },
+    {
+      "name_in_text": "Nagasaki",
+      "evidence": "By going to Nagasaki, at the extreme south of Japan"
+    },
+    {
+      "name_in_text": "Japan",
+      "evidence": "at the extreme south of Japan"
+    },
+    {
+      "name_in_text": "Shanghai",
+      "evidence": "or even to Shanghai, which is only eight hundred miles from here."
+    },
+    {
+      "name_in_text": "Chinese coast",
+      "evidence": "we should not be forced to sail wide of the Chinese coast"
+    }
+  ],
+  "people": [
+    {
+      "name_in_text": "Mr. Fogg",
+      "role": "English gentleman traveler",
+      "evidence": "Mr. Fogg, unconscious of the danger he was in of losing the steamer"
+    },
+    {
+      "name_in_text": "Aouda",
+      "role": "Mr. Fogg's traveling companion",
+      "evidence": "quietly escorting Aouda about the streets"
+    },
+    {
+      "name_in_text": "Fix",
+      "role": "Police detective posing as a fellow passenger",
+      "evidence": "It was Fix, who, bowing, addressed Mr. Fogg"
+    },
+    {
+      "name_in_text": "John Bunsby",
+      "role": "Master of the pilot-boat Tankadere",
+      "evidence": "Yes; John Bunsby, master of the ‘Tankadere.’"
+    },
+    {
+      "name_in_text": "four hardy mariners",
+      "role": "Crew of the Tankadere",
+      "evidence": "four hardy mariners, who were familiar with the Chinese seas."
+    }
+  ],
+  "narrative": {
+    "on_stage": [
+      {
+        "name_in_text": "Mr. Fogg",
+        "at_name_in_text": "English quarter",
+        "between_from": null,
+        "between_to": null,
+        "evidence": "quietly escorting Aouda about the streets of the English quarter"
+      },
+      {
+        "name_in_text": "Aouda",
+        "at_name_in_text": "English quarter",
+        "between_from": null,
+        "between_to": null,
+        "evidence": "quietly escorting Aouda about the streets of the English quarter"
+      },
+      {
+        "name_in_text": "Fix",
+        "at_name_in_text": "quay",
+        "between_from": null,
+        "between_to": null,
+        "evidence": "It was Fix, who, bowing, addressed Mr. Fogg: “Were you not, like me, sir, a passenger by the ‘Rangoon,’ which arrived yesterday?”"
+      },
+      {
+        "name_in_text": "John Bunsby",
+        "at_name_in_text": "wharves",
+        "between_from": null,
+        "between_to": null,
+        "evidence": "accosted by a sailor on one of the wharves."
+      },
+      {
+        "name_in_text": "four hardy mariners",
+        "at_name_in_text": null,
+        "between_from": null,
+        "between_to": null,
+        "evidence": "The crew of the “Tankadere” was composed of John Bunsby, the master, and four hardy mariners, who were familiar with the Chinese seas."
+      }
+    ],
+    "named_but_not_present": [
+      {
+        "name_in_text": "Passepartout",
+        "evidence": "When Passepartout did not appear the next morning to answer his master’s bell"
+      }
+    ],
+    "notes": "Passepartout is absent throughout the chapter, trapped under the influence of opium elsewhere, and is thus listed as named but not present."
+  },
+  "transport": [
+    {
+      "mode": "carriage",
+      "vessel_or_line_name": "palanquin",
+      "from": "hotel",
+      "to": "quay",
+      "evidence": "Mr. Fogg and Aouda got into the palanquin, their luggage being brought after on a wheelbarrow, and half an hour later stepped upon the quay whence they were to embark."
+    },
+    {
+      "mode": "steamer",
+      "vessel_or_line_name": "Carnatic",
+      "from": "Hong Kong",
+      "to": null,
+      "evidence": "The ‘Carnatic’, its repairs being completed, left Hong Kong twelve hours before the stated time"
+    },
+    {
+      "mode": "other",
+      "vessel_or_line_name": "Tankadere",
+      "from": "Hong Kong",
+      "to": "Shanghai",
+      "evidence": "John Bunsby, master, at length gave the order to start, and the “Tankadere,” taking the wind under her brigantine, foresail, and standing-jib, bounded briskly forward over the waves."
+    }
+  ],
+  "time": {
+    "dates_mentioned": [
+      {
+        "as_written": "the 14th",
+        "evidence": "I must get to Yokohama by the 14th at the latest"
+      },
+      {
+        "as_written": "On the 11th, at seven in the evening",
+        "evidence": "On the 11th, at seven in the evening."
+      }
+    ],
+    "days_elapsed_or_remaining": null,
+    "schedule_status": "behind",
+    "schedule_detail": "left Hong Kong twelve hours before the stated time",
+    "evidence": "The ‘Carnatic’, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given"
+  },
+  "money": {
+    "amounts": [
+      {
+        "amount_as_written": "a hundred pounds",
+        "purpose": "per day to charter the pilot-boat",
+        "evidence": "I offer you a hundred pounds per day, and an additional reward of two hundred pounds if I reach Yokohama in time."
+      },
+      {
+        "amount_as_written": "two hundred pounds",
+        "purpose": "additional reward if Yokohama is reached in time",
+        "evidence": "and an additional reward of two hundred pounds if I reach Yokohama in time."
+      },
+      {
+        "amount_as_written": "two hundred pounds",
+        "purpose": "earnest-money on account",
+        "evidence": "Here are two hundred pounds on account sir"
+      },
+      {
+        "amount_as_written": "a sum of money",
+        "purpose": "to be spent in the search for Passepartout",
+        "evidence": "left a sum of money to be spent in the search for him."
+      }
+    ],
+    "fogg_remaining_stated": null
+  },
+  "notes": null
+}

@@ -1,0 +1,843 @@
+{
+  "generated_by": "scripts/06_positions.py",
+  "chapters": [
+    {
+      "chapter": 1,
+      "scene_places": [
+        "Saville Row"
+      ],
+      "mentions": {
+        "Burlington Gardens": "here",
+        "London docks": "off_route",
+        "“City”": "off_route",
+        "Paris": "future",
+        "France": "off_route",
+        "England": "off_route",
+        "United Kingdom": "off_route",
+        "American lakes": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 0,
+          "along": 0.0,
+          "at_node": "London",
+          "source": "stated",
+          "place_name_in_text": "Saville Row",
+          "stated_at_chapter": 1,
+          "evidence": "Phileas Fogg was seated squarely in his armchair",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 0,
+          "along": 0.0,
+          "at_node": "London",
+          "source": "stated",
+          "place_name_in_text": "Saville Row",
+          "stated_at_chapter": 1,
+          "evidence": "Passepartout remained alone in the house in Saville Row.",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": null,
+          "along": null,
+          "at_node": null,
+          "source": "unknown",
+          "place_name_in_text": null,
+          "stated_at_chapter": null,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "scene_places": [
+        "Saville Row"
+      ],
+      "mentions": {
+        "London": "here",
+        "Paris": "future",
+        "England": "off_route",
+        "Haymarket taverns": "off_route",
+        "Reform Club": "here"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 0,
+          "along": 0.0,
+          "at_node": "London",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 1,
+          "evidence": null,
+          "flags": []
+        },
+        {
+          "track": "passepartout",
+          "leg": 0,
+          "along": 0.0,
+          "at_node": "London",
+          "source": "stated",
+          "place_name_in_text": "Saville Row",
+          "stated_at_chapter": 2,
+          "evidence": "At half-past eleven, then, Passepartout found himself alone in the house in Saville Row.",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": null,
+          "along": null,
+          "at_node": null,
+          "source": "unknown",
+          "place_name_in_text": null,
+          "stated_at_chapter": null,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 3,
+      "scene_places": [
+        "house",
+        "Reform Club"
+      ],
+      "mentions": {
+        "America": "off_route",
+        "the Continent": "off_route",
+        "Bank of England": "off_route",
+        "Liverpool": "future",
+        "Glasgow": "off_route",
+        "Havre": "off_route",
+        "Suez": "future",
+        "Brindisi": "future",
+        "New York": "future",
+        "London": "here",
+        "Rothal": "off_route",
+        "Allahabad": "future",
+        "Mont Cenis": "future",
+        "Bombay": "future",
+        "Calcutta": "future",
+        "Hong Kong": "future",
+        "Yokohama": "future",
+        "Japan": "off_route",
+        "San Francisco": "future",
+        "Dover": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 0,
+          "along": 0.0,
+          "at_node": "London",
+          "source": "stated",
+          "place_name_in_text": "Reform Club",
+          "stated_at_chapter": 3,
+          "evidence": "reached the Reform Club, an imposing edifice in Pall Mall",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 0,
+          "along": 0.0,
+          "at_node": "London",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 2,
+          "evidence": null,
+          "flags": []
+        },
+        {
+          "track": "fix",
+          "leg": null,
+          "along": null,
+          "at_node": null,
+          "source": "unknown",
+          "place_name_in_text": null,
+          "stated_at_chapter": null,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 4,
+      "scene_places": [
+        "Reform Club",
+        "Saville Row",
+        "Charing Cross",
+        "Sydenham"
+      ],
+      "mentions": {
+        "Dover": "off_route",
+        "Calais": "off_route",
+        "France": "off_route",
+        "Paris": "future",
+        "Bank of England": "off_route",
+        "London": "cyclic"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 0,
+          "along": 0.05,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Sydenham",
+          "stated_at_chapter": 4,
+          "evidence": "Just as the train was whirling through Sydenham, Passepartout suddenly uttered a cry of despair.\n\n“What’s the matter?” asked Mr. Fogg.",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 0,
+          "along": 0.05,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Sydenham",
+          "stated_at_chapter": 4,
+          "evidence": "Just as the train was whirling through Sydenham, Passepartout suddenly uttered a cry of despair.",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": null,
+          "along": null,
+          "at_node": null,
+          "source": "unknown",
+          "place_name_in_text": null,
+          "stated_at_chapter": null,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 5,
+      "scene_places": [
+        "office"
+      ],
+      "mentions": {
+        "London": "cyclic",
+        "West End": "cyclic",
+        "England": "off_route",
+        "Europe": "off_route",
+        "India": "off_route",
+        "United States": "off_route",
+        "Suez": "future",
+        "Scotland Yard": "cyclic",
+        "Bombay": "future"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 0,
+          "along": 0.05,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 4,
+          "evidence": null,
+          "flags": []
+        },
+        {
+          "track": "passepartout",
+          "leg": 0,
+          "along": 0.05,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 4,
+          "evidence": null,
+          "flags": []
+        },
+        {
+          "track": "fix",
+          "leg": null,
+          "along": null,
+          "at_node": null,
+          "source": "unknown",
+          "place_name_in_text": null,
+          "stated_at_chapter": null,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 6,
+      "scene_places": [
+        "Suez"
+      ],
+      "mentions": {
+        "Brindisi": "future",
+        "Bombay": "future",
+        "Suez Canal": "off_route",
+        "England": "off_route",
+        "India": "off_route",
+        "Cape of Good Hope": "off_route",
+        "London": "cyclic",
+        "Port Said": "off_route",
+        "Aden": "future",
+        "Red Sea": "off_route",
+        "Asia": "off_route",
+        "New World": "off_route",
+        "Atlantic": "off_route",
+        "Scotland Yard": "cyclic"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 0,
+          "along": 0.05,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 4,
+          "evidence": null,
+          "flags": []
+        },
+        {
+          "track": "passepartout",
+          "leg": 0,
+          "along": 0.05,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 4,
+          "evidence": null,
+          "flags": []
+        },
+        {
+          "track": "fix",
+          "leg": 1,
+          "along": 0.0,
+          "at_node": "Suez",
+          "source": "stated",
+          "place_name_in_text": "Suez",
+          "stated_at_chapter": 6,
+          "evidence": "This was Fix, one of the detectives",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 7,
+      "scene_places": [
+        "quay",
+        "consul’s office",
+        "‘Mongolia’",
+        "cabin"
+      ],
+      "mentions": {
+        "London": "cyclic",
+        "Bombay": "future",
+        "Paris": "future",
+        "Turin": "off_route",
+        "Mont Cenis": "future",
+        "Brindisi": "future",
+        "Calcutta": "future",
+        "Singapore": "future",
+        "Hong Kong": "future",
+        "Yokohama": "future",
+        "San Francisco": "future",
+        "New York": "future"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 0,
+          "along": 0.05,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 4,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 0,
+          "along": 0.05,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 4,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 1,
+          "along": 0.0,
+          "at_node": "Suez",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 6,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "scene_places": [
+        "quay",
+        "shop",
+        "consulate",
+        "telegraph office",
+        "“Mongolia”"
+      ],
+      "mentions": {
+        "Suez": "future",
+        "Egypt": "off_route",
+        "Africa": "off_route",
+        "Paris": "future",
+        "Northern and the Lyons stations": "off_route",
+        "Père la Chaise": "off_route",
+        "Champs Elysées": "off_route",
+        "London": "cyclic",
+        "Bombay": "future",
+        "India": "off_route",
+        "Asia": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 0,
+          "along": 0.05,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 4,
+          "evidence": null,
+          "flags": []
+        },
+        {
+          "track": "passepartout",
+          "leg": 0,
+          "along": 0.05,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 4,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 1,
+          "along": 0.0,
+          "at_node": "Suez",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 6,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 9,
+      "scene_places": [
+        "“Mongolia”",
+        "Aden"
+      ],
+      "mentions": {
+        "Brindisi": "past",
+        "India": "off_route",
+        "Calcutta": "future",
+        "Indian peninsula": "off_route",
+        "Arabic Gulf": "off_route",
+        "Goa": "off_route",
+        "Benares": "off_route",
+        "Gibraltar of the Indian Ocean": "off_route",
+        "London": "cyclic"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 1,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Aden",
+          "stated_at_chapter": 9,
+          "evidence": "Mr. Fogg and his servant went ashore at Aden to have the passport again visaed",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 1,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Aden",
+          "stated_at_chapter": 9,
+          "evidence": "Mr. Fogg and his servant went ashore at Aden",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 1,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Aden",
+          "stated_at_chapter": 9,
+          "evidence": "Fix, unobserved, followed them.",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 10,
+      "scene_places": [
+        "Bombay",
+        "“Mongolia”",
+        "passport office",
+        "railway station",
+        "headquarters of the Bombay police",
+        "pagoda on Malabar Hill",
+        "station"
+      ],
+      "mentions": {
+        "India": "off_route",
+        "Calcutta": "future",
+        "Madras": "off_route",
+        "Bengal": "off_route",
+        "Agra": "off_route",
+        "British India": "off_route",
+        "Indus": "off_route",
+        "Ganges": "off_route",
+        "Salcette": "off_route",
+        "continent": "off_route",
+        "Tannah": "off_route",
+        "Western Ghauts": "off_route",
+        "Burhampoor": "off_route",
+        "Bundelcund": "off_route",
+        "Allahabad": "future",
+        "Benares": "off_route",
+        "Burdivan": "off_route",
+        "Chandernagor": "off_route",
+        "Elephanta": "off_route",
+        "hypogea": "off_route",
+        "Kanherian grottoes": "off_route",
+        "London": "cyclic",
+        "Suez": "past",
+        "Paris": "past"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "stated",
+          "place_name_in_text": "Bombay",
+          "stated_at_chapter": 10,
+          "evidence": "Mr. Fogg, after bidding good-bye to his whist partners, left the steamer",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "stated",
+          "place_name_in_text": "Bombay",
+          "stated_at_chapter": 10,
+          "evidence": "Passepartout, however, had no sooner heard his master’s orders on leaving the “Mongolia”",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "inferred",
+          "place_name_in_text": "Bombay",
+          "stated_at_chapter": 10,
+          "evidence": "The passengers of the “Mongolia” went ashore at half-past four p.m.",
+          "flags": [
+            "unconfirmed_place",
+            "inferred_from_places_visited"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 11,
+      "scene_places": [
+        "Kholby",
+        "Bombay"
+      ],
+      "mentions": {
+        "London": "cyclic",
+        "Benares": "off_route",
+        "England": "off_route",
+        "Kandallah": "off_route",
+        "Pounah": "off_route",
+        "Europe": "off_route",
+        "Ellora": "off_route",
+        "Aurungabad": "off_route",
+        "Gulf of Cambray": "off_route",
+        "Surat": "off_route",
+        "Greenwich": "off_route",
+        "Allahabad": "future",
+        "Calcutta": "future",
+        "Hong Kong": "future"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "inferred",
+          "place_name_in_text": "Bombay",
+          "stated_at_chapter": 11,
+          "evidence": "An hour after leaving Bombay the train had passed the viaducts",
+          "flags": [
+            "unconfirmed_place",
+            "inferred_from_places_visited"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "inferred",
+          "place_name_in_text": "Bombay",
+          "stated_at_chapter": 11,
+          "evidence": "An hour after leaving Bombay the train had passed the viaducts",
+          "flags": [
+            "unconfirmed_place",
+            "inferred_from_places_visited"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 10,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 13,
+      "scene_places": [
+        "pagoda of Pillaji",
+        "wood"
+      ],
+      "mentions": {
+        "Bombay": "here",
+        "Bundelcund": "off_route",
+        "Allahabad": "future"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 11,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 11,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 10,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 14,
+      "scene_places": [
+        "Allahabad",
+        "pagoda",
+        "Benares",
+        "Calcutta"
+      ],
+      "mentions": {
+        "Madras": "off_route",
+        "Bombay": "past",
+        "Hong Kong": "future",
+        "Ganges": "off_route",
+        "Jumna": "off_route",
+        "Regent Street": "off_route",
+        "Pillaji": "off_route",
+        "Ahmehnagara": "off_route",
+        "Himalaya": "off_route",
+        "Ceylon": "off_route",
+        "Golconda": "off_route",
+        "Casi": "off_route",
+        "Manchester": "off_route",
+        "Birmingham": "off_route",
+        "London": "cyclic"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 3,
+          "along": 0.0,
+          "at_node": "Calcutta",
+          "source": "stated",
+          "place_name_in_text": "Calcutta",
+          "stated_at_chapter": 14,
+          "evidence": "Calcutta was reached at seven in the morning... so that Phileas Fogg had five hours before him.",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 2,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Allahabad",
+          "stated_at_chapter": 14,
+          "evidence": "Passepartout laughed gaily at his success.",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 10,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 15,
+      "scene_places": [
+        "station",
+        "court-room",
+        "quays"
+      ],
+      "mentions": {
+        "Hong Kong": "future",
+        "Bombay": "past",
+        "pagoda of Pillaji": "off_route",
+        "pagoda of Malabar Hill": "off_route",
+        "Suez": "past",
+        "London": "cyclic"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 3,
+          "along": 0.0,
+          "at_node": "Calcutta",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 14,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 2,
+          "along": 0.5,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 14,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 10,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        }
+      ]
+    }
+  ]
+}

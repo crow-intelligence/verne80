@@ -113,10 +113,20 @@ def main(argv: list[str] | None = None) -> int:
         return _report_stale(args.extractions_dir, wanted)
 
     extractions, problems = load_all(args.extractions_dir, wanted)
+    # A vessel named in chapter 9 is still a vessel when chapter 10 mentions it, so the
+    # roster is pooled across everything loaded rather than read per chapter.
+    vessels = {
+        leg.vessel_or_line_name
+        for extraction in extractions.values()
+        for leg in extraction.transport
+        if leg.vessel_or_line_name
+    }
     checks = []
     for number in sorted(extractions):
         extraction = extractions[number]
-        problems.extend(check_extraction(extraction, number, titles.get(number)))
+        problems.extend(
+            check_extraction(extraction, number, titles.get(number), vessels)
+        )
         chapter = NormalisedChapter.from_text(
             number, chapter_path(args.chapters_dir, number).read_text(encoding="utf-8")
         )

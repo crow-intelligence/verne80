@@ -1,0 +1,287 @@
+{
+"chapter": 19,
+"title": "IN WHICH PASSEPARTOUT TAKES A TOO GREAT INTEREST IN HIS MASTER, AND WHAT COMES OF IT",
+"summary_hover": "In Hong Kong, Fix reveals his true identity to Passepartout and, upon being rebuffed, drugs him with opium to stall Fogg.",
+"summary_detail": "While exploring Hong Kong, Passepartout discovers that the steamer 'Carnatic' is departing for America that very evening instead of the next morning. He meets Fix, who invites him to a tavern and reveals he is a London detective pursuing Phileas Fogg for a bank robbery. When Passepartout fiercely refuses to betray his master, Fix drugs him with an opium pipe to ensure Fogg misses the early departure of the steamer.",
+"places_visited": [
+{
+"name_in_text": "Hong Kong",
+"role": "setting",
+"evidence": "Hong Kong is an island which came into the possession of the English by the Treaty of Nankin"
+},
+{
+"name_in_text": "Victoria port",
+"role": "arrival",
+"evidence": "Passepartout wandered, with his hands in his pockets, towards the Victoria port"
+},
+{
+"name_in_text": "barber’s",
+"role": "arrival",
+"evidence": "On going into a barber’s to get shaved he learned that these ancient men were all at least eighty years old"
+},
+{
+"name_in_text": "quay",
+"role": "arrival",
+"evidence": "On reaching the quay where they were to embark on the “Carnatic,” he was not astonished to find Fix walking up and down."
+},
+{
+"name_in_text": "steamer office",
+"role": "arrival",
+"evidence": "They entered the steamer office and secured cabins for four persons."
+},
+{
+"name_in_text": "tavern",
+"role": "arrival",
+"evidence": "He accordingly invited his companion into a tavern which caught his eye on the quay."
+},
+{
+"name_in_text": "smoking-house",
+"role": "setting",
+"evidence": "Fix and Passepartout saw that they were in a smoking-house haunted by those wretched, cadaverous, idiotic creatures"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Nankin",
+"evidence": "by the Treaty of Nankin, after the war of 1842"
+},
+{
+"name_in_text": "Canton River",
+"evidence": "situated at the mouth of the Canton River"
+},
+{
+"name_in_text": "Macao",
+"evidence": "separated by about sixty miles from the Portuguese town of Macao"
+},
+{
+"name_in_text": "Kent",
+"evidence": "appearance of a town in Kent or Surrey"
+},
+{
+"name_in_text": "Surrey",
+"evidence": "appearance of a town in Kent or Surrey"
+},
+{
+"name_in_text": "Bombay",
+"evidence": "Hong Kong seemed to him not unlike Bombay, Calcutta, and Singapore"
+},
+{
+"name_in_text": "Calcutta",
+"evidence": "Hong Kong seemed to him not unlike Bombay, Calcutta, and Singapore"
+},
+{
+"name_in_text": "Singapore",
+"evidence": "Hong Kong seemed to him not unlike Bombay, Calcutta, and Singapore"
+},
+{
+"name_in_text": "America",
+"evidence": "“have you decided to go with us so far as America?”"
+},
+{
+"name_in_text": "Celestial Empire",
+"evidence": "Opium is smoked everywhere, at all times, by men and women, in the Celestial Empire"
+},
+{
+"name_in_text": "London",
+"evidence": "“I am a police detective, sent out here by the London office.”"
+},
+{
+"name_in_text": "England",
+"evidence": "committed at the Bank of England by a person whose description was fortunately secured."
+}
+],
+"people": [
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant",
+"evidence": "Passepartout wandered, with his hands in his pockets, towards the Victoria port"
+},
+{
+"name_in_text": "natives",
+"role": "Elderly local inhabitants observed by Passepartout",
+"evidence": "Passepartout noticed in the crowd a number of the natives who seemed very old and were dressed in yellow."
+},
+{
+"name_in_text": "Fix",
+"role": "Police detective pursuing Fogg",
+"evidence": "On reaching the quay where they were to embark on the “Carnatic,” he was not astonished to find Fix walking up and down."
+},
+{
+"name_in_text": "clerk",
+"role": "Ticket vendor at the steamer office",
+"evidence": "The clerk, as he gave them the tickets, informed them that, the repairs on the “Carnatic” having been completed, the steamer would leave that very evening"
+},
+{
+"name_in_text": "customers",
+"role": "Patrons of the tavern and opium den",
+"evidence": "some thirty customers were drinking English beer, porter, gin, and brandy; smoking, the while, long red clay pipes"
+},
+{
+"name_in_text": "waiters",
+"role": "Employees in the smoking-house",
+"evidence": "whereupon the waiters, taking him by the head and feet, carried and laid him upon the bed."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Victoria port",
+"between_from": null,
+"between_to": null,
+"evidence": "Passepartout wandered, with his hands in his pockets, towards the Victoria port"
+},
+{
+"name_in_text": "natives",
+"at_name_in_text": "Victoria port",
+"between_from": null,
+"between_to": null,
+"evidence": "Passepartout noticed in the crowd a number of the natives who seemed very old"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "quay",
+"between_from": null,
+"between_to": null,
+"evidence": "On reaching the quay where they were to embark on the “Carnatic,” he was not astonished to find Fix walking up and down."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "steamer office",
+"between_from": "quay",
+"between_to": "steamer office",
+"evidence": "They entered the steamer office and secured cabins for four persons."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "steamer office",
+"between_from": "quay",
+"between_to": "steamer office",
+"evidence": "They entered the steamer office and secured cabins for four persons."
+},
+{
+"name_in_text": "clerk",
+"at_name_in_text": "steamer office",
+"between_from": null,
+"between_to": null,
+"evidence": "The clerk, as he gave them the tickets, informed them"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "tavern",
+"between_from": "steamer office",
+"between_to": "tavern",
+"evidence": "He accordingly invited his companion into a tavern which caught his eye on the quay."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "tavern",
+"between_from": "steamer office",
+"between_to": "tavern",
+"evidence": "He accordingly invited his companion into a tavern which caught his eye on the quay."
+},
+{
+"name_in_text": "customers",
+"at_name_in_text": "tavern",
+"between_from": null,
+"between_to": null,
+"evidence": "some thirty customers were drinking English beer, porter, gin, and brandy"
+},
+{
+"name_in_text": "waiters",
+"at_name_in_text": "tavern",
+"between_from": null,
+"between_to": null,
+"evidence": "whereupon the waiters, taking him by the head and feet, carried and laid him upon the bed."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Mr. Fogg",
+"evidence": "It seemed to be the only possible means of keeping Phileas Fogg several days longer at Hong Kong."
+},
+{
+"name_in_text": "Phileas Fogg",
+"evidence": "It seemed to be the only possible means of keeping Phileas Fogg several days longer at Hong Kong."
+},
+{
+"name_in_text": "gentlemen of the Reform Club",
+"evidence": "“This is bad,” muttered Passepartout, “for the gentlemen of the Reform Club!”"
+},
+{
+"name_in_text": "Aouda",
+"evidence": "Phileas Fogg, the saviour of Aouda, that brave and generous man, a robber!"
+}
+],
+"notes": null
+},
+"transport": [
+{
+"mode": "steamer",
+"vessel_or_line_name": "Carnatic",
+"from": "Hong Kong",
+"to": null,
+"evidence": "On reaching the quay where they were to embark on the “Carnatic,” he was not astonished to find Fix walking up and down."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "1842",
+"evidence": "after the war of 1842;"
+},
+{
+"as_written": "that very evening",
+"evidence": "the steamer would leave that very evening"
+},
+{
+"as_written": "next morning",
+"evidence": "and not next morning, as had been announced."
+},
+{
+"as_written": "28th of last September",
+"evidence": "On the 28th of last September a robbery of fifty-five thousand pounds was committed"
+}
+],
+"days_elapsed_or_remaining": null,
+"schedule_status": "ahead",
+"schedule_detail": "the steamer leaves that very evening instead of the next morning",
+"evidence": "the repairs on the “Carnatic” having been completed, the steamer would leave that very evening, and not next morning, as had been announced."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "one million four hundred thousand pounds",
+"purpose": "amount of opium sold annually by English merchants",
+"evidence": "sell every year the miserable drug called opium, to the amount of one million four hundred thousand pounds"
+},
+{
+"amount_as_written": "Twenty thousand pounds",
+"purpose": "Fogg's wager",
+"evidence": "“Of course I do,” returned Passepartout. “Twenty thousand pounds.”"
+},
+{
+"amount_as_written": "fifty-five thousand pounds",
+"purpose": "amount stolen in the bank robbery",
+"evidence": "On the 28th of last September a robbery of fifty-five thousand pounds was committed at the Bank of England"
+},
+{
+"amount_as_written": "Fifty-five thousand!",
+"purpose": "amount stolen in the bank robbery",
+"evidence": "“Fifty-five thousand!” answered Fix, pressing his companion’s hand."
+},
+{
+"amount_as_written": "two thousand pounds",
+"purpose": "reward offered to Fix by the Bank of England",
+"evidence": "if I succeed, I get two thousand pounds."
+},
+{
+"amount_as_written": "five hundred",
+"purpose": "portion of the reward offered to Passepartout for his help",
+"evidence": "If you’ll help me, I’ll let you have five hundred of them."
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

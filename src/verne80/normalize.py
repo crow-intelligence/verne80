@@ -39,7 +39,13 @@ from __future__ import annotations
 import re
 import unicodedata
 
-__all__ = ["fold_typography", "match_key", "normalize_quote", "strip_edge_quotes"]
+__all__ = [
+    "fold_typography",
+    "match_key",
+    "normalize_quote",
+    "place_key",
+    "strip_edge_quotes",
+]
 
 # Fold families. Each maps a set of codepoints onto one canonical ASCII spelling, so
 # that two texts differing only in typographic convention reduce to the same key.
@@ -204,6 +210,35 @@ def normalize_quote(text: str) -> str:
     folded = fold_typography(text)
     collapsed = _WHITESPACE.sub(" ", folded)
     return _DASH_RUN.sub("-", collapsed).strip()
+
+
+def place_key(name: str) -> str:
+    r"""The key one place name is identified by, wherever places are compared.
+
+    A vessel or a title arrives quoted as often as not — chapter 10 names the steamer
+    ``“Mongolia”`` in the narrative block and ``Mongolia`` in ``places_mentioned``.
+    They are one place, so the key drops the marks. Unlike a passage of prose, a
+    place name never *contains* meaningful quotation marks, which is why this is safe
+    here and would not be safe on an evidence quote.
+
+    Args:
+        name: A place name as printed.
+
+    Returns:
+        Its comparison key.
+
+    Contract:
+        - Idempotent.
+        - Case- and typography-insensitive.
+        - Total: never raises.
+
+    Examples:
+        >>> place_key("“Mongolia”") == place_key("Mongolia")
+        True
+        >>> place_key("  Saville Row\n")
+        'saville row'
+    """
+    return strip_edge_quotes(match_key(name))
 
 
 def match_key(text: str) -> str:

@@ -1,0 +1,215 @@
+{
+"chapter": 16,
+"title": "IN WHICH FIX DOES NOT SEEM TO UNDERSTAND IN THE LEAST WHAT IS SAID TO HIM",
+"summary_hover": "Aboard the steamer Rangoon, Aouda grows closer to Fogg while Detective Fix plots to delay Fogg's departure from Hong Kong.",
+"summary_detail": "The travellers are aboard the steamer Rangoon sailing from Calcutta to Hong Kong. Aouda becomes better acquainted with the politely eccentric Phileas Fogg, feeling deep gratitude for her rescue. Meanwhile, Detective Fix is secretly on board, agonizing over his failure to receive an arrest warrant. He reveals his presence to Passepartout, feigning ignorance of their recent adventures to gather information and plot a way to detain Fogg.",
+"places_visited": [
+{
+"name_in_text": "Andaman",
+"role": "passing_through",
+"evidence": "they soon came in sight of the great Andaman, the principal of the islands in the Bay of Bengal"
+},
+{
+"name_in_text": "Bay of Bengal",
+"role": "passing_through",
+"evidence": "the principal of the islands in the Bay of Bengal"
+},
+{
+"name_in_text": "Andaman Islands",
+"role": "passing_through",
+"evidence": "The varied landscape afforded by the Andaman Islands was soon passed"
+},
+{
+"name_in_text": "Straits of Malacca",
+"role": "passing_through",
+"evidence": "the “Rangoon” rapidly approached the Straits of Malacca"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Calcutta",
+"evidence": "the trip from Calcutta to Hong Kong only comprised some three thousand five hundred miles"
+},
+{
+"name_in_text": "Hong Kong",
+"evidence": "the trip from Calcutta to Hong Kong only comprised some three thousand five hundred miles"
+},
+{
+"name_in_text": "India",
+"evidence": "belong to the highest of the native races of India."
+},
+{
+"name_in_text": "Himalaya",
+"evidence": "clear as the sacred lakes of the Himalaya"
+},
+{
+"name_in_text": "Celestial Empire",
+"evidence": "a luxurious dish to the tables of the Celestial Empire."
+},
+{
+"name_in_text": "China seas",
+"evidence": "the Straits of Malacca, which gave access to the China seas."
+},
+{
+"name_in_text": "Bombay",
+"evidence": "who thought him still at Bombay."
+},
+{
+"name_in_text": "Singapore",
+"evidence": "the steamer’s stay at Singapore would be too brief"
+},
+{
+"name_in_text": "China",
+"evidence": "beyond, China, Japan, America offered to Fogg an almost certain refuge."
+},
+{
+"name_in_text": "Japan",
+"evidence": "beyond, China, Japan, America offered to Fogg an almost certain refuge."
+},
+{
+"name_in_text": "America",
+"evidence": "beyond, China, Japan, America offered to Fogg an almost certain refuge."
+},
+{
+"name_in_text": "Yokohama",
+"evidence": "might get full under way again for Yokohama."
+},
+{
+"name_in_text": "Gulf of Bengal",
+"evidence": "The Gulf of Bengal does not agree with me as well as the Indian Ocean."
+},
+{
+"name_in_text": "Indian Ocean",
+"evidence": "as well as the Indian Ocean."
+},
+{
+"name_in_text": "Europe",
+"evidence": "propose to carry this young woman to Europe?"
+}
+],
+"people": [
+{
+"name_in_text": "Aouda",
+"role": "Rescued Parsee woman travelling with Fogg",
+"evidence": "During the first days of the journey Aouda became better acquainted with her protector"
+},
+{
+"name_in_text": "Phileas Fogg",
+"role": "Eccentric gentleman and Aouda's protector",
+"evidence": "The phlegmatic gentleman listened to her, apparently at least, with coldness"
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant",
+"evidence": "Passepartout was promenading up and down in the forward part of the steamer."
+},
+{
+"name_in_text": "Fix",
+"role": "Detective pursuing Fogg",
+"evidence": "Fix emerged from his cabin and went on deck."
+},
+{
+"name_in_text": "Parsee guide",
+"role": "Former guide in India",
+"evidence": "Aouda confirmed the Parsee guide’s narrative of her touching history."
+},
+{
+"name_in_text": "Sir Jametsee Jeejeebhoy",
+"role": "Parsee merchant and baronet",
+"evidence": "Sir Jametsee Jeejeebhoy, was made a baronet by the English government."
+},
+{
+"name_in_text": "Jeejeeh",
+"role": "Aouda's cousin in Hong Kong",
+"evidence": "it was his cousin, Jeejeeh, whom she hoped to join at Hong Kong."
+},
+{
+"name_in_text": "Papuans",
+"role": "Savage native inhabitants of the Andaman islands",
+"evidence": "the savage Papuans, who are in the lowest scale of humanity, but are not, as has been asserted, cannibals, did not make their appearance."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Aouda",
+"at_name_in_text": null,
+"between_from": "Calcutta",
+"between_to": "Hong Kong",
+"evidence": "the trip from Calcutta to Hong Kong... Aouda became better acquainted with her protector"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": "Calcutta",
+"between_to": "Hong Kong",
+"evidence": "He visited her regularly each day at certain hours"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": null,
+"between_from": "Calcutta",
+"between_to": "Hong Kong",
+"evidence": "He had managed to embark on the “Rangoon” at Calcutta... Fix emerged from his cabin and went on deck."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": null,
+"between_from": "Calcutta",
+"between_to": "Hong Kong",
+"evidence": "Passepartout was promenading up and down in the forward part of the steamer."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Parsee guide",
+"evidence": "Aouda confirmed the Parsee guide’s narrative"
+},
+{
+"name_in_text": "Sir Jametsee Jeejeebhoy",
+"evidence": "one of them, Sir Jametsee Jeejeebhoy, was made a baronet"
+},
+{
+"name_in_text": "Jeejeeh",
+"evidence": "it was his cousin, Jeejeeh, whom she hoped to join"
+},
+{
+"name_in_text": "Papuans",
+"evidence": "the savage Papuans, who are in the lowest scale of humanity... did not make their appearance."
+}
+],
+"notes": "The entirety of the chapter's physical action takes place aboard the steamer 'Rangoon', hence no specific 'at_name_in_text' town or location is given for the on_stage characters, only their transit route."
+},
+"transport": [
+{
+"mode": "steamer",
+"vessel_or_line_name": "Rangoon",
+"from": "Calcutta",
+"to": "Hong Kong",
+"evidence": "The “Rangoon”... was a screw steamer... the trip from Calcutta to Hong Kong only comprised some three thousand five hundred miles"
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "30th of October",
+"evidence": "It was now the 30th of October"
+}
+],
+"days_elapsed_or_remaining": "from ten to twelve days",
+"schedule_status": "on_time",
+"schedule_detail": "not a day behind time",
+"evidence": "As well and as punctual as ever, not a day behind time!"
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "two thousand pounds",
+"purpose": "the purchase of the elephant",
+"evidence": "the purchase of the elephant for two thousand pounds"
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

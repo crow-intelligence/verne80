@@ -1,0 +1,56 @@
+{
+  "_comment": [
+    "Who gets a position series of their own. A track earns its place by separating",
+    "from the party at some point — otherwise its positions are just Fogg's, and a",
+    "second copy of the same numbers is a liability rather than a feature.",
+    "Aliases are matched under match_key, so case and typography do not matter."
+  ],
+  "tracks": [
+    {
+      "track": "fogg",
+      "display": "Phileas Fogg",
+      "aliases": [
+        "Phileas Fogg",
+        "Mr. Phileas Fogg",
+        "Mr. Fogg",
+        "Fogg",
+        "Phileas Fogg, Esquire"
+      ],
+      "why": "the map's primary series — the wager is his, and the route is his itinerary"
+    },
+    {
+      "track": "passepartout",
+      "display": "Passepartout",
+      "aliases": [
+        "Passepartout",
+        "Jean Passepartout",
+        "Jean"
+      ],
+      "why": "separated from the party at Yokohama, chapters 23/24/27 — a series of its own"
+    },
+    {
+      "track": "fix",
+      "display": "Fix",
+      "aliases": [
+        "Fix",
+        "Mr. Fix",
+        "Detective Fix"
+      ],
+      "why": "reaches Suez ahead of the party in chapter 6, which is exactly why a forward-only rule over places_visited is not enough"
+    }
+  ],
+  "not_a_track": [
+    {
+      "name": "Aouda",
+      "why": "travels with Fogg from chapter 13 onwards but never separately — her position is his, and a duplicate series would only be another thing to keep in step"
+    },
+    {
+      "name": "Sir Francis Cromarty",
+      "why": "accompanies the party across India only, and never apart from it"
+    },
+    {
+      "name": "Rowan",
+      "why": "the commissioner of police; appears in chapter 5 reading a telegram and never travels"
+    }
+  ]
+}

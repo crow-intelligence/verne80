@@ -1,0 +1,327 @@
+{
+"chapter": 11,
+"title": "IN WHICH PHILEAS FOGG SECURES A CURIOUS MEANS OF CONVEYANCE AT A FABULOUS PRICE",
+"summary_hover": "The train journey across India stops abruptly at an unfinished section of track, prompting Phileas Fogg to purchase an elephant to continue.",
+"summary_detail": "Phileas Fogg, Passepartout, and Sir Francis Cromarty travel by train across the Indian peninsula, passing dense forests and historic regions. The journey is abruptly halted at the hamlet of Kholby because the railway line is unfinished, despite newspaper reports to the contrary. Remaining calm, Fogg searches the village for alternative transport and ultimately purchases a half-domesticated elephant named Kiouni for the exorbitant sum of two thousand pounds to carry them to Allahabad.",
+"places_visited": [
+{
+"name_in_text": "Bombay",
+"role": "departure",
+"evidence": "An hour after leaving Bombay the train had passed the viaducts"
+},
+{
+"name_in_text": "Island of Salcette",
+"role": "passing_through",
+"evidence": "the train had passed the viaducts and the Island of Salcette"
+},
+{
+"name_in_text": "Callyan",
+"role": "passing_through",
+"evidence": "At Callyan they reached the junction"
+},
+{
+"name_in_text": "Pauwell",
+"role": "passing_through",
+"evidence": "passing Pauwell, they entered the defiles of the mountains"
+},
+{
+"name_in_text": "Nassik",
+"role": "passing_through",
+"evidence": "passed Nassik"
+},
+{
+"name_in_text": "Khandeish",
+"role": "passing_through",
+"evidence": "proceeded over the flat, well-cultivated country of the Khandeish"
+},
+{
+"name_in_text": "Milligaum",
+"role": "passing_through",
+"evidence": "The travellers crossed, beyond Milligaum"
+},
+{
+"name_in_text": "Burhampoor",
+"role": "passing_through",
+"evidence": "At half-past twelve the train stopped at Burhampoor"
+},
+{
+"name_in_text": "Assurghur",
+"role": "passing_through",
+"evidence": "started off for Assurghur"
+},
+{
+"name_in_text": "Bundelcund",
+"role": "passing_through",
+"evidence": "separate the Khandeish from Bundelcund"
+},
+{
+"name_in_text": "Rothal",
+"role": "passing_through",
+"evidence": "some fifteen miles beyond Rothal"
+},
+{
+"name_in_text": "Kholby",
+"role": "arrival",
+"evidence": "At the hamlet of Kholby."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "London",
+"evidence": "his departure from London"
+},
+{
+"name_in_text": "Benares",
+"evidence": "join his corps at Benares"
+},
+{
+"name_in_text": "England",
+"evidence": "paying brief visits to England"
+},
+{
+"name_in_text": "Kandallah",
+"evidence": "towards south-eastern India by Kandallah and Pounah"
+},
+{
+"name_in_text": "Pounah",
+"evidence": "towards south-eastern India by Kandallah and Pounah"
+},
+{
+"name_in_text": "Europe",
+"evidence": "quietly returned to Europe"
+},
+{
+"name_in_text": "Ellora",
+"evidence": "Not far off rose Ellora"
+},
+{
+"name_in_text": "Aurungabad",
+"evidence": "the famous Aurungabad"
+},
+{
+"name_in_text": "Gulf of Cambray",
+"evidence": "empties into the Gulf of Cambray"
+},
+{
+"name_in_text": "Surat",
+"evidence": "near Surat"
+},
+{
+"name_in_text": "Greenwich",
+"evidence": "regulated on the Greenwich meridian"
+},
+{
+"name_in_text": "Allahabad",
+"evidence": "fifty miles to be laid from here to Allahabad"
+},
+{
+"name_in_text": "Calcutta",
+"evidence": "steamer leaves Calcutta"
+},
+{
+"name_in_text": "Hong Kong",
+"evidence": "for Hong Kong at noon"
+}
+],
+"people": [
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant and travelling companion",
+"evidence": "Passepartout rode in the same carriage with his master"
+},
+{
+"name_in_text": "Sir Francis Cromarty",
+"role": "Brigadier-general and whist partner",
+"evidence": "This was Sir Francis Cromarty, one of Mr. Fogg’s whist partners"
+},
+{
+"name_in_text": "Phileas Fogg",
+"role": "The gentleman traveller",
+"evidence": "But Phileas Fogg, who was not travelling, but only describing a circumference"
+},
+{
+"name_in_text": "English engineer",
+"role": "Locomotive driver",
+"evidence": "The locomotive, guided by an English engineer"
+},
+{
+"name_in_text": "Aureng-Zeb",
+"role": "Historical ferocious king",
+"evidence": "capital of the ferocious Aureng-Zeb"
+},
+{
+"name_in_text": "Feringhea",
+"role": "Thuggee chief, king of the stranglers",
+"evidence": "Feringhea, the Thuggee chief, king of the stranglers"
+},
+{
+"name_in_text": "Fix",
+"role": "Person to whom Passepartout previously spoke",
+"evidence": "the same remark that he had done to Fix"
+},
+{
+"name_in_text": "conductor",
+"role": "Railway official who announces the end of the line",
+"evidence": "The conductor, passing along the carriages, shouted"
+},
+{
+"name_in_text": "Indian",
+"role": "Owner of the elephant",
+"evidence": "An Indian came out of the hut"
+},
+{
+"name_in_text": "young Parsee",
+"role": "Elephant guide and driver",
+"evidence": "A young Parsee, with an intelligent face, offered his services"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Kholby",
+"between_from": "Bombay",
+"between_to": "Kholby",
+"evidence": "Passepartout, not less surprised, rushed out and speedily returned"
+},
+{
+"name_in_text": "Sir Francis Cromarty",
+"at_name_in_text": "Kholby",
+"between_from": "Bombay",
+"between_to": "Kholby",
+"evidence": "The general at once stepped out"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Kholby",
+"between_from": "Bombay",
+"between_to": "Kholby",
+"evidence": "while Phileas Fogg calmly followed him, and they proceeded together to the conductor"
+},
+{
+"name_in_text": "conductor",
+"at_name_in_text": "Kholby",
+"between_from": null,
+"between_to": null,
+"evidence": "The conductor, passing along the carriages, shouted"
+},
+{
+"name_in_text": "Indian",
+"at_name_in_text": "Kholby",
+"between_from": null,
+"between_to": null,
+"evidence": "An Indian came out of the hut"
+},
+{
+"name_in_text": "young Parsee",
+"at_name_in_text": "Kholby",
+"between_from": null,
+"between_to": null,
+"evidence": "A young Parsee, with an intelligent face, offered his services"
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Aureng-Zeb",
+"evidence": "capital of the ferocious Aureng-Zeb"
+},
+{
+"name_in_text": "Feringhea",
+"evidence": "Feringhea, the Thuggee chief"
+},
+{
+"name_in_text": "Fix",
+"evidence": "the same remark that he had done to Fix"
+}
+],
+"notes": "The English engineer is physically on the train but only acts as a descriptive element driving the locomotive; he has no lines or direct interaction."
+},
+"transport": [
+{
+"mode": "railway",
+"vessel_or_line_name": null,
+"from": "Bombay",
+"to": "Kholby",
+"evidence": "An hour after leaving Bombay the train had passed the viaducts"
+},
+{
+"mode": "elephant",
+"vessel_or_line_name": "Kiouni",
+"from": "Kholby",
+"to": "Allahabad",
+"evidence": "Mr. Fogg resolved to hire him."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "the 25th",
+"evidence": "A steamer leaves Calcutta for Hong Kong at noon, on the 25th."
+},
+{
+"as_written": "the 22nd",
+"evidence": "This is the 22nd, and we shall reach Calcutta in time."
+}
+],
+"days_elapsed_or_remaining": "two days",
+"schedule_status": "ahead",
+"schedule_detail": "gained two days",
+"evidence": "I have two days, which I have already gained, to sacrifice. A steamer leaves Calcutta for Hong Kong at noon, on the 25th. This is the 22nd"
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "ten pounds",
+"purpose": "an hour for the loan of the beast",
+"evidence": "offering the excessive sum of ten pounds an hour for the loan of the beast to Allahabad."
+},
+{
+"amount_as_written": "Twenty pounds",
+"purpose": "an hour for the loan of the beast",
+"evidence": "Twenty pounds? Refused also."
+},
+{
+"amount_as_written": "Forty pounds",
+"purpose": "an hour for the loan of the beast",
+"evidence": "Forty pounds? Still refused."
+},
+{
+"amount_as_written": "six hundred pounds sterling",
+"purpose": "total expected for fifteen hours of loan",
+"evidence": "his owner would receive no less than six hundred pounds sterling."
+},
+{
+"amount_as_written": "a thousand pounds",
+"purpose": "offer to purchase the elephant",
+"evidence": "at first offered a thousand pounds for him."
+},
+{
+"amount_as_written": "twenty thousand pounds",
+"purpose": "the original wager at stake",
+"evidence": "a bet of twenty thousand pounds was at stake"
+},
+{
+"amount_as_written": "twelve hundred",
+"purpose": "offer to purchase the elephant",
+"evidence": "Mr. Fogg offered first twelve hundred"
+},
+{
+"amount_as_written": "fifteen hundred",
+"purpose": "offer to purchase the elephant",
+"evidence": "then fifteen hundred"
+},
+{
+"amount_as_written": "eighteen hundred",
+"purpose": "offer to purchase the elephant",
+"evidence": "eighteen hundred"
+},
+{
+"amount_as_written": "two thousand pounds",
+"purpose": "final purchase price of the elephant",
+"evidence": "At two thousand pounds the Indian yielded."
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

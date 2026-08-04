@@ -1,0 +1,59 @@
+{
+  "_comment": [
+    "Curated knowledge about place names that the automatic proposal cannot get right,",
+    "each with the reason it is here. Two kinds of error generate almost all of it:",
+    "regions and continents that look like stops because the party crosses them, and",
+    "buildings and institutions that look like places because they have proper names.",
+    "",
+    "The waypoints list is the other half: stops the party really makes that Fogg's own",
+    "itinerary table never names, because the table lists eight legs and the journey has",
+    "many more landings than that. Each says which leg it sits on. Mont Cenis and",
+    "Brindisi are seeded from the table's own via clause rather than typed in here."
+  ],
+  "blocked": [
+    {"name": "England", "why": "a country, named as the setting of the betting frenzy"},
+    {"name": "Europe", "why": "a continent, named in a schedule estimate"},
+    {"name": "America", "why": "a continent; the route stops at San Francisco and New York, not at America"},
+    {"name": "the Continent", "why": "an idiom for mainland Europe, not a stop"},
+    {"name": "France", "why": "a country the train crosses; Paris is the stop"},
+    {"name": "India", "why": "a region the party crosses; Bombay, Allahabad and Calcutta are the stops"},
+    {"name": "Japan", "why": "the parenthetical on Yokohama in the itinerary table, not a separate place"},
+    {"name": "United Kingdom", "why": "a country, named in chapter 1's description of Fogg"},
+    {"name": "United States", "why": "a country, named in a list of where the detectives were sent"},
+    {"name": "Bank of England", "why": "an institution, named as the robbery's scene — never a position"},
+    {"name": "Reform", "why": "the club's short form in chapter 2, not a separate place"},
+    {"name": "Madame Tussaud's", "why": "an attraction, named in a joke about Fogg's stillness"},
+    {"name": "Haymarket taverns", "why": "a class of establishment, named as somewhere Fogg does not go"},
+    {"name": "American lakes", "why": "a geographic feature named in a simile about Fogg's calm"},
+    {"name": "Rothal", "why": "this translation's spelling of a Great Indian Peninsula Railway station; no gazetteer entry, and the party never stops there"},
+    {"name": "Glasgow", "why": "named in chapter 3 as somewhere a rival route might go; the party never visits"},
+    {"name": "Havre", "why": "ditto — an alternative crossing Fogg does not take"},
+    {"name": "Dover", "why": "named as the train's destination in chapter 4, but the crossing is not a stop the text lingers on; revisit if a later chapter puts anyone there"},
+    {"name": "Calais", "why": "ditto, the far side of the same crossing"}
+  ],
+  "waypoints": [
+    {"name": "Sydenham", "leg": 0, "along": 0.05, "why": "chapter 4: the train is already whirling through it, so this is where the voyage visibly begins"},
+    {"name": "Paris", "leg": 0, "along": 0.2, "why": "chapter 4: the tickets are bought for Paris"},
+    {"name": "Mont Cenis", "leg": 0, "along": 0.4, "why": "named in the chapter-3 table's own via clause for leg 0"},
+    {"name": "Brindisi", "leg": 0, "along": 0.6, "why": "ditto — the second of the table's two named waypoints, in its printed order"},
+    {"name": "Aden", "leg": 1, "along": 0.5, "why": "the Mongolia coals there between Suez and Bombay"},
+    {"name": "Allahabad", "leg": 2, "along": 0.5, "why": "where the railway's famous gap begins, between Bombay and Calcutta"},
+    {"name": "Singapore", "leg": 3, "along": 0.5, "why": "the Rangoon calls there between Calcutta and Hong Kong"},
+    {"name": "Salt Lake City", "leg": 6, "along": 0.35, "why": "on the Pacific Railroad between San Francisco and New York"},
+    {"name": "Omaha", "leg": 6, "along": 0.7, "why": "ditto, further east"},
+    {"name": "Queenstown", "leg": 7, "along": 0.6, "why": "the landfall before Liverpool"},
+    {"name": "Liverpool", "leg": 7, "along": 0.8, "why": "where the arrest happens, between New York and London"}
+  ],
+  "micro": [
+    {"name": "Saville Row", "parent": "London", "why": "Fogg's house; chapters 1, 2 and 4"},
+    {"name": "No. 7, Saville Row, Burlington Gardens", "parent": "London", "why": "the full address as chapter 1 prints it"},
+    {"name": "Burlington Gardens", "parent": "London", "why": "part of the same address"},
+    {"name": "Reform Club", "parent": "London", "why": "where the wager is made and settled"},
+    {"name": "Pall Mall", "parent": "London", "why": "the street the Reform Club stands on"},
+    {"name": "Charing Cross", "parent": "London", "why": "the departure station — still inside London, so it does not move the pin"},
+    {"name": "West End", "parent": "London", "why": "chapter 5's district, where the news spreads"},
+    {"name": "Scotland Yard", "parent": "London", "why": "where Rowan reads Fix's telegram"},
+    {"name": "house", "parent": "London", "why": "chapter 3's word for Fogg's own house in Saville Row"},
+    {"name": "office", "parent": "London", "why": "chapter 5's word for the commissioner's room at Scotland Yard"}
+  ]
+}

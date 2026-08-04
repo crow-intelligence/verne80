@@ -24,13 +24,14 @@ coercion that does happen is appended to the problems list.
 from __future__ import annotations
 
 import re
+from collections.abc import Iterable
 from dataclasses import dataclass
 from enum import StrEnum
 from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from verne80.normalize import match_key
+from verne80.normalize import match_key, place_key
 
 __all__ = [
     "ChapterExtraction",
@@ -165,9 +166,11 @@ class OnStage(Evidenced):
     own array rather than fields on :class:`Person`: chapter 4 puts Fogg in four places,
     and one row per person cannot hold that.
 
-    ``at_name_in_text`` and the ``between_`` pair are alternatives, not a pair. A model
-    that fills both is well-shaped and confused, which is why
-    :func:`check_extraction` reports it rather than a validator raising on it.
+    ``at_name_in_text`` and the ``between_`` pair are complementary, not exclusive. The
+    real chapters fill both together and mean something sensible by it: chapter 11 gives
+    ``at="Kholby", between_from="Bombay", between_to="Kholby"`` — they are at Kholby,
+    having come from Bombay. When a position is resolved, ``at_`` wins; the transit is
+    provenance for how they got there.
     """
 
     name_in_text: str = Field(min_length=1)
@@ -430,6 +433,7 @@ def check_extraction(
     extraction: ChapterExtraction,
     expected_number: int,
     expected_title: str | None = None,
+    known_vessels: Iterable[str] = (),
 ) -> list[str]:
     """Report everything questionable about an extraction that still validated.
 
@@ -437,6 +441,10 @@ def check_extraction(
         extraction: The parsed extraction.
         expected_number: The chapter number implied by the filename.
         expected_title: The title from ``index.json``, if it should be cross-checked.
+        known_vessels: Vessel and line names seen anywhere in the book. A chapter may
+            legitimately place someone "from the Mongolia" several chapters after the
+            ship was last enumerated, so a name that is a known vessel is not an
+            invented location.
 
     Returns:
         Human-readable problems, empty when nothing looks off.
@@ -482,11 +490,11 @@ def check_extraction(
             f"{label} lists a place twice under places_visited: {duplicates}"
         )
 
-    visited_keys = {match_key(name) for name in visited}
+    visited_keys = {place_key(name) for name in visited}
     both = sorted(
         place.name_in_text
         for place in extraction.places_mentioned
-        if match_key(place.name_in_text) in visited_keys
+        if place_key(place.name_in_text) in visited_keys
     )
     if both:
         problems.append(f"{label} lists a place as both visited and mentioned: {both}")
@@ -507,11 +515,13 @@ def check_extraction(
             f"{extraction.title[:50]!r} vs {expected_title[:50]!r}"
         )
 
-    problems.extend(_check_narrative(extraction, label))
+    problems.extend(_check_narrative(extraction, label, known_vessels))
     return problems
 
 
-def _check_narrative(extraction: ChapterExtraction, label: str) -> list[str]:
+def _check_narrative(
+    extraction: ChapterExtraction, label: str, known_vessels: Iterable[str] = ()
+) -> list[str]:
     """Report what looks wrong about the narrative block.
 
     Deliberately silent about three things that look like errors and are not: the same
@@ -532,16 +542,19 @@ def _check_narrative(extraction: ChapterExtraction, label: str) -> list[str]:
     if both:
         problems.append(f"{label} says {both} are both on stage and not present")
 
+    # A place *and* a transit together is not a contradiction, and an earlier version of
+    # this function wrongly said it was. The real chapters settle it: chapter 11 gives
+    # ``at="Kholby", between_from="Bombay", between_to="Kholby"`` — they are at Kholby,
+    # having come from Bombay. The model reads ``between_from`` as "the place left",
+    # which is exactly what the prompt asks for, and the two fields together say more
+    # than either alone. `at_` wins when a position is resolved; the transit is
+    # provenance.
     for position, item in enumerate(narrative.on_stage):
         where = f"{label} narrative.on_stage[{position}]"
-        if item.at_name_in_text and (item.between_from or item.between_to):
-            problems.append(
-                f"{where} gives both a place and a transit — they are alternatives"
-            )
         if (
             item.between_from
             and item.between_to
-            and match_key(item.between_from) == match_key(item.between_to)
+            and place_key(item.between_from) == place_key(item.between_to)
         ):
             problems.append(f"{where} travels from {item.between_from!r} to itself")
 
@@ -570,8 +583,14 @@ def _check_narrative(extraction: ChapterExtraction, label: str) -> list[str]:
     # The strongest cross-check here: it catches a location invented in the new block
     # that the model did not enumerate in the two it has been filling all along.
     known_places = {
-        match_key(place.name_in_text)
+        place_key(place.name_in_text)
         for place in (*extraction.places_visited, *extraction.places_mentioned)
+    }
+    known_places |= {place_key(name) for name in known_vessels if name}
+    known_places |= {
+        place_key(leg.vessel_or_line_name)
+        for leg in extraction.transport
+        if leg.vessel_or_line_name
     }
     if known_places:
         invented = sorted(
@@ -579,7 +598,7 @@ def _check_narrative(extraction: ChapterExtraction, label: str) -> list[str]:
                 name
                 for item in narrative.on_stage
                 for name in (item.at_name_in_text, item.between_from, item.between_to)
-                if name and match_key(name) not in known_places
+                if name and place_key(name) not in known_places
             }
         )
         if invented:

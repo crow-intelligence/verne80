@@ -1,0 +1,234 @@
+{
+"chapter": 18,
+"title": "IN WHICH PHILEAS FOGG, PASSEPARTOUT, AND FIX GO EACH ABOUT HIS BUSINESS",
+"summary_hover": "A storm delays the Rangoon's arrival in Hong Kong, but Fogg fortuitously catches a delayed steamer and decides to take Aouda to Europe.",
+"summary_detail": "A severe storm delays the steamer Rangoon, causing it to arrive in Hong Kong twenty-four hours late. Fogg discovers the Yokohama steamer, the 'Carnatic', was also delayed for boiler repairs, saving his schedule. Upon finding that Aouda's cousin Jeejeeh has moved to Europe, Fogg calmly offers to take Aouda with him to Europe, instructing Passepartout to book three cabins on the 'Carnatic'.",
+"places_visited": [
+{
+"name_in_text": "Hong Kong",
+"role": "arrival",
+"evidence": "guide the “Rangoon” through the channels to the port of Hong Kong."
+},
+{
+"name_in_text": "harbour",
+"role": "passing_through",
+"evidence": "guided the steamer through the flotilla of junks, tankas, and fishing boats which crowd the harbour of Hong Kong."
+},
+{
+"name_in_text": "quay",
+"role": "arrival",
+"evidence": "At one o’clock the “Rangoon” was at the quay, and the passengers were going ashore."
+},
+{
+"name_in_text": "Club Hotel",
+"role": "setting",
+"evidence": "he conducted her to a palanquin, in which they repaired to the Club Hotel."
+},
+{
+"name_in_text": "Exchange",
+"role": "setting",
+"evidence": "Mr. Fogg repaired to the Exchange"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Yokohama",
+"role": "mention",
+"evidence": "making him too late for the Yokohama boat"
+},
+{
+"name_in_text": "Japan",
+"role": "mention",
+"evidence": "the passengers for Japan would have been obliged to await for a week"
+},
+{
+"name_in_text": "San Francisco",
+"role": "mention",
+"evidence": "steamer which crossed the Pacific from Yokohama to San Francisco"
+},
+{
+"name_in_text": "Pacific",
+"role": "mention",
+"evidence": "crossed the Pacific from Yokohama to San Francisco"
+},
+{
+"name_in_text": "London",
+"role": "mention",
+"evidence": "thirty-five days after leaving London."
+},
+{
+"name_in_text": "China",
+"role": "mention",
+"evidence": "learn that Jeejeeh had left China two years before"
+},
+{
+"name_in_text": "Europe",
+"role": "mention",
+"evidence": "taken up his residence in Europe"
+},
+{
+"name_in_text": "Holland",
+"role": "mention",
+"evidence": "in Holland the broker thought"
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "The calm traveller",
+"evidence": "Phileas Fogg gazed at the tempestuous sea, which seemed to be struggling especially to delay him, with his habitual tranquillity."
+},
+{
+"name_in_text": "Aouda",
+"role": "Fogg's rescued companion",
+"evidence": "Aouda was amazed to find him as calm as he had been from the first time she saw him."
+},
+{
+"name_in_text": "Fix",
+"role": "Detective secretly hoping for Fogg's delay",
+"evidence": "Fix did not look at the state of things in the same light. The storm greatly pleased him."
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's enraged servant",
+"evidence": "Passepartout was enraged beyond expression by the unpropitious weather."
+},
+{
+"name_in_text": "captain",
+"role": "Commander of the steamer Rangoon",
+"evidence": "the captain estimated that she would reach Hong Kong twenty hours behind time"
+},
+{
+"name_in_text": "officers",
+"role": "Ship's crew",
+"evidence": "He overwhelmed the captain, officers, and sailors"
+},
+{
+"name_in_text": "sailors",
+"role": "Ship's crew",
+"evidence": "He overwhelmed the captain, officers, and sailors"
+},
+{
+"name_in_text": "pilot",
+"role": "Harbour guide for Hong Kong",
+"evidence": "The pilot went on board at six, and took his place on the bridge"
+},
+{
+"name_in_text": "broker",
+"role": "Informant at the Exchange",
+"evidence": "Meeting a broker, he made the inquiry"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Hong Kong",
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg, bolder than his servant, did not hesitate to approach the pilot"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "Club Hotel",
+"between_from": "quay",
+"between_to": "Club Hotel",
+"evidence": "On landing, he conducted her to a palanquin, in which they repaired to the Club Hotel. A room was engaged for the young woman"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": null,
+"between_from": "Singapore",
+"between_to": "Hong Kong",
+"evidence": "Fix did not look at the state of things in the same light."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Hong Kong",
+"between_from": null,
+"between_to": null,
+"evidence": "Passepartout, delighted that the young woman, who was very gracious to him, was going to continue the journey with them, went off at a brisk gait to obey his master’s order."
+},
+{
+"name_in_text": "pilot",
+"at_name_in_text": "harbour",
+"between_from": null,
+"between_to": "Hong Kong",
+"evidence": "He remounted the bridge, and guided the steamer through the flotilla of junks, tankas, and fishing boats which crowd the harbour of Hong Kong."
+},
+{
+"name_in_text": "broker",
+"at_name_in_text": "Exchange",
+"between_from": null,
+"between_to": null,
+"evidence": "Meeting a broker, he made the inquiry"
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Jeejeeh",
+"evidence": "learn that Jeejeeh had left China two years before"
+}
+],
+"notes": "Fix is on the ship during the storm but is not explicitly placed in Hong Kong on stage in this chapter after the ship docks."
+},
+"transport": [
+{
+"mode": "steamer",
+"vessel_or_line_name": "Rangoon",
+"from": null,
+"to": "Hong Kong",
+"evidence": "The “Rangoon” rolled heavily... The pilot went on board at six, and took his place on the bridge, to guide the “Rangoon” through the channels to the port of Hong Kong."
+},
+{
+"mode": "carriage",
+"vessel_or_line_name": "palanquin",
+"from": "quay",
+"to": "Club Hotel",
+"evidence": "On landing, he conducted her to a palanquin, in which they repaired to the Club Hotel."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "3rd of November",
+"evidence": "A sort of tempest arose on the 3rd of November"
+},
+{
+"as_written": "the 4th",
+"evidence": "On the 4th, however, the sea became more calm"
+},
+{
+"as_written": "the 6th",
+"evidence": "Land was not signalled until five o’clock on the morning of the 6th"
+},
+{
+"as_written": "the 5th",
+"evidence": "the steamer was due on the 5th."
+},
+{
+"as_written": "6th of November",
+"evidence": "she would have left on the 6th of November"
+},
+{
+"as_written": "thirty-five days",
+"evidence": "thirty-five days after leaving London."
+}
+],
+"days_elapsed_or_remaining": "thirty-five days",
+"schedule_status": "behind",
+"schedule_detail": "twenty-four hours behind-hand",
+"evidence": "He found himself, then, about twenty-four hours behind-hand, thirty-five days after leaving London."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "twenty thousand pounds",
+"purpose": "the wager",
+"evidence": "as if the twenty thousand pounds were to come from his own pocket."
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

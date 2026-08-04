@@ -1,0 +1,175 @@
+{
+"chapter": 13,
+"title": "IN WHICH PASSEPARTOUT RECEIVES A NEW PROOF THAT FORTUNE FAVORS THE BRAVE",
+"summary_hover": "Fogg and his companions attempt to rescue Aouda, ultimately succeeding when Passepartout poses as the resuscitated rajah and carries her away.",
+"summary_detail": "Phileas Fogg, Sir Francis Cromarty, Passepartout, and their Parsee guide plot to rescue the young widow, Aouda, from being burned alive. After an attempt to break into the pagoda fails, they wait until dawn when the sacrifice begins. In a daring move, Passepartout secretly takes the place of the deceased rajah on the pyre, rises as if from the dead, and carries the drugged woman to safety before the guards realize the trick.",
+"places_visited": [
+{
+"name_in_text": "pagoda of Pillaji",
+"role": "setting",
+"evidence": "It was decided that the guide should direct the elephant towards the pagoda of Pillaji, which he accordingly approached as quickly as possible."
+},
+{
+"name_in_text": "copse",
+"role": "setting",
+"evidence": "They halted, half an hour afterwards, in a copse, some five hundred feet from the pagoda, where they were well concealed"
+},
+{
+"name_in_text": "wood",
+"role": "passing_through",
+"evidence": "The Parsee, leading the others, noiselessly crept through the wood"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Bombay",
+"evidence": "daughter of a wealthy Bombay merchant."
+},
+{
+"name_in_text": "Bundelcund",
+"evidence": "married against her will to the old rajah of Bundelcund"
+},
+{
+"name_in_text": "Allahabad",
+"evidence": "“I am only due at Allahabad tomorrow before noon.”"
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "Gentleman who initiates the rescue",
+"evidence": "Mr. Fogg was going to risk life, or at least liberty, and therefore the success of his tour."
+},
+{
+"name_in_text": "Sir Francis Cromarty",
+"role": "Fogg's enthusiastic ally",
+"evidence": "But he did not hesitate, and he found in Sir Francis Cromarty an enthusiastic ally."
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant who executes the rescue",
+"evidence": "It was Passepartout himself, who had slipped upon the pyre in the midst of the smoke"
+},
+{
+"name_in_text": "guide",
+"role": "Parsee assisting the rescue",
+"evidence": "“Officers,” replied the guide, “I am a Parsee, and this woman is a Parsee. Command me as you will.”"
+},
+{
+"name_in_text": "Aouda",
+"role": "The young Parsee widow and intended victim",
+"evidence": "Her name was Aouda."
+},
+{
+"name_in_text": "fakirs",
+"role": "Religious fanatics participating in the sacrifice",
+"evidence": "passed among the fakirs, who escorted her with their wild, religious cries."
+},
+{
+"name_in_text": "guards",
+"role": "Armed men watching the pagoda",
+"evidence": "the guards of the rajah, lighted by torches, were watching at the doors"
+},
+{
+"name_in_text": "priests",
+"role": "Religious figures overseeing the sacrifice",
+"evidence": "probably the priests, too, were watching within."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "pagoda of Pillaji",
+"between_from": null,
+"between_to": null,
+"evidence": "Phileas Fogg and his companions, mingling in the rear ranks of the crowd, followed"
+},
+{
+"name_in_text": "Sir Francis Cromarty",
+"at_name_in_text": "pagoda of Pillaji",
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg and Sir Francis stood erect"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "pagoda of Pillaji",
+"between_from": null,
+"between_to": null,
+"evidence": "It was Passepartout himself, who had slipped upon the pyre in the midst of the smoke"
+},
+{
+"name_in_text": "guide",
+"at_name_in_text": "wood",
+"between_from": null,
+"between_to": null,
+"evidence": "The Parsee, leading the others, noiselessly crept through the wood"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "pagoda of Pillaji",
+"between_from": null,
+"between_to": null,
+"evidence": "In the semi-obscurity they saw the victim, quite senseless, stretched out beside her husband’s body."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "wealthy Bombay merchant",
+"evidence": "daughter of a wealthy Bombay merchant."
+},
+{
+"name_in_text": "rajah’s relatives",
+"evidence": "devoted by the rajah’s relatives, who had an interest in her death"
+},
+{
+"name_in_text": "old rajah of Bundelcund",
+"evidence": "married against her will to the old rajah of Bundelcund"
+}
+],
+"notes": "The old rajah of Bundelcund is physically present as an embalmed corpse on the pyre, but is listed as mentioned since he is deceased and not acting as a living person."
+},
+"transport": [
+{
+"mode": "elephant",
+"vessel_or_line_name": null,
+"from": null,
+"to": null,
+"evidence": "the elephant was bearing them away at a rapid pace."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "about six o’clock",
+"evidence": "As soon as night fell, about six o’clock, they decided to make a reconnaissance around the pagoda."
+},
+{
+"as_written": "eight now",
+"evidence": "“It is only eight now,” said the brigadier"
+},
+{
+"as_written": "midnight",
+"evidence": "They waited till midnight"
+},
+{
+"as_written": "half-past twelve",
+"evidence": "They reached the walls about half-past twelve"
+},
+{
+"as_written": "tomorrow before noon",
+"evidence": "“I am only due at Allahabad tomorrow before noon.”"
+}
+],
+"days_elapsed_or_remaining": null,
+"schedule_status": null,
+"schedule_detail": null,
+"evidence": null
+},
+"money": {
+"amounts": [],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

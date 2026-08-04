@@ -1,0 +1,329 @@
+{
+"chapter": 10,
+"title": "IN WHICH PASSEPARTOUT IS ONLY TOO GLAD TO GET OFF WITH THE LOSS OF HIS SHOES",
+"summary_hover": "In Bombay, Fogg prepares to leave for Calcutta immediately, while Passepartout accidentally offends priests in a pagoda and narrowly escapes, losing his shoes.",
+"summary_detail": "Upon arriving in Bombay, Phileas Fogg secures his passport and dines at the railway station, intending to depart for Calcutta that evening. Detective Fix tries but fails to get a local arrest warrant. Meanwhile, Passepartout wanders the city and naively enters a sacred pagoda without removing his shoes. He is attacked by priests but escapes to the station just in time, an incident Fix plans to use to detain Fogg.",
+"places_visited": [
+{
+"name_in_text": "Bombay",
+"role": "arrival",
+"evidence": "The passengers of the “Mongolia” went ashore at half-past four p.m."
+},
+{
+"name_in_text": "passport office",
+"role": "passing_through",
+"evidence": "directed his steps to the passport office."
+},
+{
+"name_in_text": "railway station",
+"role": "setting",
+"evidence": "Phileas Fogg repaired quietly to the railway station, where he ordered dinner."
+},
+{
+"name_in_text": "headquarters of the Bombay police",
+"role": "passing_through",
+"evidence": "his first destination was the headquarters of the Bombay police."
+},
+{
+"name_in_text": "pagoda on Malabar Hill",
+"role": "passing_through",
+"evidence": "he happened to espy the splendid pagoda on Malabar Hill, and was seized with an irresistible desire to see its interior."
+},
+{
+"name_in_text": "station",
+"role": "departure",
+"evidence": "Passepartout, hatless, shoeless... rushed breathlessly into the station."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "India",
+"evidence": "which is called India, embraces fourteen hundred thousand square miles"
+},
+{
+"name_in_text": "Calcutta",
+"evidence": "and has a governor-general stationed at Calcutta"
+},
+{
+"name_in_text": "Madras",
+"evidence": "governors at Madras, Bombay, and in Bengal"
+},
+{
+"name_in_text": "Bengal",
+"evidence": "governors at Madras, Bombay, and in Bengal"
+},
+{
+"name_in_text": "Agra",
+"evidence": "and a lieutenant-governor at Agra."
+},
+{
+"name_in_text": "British India",
+"evidence": "But British India, properly so called, only embraces"
+},
+{
+"name_in_text": "Indus",
+"evidence": "fast steamboats ply on the Indus"
+},
+{
+"name_in_text": "Ganges",
+"evidence": "and the Ganges"
+},
+{
+"name_in_text": "Salcette",
+"evidence": "Leaving Bombay, it passes through Salcette"
+},
+{
+"name_in_text": "continent",
+"evidence": "crossing to the continent"
+},
+{
+"name_in_text": "Tannah",
+"evidence": "opposite Tannah"
+},
+{
+"name_in_text": "Western Ghauts",
+"evidence": "goes over the chain of the Western Ghauts"
+},
+{
+"name_in_text": "Burhampoor",
+"evidence": "runs thence north-east as far as Burhampoor"
+},
+{
+"name_in_text": "Bundelcund",
+"evidence": "skirts the nearly independent territory of Bundelcund"
+},
+{
+"name_in_text": "Allahabad",
+"evidence": "ascends to Allahabad"
+},
+{
+"name_in_text": "Benares",
+"evidence": "meeting the Ganges at Benares"
+},
+{
+"name_in_text": "Burdivan",
+"evidence": "descending south-eastward by Burdivan"
+},
+{
+"name_in_text": "Chandernagor",
+"evidence": "and the French town of Chandernagor"
+},
+{
+"name_in_text": "Elephanta",
+"evidence": "He would not deign to examine even the masterpieces of Elephanta"
+},
+{
+"name_in_text": "hypogea",
+"evidence": "or the mysterious hypogea"
+},
+{
+"name_in_text": "Kanherian grottoes",
+"evidence": "the Kanherian grottoes of the island of Salcette."
+},
+{
+"name_in_text": "London",
+"evidence": "He made himself known as a London detective"
+},
+{
+"name_in_text": "Suez",
+"evidence": "that they were to leave Bombay as they had done Suez and Paris"
+},
+{
+"name_in_text": "Paris",
+"evidence": "that they were to leave Bombay as they had done Suez and Paris"
+}
+],
+"people": [
+{
+"name_in_text": "Mr. Fogg",
+"role": "the traveller who quickly departs Bombay",
+"evidence": "Mr. Fogg, after bidding good-bye to his whist partners, left the steamer"
+},
+{
+"name_in_text": "servant",
+"role": "Mr. Fogg's servant, who explores the city",
+"evidence": "gave his servant several errands to do"
+},
+{
+"name_in_text": "landlord",
+"role": "server at the railway station restaurant",
+"evidence": "the landlord especially recommended a certain giblet"
+},
+{
+"name_in_text": "Fix",
+"role": "the detective pursuing Fogg",
+"evidence": "Fix had gone on shore shortly after Mr. Fogg"
+},
+{
+"name_in_text": "director of the Bombay police",
+"role": "official who refuses to grant the arrest warrant",
+"evidence": "tried to obtain an order of arrest from the director of the Bombay police."
+},
+{
+"name_in_text": "Passepartout",
+"role": "Mr. Fogg's servant, who gets into trouble",
+"evidence": "Passepartout, however, had no sooner heard his master’s orders"
+},
+{
+"name_in_text": "Indian dancing-girls",
+"role": "performers in the Parsee festival",
+"evidence": "Indian dancing-girls, clothed in rose-coloured gauze... danced airily"
+},
+{
+"name_in_text": "three enraged priests",
+"role": "Brahmin priests who attack Passepartout",
+"evidence": "He looked up to behold three enraged priests, who forthwith fell upon him"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "Bombay",
+"between_from": "“Mongolia”",
+"between_to": null,
+"evidence": "Mr. Fogg, after bidding good-bye to his whist partners, left the steamer"
+},
+{
+"name_in_text": "servant",
+"at_name_in_text": "Bombay",
+"between_from": null,
+"between_to": null,
+"evidence": "gave his servant several errands to do"
+},
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "passport office",
+"between_from": null,
+"between_to": null,
+"evidence": "directed his steps to the passport office."
+},
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "railway station",
+"between_from": "passport office",
+"between_to": null,
+"evidence": "Having transacted his business at the passport office, Phileas Fogg repaired quietly to the railway station"
+},
+{
+"name_in_text": "landlord",
+"at_name_in_text": "railway station",
+"between_from": null,
+"between_to": null,
+"evidence": "He rang for the landlord, and, on his appearance, said"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "headquarters of the Bombay police",
+"between_from": null,
+"between_to": null,
+"evidence": "his first destination was the headquarters of the Bombay police."
+},
+{
+"name_in_text": "director of the Bombay police",
+"at_name_in_text": "headquarters of the Bombay police",
+"between_from": null,
+"between_to": null,
+"evidence": "tried to obtain an order of arrest from the director of the Bombay police."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Bombay",
+"between_from": "“Mongolia”",
+"between_to": null,
+"evidence": "Passepartout, however, had no sooner heard his master’s orders on leaving the “Mongolia”"
+},
+{
+"name_in_text": "Indian dancing-girls",
+"at_name_in_text": "Bombay",
+"between_from": null,
+"between_to": null,
+"evidence": "in the midst of which Indian dancing-girls, clothed in rose-coloured gauze... danced airily"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "pagoda on Malabar Hill",
+"between_from": null,
+"between_to": null,
+"evidence": "went in like a simple tourist, and was soon lost in admiration"
+},
+{
+"name_in_text": "three enraged priests",
+"at_name_in_text": "pagoda on Malabar Hill",
+"between_from": null,
+"between_to": null,
+"evidence": "He looked up to behold three enraged priests, who forthwith fell upon him"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "station",
+"between_from": "pagoda on Malabar Hill",
+"between_to": null,
+"evidence": "Passepartout, hatless, shoeless... rushed breathlessly into the station."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "station",
+"between_from": null,
+"between_to": null,
+"evidence": "Fix, who had followed Mr. Fogg to the station... was there, upon the platform."
+},
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "station",
+"between_from": null,
+"between_to": null,
+"evidence": "Fix heard him relate his adventures in a few words to Mr. Fogg."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "governor-general",
+"evidence": "and appointed the governor-general and his subordinates"
+},
+{
+"name_in_text": "governors",
+"evidence": "governors at Madras, Bombay, and in Bengal"
+},
+{
+"name_in_text": "lieutenant-governor",
+"evidence": "and a lieutenant-governor at Agra."
+},
+{
+"name_in_text": "ferocious rajahs",
+"evidence": "and there are certain ferocious rajahs in the interior who are absolutely independent."
+},
+{
+"name_in_text": "native chiefs",
+"evidence": "purchasing them of the native chiefs, whom it seldom paid"
+}
+],
+"notes": "Fogg's whist partners are bid goodbye but not specifically named in this chapter's text, nor is their physical presence elaborated on."
+},
+"transport": [
+{
+"mode": "railway",
+"vessel_or_line_name": "Great Indian Peninsula Railway",
+"from": "Bombay",
+"to": "Calcutta",
+"evidence": "The general route of the Great Indian Peninsula Railway is as follows... has its terminus at Calcutta."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "1756",
+"evidence": "The celebrated East India Company was all-powerful from 1756"
+}
+],
+"days_elapsed_or_remaining": "eighty days",
+"schedule_status": "unknown",
+"schedule_detail": null,
+"evidence": "whether his fate was not in truth forcing him... around the world in eighty days!"
+},
+"money": {
+"amounts": [],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

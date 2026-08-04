@@ -1,7 +1,7 @@
 import unicodedata
 
 import hypothesis.strategies as st
-from hypothesis import given, settings
+from hypothesis import assume, given, settings
 
 from tests.strategies import italicised, typographic_variant
 from verne80.normalize import (
@@ -149,7 +149,14 @@ class TestNormalizeProperties:
     @settings(max_examples=150, deadline=None)
     @given(st.text(min_size=1))
     def test_wrapping_a_quote_in_marks_never_changes_the_stripped_key(self, text):
+        """Restricted to text that does not already end in a quotation mark.
+
+        Hypothesis found `0" `: wrapping it makes its own trailing mark interior, so
+        stripping no longer removes it. Stripping only ever looks at the ends, and that
+        is the honest scope of the property.
+        """
         inner = strip_edge_quotes(normalize_quote(text))
+        assume(inner == normalize_quote(text))
         wrapped = strip_edge_quotes(normalize_quote(f'"{text}"'))
         assert wrapped == inner
 

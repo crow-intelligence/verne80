@@ -193,10 +193,17 @@ def load_extraction(path: Path) -> ChapterExtraction:
     Contract:
         - Never returns a partially validated model.
     """
-    if not path.exists():
+    # The three states a hand-paste session produces, told apart so the message says
+    # what to do. An empty file is the commonest: the editor made it before the paste
+    # landed, and reporting that as a syntax error would send you hunting for a comma.
+    if not path.exists() or not path.is_file():
         raise FileNotFoundError(
             f"{path} not found — paste Gemini's output there; "
             "see data/prompts/README.md"
+        )
+    if not path.read_text(encoding="utf-8").strip():
+        raise FileNotFoundError(
+            f"{path} is empty — the paste did not land; see data/prompts/README.md"
         )
     data = parse_extraction_json(path.read_text(encoding="utf-8"), origin=str(path))
     try:

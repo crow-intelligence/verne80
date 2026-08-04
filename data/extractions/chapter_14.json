@@ -1,0 +1,337 @@
+{
+"chapter": 14,
+"title": "IN WHICH PHILEAS FOGG DESCENDS THE WHOLE LENGTH OF THE BEAUTIFUL VALLEY OF THE GANGES WITHOUT EVER THINKING OF SEEING IT",
+"summary_hover": "Fogg, Passepartout, and Sir Francis travel with the rescued Aouda to Allahabad, gift their elephant to the guide, and proceed by train to Calcutta.",
+"summary_detail": "Following their successful rescue of Aouda, the travellers proceed by elephant to Allahabad, where Fogg generously gifts the valuable animal to their loyal Parsee guide. They board a train, stopping at Benares where Sir Francis departs to rejoin his troops. Continuing rapidly through the Ganges valley, Fogg and Passepartout arrive in Calcutta with Aouda exactly on schedule, ready to board their steamer for Hong Kong.",
+"places_visited": [
+{
+"name_in_text": "pagoda",
+"role": "departure",
+"evidence": "an hour after leaving the pagoda, had crossed a vast plain."
+},
+{
+"name_in_text": "Allahabad",
+"role": "arrival",
+"evidence": "The station at Allahabad was reached about ten o’clock"
+},
+{
+"name_in_text": "Benares",
+"role": "passing_through",
+"evidence": "At half-past twelve the train stopped at Benares."
+},
+{
+"name_in_text": "valley of the Ganges",
+"role": "passing_through",
+"evidence": "passed for a while along the valley of the Ganges."
+},
+{
+"name_in_text": "Behar",
+"role": "passing_through",
+"evidence": "glimpses of the diversified landscape of Behar"
+},
+{
+"name_in_text": "Chupenie",
+"role": "passing_through",
+"evidence": "the travellers could scarcely discern the fort of Chupenie"
+},
+{
+"name_in_text": "Ghazipur",
+"role": "passing_through",
+"evidence": "or Ghazipur and its famous rose-water factories"
+},
+{
+"name_in_text": "Buxar",
+"role": "passing_through",
+"evidence": "the fortified town of Buxar"
+},
+{
+"name_in_text": "Patna",
+"role": "passing_through",
+"evidence": "or Patna, a large manufacturing and trading-place"
+},
+{
+"name_in_text": "Monghir",
+"role": "passing_through",
+"evidence": "or Monghir, a more than European town"
+},
+{
+"name_in_text": "Bengal",
+"role": "passing_through",
+"evidence": "and the marvels of Bengal"
+},
+{
+"name_in_text": "Gour",
+"role": "passing_through",
+"evidence": "Golconda ruined Gour"
+},
+{
+"name_in_text": "Murshedabad",
+"role": "passing_through",
+"evidence": "Murshedabad, the ancient capital"
+},
+{
+"name_in_text": "Burdwan",
+"role": "passing_through",
+"evidence": "Burdwan"
+},
+{
+"name_in_text": "Hugly",
+"role": "passing_through",
+"evidence": "Hugly"
+},
+{
+"name_in_text": "Chandernagor",
+"role": "passing_through",
+"evidence": "and the French town of Chandernagor"
+},
+{
+"name_in_text": "Calcutta",
+"role": "arrival",
+"evidence": "Calcutta was reached at seven in the morning"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Madras",
+"evidence": "recover their victim at Madras, Bombay, or Calcutta."
+},
+{
+"name_in_text": "Bombay",
+"evidence": "recover their victim at Madras, Bombay, or Calcutta."
+},
+{
+"name_in_text": "Hong Kong",
+"evidence": "at noon, for Hong Kong."
+},
+{
+"name_in_text": "Ganges",
+"evidence": "junction of the two sacred rivers, Ganges and Jumna"
+},
+{
+"name_in_text": "Jumna",
+"evidence": "junction of the two sacred rivers, Ganges and Jumna"
+},
+{
+"name_in_text": "Regent Street",
+"evidence": "such a bazaar as he used to frequent in Regent Street."
+},
+{
+"name_in_text": "Pillaji",
+"evidence": "The influence to which the priests of Pillaji had subjected Aouda"
+},
+{
+"name_in_text": "Ahmehnagara",
+"evidence": "celebrates the charms of the queen of Ahmehnagara"
+},
+{
+"name_in_text": "Himalaya",
+"evidence": "as in the sacred lakes of Himalaya"
+},
+{
+"name_in_text": "Ceylon",
+"evidence": "loveliest pearls of Ceylon"
+},
+{
+"name_in_text": "Golconda",
+"evidence": "most dazzling diamonds of Golconda."
+},
+{
+"name_in_text": "Casi",
+"evidence": "built on the site of the ancient Casi"
+},
+{
+"name_in_text": "Manchester",
+"evidence": "for it is as English as Manchester or Birmingham"
+},
+{
+"name_in_text": "Birmingham",
+"evidence": "for it is as English as Manchester or Birmingham"
+},
+{
+"name_in_text": "London",
+"evidence": "The two days gained between London and Bombay had been lost"
+}
+],
+"people": [
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant and Aouda's rescuer",
+"evidence": "Passepartout laughed gaily at his success."
+},
+{
+"name_in_text": "Sir Francis",
+"role": "Brigadier-general and travelling companion",
+"evidence": "Sir Francis pressed the worthy fellow’s hand"
+},
+{
+"name_in_text": "Phileas Fogg",
+"role": "The gentleman traveller",
+"evidence": "his master said, “Well done!”"
+},
+{
+"name_in_text": "Aouda",
+"role": "The rescued young Indian woman",
+"evidence": "should Aouda remain in India, she would inevitably fall again into the hands of her executioners."
+},
+{
+"name_in_text": "Parsee",
+"role": "The elephant guide",
+"evidence": "The elephant, thanks to the skilful guidance of the Parsee, was advancing rapidly"
+},
+{
+"name_in_text": "elderly, crusty Jew",
+"role": "A merchant in Allahabad",
+"evidence": "At last he came upon an elderly, crusty Jew, who sold second-hand articles"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Allahabad",
+"between_from": "pagoda",
+"between_to": "Allahabad",
+"evidence": "Passepartout laughed gaily at his success."
+},
+{
+"name_in_text": "Sir Francis",
+"at_name_in_text": "Allahabad",
+"between_from": "pagoda",
+"between_to": "Allahabad",
+"evidence": "Sir Francis pressed the worthy fellow’s hand"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Allahabad",
+"between_from": "pagoda",
+"between_to": "Allahabad",
+"evidence": "his master said, “Well done!”"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "Allahabad",
+"between_from": "pagoda",
+"between_to": "Allahabad",
+"evidence": "As for the young Indian woman, she had been unconscious throughout of what was passing, and now, wrapped up in a travelling-blanket, was reposing in one of the howdahs."
+},
+{
+"name_in_text": "Parsee",
+"at_name_in_text": "Allahabad",
+"between_from": "pagoda",
+"between_to": "Allahabad",
+"evidence": "The elephant, thanks to the skilful guidance of the Parsee, was advancing rapidly"
+},
+{
+"name_in_text": "elderly, crusty Jew",
+"at_name_in_text": "Allahabad",
+"between_from": null,
+"between_to": null,
+"evidence": "At last he came upon an elderly, crusty Jew, who sold second-hand articles"
+},
+{
+"name_in_text": "Sir Francis",
+"at_name_in_text": "Benares",
+"between_from": "Allahabad",
+"between_to": "Benares",
+"evidence": "He bade adieu to Phileas Fogg"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Calcutta",
+"between_from": "Benares",
+"between_to": "Calcutta",
+"evidence": "Calcutta was reached at seven in the morning... so that Phileas Fogg had five hours before him."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "rajah",
+"evidence": "a venerable, embalmed rajah!"
+},
+{
+"name_in_text": "Brahma",
+"evidence": "owing to Brahma’s agency"
+},
+{
+"name_in_text": "Ucaf Uddaul",
+"evidence": "When the poet-king, Ucaf Uddaul, celebrates the charms"
+},
+{
+"name_in_text": "queen of Ahmehnagara",
+"evidence": "celebrates the charms of the queen of Ahmehnagara"
+},
+{
+"name_in_text": "Kama",
+"evidence": "bow of Kama, the god of love"
+},
+{
+"name_in_text": "Vicvarcarma",
+"evidence": "modelled in pure silver by the godlike hand of Vicvarcarma"
+},
+{
+"name_in_text": "Parsee relation",
+"evidence": "She had, it seems, a Parsee relation, who was one of the principal merchants of Hong Kong"
+},
+{
+"name_in_text": "Mahomet",
+"evidence": "which, like Mahomet’s tomb, was once suspended"
+},
+{
+"name_in_text": "Vishnu",
+"evidence": "their deities being Vishnu, the solar god"
+},
+{
+"name_in_text": "Shiva",
+"evidence": "Shiva, the divine impersonation of natural forces"
+},
+{
+"name_in_text": "Lord Cornwallis",
+"evidence": "or the tomb of Lord Cornwallis"
+}
+],
+"notes": "Kiouni the elephant is present and interacting directly with Passepartout before remaining at Allahabad. Sir Francis departs the group at Benares."
+},
+"transport": [
+{
+"mode": "elephant",
+"vessel_or_line_name": "Kiouni",
+"from": "pagoda",
+"to": "Allahabad",
+"evidence": "The elephant, thanks to the skilful guidance of the Parsee, was advancing rapidly through the still darksome forest... The station at Allahabad was reached about ten o’clock"
+},
+{
+"mode": "railway",
+"vessel_or_line_name": null,
+"from": "Allahabad",
+"to": "Calcutta",
+"evidence": "The train was about to start from Allahabad... Calcutta was reached at seven in the morning"
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "October 25th",
+"evidence": "left Calcutta the next day, October 25th, at noon, for Hong Kong."
+},
+{
+"as_written": "25th of October",
+"evidence": "he was due at Calcutta on the 25th of October"
+}
+],
+"days_elapsed_or_remaining": "two days",
+"schedule_status": "on_time",
+"schedule_detail": "neither behind-hand nor ahead of time",
+"evidence": "He was therefore neither behind-hand nor ahead of time. The two days gained between London and Bombay had been lost, as has been seen, in the journey across India."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "seventy-five pounds",
+"purpose": "purchased a dress of Scotch stuff, a large mantle, and a fine otter-skin pelisse",
+"evidence": "he purchased a dress of Scotch stuff, a large mantle, and a fine otter-skin pelisse, for which he did not hesitate to pay seventy-five pounds."
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

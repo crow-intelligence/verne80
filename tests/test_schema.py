@@ -215,20 +215,6 @@ class TestNarrative:
         problems = check_extraction(ChapterExtraction(**data), expected_number=1)
         assert any("both on stage and not present" in p for p in problems)
 
-    def test_a_place_and_a_transit_together_are_reported(self):
-        data = narrative_data(
-            on_stage=[
-                {
-                    "name_in_text": "Fogg",
-                    "at_name_in_text": "Suez",
-                    "between_to": "Bombay",
-                    "evidence": "x",
-                }
-            ]
-        )
-        problems = check_extraction(ChapterExtraction(**data), expected_number=1)
-        assert any("they are alternatives" in p for p in problems)
-
     def test_a_journey_to_the_same_place_is_reported(self):
         data = narrative_data(
             on_stage=[

@@ -1,0 +1,188 @@
+{
+"chapter": 17,
+"title": "SHOWING WHAT HAPPENED ON THE VOYAGE FROM SINGAPORE TO HONG KONG",
+"summary_hover": "Passepartout deduces that Fix is a spy sent by the Reform Club, while the travellers stop briefly in Singapore before sailing toward Hong Kong.",
+"summary_detail": "Passepartout becomes suspicious of Fix's constant presence and concludes he must be a spy hired by the Reform Club to verify Fogg's journey. The steamer Rangoon arrives early in Singapore, allowing Fogg and Aouda a brief carriage ride through the tropical landscape. They depart for Hong Kong, but worsening weather threatens to delay their progress, much to Passepartout's intense frustration.",
+"places_visited": [
+{
+"name_in_text": "Strait of Malacca",
+"role": "passing_through",
+"evidence": "the “Rangoon” entered the Strait of Malacca, which separates the peninsula of that name from Sumatra."
+},
+{
+"name_in_text": "Singapore",
+"role": "arrival",
+"evidence": "The “Rangoon” weighed anchor at Singapore the next day at four a.m."
+},
+{
+"name_in_text": "Anam",
+"role": "passing_through",
+"evidence": "the vessel made rapid progress along the coasts of Anam and Cochin China."
+},
+{
+"name_in_text": "Cochin China",
+"role": "passing_through",
+"evidence": "the vessel made rapid progress along the coasts of Anam and Cochin China."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Hong Kong",
+"evidence": "SHOWING WHAT HAPPENED ON THE VOYAGE FROM SINGAPORE TO HONG KONG"
+},
+{
+"name_in_text": "Suez",
+"evidence": "whom he had first met at Suez"
+},
+{
+"name_in_text": "Bombay",
+"evidence": "who disembarked at Bombay, which he announced as his destination"
+},
+{
+"name_in_text": "Sumatra",
+"evidence": "separates the peninsula of that name from Sumatra."
+},
+{
+"name_in_text": "New Holland",
+"evidence": "drawn by a sleek pair of New Holland horses"
+},
+{
+"name_in_text": "Malacca",
+"evidence": "the high mountains of Malacca, with their forests"
+},
+{
+"name_in_text": "Yokohama",
+"evidence": "steamer which would leave on the 6th of November for Yokohama"
+},
+{
+"name_in_text": "Saville Row",
+"evidence": "remorselessly burning at his expense in Saville Row"
+},
+{
+"name_in_text": "China",
+"evidence": "and here you are in China."
+},
+{
+"name_in_text": "America",
+"evidence": "America is not far off, and from America to Europe is only a step."
+},
+{
+"name_in_text": "Europe",
+"evidence": "from America to Europe is only a step."
+}
+],
+"people": [
+{
+"name_in_text": "Passepartout",
+"role": "Mr. Fogg's servant",
+"evidence": "The detective and Passepartout met often on deck"
+},
+{
+"name_in_text": "Fix",
+"role": "Detective following Mr. Fogg",
+"evidence": "The detective and Passepartout met often on deck after this interview, though Fix was reserved"
+},
+{
+"name_in_text": "Mr. Fogg",
+"role": "Gentleman traveller",
+"evidence": "He caught a glimpse of that mysterious gentleman once or twice"
+},
+{
+"name_in_text": "Aouda",
+"role": "Mr. Fogg's companion",
+"evidence": "where he kept Aouda company"
+},
+{
+"name_in_text": "captain",
+"role": "Commander of the steamer Rangoon",
+"evidence": "The captain as often as possible put up his sails"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Singapore",
+"between_from": null,
+"between_to": null,
+"evidence": "while Passepartout, laughing in his sleeve at Fix’s manœuvres, went about his usual errands."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Singapore",
+"between_from": null,
+"between_to": null,
+"evidence": "carried Phileas Fogg and Aouda into the midst of rows of palms"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "Singapore",
+"between_from": null,
+"between_to": null,
+"evidence": "carried Phileas Fogg and Aouda into the midst of rows of palms"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "Singapore",
+"between_from": null,
+"between_to": null,
+"evidence": "Fix, who suspected Mr. Fogg’s every movement, followed them cautiously"
+},
+{
+"name_in_text": "captain",
+"at_name_in_text": null,
+"between_from": "Singapore",
+"between_to": "Hong Kong",
+"evidence": "The captain as often as possible put up his sails, and under the double action of steam and sail the vessel made rapid progress"
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "engineer",
+"evidence": "Passepartout blamed the captain, the engineer, and the crew"
+},
+{
+"name_in_text": "crew",
+"evidence": "Passepartout blamed the captain, the engineer, and the crew"
+}
+],
+"notes": null
+},
+"transport": [
+{
+"mode": "steamer",
+"vessel_or_line_name": "Rangoon",
+"from": "Singapore",
+"to": "Hong Kong",
+"evidence": "At eleven o’clock the “Rangoon” rode out of Singapore harbour... Singapore is distant some thirteen hundred miles from the island of Hong Kong"
+},
+{
+"mode": "carriage",
+"vessel_or_line_name": null,
+"from": null,
+"to": null,
+"evidence": "A handsome carriage, drawn by a sleek pair of New Holland horses, carried Phileas Fogg and Aouda"
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "Wednesday, 30th October",
+"evidence": "During the afternoon of Wednesday, 30th October, the “Rangoon” entered the Strait of Malacca"
+},
+{
+"as_written": "6th of November",
+"evidence": "steamer which would leave on the 6th of November for Yokohama"
+}
+],
+"days_elapsed_or_remaining": "six days",
+"schedule_status": "ahead",
+"schedule_detail": "gained half a day",
+"evidence": "having gained half a day on the prescribed time of her arrival."
+},
+"money": {
+"amounts": [],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

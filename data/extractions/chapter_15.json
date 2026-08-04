@@ -1,0 +1,338 @@
+{
+"chapter": 15,
+"title": "IN WHICH THE BAG OF BANKNOTES DISGORGES SOME THOUSANDS OF POUNDS MORE",
+"summary_hover": "Fogg and Passepartout are arrested in Calcutta for Passepartout's earlier pagoda desecration, but Fogg pays exorbitant bail so they can catch their steamer.",
+"summary_detail": "Upon arriving at the station in Calcutta, Fogg, Passepartout, and Aouda are arrested and brought before Judge Obadiah. They discover the detective Fix has orchestrated charges against them for Passepartout's accidental desecration of a Bombay pagoda. Sentenced to prison and heavily fined, Fogg unhesitatingly pays two thousand pounds in bail, allowing the party to rush to the harbour and board the steamer 'Rangoon' for Hong Kong, leaving Fix in despair.",
+"places_visited": [
+{
+"name_in_text": "station",
+"role": "arrival",
+"evidence": "The train entered the station, and Passepartout jumping out first"
+},
+{
+"name_in_text": "“black town”",
+"role": "passing_through",
+"evidence": "They first passed through the “black town,” with its narrow streets"
+},
+{
+"name_in_text": "“European town”",
+"role": "passing_through",
+"evidence": "then through the “European town,” which presented a relief in its bright brick mansions"
+},
+{
+"name_in_text": "modest-looking house",
+"role": "arrival",
+"evidence": "The carriage stopped before a modest-looking house, which, however, did not have the appearance of a private mansion."
+},
+{
+"name_in_text": "court-room",
+"role": "setting",
+"evidence": "led the way to an adjoining hall. It was evidently a court-room"
+},
+{
+"name_in_text": "Calcutta",
+"role": "setting",
+"evidence": "detained at Calcutta"
+},
+{
+"name_in_text": "quays",
+"role": "arrival",
+"evidence": "the party were soon landed on one of the quays."
+},
+{
+"name_in_text": "harbour",
+"role": "setting",
+"evidence": "The “Rangoon” was moored half a mile off in the harbour"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Hong Kong",
+"evidence": "proceed at once to the Hong Kong steamer"
+},
+{
+"name_in_text": "Bombay",
+"evidence": "looked for, prisoners, for two days on the trains from Bombay."
+},
+{
+"name_in_text": "pagoda of Pillaji",
+"evidence": "what they were going to do at the pagoda of Pillaji."
+},
+{
+"name_in_text": "pagoda of Malabar Hill",
+"evidence": "we are not talking of the pagoda of Pillaji, but of the pagoda of Malabar Hill"
+},
+{
+"name_in_text": "Suez",
+"evidence": "as it had done at Bombay and Suez."
+},
+{
+"name_in_text": "London",
+"evidence": "Since leaving London, what with travelling expenses"
+}
+],
+"people": [
+{
+"name_in_text": "Passepartout",
+"role": "Mr. Fogg's servant, accused of sacrilege",
+"evidence": "Passepartout jumping out first, was followed by Mr. Fogg"
+},
+{
+"name_in_text": "Mr. Fogg",
+"role": "English gentleman and master of Passepartout",
+"evidence": "Phileas Fogg intended to proceed at once to the Hong Kong steamer"
+},
+{
+"name_in_text": "Aouda",
+"role": "Fogg's rescued companion",
+"evidence": "who assisted his fair companion to descend."
+},
+{
+"name_in_text": "policeman",
+"role": "Arresting officer",
+"evidence": "Just as he was leaving the station a policeman came up to him"
+},
+{
+"name_in_text": "Judge Obadiah",
+"role": "Magistrate presiding over the case",
+"evidence": "Judge Obadiah, a fat, round man, followed by the clerk, entered."
+},
+{
+"name_in_text": "Oysterpuff",
+"role": "The court clerk",
+"evidence": "“My dear Mr. Oysterpuff, how can a judge give a wise sentence in a clerk’s wig?”"
+},
+{
+"name_in_text": "three Indian priests",
+"role": "Complainants from the Malabar Hill pagoda",
+"evidence": "A door was swung open by order of the judge, and three Indian priests entered."
+},
+{
+"name_in_text": "Fix",
+"role": "Detective pursuing Fogg",
+"evidence": "Fix the detective, had foreseen the advantage which Passepartout’s escapade gave him"
+},
+{
+"name_in_text": "constable",
+"role": "Court official",
+"evidence": "“Silence!” shouted the constable."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "station",
+"between_from": null,
+"between_to": null,
+"evidence": "The train entered the station, and Passepartout jumping out first"
+},
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "station",
+"between_from": null,
+"between_to": null,
+"evidence": "was followed by Mr. Fogg, who assisted his fair companion to descend."
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "station",
+"between_from": null,
+"between_to": null,
+"evidence": "who assisted his fair companion to descend."
+},
+{
+"name_in_text": "policeman",
+"at_name_in_text": "station",
+"between_from": null,
+"between_to": null,
+"evidence": "Just as he was leaving the station a policeman came up to him"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "station",
+"between_from": null,
+"between_to": null,
+"evidence": "For twenty-four hours Fix watched the station with feverish anxiety"
+},
+{
+"name_in_text": "policeman",
+"at_name_in_text": "court-room",
+"between_from": "station",
+"between_to": "court-room",
+"evidence": "the policeman appeared, and, requesting them to follow him, led the way to an adjoining hall. It was evidently a court-room"
+},
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "court-room",
+"between_from": "station",
+"between_to": "court-room",
+"evidence": "Mr. Fogg and his two companions took their places on a bench opposite the desks of the magistrate"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "court-room",
+"between_from": "station",
+"between_to": "court-room",
+"evidence": "Mr. Fogg and his two companions took their places on a bench opposite the desks of the magistrate"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "court-room",
+"between_from": "station",
+"between_to": "court-room",
+"evidence": "Mr. Fogg and his two companions took their places on a bench opposite the desks of the magistrate"
+},
+{
+"name_in_text": "Judge Obadiah",
+"at_name_in_text": "court-room",
+"between_from": null,
+"between_to": null,
+"evidence": "Judge Obadiah, a fat, round man, followed by the clerk, entered."
+},
+{
+"name_in_text": "Oysterpuff",
+"at_name_in_text": "court-room",
+"between_from": null,
+"between_to": null,
+"evidence": "followed by the clerk, entered."
+},
+{
+"name_in_text": "three Indian priests",
+"at_name_in_text": "court-room",
+"between_from": null,
+"between_to": null,
+"evidence": "three Indian priests entered."
+},
+{
+"name_in_text": "constable",
+"at_name_in_text": "court-room",
+"between_from": null,
+"between_to": null,
+"evidence": "“Silence!” shouted the constable."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "court-room",
+"between_from": "station",
+"between_to": "court-room",
+"evidence": "espied the detective ensconced in a corner of the court-room, watching the proceedings"
+},
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "quays",
+"between_from": "court-room",
+"between_to": "quays",
+"evidence": "That gentleman took a carriage, and the party were soon landed on one of the quays."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "quays",
+"between_from": "court-room",
+"between_to": "quays",
+"evidence": "That gentleman took a carriage, and the party were soon landed on one of the quays."
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "quays",
+"between_from": "court-room",
+"between_to": "quays",
+"evidence": "That gentleman took a carriage, and the party were soon landed on one of the quays."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "quays",
+"between_from": "court-room",
+"between_to": "quays",
+"evidence": "Fix saw them leave the carriage and push off in a boat"
+}
+],
+"named_but_not_present": [],
+"notes": "Aouda is repeatedly referred to as 'fair companion' or one of the 'two companions' accompanying Mr. Fogg while in the court-room."
+},
+"transport": [
+{
+"mode": "railway",
+"vessel_or_line_name": null,
+"from": null,
+"to": "station",
+"evidence": "The train entered the station"
+},
+{
+"mode": "carriage",
+"vessel_or_line_name": "palkigahri",
+"from": "station",
+"to": "modest-looking house",
+"evidence": "conducted to a palkigahri, a sort of four-wheeled carriage, drawn by two horses, in which they took their places and were driven away."
+},
+{
+"mode": "carriage",
+"vessel_or_line_name": null,
+"from": "court-room",
+"to": "quays",
+"evidence": "That gentleman took a carriage, and the party were soon landed on one of the quays."
+},
+{
+"mode": "other",
+"vessel_or_line_name": "boat",
+"from": "quays",
+"to": "harbour",
+"evidence": "push off in a boat for the steamer"
+},
+{
+"mode": "steamer",
+"vessel_or_line_name": "Rangoon",
+"from": "harbour",
+"to": "Hong Kong",
+"evidence": "The “Rangoon” was moored half a mile off in the harbour"
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "20th of October",
+"evidence": "on the 20th of October"
+}
+],
+"days_elapsed_or_remaining": null,
+"schedule_status": "ahead",
+"schedule_detail": "an hour in advance of time",
+"evidence": "Eleven o’clock was striking; Mr. Fogg was an hour in advance of time."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "three hundred pounds",
+"purpose": "fine for Passepartout",
+"evidence": "condemn the said Passepartout to imprisonment for fifteen days and a fine of three hundred pounds."
+},
+{
+"amount_as_written": "one hundred and fifty pounds",
+"purpose": "fine for Phileas Fogg",
+"evidence": "condemn Phileas Fogg to a week’s imprisonment and a fine of one hundred and fifty pounds."
+},
+{
+"amount_as_written": "twenty thousand pounds",
+"purpose": "wager lost in Passepartout's thought",
+"evidence": "A wager of twenty thousand pounds lost"
+},
+{
+"amount_as_written": "one thousand pounds",
+"purpose": "bail required for each prisoner",
+"evidence": "the bail required for each prisoner would be one thousand pounds."
+},
+{
+"amount_as_written": "two thousand pounds",
+"purpose": "total bail left behind by Fogg",
+"evidence": "Fix still nourished hopes that the robber would not, after all, leave the two thousand pounds behind him"
+},
+{
+"amount_as_written": "five thousand pounds",
+"purpose": "total amount spent by Fogg since leaving London",
+"evidence": "Mr. Fogg had already spent more than five thousand pounds on the way"
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}
