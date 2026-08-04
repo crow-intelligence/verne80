@@ -8,6 +8,7 @@ from verne80.normalize import (
     fold_typography,
     match_key,
     normalize_quote,
+    place_key,
     strip_edge_quotes,
 )
 
@@ -170,3 +171,29 @@ class TestNormalizeProperties:
     def test_match_key_is_idempotent(self, text):
         once = match_key(text)
         assert match_key(once) == once
+
+
+class TestTheLeadingArticle:
+    """Verne writes both "the Reform Club" and "Reform Club"; they are one place."""
+
+    def test_an_article_does_not_make_a_second_place(self):
+        assert place_key("the Reform Club") == place_key("Reform Club")
+
+    def test_the_article_goes_after_the_quote_marks(self):
+        assert place_key("“the Continent”") == place_key("Continent")
+
+    def test_an_article_inside_a_name_is_left_alone(self):
+        assert place_key("valley of the Ganges") == "valley of the ganges"
+
+    def test_a_bare_article_is_not_emptied(self):
+        """Emptying it would collapse it onto every other empty key."""
+        assert place_key("the") == "the"
+
+    def test_only_one_article_is_dropped(self):
+        assert place_key("the a") == "a"
+
+    @settings(max_examples=150, deadline=None)
+    @given(st.text())
+    def test_it_stays_idempotent(self, text):
+        once = place_key(text)
+        assert place_key(once) == once

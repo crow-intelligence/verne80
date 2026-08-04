@@ -5,9 +5,12 @@ from hypothesis import strategies as st
 from verne80.review import (
     MergeRefusedError,
     Table,
+    carry_unowned,
     is_confirmed,
     is_rejected,
     merge_rows,
+    orphans,
+    prune,
     read_table,
     summarise,
     write_table,
@@ -83,6 +86,41 @@ class TestMergeRefusal:
         assert merge_rows(old, [], "key", COLUMNS).rows["suez"]["confirmed"] == "y"
 
 
+class TestPruning:
+    """Keys strand when a key's shape changes; merge_rows deliberately never deletes."""
+
+    def test_orphans_are_reported_even_without_prune(self):
+        old = table(mongolia={}, **{'"mongolia"': {}})
+        assert orphans(old, ["mongolia"]) == ['"mongolia"']
+
+    def test_pruning_removes_an_untouched_orphan(self):
+        old = table(mongolia={}, suez={})
+        pruned, removed = prune(old, ["suez"])
+        assert removed == ["suez"]
+        assert set(pruned.rows) == {"mongolia"}
+
+    def test_pruning_never_removes_a_confirmed_row(self):
+        old = table(suez={"confirmed": "y"})
+        pruned, removed = prune(old, ["suez"])
+        assert removed == []
+        assert set(pruned.rows) == {"suez"}
+
+    def test_pruning_never_removes_a_corrected_row(self):
+        old = table(suez={"corrected_kind": "waypoint"})
+        assert prune(old, ["suez"])[1] == []
+
+    def test_pruning_never_removes_a_noted_row(self):
+        assert prune(table(suez={"note": "ask Zoli"}), ["suez"])[1] == []
+
+    def test_pruning_ignores_a_key_it_was_not_given(self):
+        old = table(suez={}, aden={})
+        assert set(prune(old, ["suez"])[0].rows) == {"aden"}
+
+    def test_pruning_nothing_changes_nothing(self):
+        old = table(suez={})
+        assert prune(old, [])[0].rows == old.rows
+
+
 class TestRoundTrip:
     def test_a_written_table_reads_back_identically(self, tmp_path):
         original = table(suez={"kind": "node", "confirmed": "y", "note": "a, comma"})
@@ -151,3 +189,63 @@ class TestMergeProperties:
     def test_every_proposed_key_survives(self, keys):
         merged = merge_rows(table(), [proposal(key) for key in keys], "key", COLUMNS)
         assert set(merged.rows) == set(keys)
+
+
+class TestCarryingAnotherStagesColumns:
+    """05_places re-proposing must not empty the gazetteer's coordinates."""
+
+    def table(self):
+        return Table(
+            "key",
+            ("key", "kind", "lat", "confirmed", "note"),
+            {
+                "suez": {
+                    "key": "suez",
+                    "kind": "node",
+                    "lat": "29.97",
+                    "confirmed": "",
+                    "note": "",
+                }
+            },
+        )
+
+    def test_a_coordinate_survives_a_re_propose(self):
+        """Losing it un-anchors the next re-rank, and nothing announces it."""
+        rows, _ = carry_unowned(
+            self.table(), [{"key": "suez", "kind": "waypoint"}], "key", ("key", "kind")
+        )
+        assert rows[0]["lat"] == "29.97"
+
+    def test_the_proposal_still_wins_for_the_columns_it_owns(self):
+        rows, _ = carry_unowned(
+            self.table(), [{"key": "suez", "kind": "waypoint"}], "key", ("key", "kind")
+        )
+        assert rows[0]["kind"] == "waypoint"
+
+    def test_an_owned_column_may_be_emptied_on_purpose(self):
+        rows, _ = carry_unowned(
+            self.table(), [{"key": "suez", "kind": ""}], "key", ("key", "kind")
+        )
+        assert rows[0]["kind"] == ""
+
+    def test_a_new_key_carries_nothing(self):
+        rows, _ = carry_unowned(
+            self.table(), [{"key": "aden", "kind": "node"}], "key", ("key", "kind")
+        )
+        assert "lat" not in rows[0]
+
+    def test_the_foreign_columns_are_kept_in_the_column_order(self):
+        _, columns = carry_unowned(self.table(), [], "key", ("key", "kind"))
+        assert columns == ("key", "kind", "lat", "confirmed", "note")
+
+    def test_no_column_is_listed_twice(self):
+        _, columns = carry_unowned(self.table(), [], "key", ("key", "kind", "lat"))
+        assert len(columns) == len(set(columns))
+
+    def test_the_result_still_merges_without_refusing(self):
+        """The column list it returns must still hold the human columns."""
+        rows, columns = carry_unowned(
+            self.table(), [{"key": "suez", "kind": "waypoint"}], "key", ("key", "kind")
+        )
+        merged = merge_rows(self.table(), rows, "key", columns)
+        assert merged.rows["suez"]["lat"] == "29.97"

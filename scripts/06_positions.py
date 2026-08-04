@@ -29,9 +29,15 @@ from verne80.position import (
     positions_to_dict,
     resolve_positions,
 )
-from verne80.review import MergeRefusedError, is_confirmed, is_rejected, merge_rows
+from verne80.review import (
+    MergeRefusedError,
+    is_confirmed,
+    is_rejected,
+    merge_rows,
+    summarise,
+    write_table,
+)
 from verne80.review import read_table as read_review
-from verne80.review import summarise, write_table
 from verne80.route import parse_itinerary
 
 DEFAULT_CHAPTERS_DIR = Path("data/chapters")

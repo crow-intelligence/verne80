@@ -1,24 +1,27 @@
 r"""Render the gazetteer as a map you can look at, which is how errors get caught.
 
 A place resolved to the wrong continent is one glance on a map and invisible in a
-spreadsheet row. So this plots everything — including the doubtful, the unconfirmed and
-the unresolved — and draws each one as what it is, rather than gating the map on a
-review
-that has not happened yet.
+spreadsheet row. So this plots everything — the doubtful, the unconfirmed and the
+unresolved included — and draws each as what it is, rather than gating the map on a
+review that has not happened yet.
 
-Two decisions carry the whole thing.
+Three decisions carry the whole thing.
 
-**The route line follows node index, never a sort.** Ordering errors are exactly what
-the
+**The route line follows node index, never a sort.** Ordering errors are exactly what the
 map is for, and they show up as a zigzag only if the line is drawn in the order the
 itinerary states.
 
-**Longitudes are unwrapped eastward.** Leaflet draws straight lines in Web Mercator, so
-Yokohama at 139°E to San Francisco at −122° draws *backwards across Asia and Europe*.
-That artefact looks exactly like the ordering error the map exists to detect, and would
-poison the review before it started. :func:`unwrap_eastward` adds 360° whenever a step
-would otherwise go west by more than half the world; Leaflet renders longitudes past 180
-without complaint.
+**Longitudes are unwrapped eastward, then split.** Leaflet draws straight lines in Web
+Mercator, so Yokohama at 139°E to San Francisco at −122° would draw *backwards across
+Asia* — an artefact that looks exactly like the ordering error this map exists to detect.
+:func:`unwrap_eastward` runs the route past 180° instead. But a line spanning a full 360°
+makes Leaflet render the Americas three times over, so :func:`split_at_antimeridian` then
+cuts it into pieces that each fit on one world.
+
+**Never asked is not the same as nothing found.** A place the pipeline has not reached
+yet and a place Wikidata was asked about and had nothing for are different facts — one
+about this repository, one about the world — and reporting them together sends a reviewer
+hunting for a gazetteer failure that never happened.
 
 The page is self-contained apart from tiles: all the data is inline, so it opens from
 ``file://``. Tiles are the one thing it genuinely needs the network for at view time —
@@ -28,11 +31,18 @@ without them "wrong continent" is invisible, which is the entire point.
 from __future__ import annotations
 
 import json
+import math
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from string import Template
 
-__all__ = ["MapNode", "map_payload", "render_map", "unwrap_eastward"]
+__all__ = [
+    "MapNode",
+    "map_payload",
+    "render_map",
+    "split_at_antimeridian",
+    "unwrap_eastward",
+]
 
 # Below this, a resolution is one a human should look at rather than take.
 LOW_CONFIDENCE = 0.7
@@ -111,6 +121,80 @@ def unwrap_eastward(lons: Sequence[float]) -> list[float]:
     return out
 
 
+def split_at_antimeridian(
+    points: Sequence[tuple[float, float]],
+) -> list[list[tuple[float, float]]]:
+    r"""Cut an unwrapped route into pieces that each fit on one world.
+
+    :func:`unwrap_eastward` runs the route past 180° so it never doubles back, which is
+    right for knowing the direction and wrong for drawing: a line spanning 360° makes
+    Leaflet render the Americas three times over. So the unwrapped line is cut wherever it
+    crosses the antimeridian and every point is folded back into ``[-180, 180]``.
+
+    One leg of a circumnavigation has to cross the edge of any flat map. Splitting makes
+    that a line leaving the right edge and entering at the left, which is what a Mercator
+    map honestly does — as against a line drawn backwards across Asia, which is the
+    artefact that looks exactly like the ordering error this map exists to find.
+
+    Args:
+        points: ``(lat, lon)`` in route order, longitudes already unwrapped.
+
+    Returns:
+        One list of points per piece, each with longitudes in ``[-180, 180]``.
+
+    Contract:
+        - Every longitude in the result is within ``[-180, 180]``.
+        - A route that never crosses comes back as a single piece.
+        - The crossing latitude is interpolated, not copied from either end.
+        - Never raises.
+
+    Examples:
+        Yokohama to San Francisco, unwrapped to 237.6, crosses once:
+
+        >>> pieces = split_at_antimeridian([(35.4, 139.6), (37.8, 237.6)])
+        >>> [len(piece) for piece in pieces]
+        [2, 2]
+        >>> round(pieces[0][-1][1]), round(pieces[1][0][1])
+        (180, -180)
+
+        A route inside one world is left alone:
+
+        >>> split_at_antimeridian([(51.5, -0.1), (30.0, 32.5)])
+        [[(51.5, -0.1), (30.0, 32.5)]]
+    """
+
+    def wrap(lon: float) -> float:
+        return round(((lon + 180.0) % 360.0) - 180.0, 6)
+
+    if not points:
+        return []
+    pieces: list[list[tuple[float, float]]] = [[(points[0][0], wrap(points[0][1]))]]
+    for (lat_a, lon_a), (lat_b, lon_b) in zip(points, points[1:], strict=False):
+        # Each crossing is an odd multiple of 180 strictly between the two longitudes.
+        edges = [
+            edge
+            for edge in _edges_between(lon_a, lon_b)
+            if lon_a < edge < lon_b or lon_b < edge < lon_a
+        ]
+        for edge in edges:
+            share = (edge - lon_a) / (lon_b - lon_a)
+            lat_at = round(lat_a + share * (lat_b - lat_a), 6)
+            leaving = 180.0 if lon_b > lon_a else -180.0
+            pieces[-1].append((lat_at, leaving))
+            pieces.append([(lat_at, -leaving)])
+        pieces[-1].append((lat_b, wrap(lon_b)))
+    return [piece for piece in pieces if len(piece) > 1]
+
+
+def _edges_between(lon_a: float, lon_b: float) -> list[float]:
+    """The antimeridian crossings a step passes, in the order it passes them."""
+    low, high = sorted((lon_a, lon_b))
+    first = math.floor((low + 180.0) / 360.0)
+    last = math.ceil((high + 180.0) / 360.0)
+    edges = [180.0 + 360.0 * turn for turn in range(first, last + 1)]
+    return edges if lon_b >= lon_a else list(reversed(edges))
+
+
 def map_payload(
     rows: Sequence[Mapping[str, str]],
     nodes: Sequence[MapNode],
@@ -126,12 +210,14 @@ def map_payload(
         The payload.
 
     Contract:
-        - ``route`` is in node-index order and its longitudes are unwrapped.
+        - ``route`` is in node-index order, and ``segments`` is the same line cut so
+          each piece fits on one world.
         - A ``local`` place is listed but never given a pin: it has no coordinate of its
           own, and plotting one would be the lie the kind exists to prevent.
-        - Every row appears in exactly one of ``places``, ``locals`` or ``unresolved``.
+        - Every row appears in exactly one of ``places``, ``locals``, ``unresolved`` or
+          ``unqueried`` — and the last two are different states, not one.
     """
-    places, locals_, unresolved = [], [], []
+    places, locals_, unresolved, unqueried = [], [], [], []
     for row in rows:
         kind = row.get("corrected_kind") or row.get("kind") or "unknown"
         entry = {
@@ -149,6 +235,11 @@ def map_payload(
             "uses": row.get("used_as", ""),
             "chapter": row.get("first_chapter", ""),
             "confirmed": bool(row.get("confirmed", "").strip()),
+            # A place that puts someone somewhere, as against one the book merely names.
+            # The 145 merely-named ones are spec tier +3 and get their own layer, so a
+            # review can look at the ones that move the map and nothing else.
+            "positional": ("on_stage" in row.get("used_as", ""))
+            or ("visited" in row.get("used_as", "")),
         }
         if kind == "local":
             locals_.append(entry)
@@ -156,26 +247,49 @@ def map_payload(
         lat, lon = row.get("lat", "").strip(), row.get("lon", "").strip()
         if lat and lon:
             places.append({**entry, "lat": float(lat), "lon": float(lon)})
-        else:
+        elif row.get("gazetteer_source", "").strip():
+            # Asked, and the answer was nothing. A fact about the world.
             unresolved.append(entry)
+        else:
+            # Never asked. A fact about how far the pipeline has got, and reporting it
+            # as a gazetteer failure sends a reviewer hunting for one that never happened.
+            unqueried.append(entry)
 
-    known = [node for node in nodes if node.lat is not None and node.lon is not None]
-    lons = unwrap_eastward([node.lon for node in known if node.lon is not None])
-    route = [
-        {"index": node.index, "name": node.name, "lat": node.lat, "lon": lon}
-        for node, lon in zip(known, lons, strict=True)
+    # Unpacked to concrete floats here rather than filtered in place, so that "this node
+    # has coordinates" is a fact about the values from now on and not a condition a reader
+    # has to carry forward.
+    known: list[tuple[int, str, float, float]] = [
+        (node.index, node.name, node.lat, node.lon)
+        for node in nodes
+        if node.lat is not None and node.lon is not None
     ]
+    lons = unwrap_eastward([lon for _, _, _, lon in known])
+    route = [
+        {
+            "index": index,
+            "name": name,
+            "lat": lat,
+            "lon": ((lon + 180.0) % 360.0) - 180.0,
+        }
+        for (index, name, lat, _), lon in zip(known, lons, strict=True)
+    ]
+    segments = split_at_antimeridian(
+        [(lat, lon) for (_, _, lat, _), lon in zip(known, lons, strict=True)]
+    )
 
     return {
         "route": route,
+        "segments": segments,
         "places": places,
         "locals": locals_,
         "unresolved": unresolved,
+        "unqueried": unqueried,
         "counts": {
             "total": len(rows),
             "plotted": len(places),
             "local": len(locals_),
             "unresolved": len(unresolved),
+            "unqueried": len(unqueried),
             "confirmed": sum(1 for entry in places if entry["confirmed"]),
             "doubtful": sum(
                 1
@@ -297,9 +411,16 @@ prevent.</p>
 <ul class="locals" id="locals"></ul>
 
 <h2>Named, but nowhere</h2>
-<p class="sub">No candidate with coordinates. Some are the translator's inventions —
-Kholby is where the railway ends and the elephant begins, and there is no such place.</p>
+<p class="sub">Wikidata was asked about these and had no entity with coordinates under the
+name. Some are the translator's inventions — Kholby is where the railway ends and the
+elephant begins, and there is no such place.</p>
 <ul class="locals" id="unresolved"></ul>
+
+<h2>Not looked up yet</h2>
+<p class="sub">Nobody has asked about these. That is a fact about how far the pipeline has
+got, not about whether the place exists — so they are kept apart from the section above,
+which would otherwise send you hunting for a gazetteer failure that never happened.</p>
+<ul class="locals" id="unqueried"></ul>
 
 <footer>
 Wikidata (CC0 1.0) · map data © OpenStreetMap contributors (ODbL) ·
@@ -329,16 +450,26 @@ const resolve = (names) => {
 const COLOURS = resolve([...new Set(Object.values(KIND_STYLE).map(s => s.colour)),
                          "--text-primary", "--diverge-warm"]);
 
-const map = L.map("map", { worldCopyJump: false, scrollWheelZoom: false });
+// One Earth. noWrap stops the tiles repeating and maxBounds stops you panning into a
+// copy that is not there — between them the Americas appear once, as they should.
+const WORLD = L.latLngBounds([[-85, -180], [85, 180]]);
+const map = L.map("map", {
+  worldCopyJump: false, scrollWheelZoom: false,
+  maxBounds: WORLD, maxBoundsViscosity: 0.9, minZoom: 1,
+});
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18, noWrap: false,
+  maxZoom: 18, noWrap: true, bounds: WORLD,
   attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
 // Node index order, never sorted: a route drawn in the wrong order is precisely the
-// error this map exists to show, and sorting would hide it.
-const routeLine = L.polyline(DATA.route.map(n => [n.lat, n.lon]),
-  { color: COLOURS["--text-primary"], weight: 3, opacity: .75 }).addTo(map);
+// error this map exists to show, and sorting would hide it. The line arrives already cut
+// at the antimeridian, so the Pacific leg leaves the right edge and enters at the left —
+// which is what one leg of a circumnavigation does to any flat map.
+const routeLine = L.layerGroup(
+  DATA.segments.map(seg => L.polyline(seg,
+    { color: COLOURS["--text-primary"], weight: 3, opacity: .75 }))
+).addTo(map);
 for (const node of DATA.route) {
   L.marker([node.lat, node.lon], {
     icon: L.divIcon({ className: "node-label", html: String(node.index),
@@ -373,6 +504,9 @@ const layers = {};
 for (const [kind, style] of Object.entries(KIND_STYLE)) layers[kind] = L.layerGroup();
 const doubtful = L.layerGroup();
 const unchecked = L.layerGroup();
+// The book name-drops far more geography than Fogg visits; conflating the two turns the
+// route into mush, so they get a layer you can switch off.
+const mentioned = L.layerGroup();
 
 for (const p of DATA.places) {
   const style = KIND_STYLE[p.kind] || KIND_STYLE.unknown;
@@ -391,6 +525,11 @@ for (const p of DATA.places) {
         fill: false, dashArray: "2,3" }));
   }
   // The ring is the progress bar: turn this layer off and watch the map get quieter.
+  if (!p.positional) {
+    mentioned.addLayer(L.circleMarker([p.lat, p.lon],
+      { radius: 2, color: COLOURS["--text-muted"], weight: 1, fill: true,
+        fillOpacity: .8 }));
+  }
   if (!p.confirmed) {
     unchecked.addLayer(L.circleMarker([p.lat, p.lon],
       { radius: style.radius + 2, color: COLOURS["--diverge-warm"], weight: 1,
@@ -398,23 +537,26 @@ for (const p of DATA.places) {
   }
 }
 
-const overlays = { "route": L.layerGroup([routeLine]).addTo(map) };
+const overlays = { "route": routeLine };
 for (const [kind, group] of Object.entries(layers)) {
   overlays[`${kind} (${group.getLayers().length})`] = group;
   if (kind !== "off_route") group.addTo(map);
 }
+overlays[`mentioned only (${mentioned.getLayers().length})`] = mentioned.addTo(map);
 overlays[`low confidence (${doubtful.getLayers().length})`] = doubtful.addTo(map);
 overlays[`unchecked (${unchecked.getLayers().length})`] = unchecked.addTo(map);
 L.control.layers(null, overlays, { collapsed: false, position: "topright" }).addTo(map);
 L.control.scale({ imperial: false }).addTo(map);
 
 map.invalidateSize();
-map.fitBounds(routeLine.getBounds().pad(0.12), { animate: false });
+const drawn = L.featureGroup(routeLine.getLayers());
+map.fitBounds(drawn.getBounds().pad(0.05), { animate: false, maxZoom: 5 });
 
 const c = DATA.counts;
 document.getElementById("counts").innerHTML = [
   [`<b>${c.total}</b> place names`], [`<b>${c.plotted}</b> plotted`],
   [`<b>${c.local}</b> interiors`], [`<b>${c.unresolved}</b> with no coordinate`],
+  [`<b>${c.unqueried}</b> not looked up yet`],
   [`<b>${c.doubtful}</b> below ${LOW} confidence`], [`<b>${c.confirmed}</b> checked`],
 ].map(x => `<span>${x}</span>`).join("");
 
@@ -422,6 +564,7 @@ const list = (id, items) => document.getElementById(id).innerHTML =
   items.map(p => `<li>${escapeHtml(p.name)}</li>`).join("");
 list("locals", DATA.locals);
 list("unresolved", DATA.unresolved);
+list("unqueried", DATA.unqueried);
 </script>
 </body>
 </html>

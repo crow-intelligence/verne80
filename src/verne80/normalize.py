@@ -80,6 +80,11 @@ _FOLD: dict[int, str | None] = {
     **_ITALICS,
 }
 
+# Both families, so this is right on a raw string and not only on a folded one. The
+# extractions carry the steamer as “Mongolia”, and a caller that has not folded first
+# should still get Mongolia back.
+_EDGE_MARKS = "\"'\u2018\u2019\u201c\u201d\u201a\u201b\u201e\u201f"
+
 _WHITESPACE = re.compile(r"\s+")
 _DASH_RUN = re.compile(r"-{2,}")
 
@@ -158,12 +163,17 @@ def strip_edge_quotes(text: str) -> str:
         >>> strip_edge_quotes('"We start for Dover and Calais in ten minutes."')
         'We start for Dover and Calais in ten minutes.'
 
+        Curly marks too, so this works before folding as well as after:
+
+        >>> strip_edge_quotes("\u201cMongolia\u201d")
+        'Mongolia'
+
         An interior mark is content and survives:
 
         >>> strip_edge_quotes('he said "no" twice')
         'he said "no" twice'
     """
-    return text.strip().strip("\"'").strip()
+    return text.strip().strip(_EDGE_MARKS).strip()
 
 
 def normalize_quote(text: str) -> str:
@@ -221,6 +231,12 @@ def place_key(name: str) -> str:
     place name never *contains* meaningful quotation marks, which is why this is safe
     here and would not be safe on an evidence quote.
 
+    A leading article goes the same way, and for the same reason: Verne writes both
+    ``the Reform Club`` and ``Reform Club``, and keying them apart gave the club two
+    rows, one resolved and one reported as nowhere. English place names that keep
+    their article — The Hague, The Bronx — do not occur in this book; if one ever
+    does, this is the line that has to learn about it.
+
     Args:
         name: A place name as printed.
 
@@ -235,10 +251,28 @@ def place_key(name: str) -> str:
     Examples:
         >>> place_key("“Mongolia”") == place_key("Mongolia")
         True
+        >>> place_key("the Reform Club") == place_key("Reform Club")
+        True
         >>> place_key("  Saville Row\n")
         'saville row'
     """
-    return strip_edge_quotes(match_key(name))
+    return _strip_article(strip_edge_quotes(match_key(name)))
+
+
+# Leading articles, longest first so "an " is never mistaken for "a ".
+_ARTICLES = ("the ", "an ", "a ")
+
+
+def _strip_article(key: str) -> str:
+    """Drop one leading English article, leaving a bare article alone.
+
+    ``"a"`` on its own is not a place name with the article removed; it is whatever
+    the model wrote, and emptying it would collapse it onto every other empty key.
+    """
+    for article in _ARTICLES:
+        if key.startswith(article) and key[len(article) :].strip():
+            return key[len(article) :]
+    return key
 
 
 def match_key(text: str) -> str:

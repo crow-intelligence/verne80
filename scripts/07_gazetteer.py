@@ -8,13 +8,11 @@ work that would otherwise be three hundred hand decisions.
 **The nine itinerary nodes bootstrap everything else.** Route proximity is the strongest
 signal for telling one Ogden from another, and it needs coordinates to exist. So run the
 nodes first — ``--only London --only Suez …``, nine requests — check them on the map,
-and
-every later name is scored against a route that is known rather than assumed.
+and every later name is scored against a route that is known rather than assumed.
 
 Answers are cached and the cache is committed, so a re-run costs nothing and
-``--offline``
-works. The cache holds what Wikidata said, never what we concluded, so re-ranking after
-the route improves is free.
+``--offline`` works. The cache holds what Wikidata said, never what we concluded, so
+re-ranking after the route improves is free.
 
 Run: ``uv run python scripts/07_gazetteer.py``
 """
@@ -22,10 +20,17 @@ Run: ``uv run python scripts/07_gazetteer.py``
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
+from verne80.checklist import (
+    Doubt,
+    collect_quotes,
+    rank_doubts,
+    reasons_to_check,
+    render_checklist,
+)
+from verne80.extractions import load_all
 from verne80.gazetteer import (
     GazetteerCache,
     GazetteerClient,
@@ -35,9 +40,8 @@ from verne80.gazetteer import (
 )
 from verne80.normalize import place_key
 from verne80.position import PlaceKind
-from verne80.review import MergeRefusedError, merge_rows, read_table
+from verne80.review import MergeRefusedError, merge_rows, read_table, write_table
 from verne80.review import summarise as summarise_table
-from verne80.review import write_table
 from verne80.reviewmap import MapNode, map_payload, render_map
 from verne80.route import parse_itinerary
 
@@ -45,12 +49,14 @@ DEFAULT_CHAPTERS_DIR = Path("data/chapters")
 DEFAULT_PLACES = Path("data/review/places.csv")
 DEFAULT_CACHE = Path("data/processed/gazetteer_cache.json")
 DEFAULT_MAP = Path("data/review/places_map.html")
+DEFAULT_CHECKLIST = Path("data/review/places_to_check.md")
+DEFAULT_EXTRACTIONS = Path("data/extractions")
 CURATED = (
     Path(__file__).resolve().parent.parent / "src" / "verne80" / "route_places.json"
 )
 
-# The columns the gazetteer adds. Everything else in the table belongs to 05_places.py or
-# to a human, and merge_rows keeps both intact.
+# The columns the gazetteer adds. Everything else in the table belongs to 05_places.py
+# or to a human, and merge_rows keeps both intact.
 GAZETTEER_COLUMNS = (
     "modern_name",
     "name_changed",
@@ -66,8 +72,8 @@ GAZETTEER_COLUMNS = (
     "corrected_qid",
 )
 
-# Kinds that have no coordinate of their own by definition. Looking them up would spend a
-# request to learn what the curation already recorded.
+# Kinds that have no coordinate of their own by definition. Looking them up would
+# spend a request to learn what the curation already recorded.
 SKIP_KINDS = frozenset({PlaceKind.LOCAL.value, PlaceKind.OFF_ROUTE.value})
 
 
@@ -99,6 +105,14 @@ def main(argv: list[str] | None = None) -> int:
         const=DEFAULT_MAP,
         help="also write the review map, which is how errors actually get caught",
     )
+    parser.add_argument(
+        "--checklist",
+        type=Path,
+        nargs="?",
+        const=DEFAULT_CHECKLIST,
+        help="also write the places worth a second opinion, as pasteable blocks",
+    )
+    parser.add_argument("--extractions-dir", type=Path, default=DEFAULT_EXTRACTIONS)
     args = parser.parse_args(argv)
 
     source = args.chapters_dir / "chapter_03.txt"
@@ -195,6 +209,43 @@ def main(argv: list[str] | None = None) -> int:
         args.map.parent.mkdir(parents=True, exist_ok=True)
         args.map.write_text(render_map(payload), encoding="utf-8")
         print(f"  wrote {args.map} — open it and look")
+
+    if args.checklist:
+        numbers = sorted(
+            int(path.stem.split("_")[1])
+            for path in args.extractions_dir.glob("chapter_*.json")
+        )
+        loaded, _ = load_all(args.extractions_dir, numbers)
+        quotes = collect_quotes(loaded.values())
+        doubts = []
+        for key, row in merged.rows.items():
+            reasons = reasons_to_check(row, anchors)
+            if not reasons:
+                continue
+            quote, chapter = quotes.get(key, ("", None))
+            used = row.get("used_as", "")
+            doubts.append(
+                Doubt(
+                    key,
+                    row["name_in_text"],
+                    tuple(reasons),
+                    quote,
+                    chapter,
+                    positional="on_stage" in used or "visited" in used,
+                )
+            )
+        ordered = rank_doubts(doubts)
+        seen = {
+            key: tuple(
+                cache.get(GazetteerCache.key("wikidata", row["name_in_text"])) or ()
+            )
+            for key, row in merged.rows.items()
+        }
+        args.checklist.parent.mkdir(parents=True, exist_ok=True)
+        args.checklist.write_text(
+            render_checklist(ordered, merged.rows, seen, anchors), encoding="utf-8"
+        )
+        print(f"  wrote {args.checklist} ({len(ordered)} places worth a look)")
     return 0
 
 
@@ -221,12 +272,24 @@ def _wanted(table, spine, only: list[str], nodes_only: bool) -> list[str]:
     ]
 
 
+ANCHOR_KINDS = frozenset({PlaceKind.NODE.value, PlaceKind.WAYPOINT.value})
+
+
 def _anchors(table) -> list[tuple[float, float]]:
-    """Coordinates already known, which is what later proximity is measured against."""
+    """The route, which is what "route proximity" is measured against.
+
+    Only nodes and waypoints, deliberately. Anchoring on *every* resolved place would
+    let
+    one wrong match become evidence for the next: a stray Queensland "Ogden" would sit
+    in
+    the anchor set and quietly legitimise every other Australian candidate. The route is
+    the thing we actually know, so the route is what a candidate's distance means.
+    """
     out: list[tuple[float, float]] = []
     for row in table.rows.values():
+        kind = row.get("corrected_kind") or row.get("kind")
         lat, lon = row.get("lat", ""), row.get("lon", "")
-        if lat.strip() and lon.strip():
+        if kind in ANCHOR_KINDS and lat.strip() and lon.strip():
             out.append((float(lat), float(lon)))
     return out
 

@@ -1188,14 +1188,13 @@
           "leg": 4,
           "along": 0.0,
           "at_node": "Hong Kong",
-          "source": "inferred",
-          "place_name_in_text": "quay",
-          "stated_at_chapter": 20,
-          "evidence": "stepped upon the quay whence they were to embark.",
+          "source": "carried",
+          "place_name_in_text": "English quarter",
+          "stated_at_chapter": 18,
+          "evidence": "quietly escorting Aouda about the streets of the English quarter",
           "flags": [
             "unconfirmed_place",
-            "local_interior",
-            "inferred_from_places_visited"
+            "local_interior"
           ]
         },
         {
@@ -1241,7 +1240,7 @@
         "London": "cyclic",
         "island of Formosa": "off_route",
         "Chinese coast": "off_route",
-        "Shanghai River": "off_route"
+        "Shanghai River": "here"
       },
       "tracks": [
         {
@@ -1378,11 +1377,12 @@
           "along": 0.0,
           "at_node": "Yokohama",
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "Japanese quarter",
           "stated_at_chapter": 22,
-          "evidence": null,
+          "evidence": "He followed the clown, and soon found himself once more in the Japanese quarter.",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
@@ -1974,9 +1974,9 @@
           "along": 0.85,
           "at_node": null,
           "source": "carried",
-          "place_name_in_text": "St. Nicholas Hotel, on Broadway",
+          "place_name_in_text": "Battery",
           "stated_at_chapter": 31,
-          "evidence": "Rooms were engaged, and the night passed, briefly to Phileas Fogg, who slept profoundly",
+          "evidence": "He seemed about to give up all hope, when he espied, anchored at the Battery",
           "flags": [
             "unconfirmed_place",
             "local_interior"
@@ -2256,7 +2256,7 @@
         {
           "track": "fogg",
           "leg": 7,
-          "along": 0.425,
+          "along": 0.7125,
           "at_node": null,
           "source": "stated",
           "place_name_in_text": "the Reform Club",

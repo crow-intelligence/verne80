@@ -4,7 +4,13 @@ import re
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from verne80.reviewmap import MapNode, map_payload, render_map, unwrap_eastward
+from verne80.reviewmap import (
+    MapNode,
+    map_payload,
+    render_map,
+    split_at_antimeridian,
+    unwrap_eastward,
+)
 
 NODES = [
     MapNode(0, "London", 51.51, -0.13),
@@ -66,6 +72,45 @@ class TestTheRouteLine:
         assert map_payload([], [])["route"] == []
 
 
+class TestTheAntimeridian:
+    """A line spanning 360 degrees makes Leaflet draw the Americas three times."""
+
+    def test_a_pacific_crossing_is_split(self):
+        pieces = split_at_antimeridian([(35.4, 139.6), (37.8, 237.6)])
+        assert len(pieces) == 2
+
+    def test_every_point_stays_within_one_world(self):
+        pieces = split_at_antimeridian(
+            [(51.5, -0.1), (35.4, 139.6), (37.8, 237.6), (40.7, 286.0), (51.5, 359.9)]
+        )
+        assert all(-180 <= lon <= 180 for piece in pieces for _, lon in piece)
+
+    def test_a_route_that_never_crosses_is_left_as_one_piece(self):
+        route = [(51.5, -0.1), (30.0, 32.5), (19.1, 72.9)]
+        assert split_at_antimeridian(route) == [route]
+
+    def test_the_latitude_at_the_crossing_is_interpolated_not_copied(self):
+        pieces = split_at_antimeridian([(0.0, 179.0), (40.0, 181.0)])
+        crossing = pieces[0][-1][0]
+        assert 0.0 < crossing < 40.0
+        assert crossing == pieces[1][0][0]
+
+    def test_the_line_leaves_the_right_edge_and_enters_at_the_left(self):
+        pieces = split_at_antimeridian([(35.4, 139.6), (37.8, 237.6)])
+        assert pieces[0][-1][1] == 180.0
+        assert pieces[1][0][1] == -180.0
+
+    def test_an_empty_route_is_no_pieces(self):
+        assert split_at_antimeridian([]) == []
+
+    def test_the_whole_real_route_becomes_two_pieces(self):
+        lons = unwrap_eastward(
+            [-0.13, 32.53, 72.88, 88.36, 114.16, 139.63, -122.42, -74.01, -0.13]
+        )
+        pieces = split_at_antimeridian([(0.0, lon) for lon in lons])
+        assert len(pieces) == 2
+
+
 class TestWhatGetsAPin:
     def test_a_local_place_gets_no_pin(self):
         """It has no coordinate of its own; plotting one would be the lie."""
@@ -79,20 +124,43 @@ class TestWhatGetsAPin:
 
     def test_a_place_with_no_coordinates_is_listed_not_dropped(self):
         """Kholby is a real stop with no modern referent; losing it loses a stop."""
-        payload = map_payload([row("kholby", kind="waypoint")], NODES)
-        assert [entry["name"] for entry in payload["unresolved"]] == ["Kholby"]
+        entry = row("kholby", kind="waypoint", gazetteer_source="none")
+        payload = map_payload([entry], NODES)
+        assert [item["name"] for item in payload["unresolved"]] == ["Kholby"]
 
     def test_every_row_lands_in_exactly_one_list(self):
         rows = [
             row("suez", lat="29.97", lon="32.53"),
             row("station", kind="local"),
-            row("kholby", kind="waypoint"),
+            row("kholby", kind="waypoint", gazetteer_source="none"),
+            row("paris", kind="waypoint"),
         ]
         payload = map_payload(rows, NODES)
-        total = (
-            len(payload["places"]) + len(payload["locals"]) + len(payload["unresolved"])
+        total = sum(
+            len(payload[name])
+            for name in ("places", "locals", "unresolved", "unqueried")
         )
         assert total == len(rows)
+
+    def test_a_never_queried_place_is_not_reported_as_missing(self):
+        """Not-asked and asked-with-no-answer are different facts."""
+        payload = map_payload([row("paris", kind="waypoint")], NODES)
+        assert payload["unresolved"] == []
+        assert [entry["name"] for entry in payload["unqueried"]] == ["Paris"]
+
+    def test_a_queried_place_with_no_answer_is_reported_as_missing(self):
+        entry = row("kholby", kind="waypoint", gazetteer_source="none")
+        payload = map_payload([entry], NODES)
+        assert [item["name"] for item in payload["unresolved"]] == ["Kholby"]
+        assert payload["unqueried"] == []
+
+    def test_a_mentioned_only_place_is_marked_as_such(self):
+        rows = [
+            row("bengal", lat="1", lon="2", used_as="mentioned:3"),
+            row("suez", lat="3", lon="4", used_as="on_stage:2 visited:1"),
+        ]
+        flags = {p["name"]: p["positional"] for p in map_payload(rows, NODES)["places"]}
+        assert flags == {"Bengal": False, "Suez": True}
 
     def test_a_correction_overrides_the_proposed_kind(self):
         entry = row("suez", kind="unknown", corrected_kind="local")
@@ -152,6 +220,35 @@ class TestReviewMapProperties:
     @given(st.lists(st.floats(min_value=-180, max_value=180), min_size=1, max_size=12))
     def test_the_first_point_never_moves(self, lons):
         assert unwrap_eastward(lons)[0] == lons[0]
+
+    @settings(max_examples=150, deadline=None)
+    @given(
+        st.lists(
+            st.tuples(
+                st.floats(min_value=-85, max_value=85),
+                st.floats(min_value=-540, max_value=540),
+            ),
+            max_size=10,
+        )
+    )
+    def test_every_split_point_is_on_one_world(self, points):
+        for piece in split_at_antimeridian(points):
+            assert all(-180.0 <= lon <= 180.0 for _, lon in piece)
+
+    @settings(max_examples=150, deadline=None)
+    @given(
+        st.lists(
+            st.tuples(
+                st.floats(min_value=-85, max_value=85),
+                st.floats(min_value=-540, max_value=540),
+            ),
+            max_size=10,
+        )
+    )
+    def test_splitting_never_raises_and_never_loses_a_leg(self, points):
+        pieces = split_at_antimeridian(points)
+        steps = sum(len(piece) - 1 for piece in pieces)
+        assert steps >= max(0, len(points) - 1)
 
     @settings(max_examples=100, deadline=None)
     @given(

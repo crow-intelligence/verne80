@@ -460,3 +460,151 @@ class TestTheClient:
         from verne80.gazetteer import RateLimiter
 
         assert RateLimiter().interval >= 1.0
+
+
+class TestTheChecklist:
+    """What earns a second opinion, and what a block must carry to be pasteable."""
+
+    @staticmethod
+    def _row(**cells):
+        base = {
+            "key": "ogden",
+            "name_in_text": "Ogden",
+            "used_as": "on_stage:5 visited:1",
+            "first_chapter": "26",
+            "confirmed": "",
+            "lat": "41.23",
+            "lon": "-111.96",
+            "confidence": "0.95",
+            "n_gazetteer_candidates": "1",
+            "gazetteer_source": "wikidata",
+            "modern_name": "Ogden",
+            "qid": "Q52471",
+            "name_changed": "",
+            "country": "United States",
+            "entity_type": "city",
+        }
+        return {**base, **cells}
+
+    def test_a_confident_lone_candidate_does_not_need_checking(self):
+        from verne80.checklist import reasons_to_check
+
+        assert reasons_to_check(self._row(), [(41.2, -111.9)]) == []
+
+    def test_low_confidence_earns_a_block(self):
+        from verne80.checklist import reasons_to_check
+
+        reasons = reasons_to_check(self._row(confidence="0.55"), [(41.2, -111.9)])
+        assert reasons[0].startswith("low confidence")
+
+    def test_a_contested_answer_earns_a_block_even_when_fairly_sure(self):
+        from verne80.checklist import reasons_to_check
+
+        row = self._row(confidence="0.80", n_gazetteer_candidates="5")
+        assert "5 candidates" in reasons_to_check(row, [(41.2, -111.9)])[0]
+
+    def test_a_renamed_place_always_earns_a_block(self):
+        """A wrong rename is embarrassing; per spec 2.3 the rename is the content."""
+        from verne80.checklist import reasons_to_check
+
+        row = self._row(name_changed="y", modern_name="Prayagraj")
+        assert any("renamed" in reason for reason in reasons_to_check(row, []))
+
+    def test_a_place_far_from_the_route_that_the_party_visits_earns_a_block(self):
+        from verne80.checklist import reasons_to_check
+
+        reasons = reasons_to_check(self._row(), [(51.5, -0.1)])
+        assert any("from the route" in reason for reason in reasons)
+
+    def test_a_mentioned_place_far_from_the_route_does_not(self):
+        """The book name-drops geography anywhere; only a visit implies proximity."""
+        from verne80.checklist import reasons_to_check
+
+        row = self._row(used_as="mentioned:2")
+        assert not any(
+            "from the route" in reason
+            for reason in reasons_to_check(row, [(51.5, -0.1)])
+        )
+
+    def test_something_we_need_and_do_not_have_comes_first(self):
+        from verne80.checklist import reasons_to_check
+
+        row = self._row(lat="", lon="", confidence="")
+        assert reasons_to_check(row, []) == [
+            "nothing found, and the party is placed by it"
+        ]
+
+    def test_a_confirmed_row_is_never_flagged(self):
+        from verne80.checklist import reasons_to_check
+
+        assert reasons_to_check(self._row(confidence="0.1", confirmed="y"), []) == []
+
+    def test_a_never_queried_row_is_not_flagged_as_missing(self):
+        from verne80.checklist import reasons_to_check
+
+        row = self._row(lat="", lon="", confidence="", gazetteer_source="")
+        assert reasons_to_check(row, []) == []
+
+    def test_a_block_carries_a_quote_from_the_chapter(self):
+        """Without it, "the Indian town or the American one?" is unanswerable."""
+        from verne80.checklist import Doubt, render_checklist
+
+        doubt = Doubt(
+            "ogden",
+            "Ogden",
+            ("low confidence (0.55)",),
+            "the Central Pacific, between San Francisco and Ogden",
+            26,
+        )
+        text = render_checklist([doubt], {"ogden": self._row()}, {})
+        assert "between San Francisco and Ogden" in text
+        assert "ch. 26" in text
+
+    def test_every_runner_up_is_listed_with_its_qid(self):
+        from verne80.checklist import Doubt, render_checklist
+
+        others = [
+            PlaceCandidate("Q541950", "Ogden", country="Canada"),
+            PlaceCandidate("Q52471", "Ogden", country="United States"),
+        ]
+        text = render_checklist(
+            [Doubt("ogden", "Ogden", ("5 candidates",))],
+            {"ogden": self._row()},
+            {"ogden": others},
+        )
+        runners = [line for line in text.splitlines() if line.startswith("- `Q")]
+        assert runners == [
+            "- `Q541950` — Ogden, Canada"
+        ]  # the winner is not among them
+
+    def test_the_question_asks_for_a_qid(self):
+        from verne80.checklist import Doubt, render_checklist
+
+        text = render_checklist(
+            [Doubt("ogden", "Ogden", ("low confidence (0.55)",))],
+            {"ogden": self._row()},
+            {},
+        )
+        assert "which QID is?" in text
+
+    def test_the_ones_that_position_the_party_come_first(self):
+        from verne80.checklist import Doubt, rank_doubts
+
+        aside = Doubt("bengal", "Bengal", ("low confidence (0.40)",), positional=False)
+        matters = Doubt("ogden", "Ogden", ("5 candidates",), positional=True)
+        assert [d.key for d in rank_doubts([aside, matters])] == ["ogden", "bengal"]
+
+    def test_a_quote_comes_from_the_chapter_that_introduces_the_place(self):
+        from verne80.checklist import collect_quotes
+        from verne80.schema import ChapterExtraction
+
+        def chapter(number, evidence):
+            return ChapterExtraction(
+                chapter=number,
+                summary_hover="x",
+                summary_detail="One. Two.",
+                places_mentioned=[{"name_in_text": "Ogden", "evidence": evidence}],
+            )
+
+        quotes = collect_quotes([chapter(27, "later"), chapter(26, "first")])
+        assert quotes["ogden"] == ("first", 26)

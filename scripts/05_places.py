@@ -22,11 +22,14 @@ from collections import Counter
 from pathlib import Path
 
 from verne80.extractions import load_all
-from verne80.normalize import place_key
+from verne80.normalize import place_key, strip_edge_quotes
 from verne80.position import PlaceKind
 from verne80.review import (
     MergeRefusedError,
+    carry_unowned,
     merge_rows,
+    orphans,
+    prune,
     read_table,
     summarise,
     write_table,
@@ -70,6 +73,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--extractions-dir", type=Path, default=DEFAULT_EXTRACTIONS_DIR)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--curated", type=Path, default=CURATED)
+    parser.add_argument(
+        "--prune",
+        action="store_true",
+        help="remove stranded rows nobody has touched; confirmed ones are kept",
+    )
     args = parser.parse_args(argv)
 
     source = args.chapters_dir / "chapter_03.txt"
@@ -92,11 +100,28 @@ def main(argv: list[str] | None = None) -> int:
 
     proposed = [_propose(key, use, spine, curated) for key, use in sorted(uses.items())]
 
+    # The gazetteer's coordinates live in this table too, and they are not ours to
+    # empty — see carry_unowned, which exists because we once did.
+    existing = read_table(args.out, "key")
+    proposed, columns = carry_unowned(existing, proposed, "key", COLUMNS)
+
     try:
-        merged = merge_rows(read_table(args.out, "key"), proposed, "key", COLUMNS)
+        merged = merge_rows(existing, proposed, "key", columns)
     except MergeRefusedError as error:
         print(f"  FAIL  {error}", file=sys.stderr)
         return 1
+
+    stranded = orphans(merged, [row["key"] for row in proposed])
+    if stranded:
+        print(f"  {len(stranded)} stranded rows nothing proposes any more: {stranded}")
+        if args.prune:
+            merged, removed = prune(merged, stranded)
+            print(
+                f"  pruned {len(removed)}; {len(stranded) - len(removed)} kept "
+                "because somebody had touched them"
+            )
+        else:
+            print("  re-run with --prune to remove the ones nobody has touched")
 
     counts = Counter(row["kind"] for row in merged.rows.values())
     parts = "   ".join(f"{count} {kind}" for kind, count in sorted(counts.items()))
@@ -126,9 +151,16 @@ def _collect_uses(directory: Path) -> dict[str, dict[str, object]]:
     def note(name: str | None, chapter: int, how: str) -> None:
         if not name or not name.strip():
             return
+        # Stored without its quotation marks. A place name never contains a meaningful
+        # one — the extractions carry the steamer as '"Mongolia"' — which is why this is
+        # safe here and would not be on an evidence quote.
         entry = uses.setdefault(
             place_key(name),
-            {"name_in_text": name.strip(), "first_chapter": chapter, "how": Counter()},
+            {
+                "name_in_text": strip_edge_quotes(name),
+                "first_chapter": chapter,
+                "how": Counter(),
+            },
         )
         entry["first_chapter"] = min(int(entry["first_chapter"]), chapter)
         counter = entry["how"]

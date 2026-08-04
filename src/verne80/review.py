@@ -29,6 +29,9 @@ from pathlib import Path
 
 __all__ = [
     "HUMAN_COLUMNS",
+    "carry_unowned",
+    "orphans",
+    "prune",
     "MergeRefusedError",
     "Table",
     "merge_rows",
@@ -99,6 +102,57 @@ def read_table(path: Path, key_column: str) -> Table:
         columns = tuple(reader.fieldnames or ())
         rows = {row[key_column]: dict(row) for row in reader if row.get(key_column)}
     return Table(key_column, columns, rows)
+
+
+def carry_unowned(
+    table: Table,
+    proposed: Sequence[Mapping[str, str]],
+    key_column: str,
+    owned: Sequence[str],
+) -> tuple[list[dict[str, str]], tuple[str, ...]]:
+    """Let one stage re-propose its own columns without erasing another stage's.
+
+    Two stages write the same table: ``05_places.py`` proposes what a place *is*, and
+    ``07_gazetteer.py`` writes where it *is*. Re-running the first with only its own
+    columns emptied the second's, and the damage was silent and delayed — the next
+    re-rank read a table with no coordinates in it, found no route anchors, and scored
+    Yokohama at 0.43 instead of 0.99 because proximity to a route it could no longer
+    see had stopped counting. Nothing failed; the numbers just quietly got worse.
+
+    :func:`merge_rows` defends the columns a *human* fills in. This defends the ones
+    another stage fills in, which needs no policy — the previous value simply sits
+    underneath the proposal.
+
+    Args:
+        table: The table as it stands on disk.
+        proposed: This stage's rows, carrying only the columns it owns.
+        key_column: Which column identifies a row.
+        owned: The columns this stage is entitled to overwrite.
+
+    Returns:
+        The proposal with each existing row underneath it, and the column order to
+        write: owned first, then whatever else the table already had.
+
+    Contract:
+        - An owned column always takes the proposed value, empty included.
+        - An unowned column keeps its existing value, and is empty for a new key.
+        - The returned columns are ``owned`` followed by the table's extras, in the
+          table's own order, with no duplicates.
+
+    Examples:
+        >>> table = Table("key", ("key", "kind", "lat"),
+        ...               {"suez": {"key": "suez", "kind": "node", "lat": "29.97"}})
+        >>> rows, columns = carry_unowned(
+        ...     table, [{"key": "suez", "kind": "waypoint"}], "key", ("key", "kind"))
+        >>> rows[0]["lat"], rows[0]["kind"]
+        ('29.97', 'waypoint')
+        >>> columns
+        ('key', 'kind', 'lat')
+    """
+    owned_set = set(owned)
+    rows = [{**table.rows.get(row.get(key_column, ""), {}), **row} for row in proposed]
+    extras = tuple(column for column in table.columns if column not in owned_set)
+    return rows, tuple(owned) + extras
 
 
 def merge_rows(
@@ -261,3 +315,81 @@ def is_rejected(cell: str) -> bool:
         (True, False, False)
     """
     return cell.strip().lower() in {"n", "no", "false", "0"}
+
+
+def orphans(table: Table, proposed_keys: Iterable[str]) -> list[str]:
+    """Keys in the table that nothing proposes any more.
+
+    They accumulate when a key changes shape. ``place_key`` gained
+    :func:`~verne80.normalize.strip_edge_quotes` after the first run, so the quoted
+    spellings of the steamer stopped being produced — and :func:`merge_rows`, which
+    never
+    deletes a key, kept them anyway. Reported on every run so they are visible rather
+    than
+    quietly plotting as duplicate pins.
+
+    Args:
+        table: What is on disk.
+        proposed_keys: The keys this run computed.
+
+    Returns:
+        The stranded keys, sorted.
+
+    Examples:
+        >>> old = Table("key", ("key",), {"mongolia": {}, '"mongolia"': {}})
+        >>> orphans(old, ["mongolia"])
+        ['"mongolia"']
+    """
+    live = set(proposed_keys)
+    return sorted(key for key in table.rows if key not in live)
+
+
+def prune(table: Table, keys: Iterable[str]) -> tuple[Table, list[str]]:
+    """Drop stranded rows, but never one somebody has touched.
+
+    Deleting is the one thing :func:`merge_rows` refuses to do, and that refusal is
+    worth
+    keeping — so this is a separate, explicit step, and even then it only removes rows
+    with *no* human input: unconfirmed, uncorrected, un-noted. A row anyone has worked
+    on
+    survives whatever else is true about it.
+
+    Args:
+        table: The table to prune.
+        keys: Candidate keys, normally from :func:`orphans`.
+
+    Returns:
+        The pruned table and the keys actually removed.
+
+    Contract:
+        - A row with anything in ``confirmed``, ``note`` or any ``corrected_*`` column
+        is
+          never removed.
+        - Only keys in ``keys`` are considered.
+        - Never raises.
+
+    Examples:
+        >>> table = Table("key", ("key", "confirmed", "note"), {
+        ...     "gone": {"key": "gone", "confirmed": "", "note": ""},
+        ...     "kept": {"key": "kept", "confirmed": "y", "note": ""},
+        ... })
+        >>> pruned, removed = prune(table, ["gone", "kept"])
+        >>> removed, sorted(pruned.rows)
+        (['gone'], ['kept'])
+    """
+    removed: list[str] = []
+    rows = dict(table.rows)
+    for key in keys:
+        row = rows.get(key)
+        if row is None:
+            continue
+        touched = any(
+            value.strip()
+            for column, value in row.items()
+            if column in HUMAN_COLUMNS or column.startswith("corrected_")
+        )
+        if touched:
+            continue
+        del rows[key]
+        removed.append(key)
+    return Table(table.key_column, table.columns, rows), sorted(removed)
