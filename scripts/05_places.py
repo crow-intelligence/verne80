@@ -52,6 +52,7 @@ COLUMNS = (
     "leg",
     "along",
     "n_candidates",
+    "modern_hint",
     "why",
     "confirmed",
     "corrected_kind",
@@ -165,6 +166,7 @@ def _propose(
         "leg": "",
         "along": "",
         "n_candidates": "0",
+        "modern_hint": "",
         "why": "",
         "confirmed": "",
         "note": "",
@@ -227,7 +229,21 @@ def _propose(
             row["why"] = entry["why"]
             return row
 
-    row["why"] = "not on the route and not in route_places.json — needs a human"
+    # A name Verne's translator invented, or transliterated past recognition. Both stay
+    # `unknown` — the gazetteer decides what they are — but the note travels with them,
+    # and the alias is the string the gazetteer will actually search for.
+    for entry in curated.get("invented", []):
+        if place_key(entry["name"]) == key:
+            row["why"] = f"no modern referent: {entry['why']}"
+            return row
+
+    for entry in curated.get("aliases", []):
+        if place_key(entry["name"]) == key:
+            row["modern_hint"] = entry["modern"]
+            row["why"] = f"1872 spelling of {entry['modern']}: {entry['why']}"
+            return row
+
+    row["why"] = "not on the route and not in route_places.json — for the gazetteer"
     return row
 
 

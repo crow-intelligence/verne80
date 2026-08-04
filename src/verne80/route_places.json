@@ -13,7 +13,17 @@
     "The local list is the third kind of error, and the one no curation can fix by name:",
     "'station' appears in six chapters and means six different cities. These are interiors",
     "and vessels — somewhere inside wherever the party already is. They never move the pin",
-    "and have no coordinates of their own, because their position is the party's."
+    "and have no coordinates of their own, because their position is the party's.",
+    "",
+    "aliases and invented are the two things no search API can supply. Verne's Indian and",
+    "American place names are 1872 transliterations — Burhampoor is Burhanpur, Callyan is",
+    "Kalyan — and a search for the old spelling finds nothing. A handful more are the",
+    "translator's inventions with no modern referent at all; those resolve to nothing on",
+    "purpose rather than to something plausible.",
+    "",
+    "Everything else is left to the gazetteer. Wikidata knows Nebraska is a state and Ogden",
+    "is a city, so typing fifty region entries here would be doing by hand what the entity",
+    "type does for free — and doing it less reliably."
   ],
   "blocked": [
     {
@@ -91,6 +101,22 @@
     {
       "name": "Calais",
       "why": "ditto, the far side of the same crossing"
+    },
+    {
+      "name": "China",
+      "why": "the country and the Cunard steamer share a name and the book uses it both ways; no automatic rule separates them, so neither gets a pin"
+    },
+    {
+      "name": "Pacific",
+      "why": "the ocean and the railroad share a name here; Yokohama, San Francisco and Omaha are the stops"
+    },
+    {
+      "name": "American continent",
+      "why": "a continent, named in chapter 25's description of the crossing"
+    },
+    {
+      "name": "Californian capital",
+      "why": "a description of Sacramento, not a name"
     }
   ],
   "waypoints": [
@@ -457,6 +483,188 @@
     {
       "name": "Henrietta",
       "why": "ditto, the ship Fogg buys out from under its captain"
+    },
+    {
+      "name": "Japanese quarter",
+      "why": "chapter 23's district of Yokohama — inside the node"
+    },
+    {
+      "name": "English quarter",
+      "why": "chapter 20's district of Hong Kong"
+    },
+    {
+      "name": "“European town”",
+      "why": "chapter 15's Calcutta district"
+    },
+    {
+      "name": "“black town”",
+      "why": "ditto, the other half of the same city"
+    },
+    {
+      "name": "Benten",
+      "why": "the Yokohama quarter Passepartout wanders into"
+    },
+    {
+      "name": "Battery",
+      "why": "the park at the foot of Manhattan; inside New York"
+    },
+    {
+      "name": "Steamer Point",
+      "why": "Aden's harbour quarter; Aden is already a waypoint"
+    },
+    {
+      "name": "Victoria port",
+      "why": "Hong Kong's harbour; Hong Kong is the node"
+    },
+    {
+      "name": "Montgomery Street",
+      "why": "a street in San Francisco"
+    },
+    {
+      "name": "bay of the Golden Gate",
+      "why": "San Francisco's own bay"
+    },
+    {
+      "name": "Shanghai River",
+      "why": "the Huangpu, at Shanghai; the city is the stop"
+    },
+    {
+      "name": "Irish coast",
+      "why": "a stretch of shoreline, not a landing"
+    }
+  ],
+  "aliases": [
+    {
+      "name": "Burhampoor",
+      "modern": "Burhanpur",
+      "why": "the 1872 transliteration; no search finds the old spelling"
+    },
+    {
+      "name": "Assurghur",
+      "modern": "Asirgarh",
+      "why": "ditto — the fort above Burhanpur"
+    },
+    {
+      "name": "Callyan",
+      "modern": "Kalyan",
+      "why": "ditto, on the line out of Bombay"
+    },
+    {
+      "name": "Nassik",
+      "modern": "Nashik",
+      "why": "ditto"
+    },
+    {
+      "name": "Chandernagor",
+      "modern": "Chandannagar",
+      "why": "ditto, the French settlement above Calcutta"
+    },
+    {
+      "name": "Benares",
+      "modern": "Varanasi",
+      "why": "renamed as well as retransliterated — the change is content, per spec §2.3"
+    },
+    {
+      "name": "Monghir",
+      "modern": "Munger",
+      "why": "ditto"
+    },
+    {
+      "name": "Murshedabad",
+      "modern": "Murshidabad",
+      "why": "ditto"
+    },
+    {
+      "name": "Burdwan",
+      "modern": "Bardhaman",
+      "why": "ditto"
+    },
+    {
+      "name": "Burdivan",
+      "modern": "Bardhaman",
+      "why": "the same place, spelled a second way in the same book"
+    },
+    {
+      "name": "Hugly",
+      "modern": "Hooghly River",
+      "why": "the river, spelled as Verne's translator has it"
+    },
+    {
+      "name": "Vindhia Mountains",
+      "modern": "Vindhya Range",
+      "why": "ditto"
+    },
+    {
+      "name": "Wahsatch Mountains",
+      "modern": "Wasatch Range",
+      "why": "the American equivalent of the same problem"
+    },
+    {
+      "name": "Cheyne Pass",
+      "modern": "Cheyenne Pass",
+      "why": "ditto — a misprint that survived into the translation"
+    },
+    {
+      "name": "’Cisco",
+      "modern": "Cisco, California",
+      "why": "the elided form of a Sierra Nevada stop"
+    },
+    {
+      "name": "bay of Yeddo",
+      "modern": "Tokyo Bay",
+      "why": "Yeddo is Edo, which is Tokyo"
+    },
+    {
+      "name": "Anam",
+      "modern": "Annam",
+      "why": "the old French spelling"
+    },
+    {
+      "name": "Ahmehnagara",
+      "modern": "Ahmednagar",
+      "why": "ditto"
+    }
+  ],
+  "invented": [
+    {
+      "name": "Kholby",
+      "why": "where the railway ends and the elephant begins. No such place; Verne needed a gap and put one here"
+    },
+    {
+      "name": "Rothal",
+      "why": "this translation's spelling of a Great Indian Peninsula Railway station with no modern referent"
+    },
+    {
+      "name": "Milligaum",
+      "why": "one of the stations Verne lists across the Western Ghats; no gazetteer entry"
+    },
+    {
+      "name": "Pauwell",
+      "why": "ditto"
+    },
+    {
+      "name": "Kallenger",
+      "why": "ditto, in Bundelcund"
+    },
+    {
+      "name": "Cani",
+      "why": "ditto"
+    },
+    {
+      "name": "Chupenie",
+      "why": "ditto, in the Ganges valley"
+    },
+    {
+      "name": "Gour",
+      "why": "the ruined city Verne names on the Ganges; ambiguous and never stopped at"
+    },
+    {
+      "name": "Roclin, Auburn, and Colfax",
+      "why": "three towns run together as one string by the extraction; split by hand if the map ever needs them"
+    },
+    {
+      "name": "promontory of the Treaty",
+      "why": "Verne's phrase for a headland at Yokohama, not a name any gazetteer carries"
     }
   ]
 }
