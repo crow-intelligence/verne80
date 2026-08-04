@@ -667,6 +667,60 @@
       ]
     },
     {
+      "chapter": 12,
+      "scene_places": [
+        "thick forest"
+      ],
+      "mentions": {
+        "Allahabad": "future",
+        "Kholby": "off_route",
+        "Saville Row": "cyclic",
+        "Ganges": "off_route",
+        "India": "off_route",
+        "Bombay": "here",
+        "Pillaji": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 11,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 11,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 2,
+          "along": 0.0,
+          "at_node": "Bombay",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 10,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
       "chapter": 13,
       "scene_places": [
         "pagoda of Pillaji",
@@ -836,6 +890,1369 @@
           "flags": [
             "on_stage_without_a_place"
           ]
+        }
+      ]
+    },
+    {
+      "chapter": 16,
+      "scene_places": [
+        "Hong Kong",
+        "Calcutta"
+      ],
+      "mentions": {
+        "Calcutta": "past",
+        "Hong Kong": "future",
+        "India": "off_route",
+        "Himalaya": "off_route",
+        "Celestial Empire": "off_route",
+        "China seas": "off_route",
+        "Bombay": "past",
+        "Singapore": "here",
+        "China": "off_route",
+        "Japan": "off_route",
+        "America": "off_route",
+        "Yokohama": "future",
+        "Gulf of Bengal": "off_route",
+        "Indian Ocean": "off_route",
+        "Europe": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 3,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Hong Kong",
+          "stated_at_chapter": 16,
+          "evidence": "He visited her regularly each day at certain hours",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 3,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Hong Kong",
+          "stated_at_chapter": 16,
+          "evidence": "Passepartout was promenading up and down in the forward part of the steamer.",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 3,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Hong Kong",
+          "stated_at_chapter": 16,
+          "evidence": "He had managed to embark on the “Rangoon” at Calcutta... Fix emerged from his cabin and went on deck.",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 17,
+      "scene_places": [
+        "Singapore",
+        "Hong Kong"
+      ],
+      "mentions": {
+        "Hong Kong": "future",
+        "Suez": "past",
+        "Bombay": "past",
+        "Sumatra": "off_route",
+        "New Holland": "off_route",
+        "Malacca": "off_route",
+        "Yokohama": "future",
+        "Saville Row": "cyclic",
+        "China": "off_route",
+        "America": "off_route",
+        "Europe": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 3,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Singapore",
+          "stated_at_chapter": 17,
+          "evidence": "carried Phileas Fogg and Aouda into the midst of rows of palms",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 3,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Singapore",
+          "stated_at_chapter": 17,
+          "evidence": "while Passepartout, laughing in his sleeve at Fix’s manœuvres, went about his usual errands.",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 3,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Singapore",
+          "stated_at_chapter": 17,
+          "evidence": "Fix, who suspected Mr. Fogg’s every movement, followed them cautiously",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 18,
+      "scene_places": [
+        "Hong Kong",
+        "Club Hotel",
+        "quay",
+        "Singapore",
+        "harbour",
+        "Exchange"
+      ],
+      "mentions": {
+        "Yokohama": "future",
+        "Japan": "off_route",
+        "San Francisco": "future",
+        "Pacific": "off_route",
+        "London": "cyclic",
+        "China": "off_route",
+        "Europe": "off_route",
+        "Holland": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "stated",
+          "place_name_in_text": "Hong Kong",
+          "stated_at_chapter": 18,
+          "evidence": "Mr. Fogg, bolder than his servant, did not hesitate to approach the pilot",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "stated",
+          "place_name_in_text": "Hong Kong",
+          "stated_at_chapter": 18,
+          "evidence": "Passepartout, delighted that the young woman, who was very gracious to him, was going to continue the journey with them, went off at a brisk gait to obey his master’s order.",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 3,
+          "along": 0.75,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Hong Kong",
+          "stated_at_chapter": 18,
+          "evidence": "Fix did not look at the state of things in the same light.",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 19,
+      "scene_places": [
+        "Victoria port",
+        "quay",
+        "steamer office",
+        "tavern"
+      ],
+      "mentions": {
+        "Nankin": "off_route",
+        "Canton River": "off_route",
+        "Macao": "off_route",
+        "Kent": "off_route",
+        "Surrey": "off_route",
+        "Bombay": "past",
+        "Calcutta": "past",
+        "Singapore": "past",
+        "America": "off_route",
+        "Celestial Empire": "off_route",
+        "London": "cyclic",
+        "England": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 18,
+          "evidence": null,
+          "flags": []
+        },
+        {
+          "track": "passepartout",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 18,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 3,
+          "along": 0.75,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 18,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 20,
+      "scene_places": [
+        "English quarter",
+        "quay",
+        "wharves"
+      ],
+      "mentions": {
+        "opium-house": "off_route",
+        "Yokohama": "future",
+        "Macao": "off_route",
+        "San Francisco": "future",
+        "Nagasaki": "off_route",
+        "Japan": "off_route",
+        "Shanghai": "off_route",
+        "Chinese coast": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 18,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 18,
+          "evidence": null,
+          "flags": []
+        },
+        {
+          "track": "fix",
+          "leg": 3,
+          "along": 0.75,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 18,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 21,
+      "scene_places": [
+        "Shanghai River",
+        "Hong Kong",
+        "Shanghai"
+      ],
+      "mentions": {
+        "Yokohama": "future",
+        "Shanghai": "off_route",
+        "America": "off_route",
+        "England": "off_route",
+        "United States": "off_route",
+        "London": "cyclic",
+        "island of Formosa": "off_route",
+        "Chinese coast": "off_route",
+        "Shanghai River": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "stated",
+          "place_name_in_text": "Shanghai",
+          "stated_at_chapter": 21,
+          "evidence": "Phileas Fogg, with body erect and legs wide apart, standing like a sailor, gazed without staggering at the swelling waters.",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 18,
+          "evidence": null,
+          "flags": []
+        },
+        {
+          "track": "fix",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "stated",
+          "place_name_in_text": "Shanghai",
+          "stated_at_chapter": 21,
+          "evidence": "Fix, seated in the bow, gave himself up to meditation.",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 22,
+      "scene_places": [
+        "Japan",
+        "Hong Kong",
+        "Yokohama"
+      ],
+      "mentions": {
+        "London": "cyclic",
+        "North America": "off_route",
+        "Oriental islands": "off_route",
+        "Yeddo": "off_route",
+        "Calcutta": "past",
+        "Europe": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 21,
+          "evidence": null,
+          "flags": []
+        },
+        {
+          "track": "passepartout",
+          "leg": 5,
+          "along": 0.0,
+          "at_node": "Yokohama",
+          "source": "stated",
+          "place_name_in_text": "Yokohama",
+          "stated_at_chapter": 22,
+          "evidence": "Passepartout went timidly ashore on this so curious territory of the Sons of the Sun. He had nothing better to do than, taking chance for his guide, to wander aimlessly through the streets of Yokohama.",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 21,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 23,
+      "scene_places": [
+        "Japanese quarter"
+      ],
+      "mentions": {
+        "America": "off_route",
+        "San Francisco": "future",
+        "Pacific": "off_route",
+        "Japan": "off_route",
+        "New World": "off_route",
+        "UNITED STATES": "off_route",
+        "Empire of the Sun": "off_route",
+        "States of the Union": "off_route",
+        "France": "off_route",
+        "Paris": "past",
+        "Europe": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 21,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 5,
+          "along": 0.0,
+          "at_node": "Yokohama",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 22,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 4,
+          "along": 0.0,
+          "at_node": "Hong Kong",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 21,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 24,
+      "scene_places": [
+        "Yokohama",
+        "San Francisco"
+      ],
+      "mentions": {
+        "Shanghai": "off_route",
+        "Hong Kong": "past",
+        "New York": "future",
+        "London": "cyclic",
+        "California": "off_route",
+        "Japan": "off_route",
+        "China": "off_route",
+        "Liverpool": "future",
+        "Aden": "past",
+        "Bombay": "past",
+        "Calcutta": "past",
+        "Singapore": "past",
+        "England": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 5,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "San Francisco",
+          "stated_at_chapter": 24,
+          "evidence": "The steamer which was about to depart from Yokohama to San Francisco belonged to the Pacific Mail Steamship Company",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 5,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "San Francisco",
+          "stated_at_chapter": 24,
+          "evidence": "On that very day, however, he met Passepartout face to face on the forward deck.",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 5,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "San Francisco",
+          "stated_at_chapter": 24,
+          "evidence": "His course decided on, he went on board the “General Grant,” and was there when Mr. Fogg and Aouda arrived.",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 25,
+      "scene_places": [
+        "American continent",
+        "International Hotel",
+        "English consulate",
+        "Montgomery Street",
+        "station"
+      ],
+      "mentions": {
+        "Sacramento": "off_route",
+        "Mexico": "off_route",
+        "Chili": "off_route",
+        "Peru": "off_route",
+        "Brazil": "off_route",
+        "Europe": "off_route",
+        "Asia": "off_route",
+        "Pacific islands": "off_route",
+        "New World": "off_route",
+        "New York": "future",
+        "Chinese quarter": "off_route",
+        "Celestial Empire": "off_route",
+        "Regent Street": "off_route",
+        "London": "cyclic",
+        "Boulevard des Italiens": "off_route",
+        "Paris": "past",
+        "Broadway": "off_route",
+        "England": "off_route",
+        "America": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 6,
+          "along": 0.0,
+          "at_node": "San Francisco",
+          "source": "inferred",
+          "place_name_in_text": "San Francisco",
+          "stated_at_chapter": 25,
+          "evidence": "IN WHICH A SLIGHT GLIMPSE IS HAD OF SAN FRANCISCO",
+          "flags": [
+            "unconfirmed_place",
+            "inferred_from_places_visited"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 6,
+          "along": 0.0,
+          "at_node": "San Francisco",
+          "source": "inferred",
+          "place_name_in_text": "San Francisco",
+          "stated_at_chapter": 25,
+          "evidence": "IN WHICH A SLIGHT GLIMPSE IS HAD OF SAN FRANCISCO",
+          "flags": [
+            "unconfirmed_place",
+            "inferred_from_places_visited"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 6,
+          "along": 0.0,
+          "at_node": "San Francisco",
+          "source": "inferred",
+          "place_name_in_text": "San Francisco",
+          "stated_at_chapter": 25,
+          "evidence": "IN WHICH A SLIGHT GLIMPSE IS HAD OF SAN FRANCISCO",
+          "flags": [
+            "unconfirmed_place",
+            "inferred_from_places_visited"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 26,
+      "scene_places": [
+        "Utah",
+        "Oakland station"
+      ],
+      "mentions": {
+        "United States": "off_route",
+        "San Francisco": "here",
+        "Ogden": "off_route",
+        "Omaha": "future",
+        "New York": "future",
+        "Illinois": "off_route",
+        "Nebraska": "off_route",
+        "Iowa, Kansas, Colorado, and Oregon": "off_route",
+        "Platte River": "off_route",
+        "Laramie territory": "off_route",
+        "Wahsatch Mountains": "off_route",
+        "Great Salt Lake": "off_route",
+        "Salt Lake City": "future",
+        "Tuilla Valley": "off_route",
+        "American Desert": "off_route",
+        "Cedar and Humboldt Mountains": "off_route",
+        "Pacific": "off_route",
+        "Rocky Mountains": "off_route",
+        "Liverpool": "future",
+        "American River": "off_route",
+        "San Pablo Bay": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 6,
+          "along": 0.0,
+          "at_node": "San Francisco",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 25,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 6,
+          "along": 0.0,
+          "at_node": "San Francisco",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 25,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 6,
+          "along": 0.0,
+          "at_node": "San Francisco",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 25,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 27,
+      "scene_places": [
+        "Ogden",
+        "Salt Lake City",
+        "station"
+      ],
+      "mentions": {
+        "United States": "off_route",
+        "Israel": "off_route",
+        "America": "off_route",
+        "England": "off_route",
+        "Norway": "off_route",
+        "Sweden": "off_route",
+        "Germany": "off_route",
+        "Ohio": "off_route",
+        "Kirkland": "off_route",
+        "Independence, Missouri": "off_route",
+        "Far West": "off_route",
+        "Illinois": "off_route",
+        "Nauvoo": "off_route",
+        "Mississippi": "off_route",
+        "Carthage": "off_route",
+        "California": "off_route",
+        "Vermont": "off_route",
+        "Missouri": "off_route",
+        "Dead Sea": "off_route",
+        "Jordan": "off_route",
+        "Lake Asphaltite": "off_route",
+        "Weber": "off_route",
+        "Wahsatch Range": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 6,
+          "along": 0.35,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Salt Lake City",
+          "stated_at_chapter": 27,
+          "evidence": "Mr. Fogg and his party had time to pay a visit to Salt Lake City... The travellers, then, were promenading, at three o’clock, about the streets",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 6,
+          "along": 0.35,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Salt Lake City",
+          "stated_at_chapter": 27,
+          "evidence": "Passepartout could not behold without a certain fright these women",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 6,
+          "along": 0.35,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Salt Lake City",
+          "stated_at_chapter": 27,
+          "evidence": "Neither Mr. Fogg nor Fix cared to attend. ... At four the party found themselves again at the station",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 28,
+      "scene_places": [
+        "Medicine Bow",
+        "Great Salt Lake",
+        "Green River station"
+      ],
+      "mentions": {
+        "Great Salt Lake": "off_route",
+        "Ogden": "off_route",
+        "San Francisco": "past",
+        "Atlantic": "off_route",
+        "Pacific": "off_route",
+        "New York": "future",
+        "Europe": "off_route",
+        "North Platte River": "off_route",
+        "Laramie Peak": "off_route",
+        "Arkansas River": "off_route",
+        "Missouri": "off_route",
+        "Omaha": "future",
+        "Medicine Creek": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 6,
+          "along": 0.35,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 27,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 6,
+          "along": 0.35,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 27,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 6,
+          "along": 0.35,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 27,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 29,
+      "scene_places": [
+        "Kearney station"
+      ],
+      "mentions": {
+        "Atlantic": "off_route",
+        "Denver": "off_route",
+        "San Francisco": "past",
+        "New York": "future",
+        "Missouri": "off_route",
+        "Omaha": "future",
+        "Europe": "off_route",
+        "America": "off_route",
+        "England": "off_route",
+        "Chicago": "off_route",
+        "Plum Creek": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 6,
+          "along": 0.35,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 27,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 6,
+          "along": 0.35,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 27,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 6,
+          "along": 0.35,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 27,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 30,
+      "scene_places": [
+        "Fort Kearney"
+      ],
+      "mentions": {
+        "Republican River": "off_route",
+        "New York": "future",
+        "Arkansas": "off_route",
+        "Omaha": "future",
+        "San Francisco": "past"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 6,
+          "along": 0.35,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 27,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 6,
+          "along": 0.35,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 27,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 6,
+          "along": 0.35,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 27,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 31,
+      "scene_places": [
+        "Fort Kearney",
+        "Omaha",
+        "New York"
+      ],
+      "mentions": {
+        "Liverpool": "future",
+        "Europe": "off_route",
+        "England": "off_route",
+        "Great Island": "off_route",
+        "Columbus": "off_route",
+        "Nebraska": "off_route",
+        "Schuyler": "off_route",
+        "Fremont": "off_route",
+        "Saint Joseph": "off_route",
+        "Atlantic": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 6,
+          "along": 0.85,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "New York",
+          "stated_at_chapter": 31,
+          "evidence": "A train was ready to start when Mr. Fogg and his party reached the station, and they only had time to get into the cars.",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 6,
+          "along": 0.85,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "New York",
+          "stated_at_chapter": 31,
+          "evidence": "A train was ready to start when Mr. Fogg and his party reached the station, and they only had time to get into the cars.",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 6,
+          "along": 0.85,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "New York",
+          "stated_at_chapter": 31,
+          "evidence": "A train was ready to start when Mr. Fogg and his party reached the station, and they only had time to get into the cars.",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 32,
+      "scene_places": [
+        "Cunard pier",
+        "St. Nicholas Hotel, on Broadway",
+        "Battery",
+        "Henrietta",
+        "St. Nicholas"
+      ],
+      "mentions": {
+        "Liverpool": "future",
+        "London": "cyclic",
+        "Havre": "off_route",
+        "Southampton": "off_route",
+        "Cardiff": "off_route",
+        "Bordeaux": "off_route",
+        "China": "off_route",
+        "Hong Kong": "past",
+        "England": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 6,
+          "along": 0.85,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 31,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 6,
+          "along": 0.85,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 31,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 6,
+          "along": 0.85,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 31,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 33,
+      "scene_places": [
+        "Henrietta",
+        "Queenstown Harbour",
+        "Dublin",
+        "Liverpool quay"
+      ],
+      "mentions": {
+        "New York": "past",
+        "Liverpool": "future",
+        "Bordeaux": "off_route",
+        "London": "cyclic"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 7,
+          "along": 0.6,
+          "at_node": null,
+          "source": "inferred",
+          "place_name_in_text": "Queenstown",
+          "stated_at_chapter": 33,
+          "evidence": "By ten in the evening they were passing Queenstown.",
+          "flags": [
+            "unconfirmed_place",
+            "inferred_from_places_visited"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 7,
+          "along": 0.6,
+          "at_node": null,
+          "source": "inferred",
+          "place_name_in_text": "Queenstown",
+          "stated_at_chapter": 33,
+          "evidence": "By ten in the evening they were passing Queenstown.",
+          "flags": [
+            "unconfirmed_place",
+            "inferred_from_places_visited"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 7,
+          "along": 0.6,
+          "at_node": null,
+          "source": "inferred",
+          "place_name_in_text": "Queenstown",
+          "stated_at_chapter": 33,
+          "evidence": "By ten in the evening they were passing Queenstown.",
+          "flags": [
+            "unconfirmed_place",
+            "inferred_from_places_visited"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 34,
+      "scene_places": [
+        "Custom House",
+        "London",
+        "station"
+      ],
+      "mentions": {
+        "English soil": "off_route",
+        "Reform Club": "here"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 7,
+          "along": 1.0,
+          "at_node": "London",
+          "source": "stated",
+          "place_name_in_text": "London",
+          "stated_at_chapter": 34,
+          "evidence": "at last set out towards London with Aouda and his faithful servant.",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 7,
+          "along": 1.0,
+          "at_node": "London",
+          "source": "stated",
+          "place_name_in_text": "London",
+          "stated_at_chapter": 34,
+          "evidence": "at last set out towards London with Aouda and his faithful servant.",
+          "flags": [
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 7,
+          "along": 1.0,
+          "at_node": "London",
+          "source": "inferred",
+          "place_name_in_text": "London",
+          "stated_at_chapter": 34,
+          "evidence": "when Mr. Fogg stepped from the train at the terminus, all the clocks in London were striking ten minutes before nine.",
+          "flags": [
+            "unconfirmed_place",
+            "inferred_from_places_visited"
+          ]
+        }
+      ]
+    },
+    {
+      "chapter": 35,
+      "scene_places": [
+        "station",
+        "domicile",
+        "Saville Row"
+      ],
+      "mentions": {
+        "Barings": "off_route",
+        "Reform Club": "here",
+        "England": "off_route",
+        "Westminster": "off_route",
+        "Reform": "off_route",
+        "India": "off_route",
+        "Liverpool": "past",
+        "Marylebone parish": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 7,
+          "along": 1.0,
+          "at_node": "London",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 34,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 7,
+          "along": 1.0,
+          "at_node": "London",
+          "source": "stated",
+          "place_name_in_text": "Saville Row",
+          "stated_at_chapter": 35,
+          "evidence": "First of all, the worthy fellow had gone up to his room, and had extinguished the gas burner",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 7,
+          "along": 1.0,
+          "at_node": "London",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 34,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 36,
+      "scene_places": [
+        "great saloon of the club",
+        "saloon"
+      ],
+      "mentions": {
+        "Edinburgh": "off_route",
+        "America": "off_route",
+        "Asia": "off_route",
+        "Saville Row": "here",
+        "Liverpool": "past",
+        "New York": "past",
+        "Barings": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 7,
+          "along": 1.0,
+          "at_node": "London",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 34,
+          "evidence": null,
+          "flags": [
+            "on_stage_without_a_place"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 7,
+          "along": 1.0,
+          "at_node": "London",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 35,
+          "evidence": null,
+          "flags": []
+        },
+        {
+          "track": "fix",
+          "leg": 7,
+          "along": 1.0,
+          "at_node": "London",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 34,
+          "evidence": null,
+          "flags": []
+        }
+      ]
+    },
+    {
+      "chapter": 37,
+      "scene_places": [
+        "the clergyman’s house",
+        "Saville Row",
+        "the Reform Club",
+        "his house"
+      ],
+      "mentions": {
+        "India": "off_route"
+      },
+      "tracks": [
+        {
+          "track": "fogg",
+          "leg": 7,
+          "along": 1.0,
+          "at_node": "London",
+          "source": "inferred",
+          "place_name_in_text": "Saville Row",
+          "stated_at_chapter": 37,
+          "evidence": "In three minutes he was in Saville Row again, and staggered back into\nMr. Fogg’s room.",
+          "flags": [
+            "unconfirmed_place",
+            "inferred_from_places_visited"
+          ]
+        },
+        {
+          "track": "passepartout",
+          "leg": 7,
+          "along": 1.0,
+          "at_node": "London",
+          "source": "stated",
+          "place_name_in_text": "Saville Row",
+          "stated_at_chapter": 37,
+          "evidence": "In three minutes he was in Saville Row again, and staggered back into\nMr. Fogg’s room.",
+          "flags": [
+            "unconfirmed_place"
+          ]
+        },
+        {
+          "track": "fix",
+          "leg": 7,
+          "along": 1.0,
+          "at_node": "London",
+          "source": "carried",
+          "place_name_in_text": null,
+          "stated_at_chapter": 34,
+          "evidence": null,
+          "flags": []
         }
       ]
     }

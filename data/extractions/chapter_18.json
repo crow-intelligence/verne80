@@ -33,42 +33,34 @@
 "places_mentioned": [
 {
 "name_in_text": "Yokohama",
-"role": "mention",
 "evidence": "making him too late for the Yokohama boat"
 },
 {
 "name_in_text": "Japan",
-"role": "mention",
 "evidence": "the passengers for Japan would have been obliged to await for a week"
 },
 {
 "name_in_text": "San Francisco",
-"role": "mention",
 "evidence": "steamer which crossed the Pacific from Yokohama to San Francisco"
 },
 {
 "name_in_text": "Pacific",
-"role": "mention",
 "evidence": "crossed the Pacific from Yokohama to San Francisco"
 },
 {
 "name_in_text": "London",
-"role": "mention",
 "evidence": "thirty-five days after leaving London."
 },
 {
 "name_in_text": "China",
-"role": "mention",
 "evidence": "learn that Jeejeeh had left China two years before"
 },
 {
 "name_in_text": "Europe",
-"role": "mention",
 "evidence": "taken up his residence in Europe"
 },
 {
 "name_in_text": "Holland",
-"role": "mention",
 "evidence": "in Holland the broker thought"
 }
 ],

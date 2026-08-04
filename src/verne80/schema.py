@@ -332,6 +332,7 @@ class ChapterExtraction(_Base):
             lists=("places_visited", "places_mentioned", "people", "transport"),
         )
         if isinstance(data, dict):
+            data = dict(data)
             for key in ("narrative", "time", "money"):
                 if data.get(key) is None:
                     data[key] = {}
@@ -387,13 +388,19 @@ class ChapterExtraction(_Base):
 
 
 def _absorb(data: Any, lists: tuple[str, ...]) -> Any:
-    """Replace ``null`` with ``[]`` for the named list fields."""
+    """Replace ``null`` with ``[]`` for the named list fields.
+
+    Works on a copy. A ``mode="before"`` validator runs on whatever the caller passed,
+    and mutating it means merely *validating* a document quietly rewrites it — which is
+    how the repair tool started returning fields the model never wrote.
+    """
     if not isinstance(data, dict):
         return data
+    out = dict(data)
     for key in lists:
-        if data.get(key) is None and key in data:
-            data[key] = []
-    return data
+        if out.get(key) is None and key in out:
+            out[key] = []
+    return out
 
 
 def normalise_mode(value: Any) -> Any:
