@@ -349,7 +349,10 @@ def parse_itinerary(
     legs: list[RouteLeg] = []
     for position, match in enumerate(matches):
         origin_name = normalize_quote(match.group("origin"))
-        printed_destination = normalize_quote(match.group("destination"))
+        # The via clause is not part of the name; a parenthetical is a spelling of it.
+        printed_destination = _VIA.split(
+            normalize_quote(match.group("destination")), 1
+        )[0]
         destination_name, via = split_via(match.group("destination"))
         if position == 0:
             nodes.append(_make_node(0, origin_name))
