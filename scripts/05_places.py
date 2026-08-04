@@ -183,6 +183,14 @@ def _propose(
         )
         return row
 
+    # After the node check, so "London" is never local, and before micro, so a name that
+    # is both a fixed interior and a generic one resolves as the generic.
+    for entry in curated.get("local", []):
+        if place_key(entry["name"]) == key:
+            row["kind"] = PlaceKind.LOCAL.value
+            row["why"] = entry["why"]
+            return row
+
     for entry in curated.get("micro", []):
         if place_key(entry["name"]) == key:
             row["kind"] = PlaceKind.MICRO.value

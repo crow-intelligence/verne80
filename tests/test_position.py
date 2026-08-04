@@ -48,6 +48,9 @@ CONTAINMENT = {
         "sydenham", "Sydenham", PlaceKind.WAYPOINT, leg=0, along=0.05, confirmed=True
     ),
     "india": Containment("india", "India", PlaceKind.OFF_ROUTE, confirmed=True),
+    "station": Containment("station", "station", PlaceKind.LOCAL, confirmed=True),
+    "quay": Containment("quay", "quay", PlaceKind.LOCAL, confirmed=True),
+    "mongolia": Containment("mongolia", "Mongolia", PlaceKind.LOCAL, confirmed=True),
 }
 
 
@@ -166,6 +169,102 @@ class TestWhatSetsAPosition:
     def test_every_chapter_yields_a_row_for_every_track(self):
         out = resolve({1: chapter(1), 2: chapter(2)})
         assert [len(entry.tracks) for entry in out] == [3, 3]
+
+
+class TestLocalInteriors:
+    """`station` means six different cities. The kind that answers "inside here"."""
+
+    def test_a_station_does_not_move_the_pin(self):
+        out = resolve(
+            {
+                1: chapter(1, [("Fogg", {"at_name_in_text": "Suez"})]),
+                2: chapter(2, [("Fogg", {"at_name_in_text": "station"})]),
+            }
+        )
+        assert row(out[1], "fogg").point == RoutePoint(1, 0.0)
+
+    def test_a_station_keeps_the_chapter_that_last_stated_a_position(self):
+        """The chapter named a room, so it is not news about where they are."""
+        out = resolve(
+            {
+                1: chapter(1, [("Fogg", {"at_name_in_text": "Suez"})]),
+                2: chapter(2, [("Fogg", {"at_name_in_text": "station"})]),
+            }
+        )
+        second = row(out[1], "fogg")
+        assert second.source is PositionSource.CARRIED
+        assert second.stated_at_chapter == 1
+        assert second.place_name_in_text == "station"
+
+    def test_the_same_station_in_two_chapters_is_two_different_places(self):
+        """The whole reason the kind exists: one name, two cities, no contradiction."""
+        out = resolve(
+            {
+                1: chapter(1, [("Fogg", {"at_name_in_text": "Suez"})]),
+                2: chapter(2, [("Fogg", {"at_name_in_text": "station"})]),
+                3: chapter(3, [("Fogg", {"at_name_in_text": "Bombay"})]),
+                4: chapter(4, [("Fogg", {"at_name_in_text": "station"})]),
+            }
+        )
+        assert row(out[1], "fogg").point == RoutePoint(1, 0.0)
+        assert row(out[3], "fogg").point == RoutePoint(2, 0.0)
+
+    def test_a_station_before_the_party_is_placed_resolves_to_nothing(self):
+        """Guessing here would be worse than the unresolved place it replaces."""
+        out = resolve({1: chapter(1, [("Fogg", {"at_name_in_text": "station"})])})
+        assert row(out[0], "fogg").point is None
+
+    def test_a_city_the_chapter_also_names_beats_the_station(self):
+        """Ordered so the local comes last, which is the case that would break it."""
+        out = resolve(
+            {
+                1: chapter(1, [("Fogg", {"at_name_in_text": "London"})]),
+                2: chapter(
+                    2,
+                    [
+                        ("Fogg", {"at_name_in_text": "Suez"}),
+                        ("Fogg", {"at_name_in_text": "station"}),
+                    ],
+                ),
+            }
+        )
+        second = row(out[1], "fogg")
+        assert second.point == RoutePoint(1, 0.0)
+        assert second.source is PositionSource.STATED
+        assert second.place_name_in_text == "Suez"
+
+    def test_a_transit_out_of_a_station_is_still_a_transit(self):
+        out = resolve(
+            {
+                1: chapter(1, [("Fogg", {"at_name_in_text": "London"})]),
+                2: chapter(
+                    2, [("Fogg", {"between_from": "station", "between_to": "Bombay"})]
+                ),
+            }
+        )
+        second = row(out[1], "fogg")
+        assert second.source is PositionSource.STATED
+        assert RoutePoint(0, 0.0) < second.point <= RoutePoint(2, 0.0)
+
+    def test_being_aboard_the_mongolia_is_not_a_position_of_its_own(self):
+        """A vessel is a real location whose position is the party's own leg."""
+        out = resolve(
+            {
+                1: chapter(1, [("Fogg", {"at_name_in_text": "Suez"})]),
+                2: chapter(2, [("Fogg", {"at_name_in_text": "Mongolia"})]),
+            }
+        )
+        assert row(out[1], "fogg").point == RoutePoint(1, 0.0)
+
+    def test_a_mentioned_local_is_here_not_off_route(self):
+        extraction = chapter(3, mentioned=["quay"])
+        classes = classify_mentions(extraction, RoutePoint(1, 0.0), CONTAINMENT, SPINE)
+        assert classes["quay"] is TemporalClass.HERE
+
+    def test_a_mentioned_local_is_unknown_before_the_party_is_placed(self):
+        extraction = chapter(1, mentioned=["quay"])
+        classes = classify_mentions(extraction, None, CONTAINMENT, SPINE)
+        assert classes["quay"] is TemporalClass.UNKNOWN
 
 
 class TestTheCycle:

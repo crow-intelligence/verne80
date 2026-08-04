@@ -8,52 +8,455 @@
     "The waypoints list is the other half: stops the party really makes that Fogg's own",
     "itinerary table never names, because the table lists eight legs and the journey has",
     "many more landings than that. Each says which leg it sits on. Mont Cenis and",
-    "Brindisi are seeded from the table's own via clause rather than typed in here."
+    "Brindisi are seeded from the table's own via clause rather than typed in here.",
+    "",
+    "The local list is the third kind of error, and the one no curation can fix by name:",
+    "'station' appears in six chapters and means six different cities. These are interiors",
+    "and vessels — somewhere inside wherever the party already is. They never move the pin",
+    "and have no coordinates of their own, because their position is the party's."
   ],
   "blocked": [
-    {"name": "England", "why": "a country, named as the setting of the betting frenzy"},
-    {"name": "Europe", "why": "a continent, named in a schedule estimate"},
-    {"name": "America", "why": "a continent; the route stops at San Francisco and New York, not at America"},
-    {"name": "the Continent", "why": "an idiom for mainland Europe, not a stop"},
-    {"name": "France", "why": "a country the train crosses; Paris is the stop"},
-    {"name": "India", "why": "a region the party crosses; Bombay, Allahabad and Calcutta are the stops"},
-    {"name": "Japan", "why": "the parenthetical on Yokohama in the itinerary table, not a separate place"},
-    {"name": "United Kingdom", "why": "a country, named in chapter 1's description of Fogg"},
-    {"name": "United States", "why": "a country, named in a list of where the detectives were sent"},
-    {"name": "Bank of England", "why": "an institution, named as the robbery's scene — never a position"},
-    {"name": "Reform", "why": "the club's short form in chapter 2, not a separate place"},
-    {"name": "Madame Tussaud's", "why": "an attraction, named in a joke about Fogg's stillness"},
-    {"name": "Haymarket taverns", "why": "a class of establishment, named as somewhere Fogg does not go"},
-    {"name": "American lakes", "why": "a geographic feature named in a simile about Fogg's calm"},
-    {"name": "Rothal", "why": "this translation's spelling of a Great Indian Peninsula Railway station; no gazetteer entry, and the party never stops there"},
-    {"name": "Glasgow", "why": "named in chapter 3 as somewhere a rival route might go; the party never visits"},
-    {"name": "Havre", "why": "ditto — an alternative crossing Fogg does not take"},
-    {"name": "Dover", "why": "named as the train's destination in chapter 4, but the crossing is not a stop the text lingers on; revisit if a later chapter puts anyone there"},
-    {"name": "Calais", "why": "ditto, the far side of the same crossing"}
+    {
+      "name": "England",
+      "why": "a country, named as the setting of the betting frenzy"
+    },
+    {
+      "name": "Europe",
+      "why": "a continent, named in a schedule estimate"
+    },
+    {
+      "name": "America",
+      "why": "a continent; the route stops at San Francisco and New York, not at America"
+    },
+    {
+      "name": "the Continent",
+      "why": "an idiom for mainland Europe, not a stop"
+    },
+    {
+      "name": "France",
+      "why": "a country the train crosses; Paris is the stop"
+    },
+    {
+      "name": "India",
+      "why": "a region the party crosses; Bombay, Allahabad and Calcutta are the stops"
+    },
+    {
+      "name": "Japan",
+      "why": "the parenthetical on Yokohama in the itinerary table, not a separate place"
+    },
+    {
+      "name": "United Kingdom",
+      "why": "a country, named in chapter 1's description of Fogg"
+    },
+    {
+      "name": "United States",
+      "why": "a country, named in a list of where the detectives were sent"
+    },
+    {
+      "name": "Bank of England",
+      "why": "an institution, named as the robbery's scene — never a position"
+    },
+    {
+      "name": "Reform",
+      "why": "the club's short form in chapter 2, not a separate place"
+    },
+    {
+      "name": "Madame Tussaud's",
+      "why": "an attraction, named in a joke about Fogg's stillness"
+    },
+    {
+      "name": "Haymarket taverns",
+      "why": "a class of establishment, named as somewhere Fogg does not go"
+    },
+    {
+      "name": "American lakes",
+      "why": "a geographic feature named in a simile about Fogg's calm"
+    },
+    {
+      "name": "Rothal",
+      "why": "this translation's spelling of a Great Indian Peninsula Railway station; no gazetteer entry, and the party never stops there"
+    },
+    {
+      "name": "Glasgow",
+      "why": "named in chapter 3 as somewhere a rival route might go; the party never visits"
+    },
+    {
+      "name": "Havre",
+      "why": "ditto — an alternative crossing Fogg does not take"
+    },
+    {
+      "name": "Dover",
+      "why": "named as the train's destination in chapter 4, but the crossing is not a stop the text lingers on; revisit if a later chapter puts anyone there"
+    },
+    {
+      "name": "Calais",
+      "why": "ditto, the far side of the same crossing"
+    }
   ],
   "waypoints": [
-    {"name": "Sydenham", "leg": 0, "along": 0.05, "why": "chapter 4: the train is already whirling through it, so this is where the voyage visibly begins"},
-    {"name": "Paris", "leg": 0, "along": 0.2, "why": "chapter 4: the tickets are bought for Paris"},
-    {"name": "Mont Cenis", "leg": 0, "along": 0.4, "why": "named in the chapter-3 table's own via clause for leg 0"},
-    {"name": "Brindisi", "leg": 0, "along": 0.6, "why": "ditto — the second of the table's two named waypoints, in its printed order"},
-    {"name": "Aden", "leg": 1, "along": 0.5, "why": "the Mongolia coals there between Suez and Bombay"},
-    {"name": "Allahabad", "leg": 2, "along": 0.5, "why": "where the railway's famous gap begins, between Bombay and Calcutta"},
-    {"name": "Singapore", "leg": 3, "along": 0.5, "why": "the Rangoon calls there between Calcutta and Hong Kong"},
-    {"name": "Salt Lake City", "leg": 6, "along": 0.35, "why": "on the Pacific Railroad between San Francisco and New York"},
-    {"name": "Omaha", "leg": 6, "along": 0.7, "why": "ditto, further east"},
-    {"name": "Queenstown", "leg": 7, "along": 0.6, "why": "the landfall before Liverpool"},
-    {"name": "Liverpool", "leg": 7, "along": 0.8, "why": "where the arrest happens, between New York and London"}
+    {
+      "name": "Sydenham",
+      "leg": 0,
+      "along": 0.05,
+      "why": "chapter 4: the train is already whirling through it, so this is where the voyage visibly begins"
+    },
+    {
+      "name": "Paris",
+      "leg": 0,
+      "along": 0.2,
+      "why": "chapter 4: the tickets are bought for Paris"
+    },
+    {
+      "name": "Mont Cenis",
+      "leg": 0,
+      "along": 0.4,
+      "why": "named in the chapter-3 table's own via clause for leg 0"
+    },
+    {
+      "name": "Brindisi",
+      "leg": 0,
+      "along": 0.6,
+      "why": "ditto — the second of the table's two named waypoints, in its printed order"
+    },
+    {
+      "name": "Aden",
+      "leg": 1,
+      "along": 0.5,
+      "why": "the Mongolia coals there between Suez and Bombay"
+    },
+    {
+      "name": "Allahabad",
+      "leg": 2,
+      "along": 0.5,
+      "why": "where the railway's famous gap begins, between Bombay and Calcutta"
+    },
+    {
+      "name": "Singapore",
+      "leg": 3,
+      "along": 0.5,
+      "why": "the Rangoon calls there between Calcutta and Hong Kong"
+    },
+    {
+      "name": "Salt Lake City",
+      "leg": 6,
+      "along": 0.35,
+      "why": "on the Pacific Railroad between San Francisco and New York"
+    },
+    {
+      "name": "Omaha",
+      "leg": 6,
+      "along": 0.7,
+      "why": "ditto, further east"
+    },
+    {
+      "name": "Queenstown",
+      "leg": 7,
+      "along": 0.6,
+      "why": "the landfall before Liverpool"
+    },
+    {
+      "name": "Liverpool",
+      "leg": 7,
+      "along": 0.8,
+      "why": "where the arrest happens, between New York and London"
+    }
   ],
   "micro": [
-    {"name": "Saville Row", "parent": "London", "why": "Fogg's house; chapters 1, 2 and 4"},
-    {"name": "No. 7, Saville Row, Burlington Gardens", "parent": "London", "why": "the full address as chapter 1 prints it"},
-    {"name": "Burlington Gardens", "parent": "London", "why": "part of the same address"},
-    {"name": "Reform Club", "parent": "London", "why": "where the wager is made and settled"},
-    {"name": "Pall Mall", "parent": "London", "why": "the street the Reform Club stands on"},
-    {"name": "Charing Cross", "parent": "London", "why": "the departure station — still inside London, so it does not move the pin"},
-    {"name": "West End", "parent": "London", "why": "chapter 5's district, where the news spreads"},
-    {"name": "Scotland Yard", "parent": "London", "why": "where Rowan reads Fix's telegram"},
-    {"name": "house", "parent": "London", "why": "chapter 3's word for Fogg's own house in Saville Row"},
-    {"name": "office", "parent": "London", "why": "chapter 5's word for the commissioner's room at Scotland Yard"}
+    {
+      "name": "Saville Row",
+      "parent": "London",
+      "why": "Fogg's house; chapters 1, 2 and 4"
+    },
+    {
+      "name": "No. 7, Saville Row, Burlington Gardens",
+      "parent": "London",
+      "why": "the full address as chapter 1 prints it"
+    },
+    {
+      "name": "Burlington Gardens",
+      "parent": "London",
+      "why": "part of the same address"
+    },
+    {
+      "name": "Reform Club",
+      "parent": "London",
+      "why": "where the wager is made and settled"
+    },
+    {
+      "name": "Pall Mall",
+      "parent": "London",
+      "why": "the street the Reform Club stands on"
+    },
+    {
+      "name": "Charing Cross",
+      "parent": "London",
+      "why": "the departure station — still inside London, so it does not move the pin"
+    },
+    {
+      "name": "West End",
+      "parent": "London",
+      "why": "chapter 5's district, where the news spreads"
+    },
+    {
+      "name": "Scotland Yard",
+      "parent": "London",
+      "why": "where Rowan reads Fix's telegram"
+    },
+    {
+      "name": "house",
+      "parent": "London",
+      "why": "chapter 3's word for Fogg's own house in Saville Row"
+    },
+    {
+      "name": "office",
+      "parent": "London",
+      "why": "chapter 5's word for the commissioner's room at Scotland Yard"
+    }
+  ],
+  "local": [
+    {
+      "name": "station",
+      "why": "chapters 10, 15, 25, 27, 34 and 35 — Bombay, Calcutta, San Francisco, the plains, Liverpool, London. One name, six places"
+    },
+    {
+      "name": "railway station",
+      "why": "the same thing spelled out"
+    },
+    {
+      "name": "Kearney station",
+      "why": "the Fort Kearney one, but the pin belongs to Fort Kearney, not to its platform"
+    },
+    {
+      "name": "Oakland station",
+      "why": "ditto, inside San Francisco"
+    },
+    {
+      "name": "Green River station",
+      "why": "ditto"
+    },
+    {
+      "name": "Fort Bridger station",
+      "why": "ditto"
+    },
+    {
+      "name": "Plum Creek station",
+      "why": "ditto"
+    },
+    {
+      "name": "terminus",
+      "why": "chapter 27's word for whichever end of the line they are at"
+    },
+    {
+      "name": "quay",
+      "why": "five chapters, five ports"
+    },
+    {
+      "name": "quays",
+      "why": "the plural, same thing"
+    },
+    {
+      "name": "Liverpool quay",
+      "why": "a quay is a quay; Liverpool is already a waypoint"
+    },
+    {
+      "name": "floating quay",
+      "why": "ditto"
+    },
+    {
+      "name": "wharf",
+      "why": "ditto"
+    },
+    {
+      "name": "wharves",
+      "why": "ditto"
+    },
+    {
+      "name": "docks",
+      "why": "ditto"
+    },
+    {
+      "name": "harbour",
+      "why": "four chapters, four harbours"
+    },
+    {
+      "name": "Queenstown Harbour",
+      "why": "Queenstown is already a waypoint; its harbour is inside it"
+    },
+    {
+      "name": "Cunard pier",
+      "why": "inside New York"
+    },
+    {
+      "name": "court-room",
+      "why": "chapter 15's Calcutta court and chapter 34's Liverpool one"
+    },
+    {
+      "name": "consulate",
+      "why": "Suez, Bombay and Hong Kong all have one"
+    },
+    {
+      "name": "English consulate",
+      "why": "ditto"
+    },
+    {
+      "name": "French consulate",
+      "why": "ditto"
+    },
+    {
+      "name": "consul's office",
+      "why": "ditto"
+    },
+    {
+      "name": "consul’s office",
+      "why": "the curly-apostrophe spelling of the same"
+    },
+    {
+      "name": "passport office",
+      "why": "ditto"
+    },
+    {
+      "name": "Custom House",
+      "why": "an institution every port has"
+    },
+    {
+      "name": "steamer office",
+      "why": "ditto"
+    },
+    {
+      "name": "telegraph office",
+      "why": "ditto"
+    },
+    {
+      "name": "police-station at Hong Kong",
+      "why": "Hong Kong is the node; the station is a room in it"
+    },
+    {
+      "name": "headquarters of the Bombay police",
+      "why": "ditto, in Bombay"
+    },
+    {
+      "name": "International Hotel",
+      "why": "chapter 25's San Francisco hotel — a room, not a stop"
+    },
+    {
+      "name": "Club Hotel",
+      "why": "ditto"
+    },
+    {
+      "name": "hotel",
+      "why": "the bare noun, in three chapters"
+    },
+    {
+      "name": "St. Nicholas Hotel, on Broadway",
+      "why": "inside New York"
+    },
+    {
+      "name": "St. Nicholas",
+      "why": "the short form of the same"
+    },
+    {
+      "name": "tavern",
+      "why": "chapter 22's word, and it is not a stop"
+    },
+    {
+      "name": "saloon",
+      "why": "the Reform Club's, and a railway car's"
+    },
+    {
+      "name": "great saloon of the club",
+      "why": "inside the Reform Club, which is already micro to London"
+    },
+    {
+      "name": "smoking-house",
+      "why": "the Yokohama opium den; inside Yokohama"
+    },
+    {
+      "name": "barber's",
+      "why": "chapter 22, inside Yokohama"
+    },
+    {
+      "name": "shop",
+      "why": "the bare noun"
+    },
+    {
+      "name": "exchange",
+      "why": "an institution, in whichever city they are in"
+    },
+    {
+      "name": "pagoda",
+      "why": "three chapters, three pagodas"
+    },
+    {
+      "name": "pagoda of Pillaji",
+      "why": "Verne's stop on the elephant route; the party is between Kholby and Allahabad, and that leg is the position"
+    },
+    {
+      "name": "pagoda on Malabar Hill",
+      "why": "inside Bombay"
+    },
+    {
+      "name": "thick forest",
+      "why": "the Bundelcund crossing; a setting, not a place"
+    },
+    {
+      "name": "copse",
+      "why": "ditto"
+    },
+    {
+      "name": "wood",
+      "why": "ditto"
+    },
+    {
+      "name": "ruined bungalow",
+      "why": "ditto"
+    },
+    {
+      "name": "modest-looking house",
+      "why": "chapter 22's Yokohama house"
+    },
+    {
+      "name": "his house",
+      "why": "whoever's, wherever they are"
+    },
+    {
+      "name": "the clergyman's house",
+      "why": "chapter 34, in Liverpool"
+    },
+    {
+      "name": "the clergyman’s house",
+      "why": "the curly-apostrophe spelling of the same"
+    },
+    {
+      "name": "domicile",
+      "why": "chapter 1's word for Saville Row, used loosely later"
+    },
+    {
+      "name": "cabin",
+      "why": "aboard whichever ship they are on"
+    },
+    {
+      "name": "Mongolia",
+      "why": "a vessel. Being aboard is a real location, but its position is the leg the ship is on — and that leg is already the party's own"
+    },
+    {
+      "name": "Rangoon",
+      "why": "ditto, Calcutta to Hong Kong"
+    },
+    {
+      "name": "Carnatic",
+      "why": "ditto, Hong Kong to Yokohama"
+    },
+    {
+      "name": "Tankadere",
+      "why": "ditto, the Hong Kong pilot boat"
+    },
+    {
+      "name": "General Grant",
+      "why": "ditto, Yokohama to San Francisco"
+    },
+    {
+      "name": "Henrietta",
+      "why": "ditto, the ship Fogg buys out from under its captain"
+    }
   ]
 }

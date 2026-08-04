@@ -367,12 +367,14 @@
           "leg": 0,
           "along": 0.05,
           "at_node": null,
-          "source": "carried",
-          "place_name_in_text": null,
-          "stated_at_chapter": 4,
-          "evidence": null,
+          "source": "stated",
+          "place_name_in_text": "‘Mongolia’",
+          "stated_at_chapter": 7,
+          "evidence": "went off to the ‘Mongolia’ in a boat",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
           ]
         },
         {
@@ -381,11 +383,12 @@
           "along": 0.05,
           "at_node": null,
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "quay",
           "stated_at_chapter": 4,
-          "evidence": null,
+          "evidence": "repaired to the quay, gave some orders to Passepartout",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
@@ -431,7 +434,7 @@
           "at_node": null,
           "source": "carried",
           "place_name_in_text": null,
-          "stated_at_chapter": 4,
+          "stated_at_chapter": 7,
           "evidence": null,
           "flags": []
         },
@@ -441,11 +444,12 @@
           "along": 0.05,
           "at_node": null,
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "shop",
           "stated_at_chapter": 4,
-          "evidence": null,
+          "evidence": "Passepartout and he had now reached the shop, where Fix left his companion",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
@@ -454,11 +458,12 @@
           "along": 0.0,
           "at_node": "Suez",
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "“Mongolia”",
           "stated_at_chapter": 6,
-          "evidence": null,
+          "evidence": "A quarter of an hour later found Fix, with a small bag in his hand, proceeding on board the “Mongolia;”",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         }
       ]
@@ -588,16 +593,16 @@
         },
         {
           "track": "fix",
-          "leg": 2,
-          "along": 0.0,
-          "at_node": "Bombay",
-          "source": "inferred",
-          "place_name_in_text": "Bombay",
-          "stated_at_chapter": 10,
-          "evidence": "The passengers of the “Mongolia” went ashore at half-past four p.m.",
+          "leg": 1,
+          "along": 0.5,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": "station",
+          "stated_at_chapter": 9,
+          "evidence": "Fix, who had followed Mr. Fogg to the station... was there, upon the platform.",
           "flags": [
             "unconfirmed_place",
-            "inferred_from_places_visited"
+            "local_interior"
           ]
         }
       ]
@@ -655,12 +660,12 @@
         },
         {
           "track": "fix",
-          "leg": 2,
-          "along": 0.0,
-          "at_node": "Bombay",
+          "leg": 1,
+          "along": 0.5,
+          "at_node": null,
           "source": "carried",
           "place_name_in_text": null,
-          "stated_at_chapter": 10,
+          "stated_at_chapter": 9,
           "evidence": null,
           "flags": []
         }
@@ -687,11 +692,12 @@
           "along": 0.0,
           "at_node": "Bombay",
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "thick forest",
           "stated_at_chapter": 11,
-          "evidence": null,
+          "evidence": "the guide entered a thick forest... Mr. Fogg patiently waited without a word.",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
@@ -700,21 +706,22 @@
           "along": 0.0,
           "at_node": "Bombay",
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "thick forest",
           "stated_at_chapter": 11,
-          "evidence": null,
+          "evidence": "the guide entered a thick forest... Passepartout was all eyes and ears.",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
           "track": "fix",
-          "leg": 2,
-          "along": 0.0,
-          "at_node": "Bombay",
+          "leg": 1,
+          "along": 0.5,
+          "at_node": null,
           "source": "carried",
           "place_name_in_text": null,
-          "stated_at_chapter": 10,
+          "stated_at_chapter": 9,
           "evidence": null,
           "flags": []
         }
@@ -738,11 +745,12 @@
           "along": 0.0,
           "at_node": "Bombay",
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "pagoda of Pillaji",
           "stated_at_chapter": 11,
-          "evidence": null,
+          "evidence": "Phileas Fogg and his companions, mingling in the rear ranks of the crowd, followed",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
@@ -751,21 +759,22 @@
           "along": 0.0,
           "at_node": "Bombay",
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "pagoda of Pillaji",
           "stated_at_chapter": 11,
-          "evidence": null,
+          "evidence": "It was Passepartout himself, who had slipped upon the pyre in the midst of the smoke",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
           "track": "fix",
-          "leg": 2,
-          "along": 0.0,
-          "at_node": "Bombay",
+          "leg": 1,
+          "along": 0.5,
+          "at_node": null,
           "source": "carried",
           "place_name_in_text": null,
-          "stated_at_chapter": 10,
+          "stated_at_chapter": 9,
           "evidence": null,
           "flags": []
         }
@@ -825,12 +834,12 @@
         },
         {
           "track": "fix",
-          "leg": 2,
-          "along": 0.0,
-          "at_node": "Bombay",
+          "leg": 1,
+          "along": 0.5,
+          "at_node": null,
           "source": "carried",
           "place_name_in_text": null,
-          "stated_at_chapter": 10,
+          "stated_at_chapter": 9,
           "evidence": null,
           "flags": []
         }
@@ -846,7 +855,7 @@
       "mentions": {
         "Hong Kong": "future",
         "Bombay": "past",
-        "pagoda of Pillaji": "off_route",
+        "pagoda of Pillaji": "here",
         "pagoda of Malabar Hill": "off_route",
         "Suez": "past",
         "London": "cyclic"
@@ -858,11 +867,12 @@
           "along": 0.0,
           "at_node": "Calcutta",
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "quays",
           "stated_at_chapter": 14,
-          "evidence": null,
+          "evidence": "That gentleman took a carriage, and the party were soon landed on one of the quays.",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
@@ -871,24 +881,26 @@
           "along": 0.5,
           "at_node": null,
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "quays",
           "stated_at_chapter": 14,
-          "evidence": null,
+          "evidence": "That gentleman took a carriage, and the party were soon landed on one of the quays.",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
           "track": "fix",
-          "leg": 2,
-          "along": 0.0,
-          "at_node": "Bombay",
+          "leg": 1,
+          "along": 0.5,
+          "at_node": null,
           "source": "carried",
-          "place_name_in_text": null,
-          "stated_at_chapter": 10,
-          "evidence": null,
+          "place_name_in_text": "quays",
+          "stated_at_chapter": 9,
+          "evidence": "Fix saw them leave the carriage and push off in a boat",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         }
       ]
@@ -1129,11 +1141,12 @@
           "along": 0.0,
           "at_node": "Hong Kong",
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "tavern",
           "stated_at_chapter": 18,
-          "evidence": null,
+          "evidence": "He accordingly invited his companion into a tavern which caught his eye on the quay.",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
@@ -1142,11 +1155,12 @@
           "along": 0.75,
           "at_node": null,
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "tavern",
           "stated_at_chapter": 18,
-          "evidence": null,
+          "evidence": "He accordingly invited his companion into a tavern which caught his eye on the quay.",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         }
       ]
@@ -1174,12 +1188,14 @@
           "leg": 4,
           "along": 0.0,
           "at_node": "Hong Kong",
-          "source": "carried",
-          "place_name_in_text": null,
-          "stated_at_chapter": 18,
-          "evidence": null,
+          "source": "inferred",
+          "place_name_in_text": "quay",
+          "stated_at_chapter": 20,
+          "evidence": "stepped upon the quay whence they were to embark.",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior",
+            "inferred_from_places_visited"
           ]
         },
         {
@@ -1199,11 +1215,12 @@
           "along": 0.75,
           "at_node": null,
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "quay",
           "stated_at_chapter": 18,
-          "evidence": null,
+          "evidence": "It was Fix, who, bowing, addressed Mr. Fogg: “Were you not, like me, sir, a passenger by the ‘Rangoon,’ which arrived yesterday?”",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         }
       ]
@@ -1483,44 +1500,44 @@
       "tracks": [
         {
           "track": "fogg",
-          "leg": 6,
-          "along": 0.0,
-          "at_node": "San Francisco",
-          "source": "inferred",
-          "place_name_in_text": "San Francisco",
-          "stated_at_chapter": 25,
-          "evidence": "IN WHICH A SLIGHT GLIMPSE IS HAD OF SAN FRANCISCO",
+          "leg": 5,
+          "along": 0.5,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": "station",
+          "stated_at_chapter": 24,
+          "evidence": "At a quarter before six the travellers reached the station",
           "flags": [
             "unconfirmed_place",
-            "inferred_from_places_visited"
+            "local_interior"
           ]
         },
         {
           "track": "passepartout",
-          "leg": 6,
-          "along": 0.0,
-          "at_node": "San Francisco",
-          "source": "inferred",
-          "place_name_in_text": "San Francisco",
-          "stated_at_chapter": 25,
-          "evidence": "IN WHICH A SLIGHT GLIMPSE IS HAD OF SAN FRANCISCO",
+          "leg": 5,
+          "along": 0.5,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": "station",
+          "stated_at_chapter": 24,
+          "evidence": "At a quarter before six the travellers reached the station",
           "flags": [
             "unconfirmed_place",
-            "inferred_from_places_visited"
+            "local_interior"
           ]
         },
         {
           "track": "fix",
-          "leg": 6,
-          "along": 0.0,
-          "at_node": "San Francisco",
-          "source": "inferred",
-          "place_name_in_text": "San Francisco",
-          "stated_at_chapter": 25,
-          "evidence": "IN WHICH A SLIGHT GLIMPSE IS HAD OF SAN FRANCISCO",
+          "leg": 5,
+          "along": 0.5,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": "station",
+          "stated_at_chapter": 24,
+          "evidence": "At a quarter before six the travellers reached the station",
           "flags": [
             "unconfirmed_place",
-            "inferred_from_places_visited"
+            "local_interior"
           ]
         }
       ]
@@ -1533,7 +1550,7 @@
       ],
       "mentions": {
         "United States": "off_route",
-        "San Francisco": "here",
+        "San Francisco": "future",
         "Ogden": "off_route",
         "Omaha": "future",
         "New York": "future",
@@ -1557,41 +1574,47 @@
       "tracks": [
         {
           "track": "fogg",
-          "leg": 6,
-          "along": 0.0,
-          "at_node": "San Francisco",
-          "source": "carried",
-          "place_name_in_text": null,
-          "stated_at_chapter": 25,
-          "evidence": null,
+          "leg": 5,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Utah",
+          "stated_at_chapter": 26,
+          "evidence": "Having breakfasted, Mr. Fogg and his companions resumed their places in the car",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
           ]
         },
         {
           "track": "passepartout",
-          "leg": 6,
-          "along": 0.0,
-          "at_node": "San Francisco",
-          "source": "carried",
-          "place_name_in_text": null,
-          "stated_at_chapter": 25,
-          "evidence": null,
+          "leg": 5,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Utah",
+          "stated_at_chapter": 26,
+          "evidence": "Passepartout found himself beside the detective; but he did not talk to him.",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
           ]
         },
         {
           "track": "fix",
-          "leg": 6,
-          "along": 0.0,
-          "at_node": "San Francisco",
-          "source": "carried",
-          "place_name_in_text": null,
-          "stated_at_chapter": 25,
-          "evidence": null,
+          "leg": 5,
+          "along": 0.5,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "Utah",
+          "stated_at_chapter": 26,
+          "evidence": "Fix’s manner had not changed; but Passepartout was very reserved",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "unconfirmed_place",
+            "in_transit"
           ]
         }
       ]
@@ -1698,12 +1721,14 @@
           "leg": 6,
           "along": 0.35,
           "at_node": null,
-          "source": "carried",
-          "place_name_in_text": null,
-          "stated_at_chapter": 27,
-          "evidence": null,
+          "source": "inferred",
+          "place_name_in_text": "Fort Bridger station",
+          "stated_at_chapter": 28,
+          "evidence": "At ten o’clock at night the train stopped at Fort Bridger station",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior",
+            "inferred_from_places_visited"
           ]
         },
         {
@@ -1711,12 +1736,14 @@
           "leg": 6,
           "along": 0.35,
           "at_node": null,
-          "source": "carried",
-          "place_name_in_text": null,
-          "stated_at_chapter": 27,
-          "evidence": null,
+          "source": "inferred",
+          "place_name_in_text": "Fort Bridger station",
+          "stated_at_chapter": 28,
+          "evidence": "At ten o’clock at night the train stopped at Fort Bridger station",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior",
+            "inferred_from_places_visited"
           ]
         },
         {
@@ -1724,12 +1751,14 @@
           "leg": 6,
           "along": 0.35,
           "at_node": null,
-          "source": "carried",
-          "place_name_in_text": null,
-          "stated_at_chapter": 27,
-          "evidence": null,
+          "source": "inferred",
+          "place_name_in_text": "Fort Bridger station",
+          "stated_at_chapter": 28,
+          "evidence": "At ten o’clock at night the train stopped at Fort Bridger station",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior",
+            "inferred_from_places_visited"
           ]
         }
       ]
@@ -1758,12 +1787,13 @@
           "leg": 6,
           "along": 0.35,
           "at_node": null,
-          "source": "carried",
-          "place_name_in_text": null,
-          "stated_at_chapter": 27,
-          "evidence": null,
+          "source": "stated",
+          "place_name_in_text": "Kearney station",
+          "stated_at_chapter": 29,
+          "evidence": "“It shall be stopped,” said Phileas Fogg, preparing to rush from the car.",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "in_transit"
           ]
         },
         {
@@ -1771,12 +1801,13 @@
           "leg": 6,
           "along": 0.35,
           "at_node": null,
-          "source": "carried",
-          "place_name_in_text": null,
-          "stated_at_chapter": 27,
-          "evidence": null,
+          "source": "stated",
+          "place_name_in_text": "Kearney station",
+          "stated_at_chapter": 29,
+          "evidence": "There, suspended by one hand between the baggage-car and the tender, with the other he loosened the safety chains",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "in_transit"
           ]
         },
         {
@@ -1784,12 +1815,13 @@
           "leg": 6,
           "along": 0.35,
           "at_node": null,
-          "source": "carried",
-          "place_name_in_text": null,
-          "stated_at_chapter": 27,
-          "evidence": null,
+          "source": "stated",
+          "place_name_in_text": "Kearney station",
+          "stated_at_chapter": 29,
+          "evidence": "Fix got up, and, going to Colonel Proctor said, “You forget that it is I with whom you have to deal, sir",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "in_transit"
           ]
         }
       ]
@@ -1814,7 +1846,7 @@
           "at_node": null,
           "source": "carried",
           "place_name_in_text": null,
-          "stated_at_chapter": 27,
+          "stated_at_chapter": 29,
           "evidence": null,
           "flags": [
             "on_stage_without_a_place"
@@ -1827,7 +1859,7 @@
           "at_node": null,
           "source": "carried",
           "place_name_in_text": null,
-          "stated_at_chapter": 27,
+          "stated_at_chapter": 29,
           "evidence": null,
           "flags": [
             "on_stage_without_a_place"
@@ -1840,7 +1872,7 @@
           "at_node": null,
           "source": "carried",
           "place_name_in_text": null,
-          "stated_at_chapter": 27,
+          "stated_at_chapter": 29,
           "evidence": null,
           "flags": [
             "on_stage_without_a_place"
@@ -1942,11 +1974,12 @@
           "along": 0.85,
           "at_node": null,
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "St. Nicholas Hotel, on Broadway",
           "stated_at_chapter": 31,
-          "evidence": null,
+          "evidence": "Rooms were engaged, and the night passed, briefly to Phileas Fogg, who slept profoundly",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
@@ -1955,11 +1988,12 @@
           "along": 0.85,
           "at_node": null,
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "St. Nicholas Hotel, on Broadway",
           "stated_at_chapter": 31,
-          "evidence": null,
+          "evidence": "after giving Passepartout instructions to await his return",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
@@ -1968,11 +2002,12 @@
           "along": 0.85,
           "at_node": null,
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "Henrietta",
           "stated_at_chapter": 31,
-          "evidence": null,
+          "evidence": "hurry to the St. Nicholas, and return with Aouda, Passepartout, and even the inseparable Fix... They were on board when the “Henrietta” made ready to weigh anchor.",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         }
       ]
@@ -1986,7 +2021,7 @@
         "Liverpool quay"
       ],
       "mentions": {
-        "New York": "past",
+        "New York": "future",
         "Liverpool": "future",
         "Bordeaux": "off_route",
         "London": "cyclic"
@@ -1994,44 +2029,44 @@
       "tracks": [
         {
           "track": "fogg",
-          "leg": 7,
-          "along": 0.6,
+          "leg": 6,
+          "along": 0.85,
           "at_node": null,
-          "source": "inferred",
-          "place_name_in_text": "Queenstown",
-          "stated_at_chapter": 33,
-          "evidence": "By ten in the evening they were passing Queenstown.",
+          "source": "carried",
+          "place_name_in_text": "Liverpool quay",
+          "stated_at_chapter": 31,
+          "evidence": "Phileas Fogg at last disembarked on the Liverpool quay, at twenty minutes before twelve, 21st December.",
           "flags": [
             "unconfirmed_place",
-            "inferred_from_places_visited"
+            "local_interior"
           ]
         },
         {
           "track": "passepartout",
-          "leg": 7,
-          "along": 0.6,
+          "leg": 6,
+          "along": 0.85,
           "at_node": null,
-          "source": "inferred",
-          "place_name_in_text": "Queenstown",
-          "stated_at_chapter": 33,
-          "evidence": "By ten in the evening they were passing Queenstown.",
+          "source": "carried",
+          "place_name_in_text": "Henrietta",
+          "stated_at_chapter": 31,
+          "evidence": "As for Passepartout, he thought Mr. Fogg’s manœuvre simply glorious.",
           "flags": [
             "unconfirmed_place",
-            "inferred_from_places_visited"
+            "local_interior"
           ]
         },
         {
           "track": "fix",
-          "leg": 7,
-          "along": 0.6,
+          "leg": 6,
+          "along": 0.85,
           "at_node": null,
-          "source": "inferred",
-          "place_name_in_text": "Queenstown",
-          "stated_at_chapter": 33,
-          "evidence": "By ten in the evening they were passing Queenstown.",
+          "source": "carried",
+          "place_name_in_text": "Liverpool quay",
+          "stated_at_chapter": 31,
+          "evidence": "But at this moment Fix came up, put his hand upon Mr. Fogg’s shoulder, and, showing his warrant, said, “You are really Phileas Fogg?”",
           "flags": [
             "unconfirmed_place",
-            "inferred_from_places_visited"
+            "local_interior"
           ]
         }
       ]
@@ -2045,14 +2080,14 @@
       ],
       "mentions": {
         "English soil": "off_route",
-        "Reform Club": "here"
+        "Reform Club": "cyclic"
       },
       "tracks": [
         {
           "track": "fogg",
           "leg": 7,
-          "along": 1.0,
-          "at_node": "London",
+          "along": 0.425,
+          "at_node": null,
           "source": "stated",
           "place_name_in_text": "London",
           "stated_at_chapter": 34,
@@ -2066,8 +2101,8 @@
         {
           "track": "passepartout",
           "leg": 7,
-          "along": 1.0,
-          "at_node": "London",
+          "along": 0.425,
+          "at_node": null,
           "source": "stated",
           "place_name_in_text": "London",
           "stated_at_chapter": 34,
@@ -2080,16 +2115,16 @@
         },
         {
           "track": "fix",
-          "leg": 7,
-          "along": 1.0,
-          "at_node": "London",
-          "source": "inferred",
-          "place_name_in_text": "London",
-          "stated_at_chapter": 34,
-          "evidence": "when Mr. Fogg stepped from the train at the terminus, all the clocks in London were striking ten minutes before nine.",
+          "leg": 6,
+          "along": 0.85,
+          "at_node": null,
+          "source": "carried",
+          "place_name_in_text": "Custom House",
+          "stated_at_chapter": 31,
+          "evidence": "The door swung open, and he saw Passepartout, Aouda, and Fix, who hurried towards him.",
           "flags": [
             "unconfirmed_place",
-            "inferred_from_places_visited"
+            "local_interior"
           ]
         }
       ]
@@ -2103,26 +2138,27 @@
       ],
       "mentions": {
         "Barings": "off_route",
-        "Reform Club": "here",
+        "Reform Club": "cyclic",
         "England": "off_route",
         "Westminster": "off_route",
         "Reform": "off_route",
         "India": "off_route",
-        "Liverpool": "past",
+        "Liverpool": "future",
         "Marylebone parish": "off_route"
       },
       "tracks": [
         {
           "track": "fogg",
           "leg": 7,
-          "along": 1.0,
-          "at_node": "London",
+          "along": 0.425,
+          "at_node": null,
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "domicile",
           "stated_at_chapter": 34,
-          "evidence": null,
+          "evidence": "and quietly went to his domicile.",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
@@ -2140,12 +2176,12 @@
         },
         {
           "track": "fix",
-          "leg": 7,
-          "along": 1.0,
-          "at_node": "London",
+          "leg": 6,
+          "along": 0.85,
+          "at_node": null,
           "source": "carried",
           "place_name_in_text": null,
-          "stated_at_chapter": 34,
+          "stated_at_chapter": 31,
           "evidence": null,
           "flags": []
         }
@@ -2161,8 +2197,8 @@
         "Edinburgh": "off_route",
         "America": "off_route",
         "Asia": "off_route",
-        "Saville Row": "here",
-        "Liverpool": "past",
+        "Saville Row": "cyclic",
+        "Liverpool": "future",
         "New York": "past",
         "Barings": "off_route"
       },
@@ -2170,14 +2206,15 @@
         {
           "track": "fogg",
           "leg": 7,
-          "along": 1.0,
-          "at_node": "London",
+          "along": 0.425,
+          "at_node": null,
           "source": "carried",
-          "place_name_in_text": null,
+          "place_name_in_text": "saloon",
           "stated_at_chapter": 34,
-          "evidence": null,
+          "evidence": "At the fifty-seventh second the door of the saloon opened; and the pendulum had not beat the sixtieth second when Phileas Fogg appeared",
           "flags": [
-            "on_stage_without_a_place"
+            "unconfirmed_place",
+            "local_interior"
           ]
         },
         {
@@ -2193,12 +2230,12 @@
         },
         {
           "track": "fix",
-          "leg": 7,
-          "along": 1.0,
-          "at_node": "London",
+          "leg": 6,
+          "along": 0.85,
+          "at_node": null,
           "source": "carried",
           "place_name_in_text": null,
-          "stated_at_chapter": 34,
+          "stated_at_chapter": 31,
           "evidence": null,
           "flags": []
         }
@@ -2219,15 +2256,16 @@
         {
           "track": "fogg",
           "leg": 7,
-          "along": 1.0,
-          "at_node": "London",
-          "source": "inferred",
-          "place_name_in_text": "Saville Row",
+          "along": 0.425,
+          "at_node": null,
+          "source": "stated",
+          "place_name_in_text": "the Reform Club",
           "stated_at_chapter": 37,
-          "evidence": "In three minutes he was in Saville Row again, and staggered back into\nMr. Fogg’s room.",
+          "evidence": "left his\nhouse, jumped into a cab, promised a hundred pounds to the cabman, and,\nhaving run over two dogs and overturned five carriages, reached the\nReform Club.",
           "flags": [
             "unconfirmed_place",
-            "inferred_from_places_visited"
+            "unconfirmed_place",
+            "in_transit"
           ]
         },
         {
@@ -2245,12 +2283,12 @@
         },
         {
           "track": "fix",
-          "leg": 7,
-          "along": 1.0,
-          "at_node": "London",
+          "leg": 6,
+          "along": 0.85,
+          "at_node": null,
           "source": "carried",
           "place_name_in_text": null,
-          "stated_at_chapter": 34,
+          "stated_at_chapter": 31,
           "evidence": null,
           "flags": []
         }

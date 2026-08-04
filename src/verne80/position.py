@@ -8,7 +8,7 @@ while Fogg is already on a train to Paris — the camera is *behind* the party. 
 second.
 
 So position comes from ``narrative.on_stage``: who is physically in the scene, and
-where the chapter puts them. Everything else follows from three ideas.
+where the chapter puts them. Everything else follows from four ideas.
 
 **A position is a point on a leg, not a node.** :class:`RoutePoint` is ``(leg,
 along)``. Node *k* is ``RoutePoint(k, 0.0)`` and the closing London is ``RoutePoint(7,
@@ -23,6 +23,11 @@ track, and a row whose position was inherited says so, along with the chapter th
 last stated it. Chapter 5's Fogg row reads ``carried, stated_at_chapter=4``. That is
 what lets the dashboard dim the pin, or write "last seen, ch. 4", instead of quietly
 asserting a position nobody wrote down.
+
+**An interior is not a position.** ``station`` appears in six chapters and means six
+different cities; ``quay`` in five. Those names cannot be resolved by a map keyed on
+them, so :attr:`PlaceKind.LOCAL` answers "inside wherever the party already is" and
+never moves the pin. A chapter whose only named place is a room stays where it was.
 
 **Monotonicity is a check, never a mechanism.** Nothing here pushes a position
 forwards. :func:`check_positions` reports a backwards step afterwards, and only as a
@@ -62,6 +67,11 @@ TRACKS_JSON = Path(__file__).with_name("tracks.json")
 # after the origin and nowhere near claiming an arrival.
 _JUST_UNDER_WAY = 0.1
 
+# Raised when a name resolved only because the party was already somewhere. Read in
+# three places, so it is a constant rather than three string literals that could drift
+# apart.
+LOCAL_FLAG = "local_interior"
+
 
 class PositionSource(StrEnum):
     """How a row's position was arrived at."""
@@ -87,6 +97,21 @@ class PlaceKind(StrEnum):
 
     MICRO = "micro"
     """Somewhere inside a stop — the Reform Club, Saville Row. Rolls up to a parent."""
+
+    LOCAL = "local"
+    """Somewhere inside wherever the party already is: a station, a quay, a cabin.
+
+    The distinction from :attr:`MICRO` is the whole point. A micro-location is a *fixed*
+    interior with a known parent: the Reform Club is in London, always. A local one is a
+    *floating* interior whose parent is whatever position has been carried. ``station``
+    appears in chapters 10, 15, 25, 27, 34 and 35 — Bombay, Calcutta, San Francisco, the
+    plains, Liverpool, London. One name, six places. A containment map keyed by name
+    cannot resolve that, and no amount of hand-curation can either; the only true answer
+    is "inside where they already are".
+
+    A vessel behaves the same way. Being aboard the Mongolia is a real location, but its
+    position is the leg the ship is on — which is the party's own.
+    """
 
     WAYPOINT = "waypoint"
     """Somewhere on a leg that the itinerary does not name — Paris, Aden, Omaha."""
@@ -331,9 +356,10 @@ def resolve_point(
     """Turn a place name into a point on the route.
 
     Where a name refers to more than one node — London, at both ends — the carried
-    position picks between them. **It disambiguates a name; it never supplies one.** A
-    place that is not on the route at all resolves to ``None`` whatever has been
-    carried.
+    position picks between them. **It disambiguates a name; it never supplies one** —
+    with the single exception of a :attr:`PlaceKind.LOCAL` interior, which has no
+    other answer and for which the carried position *is* the answer. A place that is
+    not on the route at all resolves to ``None`` whatever has been carried.
 
     Args:
         name: The place as the chapter printed it.
@@ -346,6 +372,9 @@ def resolve_point(
 
     Contract:
         - Returns ``None`` for an unknown or off-route place, never a guess.
+        - A ``local`` place returns ``carried`` unchanged, flagged ``local_interior``.
+          This is the one documented exception to "the carried position never supplies a
+          position": a name meaning "inside here" has no other answer.
         - With several candidates, returns the earliest at or after ``carried``; if none
           qualifies, the nearest overall, flagged ``ambiguous_cycle_node``.
         - Never raises.
@@ -356,6 +385,12 @@ def resolve_point(
     flags: list[str] = []
     if not entry.confirmed:
         flags.append("unconfirmed_place")
+
+    if entry.kind is PlaceKind.LOCAL:
+        # With nothing carried this returns None on purpose: a station tells you
+        # nothing about a track the text has not placed yet, and guessing would be
+        # worse than the unresolved place it replaces.
+        return carried, (*flags, LOCAL_FLAG)
 
     if entry.kind is PlaceKind.MICRO and entry.parent_key:
         parent = containment.get(entry.parent_key)
@@ -463,10 +498,16 @@ def _resolve_track(
     if not on_stage:
         return _carry(number, track, held, stated_at[track.key])
 
-    # Last entry first: a chapter that moves someone ends where the chapter ends.
-    for item in reversed(on_stage):
-        point, flags = _point_for(item, containment, spine, held)
-        if point is not None:
+    # Two passes, last entry first, because a chapter that moves someone ends where
+    # the chapter ends — but a local interior must not beat a real place named earlier
+    # in the same chapter. "…and they reached the station" would otherwise swallow
+    # "…arrived at Liverpool" three sentences before it.
+    resolved = [
+        (item, *_point_for(item, containment, spine, held)) for item in on_stage
+    ]
+
+    for item, point, flags in reversed(resolved):
+        if point is not None and LOCAL_FLAG not in flags:
             place = item.at_name_in_text or item.between_to or item.between_from
             return TrackPosition(
                 chapter=number,
@@ -475,6 +516,23 @@ def _resolve_track(
                 source=PositionSource.STATED,
                 place_name_in_text=place,
                 stated_at_chapter=number,
+                evidence=item.evidence,
+                flags=flags,
+            )
+
+    for item, point, flags in reversed(resolved):
+        if point is not None:
+            # A room, not a place. The name is real and belongs in the row, but it is
+            # not news about the position — so this stays CARRIED and
+            # `stated_at_chapter` keeps pointing at whichever chapter last gave a real
+            # one.
+            return TrackPosition(
+                chapter=number,
+                track=track.key,
+                point=point,
+                source=PositionSource.CARRIED,
+                place_name_in_text=item.at_name_in_text or item.between_to,
+                stated_at_chapter=stated_at[track.key],
                 evidence=item.evidence,
                 flags=flags,
             )
@@ -500,6 +558,27 @@ def _resolve_track(
     return _carry(number, track, held, stated_at[track.key], on_stage=True)
 
 
+def _drop_local(flags: tuple[str, ...], keep: bool = False) -> tuple[str, ...]:
+    """A transit with one local end is still a transit.
+
+    ``between_from="station", between_to="Omaha"`` is movement. The local end supplied
+    the carried position, which is exactly what "we left the station" means; keeping the
+    flag would send the row down the local pass and lose the movement the chapter is
+    describing.
+
+    Args:
+        flags: The flags both ends raised.
+        keep: Whether to leave the flag in place, for a transit where *neither* end
+            resolved to anywhere but the carried position.
+
+    Returns:
+        The flags, with the local marker removed unless ``keep``.
+    """
+    if keep:
+        return flags
+    return tuple(flag for flag in flags if flag != LOCAL_FLAG)
+
+
 def _point_for(
     item: object,
     containment: Mapping[str, Containment],
@@ -517,14 +596,16 @@ def _point_for(
     if origin and destination:
         start, flags_a = resolve_point(origin, containment, spine, held)
         end, flags_b = resolve_point(destination, containment, spine, start or held)
+        flags = _drop_local((*flags_a, *flags_b), keep=start is None and end is None)
         if start is not None and end is not None:
-            return start.midpoint(end), (*flags_a, *flags_b, "in_transit")
-        return (end or start), (*flags_a, *flags_b, "in_transit")
+            return start.midpoint(end), (*flags, "in_transit")
+        return (end or start), (*flags, "in_transit")
 
     if destination:
         end, flags = resolve_point(destination, containment, spine, held)
         if end is None:
             return None, flags
+        flags = _drop_local(flags)
         if held is None:
             return end, (*flags, "in_transit")
         return held.midpoint(end), (*flags, "in_transit")
@@ -598,6 +679,13 @@ def classify_mentions(
         entry = containment.get(place_key(name))
         if entry is None:
             out[name] = TemporalClass.UNKNOWN
+            continue
+        if entry.kind is PlaceKind.LOCAL:
+            # An interior named in a chapter is where the party is, by definition. A
+            # vessel recalled after they have left it reads HERE when it should read
+            # PAST — mentioned places are spec tier +3, and the `why` column carries
+            # that nuance; it is not worth machinery here.
+            out[name] = TemporalClass.HERE if fogg_point else TemporalClass.UNKNOWN
             continue
         points = _candidates(entry, containment, last_leg)
         if not points:
@@ -817,7 +905,8 @@ def format_run_log(
                 continue
             where = row.place_name_in_text or ""
             if row.source is PositionSource.CARRIED:
-                where = f"carried from {row.stated_at_chapter:02d}"
+                since = f"carried from {row.stated_at_chapter:02d}"
+                where = f"{where} ({since})" if where else since
             cell = f"{key} leg {row.point.leg}@{row.point.along:.2f} {where}"
             cells.append(cell.strip())
         scene = ""
