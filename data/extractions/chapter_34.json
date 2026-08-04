@@ -1,0 +1,185 @@
+{
+"chapter": 34,
+"title": "IN WHICH PHILEAS FOGG AT LAST REACHES LONDON",
+"summary_hover": "Phileas Fogg is held in the Liverpool Custom House but is released when the real robber is caught, chartering a train to London too late.",
+"summary_detail": "Phileas Fogg is imprisoned in the Liverpool Custom House by Detective Fix, effectively ruining his chances of winning the wager. Passepartout is devastated, blaming himself for not warning Fogg about Fix's true motives. Fix suddenly returns with news that the real bank robber was caught three days prior. A freed Fogg knocks Fix down and charters a special train to London, but arrives five minutes late.",
+"places_visited": [
+{
+"name_in_text": "Custom House",
+"role": "setting",
+"evidence": "He had been shut up in the Custom House"
+},
+{
+"name_in_text": "Liverpool",
+"role": "setting",
+"evidence": "Having arrived at Liverpool at twenty minutes before twelve on the 21st of December"
+},
+{
+"name_in_text": "station",
+"role": "passing_through",
+"evidence": "got into a cab, and in a few moments descended at the station."
+},
+{
+"name_in_text": "London",
+"role": "arrival",
+"evidence": "when Mr. Fogg stepped from the train at the terminus, all the clocks in London were striking ten minutes before nine."
+},
+{
+"name_in_text": "terminus",
+"role": "arrival",
+"evidence": "when Mr. Fogg stepped from the train at the terminus"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "English soil",
+"evidence": "only to arrest him the moment he set foot on English soil."
+},
+{
+"name_in_text": "Reform Club",
+"evidence": "he had till a quarter before nine that evening to reach the Reform Club"
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "The gentleman traveler who is imprisoned and delayed.",
+"evidence": "Phileas Fogg was in prison."
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant, distressed over the arrest.",
+"evidence": "Passepartout, when he saw his master arrested, would have fallen upon Fix"
+},
+{
+"name_in_text": "Fix",
+"role": "Detective who wrongly arrests Fogg and brings news of his freedom.",
+"evidence": "As for Fix, he had arrested Mr. Fogg because it was his duty"
+},
+{
+"name_in_text": "policemen",
+"role": "Officers holding back Passepartout.",
+"evidence": "had he not been held back by some policemen."
+},
+{
+"name_in_text": "Aouda",
+"role": "Fogg's traveling companion who waits outside his prison.",
+"evidence": "Aouda was thunderstruck at the suddenness of an event which she could not understand."
+},
+{
+"name_in_text": "engineer",
+"role": "Train operator hired for a special run.",
+"evidence": "having stimulated the engineer by the offer of a generous reward"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Custom House",
+"between_from": null,
+"between_to": null,
+"evidence": "He had been shut up in the Custom House"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Custom House",
+"between_from": null,
+"between_to": null,
+"evidence": "Aouda and he had remained, despite the cold, under the portico of the Custom House."
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "Custom House",
+"between_from": null,
+"between_to": null,
+"evidence": "Aouda and he had remained, despite the cold, under the portico of the Custom House."
+},
+{
+"name_in_text": "policemen",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": null,
+"evidence": "had he not been held back by some policemen."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "Custom House",
+"between_from": null,
+"between_to": null,
+"evidence": "The door swung open, and he saw Passepartout, Aouda, and Fix, who hurried towards him."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": "station",
+"between_to": "London",
+"evidence": "at last set out towards London with Aouda and his faithful servant."
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": null,
+"between_from": "station",
+"between_to": "London",
+"evidence": "at last set out towards London with Aouda and his faithful servant."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": null,
+"between_from": "station",
+"between_to": "London",
+"evidence": "at last set out towards London with Aouda and his faithful servant."
+},
+{
+"name_in_text": "engineer",
+"at_name_in_text": null,
+"between_from": "station",
+"between_to": "London",
+"evidence": "having stimulated the engineer by the offer of a generous reward, at last set out towards London"
+}
+],
+"named_but_not_present": [],
+"notes": null
+},
+"transport": [
+{
+"mode": "carriage",
+"vessel_or_line_name": "cab",
+"from": "Custom House",
+"to": "station",
+"evidence": "left the Custom House without delay, got into a cab, and in a few moments descended at the station."
+},
+{
+"mode": "railway",
+"vessel_or_line_name": "special train",
+"from": "station",
+"to": "London",
+"evidence": "Phileas Fogg then ordered a special train. ... at last set out towards London with Aouda and his faithful servant."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "next day",
+"evidence": "he was to be transferred to London the next day."
+},
+{
+"as_written": "21st of December",
+"evidence": "Having arrived at Liverpool at twenty minutes before twelve on the 21st of December"
+},
+{
+"as_written": "21st December, Saturday",
+"evidence": "On the line where these words were written, “21st December, Saturday, Liverpool”"
+}
+],
+"days_elapsed_or_remaining": "80th day",
+"schedule_status": "behind",
+"schedule_detail": "behind-hand five minutes",
+"evidence": "Having made the tour of the world, he was behind-hand five minutes. He had lost the wager!"
+},
+"money": {
+"amounts": [],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

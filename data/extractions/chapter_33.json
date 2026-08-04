@@ -1,0 +1,286 @@
+{
+"chapter": 33,
+"title": "IN WHICH PHILEAS FOGG SHOWS HIMSELF EQUAL TO THE OCCASION",
+"summary_hover": "Phileas Fogg takes over the Henrietta, burns its wooden parts for fuel, reaches Ireland, and is arrested upon arriving in Liverpool.",
+"summary_detail": "Phileas Fogg bribes the crew of the Henrietta to lock up Captain Speedy and sail toward Liverpool. When the coal supply runs low, Fogg buys the ship at a premium and burns its wooden fixtures to keep the steam going. Reaching Ireland, Fogg's party takes a train to Dublin and a fast steamer to Liverpool, only for Fix to finally arrest Fogg just as they disembark.",
+"places_visited": [
+{
+"name_in_text": "Hudson",
+"role": "passing_through",
+"evidence": "passed the lighthouse which marks the entrance of the Hudson"
+},
+{
+"name_in_text": "Sandy Hook",
+"role": "passing_through",
+"evidence": "turned the point of Sandy Hook, and put to sea."
+},
+{
+"name_in_text": "Long Island",
+"role": "passing_through",
+"evidence": "she skirted Long Island"
+},
+{
+"name_in_text": "Fire Island",
+"role": "passing_through",
+"evidence": "passed Fire Island, and directed her course rapidly eastward."
+},
+{
+"name_in_text": "Banks of Newfoundland",
+"role": "passing_through",
+"evidence": "they passed the edge of the Banks of Newfoundland"
+},
+{
+"name_in_text": "Irish coast",
+"role": "passing_through",
+"evidence": "they sighted the Irish coast and Fastnet Light."
+},
+{
+"name_in_text": "Fastnet Light",
+"role": "passing_through",
+"evidence": "they sighted the Irish coast and Fastnet Light."
+},
+{
+"name_in_text": "Queenstown",
+"role": "passing_through",
+"evidence": "By ten in the evening they were passing Queenstown."
+},
+{
+"name_in_text": "Queenstown Harbour",
+"role": "arrival",
+"evidence": "The “Henrietta” entered Queenstown Harbour at one o’clock in the morning"
+},
+{
+"name_in_text": "Dublin",
+"role": "passing_through",
+"evidence": "at dawn of day they were in Dublin"
+},
+{
+"name_in_text": "Liverpool quay",
+"role": "arrival",
+"evidence": "Phileas Fogg at last disembarked on the Liverpool quay"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "New York",
+"evidence": "three thousand miles from New York to Liverpool"
+},
+{
+"name_in_text": "Liverpool",
+"evidence": "Phileas Fogg wished to go to Liverpool, but the captain would not carry him there."
+},
+{
+"name_in_text": "Bordeaux",
+"evidence": "Then Phileas Fogg had taken passage for Bordeaux"
+},
+{
+"name_in_text": "London",
+"evidence": "since Phileas Fogg’s departure from London"
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "The gentleman traveler who takes command of the Henrietta and is arrested in Liverpool.",
+"evidence": "It was Phileas Fogg, Esquire."
+},
+{
+"name_in_text": "Captain Speedy",
+"role": "The captain of the Henrietta, who is locked in his cabin and later sells his ship to Fogg.",
+"evidence": "As for Captain Speedy, he was shut up in his cabin under lock and key"
+},
+{
+"name_in_text": "Aouda",
+"role": "Fogg's companion, who remains quietly anxious during the voyage.",
+"evidence": "Aouda was anxious, though she said nothing."
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant, who helps dismantle the ship and worries about the delays.",
+"evidence": "As for Passepartout, he thought Mr. Fogg’s manœuvre simply glorious."
+},
+{
+"name_in_text": "Fix",
+"role": "The detective who follows Fogg and eventually arrests him in Liverpool.",
+"evidence": "Often, also, the worthy fellow revolved around Fix, looking at him with a keen, distrustful eye"
+},
+{
+"name_in_text": "engineer",
+"role": "The ship's engineer who warns Fogg about the depleting coal supply.",
+"evidence": "On this day the engineer came on deck, went up to Mr. Fogg, and began to speak earnestly with him."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Henrietta",
+"between_from": null,
+"between_to": null,
+"evidence": "This was why Phileas Fogg was in command instead of Captain Speedy; why the captain was a prisoner in his cabin; and why, in short, the “Henrietta” was directing her course towards Liverpool."
+},
+{
+"name_in_text": "Captain Speedy",
+"at_name_in_text": "Henrietta",
+"between_from": null,
+"between_to": null,
+"evidence": "As for Captain Speedy, he was shut up in his cabin under lock and key"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "Henrietta",
+"between_from": null,
+"between_to": null,
+"evidence": "Aouda was anxious, though she said nothing."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Henrietta",
+"between_from": null,
+"between_to": null,
+"evidence": "As for Passepartout, he thought Mr. Fogg’s manœuvre simply glorious."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "Henrietta",
+"between_from": null,
+"between_to": null,
+"evidence": "Often, also, the worthy fellow revolved around Fix, looking at him with a keen, distrustful eye"
+},
+{
+"name_in_text": "engineer",
+"at_name_in_text": "Henrietta",
+"between_from": null,
+"between_to": null,
+"evidence": "On this day the engineer came on deck, went up to Mr. Fogg, and began to speak earnestly with him."
+},
+{
+"name_in_text": "Captain Speedy",
+"at_name_in_text": "Queenstown Harbour",
+"between_from": null,
+"between_to": null,
+"evidence": "left that gentleman on the levelled hulk of his craft, which was still worth half what he had sold it for."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Dublin",
+"between_from": "Queenstown Harbour",
+"between_to": "Dublin",
+"evidence": "They all got upon the train, which was just ready to start, at half-past one; at dawn of day they were in Dublin"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "Dublin",
+"between_from": "Queenstown Harbour",
+"between_to": "Dublin",
+"evidence": "They all got upon the train, which was just ready to start, at half-past one; at dawn of day they were in Dublin"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Liverpool quay",
+"between_from": "Dublin",
+"between_to": "Liverpool quay",
+"evidence": "Phileas Fogg at last disembarked on the Liverpool quay, at twenty minutes before twelve, 21st December."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "Liverpool quay",
+"between_from": "Dublin",
+"between_to": "Liverpool quay",
+"evidence": "But at this moment Fix came up, put his hand upon Mr. Fogg’s shoulder, and, showing his warrant, said, “You are really Phileas Fogg?”"
+}
+],
+"named_but_not_present": [],
+"notes": "Aouda and Passepartout are implied to be traveling with Fogg to Dublin and Liverpool ('The party went on shore at once', 'They all got upon the train'), but are not explicitly named in the scenes at Dublin or the Liverpool quay."
+},
+"transport": [
+{
+"mode": "steamer",
+"vessel_or_line_name": "Henrietta",
+"from": null,
+"to": "Queenstown Harbour",
+"evidence": "The “Henrietta” passed the lighthouse which marks the entrance of the Hudson, turned the point of Sandy Hook, and put to sea."
+},
+{
+"mode": "railway",
+"vessel_or_line_name": null,
+"from": "Queenstown",
+"to": "Dublin",
+"evidence": "They all got upon the train, which was just ready to start, at half-past one; at dawn of day they were in Dublin"
+},
+{
+"mode": "steamer",
+"vessel_or_line_name": null,
+"from": "Dublin",
+"to": "Liverpool quay",
+"evidence": "at dawn of day they were in Dublin; and they lost no time in embarking on a steamer which, disdaining to rise upon the waves, invariably cut through them."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "12th and the 21st of December",
+"evidence": "nine days, between the 12th and the 21st of December."
+},
+{
+"as_written": "13th",
+"evidence": "On the 13th they passed the edge of the Banks of Newfoundland"
+},
+{
+"as_written": "16th of December",
+"evidence": "The 16th of December was the seventy-fifth day since Phileas Fogg’s departure from London"
+},
+{
+"as_written": "18th",
+"evidence": "but on the 18th, the engineer, as he had predicted, announced that the coal would give out in the course of the day."
+},
+{
+"as_written": "19th of December",
+"evidence": "On the next day, the 19th of December, the masts, rafts, and spars were burned"
+},
+{
+"as_written": "20th",
+"evidence": "The railings, fittings, the greater part of the deck, and top sides disappeared on the 20th"
+},
+{
+"as_written": "21st December",
+"evidence": "Phileas Fogg at last disembarked on the Liverpool quay, at twenty minutes before twelve, 21st December."
+}
+],
+"days_elapsed_or_remaining": "seventy-fifth day",
+"schedule_status": "on_time",
+"schedule_detail": "He was only six hours distant from London.",
+"evidence": "He was only six hours distant from London."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "fifty-five thousand pounds",
+"purpose": "The amount Fix believes Fogg stole from the Bank of England.",
+"evidence": "a man who began by stealing fifty-five thousand pounds might end by stealing a vessel"
+},
+{
+"amount_as_written": "fifty thousand dollars",
+"purpose": "The value Captain Speedy claims for his vessel.",
+"evidence": "A vessel worth fifty thousand dollars!"
+},
+{
+"amount_as_written": "sixty thousand",
+"purpose": "The amount Fogg pays Speedy in dollars to buy the Henrietta.",
+"evidence": "Here are sixty thousand,” replied Phileas Fogg, handing the captain a roll of bank-bills."
+},
+{
+"amount_as_written": "twenty thousand pounds",
+"purpose": "The amount Fogg has expended, and the amount of the wager he will lose if he does not arrive in London on time.",
+"evidence": "Nearly twenty thousand pounds had been expended, and Fogg left the hull and engine to the captain"
+},
+{
+"amount_as_written": "forty thousand dollars",
+"purpose": "The profit Captain Speedy states he made from the transaction.",
+"evidence": "for I have gained at least forty thousand dollars by it!"
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

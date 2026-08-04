@@ -1,0 +1,196 @@
+{
+"chapter": 36,
+"title": "IN WHICH PHILEAS FOGG'S NAME IS ONCE MORE AT A PREMIUM ON 'CHANGE",
+"summary_hover": "As the deadline for the wager approaches, Fogg's friends wait at the Reform Club until he dramatically appears at the final second.",
+"summary_detail": "Following the arrest of the real bank robber, James Strand, public opinion in London swings entirely back in Phileas Fogg's favor. On the evening the wager is set to expire, his five friends anxiously wait in the Reform Club while a massive crowd gathers outside. Having received no news, the men count down the final seconds of the wager, only for Fogg to suddenly enter the room right on time.",
+"places_visited": [
+{
+"name_in_text": "Pall Mall",
+"role": "setting",
+"evidence": "A great crowd was collected in Pall Mall and the neighbouring streets on Saturday evening"
+},
+{
+"name_in_text": "Reform Club",
+"role": "setting",
+"evidence": "it seemed like a multitude of brokers permanently established around the Reform Club."
+},
+{
+"name_in_text": "great saloon of the club",
+"role": "setting",
+"evidence": "The five antagonists of Phileas Fogg had met in the great saloon of the club."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Edinburgh",
+"evidence": "arrested, on the 17th day of December, at Edinburgh."
+},
+{
+"name_in_text": "America",
+"evidence": "Telegrams were sent to America and Asia for news of Phileas Fogg."
+},
+{
+"name_in_text": "Asia",
+"evidence": "Telegrams were sent to America and Asia for news of Phileas Fogg."
+},
+{
+"name_in_text": "Saville Row",
+"evidence": "Messengers were dispatched to the house in Saville Row morning and evening."
+},
+{
+"name_in_text": "Liverpool",
+"evidence": "What time did the last train arrive from Liverpool?"
+},
+{
+"name_in_text": "New York",
+"evidence": "the only steamer he could have taken from New York to get here in time"
+},
+{
+"name_in_text": "Barings",
+"evidence": "present Mr. Fogg’s cheque at Barings to-morrow."
+}
+],
+"people": [
+{
+"name_in_text": "John Sullivan",
+"role": "A banker and one of Fogg's antagonists in the wager.",
+"evidence": "John Sullivan and Samuel Fallentin, the bankers"
+},
+{
+"name_in_text": "Samuel Fallentin",
+"role": "A banker and one of Fogg's antagonists in the wager.",
+"evidence": "John Sullivan and Samuel Fallentin, the bankers"
+},
+{
+"name_in_text": "Andrew Stuart",
+"role": "An engineer and one of Fogg's antagonists in the wager.",
+"evidence": "Andrew Stuart, the engineer"
+},
+{
+"name_in_text": "Gauthier Ralph",
+"role": "Director of the Bank of England and one of Fogg's antagonists.",
+"evidence": "Gauthier Ralph, the director of the Bank of England"
+},
+{
+"name_in_text": "Thomas Flanagan",
+"role": "A brewer and one of Fogg's antagonists.",
+"evidence": "Thomas Flanagan, the brewer"
+},
+{
+"name_in_text": "Phileas Fogg",
+"role": "The gentleman who arrives at the very last second to win the wager.",
+"evidence": "the pendulum had not beat the sixtieth second when Phileas Fogg appeared"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "John Sullivan",
+"at_name_in_text": "great saloon of the club",
+"between_from": null,
+"between_to": null,
+"evidence": "The five antagonists of Phileas Fogg had met in the great saloon of the club. John Sullivan..."
+},
+{
+"name_in_text": "Samuel Fallentin",
+"at_name_in_text": "great saloon of the club",
+"between_from": null,
+"between_to": null,
+"evidence": "The five antagonists of Phileas Fogg had met in the great saloon of the club. John Sullivan and Samuel Fallentin..."
+},
+{
+"name_in_text": "Andrew Stuart",
+"at_name_in_text": "great saloon of the club",
+"between_from": null,
+"between_to": null,
+"evidence": "The five antagonists of Phileas Fogg had met in the great saloon of the club... Andrew Stuart"
+},
+{
+"name_in_text": "Gauthier Ralph",
+"at_name_in_text": "great saloon of the club",
+"between_from": null,
+"between_to": null,
+"evidence": "The five antagonists of Phileas Fogg had met in the great saloon of the club... Gauthier Ralph"
+},
+{
+"name_in_text": "Thomas Flanagan",
+"at_name_in_text": "great saloon of the club",
+"between_from": null,
+"between_to": null,
+"evidence": "The five antagonists of Phileas Fogg had met in the great saloon of the club... Thomas Flanagan"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "saloon",
+"between_from": null,
+"between_to": null,
+"evidence": "At the fifty-seventh second the door of the saloon opened; and the pendulum had not beat the sixtieth second when Phileas Fogg appeared"
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "James Strand",
+"evidence": "the real bankrobber, a certain James Strand, had been arrested"
+},
+{
+"name_in_text": "Fix",
+"evidence": "The police were ignorant what had become of the detective, Fix"
+},
+{
+"name_in_text": "Lord Albemarle",
+"evidence": "paralytic old Lord Albemarle bet even in his favour."
+}
+],
+"notes": null
+},
+"transport": [],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "17th day of December",
+"evidence": "arrested, on the 17th day of December, at Edinburgh."
+},
+{
+"as_written": "17th of December",
+"evidence": "The 17th of December, the day of James Strand’s arrest"
+},
+{
+"as_written": "Saturday, the 21st of December",
+"evidence": "And would he appear on Saturday, the 21st of December, at a quarter before nine in the evening"
+},
+{
+"as_written": "yesterday",
+"evidence": "the ‘China’—the only steamer he could have taken from New York to get here in time arrived yesterday."
+},
+{
+"as_written": "to-morrow",
+"evidence": "we have nothing to do but to present Mr. Fogg’s cheque at Barings to-morrow."
+}
+],
+"days_elapsed_or_remaining": "seventy-sixth",
+"schedule_status": "on_time",
+"schedule_detail": null,
+"evidence": "and the pendulum had not beat the sixtieth second when Phileas Fogg appeared, followed by an excited crowd who had forced their way through the club doors, and in his calm voice, said, “Here I am, gentlemen!”"
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "five thousand",
+"purpose": "The amount Lord Albemarle was expected to lose on his bet.",
+"evidence": "I think he will be at least twenty days behind-hand, and that Lord Albemarle will lose a cool five thousand."
+},
+{
+"amount_as_written": "four thousand",
+"purpose": "Andrew Stuart's portion of the bet.",
+"evidence": "I wouldn’t give up my four thousand of the bet"
+},
+{
+"amount_as_written": "three thousand nine hundred and ninety-nine",
+"purpose": "The hypothetical amount Andrew Stuart would refuse to sell his four thousand wager for.",
+"evidence": "for three thousand nine hundred and ninety-nine."
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

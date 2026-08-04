@@ -1,0 +1,347 @@
+{
+"chapter": 29,
+"title": "IN WHICH CERTAIN INCIDENTS ARE NARRATED WHICH ARE ONLY TO BE MET WITH ON AMERICAN RAILROADS",
+"summary_hover": "Colonel Proctor forces Fogg into a duel aboard the train, but a sudden attack by Sioux warriors interrupts them.",
+"summary_detail": "As the train continues its journey across the American West, Colonel Proctor interrupts Fogg's whist game and demands a duel. Unable to stop at Plum Creek, they prepare to fight in the rear car. Before they can duel, a band of Sioux attacks the train. Passepartout heroically uncouples the cars to stop the train near Fort Kearney, but goes missing in the aftermath.",
+"places_visited": [
+{
+"name_in_text": "Fort Saunders",
+"role": "passing_through",
+"evidence": "passing Fort Saunders"
+},
+{
+"name_in_text": "Cheyne Pass",
+"role": "passing_through",
+"evidence": "crossing Cheyne Pass"
+},
+{
+"name_in_text": "Evans Pass",
+"role": "passing_through",
+"evidence": "and reaching Evans Pass."
+},
+{
+"name_in_text": "Camp Walbach",
+"role": "passing_through",
+"evidence": "During the night Camp Walbach was passed on the left"
+},
+{
+"name_in_text": "Lodge Pole Creek",
+"role": "passing_through",
+"evidence": "Lodge Pole Creek ran parallel with the road"
+},
+{
+"name_in_text": "Wyoming",
+"role": "passing_through",
+"evidence": "marking the boundary between the territories of Wyoming and Colorado."
+},
+{
+"name_in_text": "Colorado",
+"role": "passing_through",
+"evidence": "marking the boundary between the territories of Wyoming and Colorado."
+},
+{
+"name_in_text": "Nebraska",
+"role": "passing_through",
+"evidence": "They entered Nebraska at eleven"
+},
+{
+"name_in_text": "Sedgwick",
+"role": "passing_through",
+"evidence": "passed near Sedgwick"
+},
+{
+"name_in_text": "Julesburg",
+"role": "passing_through",
+"evidence": "and touched at Julesburg, on the southern branch of the Platte River."
+},
+{
+"name_in_text": "Platte River",
+"role": "passing_through",
+"evidence": "on the southern branch of the Platte River."
+},
+{
+"name_in_text": "Fort McPherson",
+"role": "passing_through",
+"evidence": "Fort McPherson was left behind at eight in the morning"
+},
+{
+"name_in_text": "North Platte",
+"role": "passing_through",
+"evidence": "At nine the train stopped at the important town of North Platte"
+},
+{
+"name_in_text": "Plum Creek station",
+"role": "passing_through",
+"evidence": "approaching Plum Creek station."
+},
+{
+"name_in_text": "Fort Kearney",
+"role": "passing_through",
+"evidence": "between Fort Kearney and the station beyond."
+},
+{
+"name_in_text": "Kearney station",
+"role": "arrival",
+"evidence": "stopped, less than a hundred feet from Kearney station."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Atlantic",
+"evidence": "descend to the Atlantic by limitless plains"
+},
+{
+"name_in_text": "Denver",
+"evidence": "led off southward to Denver, the capital of Colorado."
+},
+{
+"name_in_text": "San Francisco",
+"evidence": "Thirteen hundred and eighty-two miles had been passed over from San Francisco"
+},
+{
+"name_in_text": "New York",
+"evidence": "four days and nights more would probably bring them to New York."
+},
+{
+"name_in_text": "Missouri",
+"evidence": "whose waters empty into the Missouri a little above Omaha."
+},
+{
+"name_in_text": "Omaha",
+"evidence": "traversed before reaching Omaha."
+},
+{
+"name_in_text": "Europe",
+"evidence": "I am in a great hurry to get back to Europe"
+},
+{
+"name_in_text": "America",
+"evidence": "I determined to return to America"
+},
+{
+"name_in_text": "England",
+"evidence": "business which called me to England."
+},
+{
+"name_in_text": "Chicago",
+"evidence": "To Chicago?"
+},
+{
+"name_in_text": "Plum Creek",
+"evidence": "Do you know Plum Creek?"
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "Passenger, challenged to a duel",
+"evidence": "Phileas Fogg left the car, and the American followed him"
+},
+{
+"name_in_text": "Aouda",
+"role": "Fogg's traveling companion, defends the train",
+"evidence": "Aouda behaved courageously from the first."
+},
+{
+"name_in_text": "Fix",
+"role": "Detective, acts as Fogg's second",
+"evidence": "begged Fix to be his second at the approaching duel"
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant, saves the train",
+"evidence": "Mr. Fogg had not time to stop the brave fellow, who, opening a door unperceived by the Indians, succeeded in slipping under the car"
+},
+{
+"name_in_text": "Colonel Proctor",
+"role": "American duellist",
+"evidence": "Mr. Fogg, Aouda, and Fix raised their heads, and beheld Colonel Proctor."
+},
+{
+"name_in_text": "Stamp Proctor",
+"role": "American duellist",
+"evidence": "Stamp Proctor and Phileas Fogg recognised each other at once."
+},
+{
+"name_in_text": "Yankee",
+"role": "Proctor's second",
+"evidence": "attended by a Yankee of his own stamp as his second."
+},
+{
+"name_in_text": "conductor",
+"role": "Train official",
+"evidence": "just as the combatants were about to step from the train, the conductor hurried up"
+},
+{
+"name_in_text": "Sioux",
+"role": "Native American attackers",
+"evidence": "They then perceived that the train was attacked by a band of Sioux."
+},
+{
+"name_in_text": "engineer",
+"role": "Train driver",
+"evidence": "half stunned the engineer and stoker with blows from their muskets."
+},
+{
+"name_in_text": "stoker",
+"role": "Train worker",
+"evidence": "half stunned the engineer and stoker with blows from their muskets."
+},
+{
+"name_in_text": "Sioux chief",
+"role": "Leader of the attackers on the engine",
+"evidence": "A Sioux chief, wishing to stop the train, but not knowing how to work the regulator, had opened wide instead of closing the steam-valve"
+},
+{
+"name_in_text": "soldiers of the fort",
+"role": "Military garrison from Fort Kearney",
+"evidence": "The soldiers of the fort, attracted by the shots, hurried up"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Kearney station",
+"evidence": "“It shall be stopped,” said Phileas Fogg, preparing to rush from the car."
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Kearney station",
+"evidence": "Aouda behaved courageously from the first. She defended herself like a true heroine with a revolver"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Kearney station",
+"evidence": "Fix got up, and, going to Colonel Proctor said, “You forget that it is I with whom you have to deal, sir"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Kearney station",
+"evidence": "There, suspended by one hand between the baggage-car and the tender, with the other he loosened the safety chains"
+},
+{
+"name_in_text": "Colonel Proctor",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Kearney station",
+"evidence": "Colonel Proctor and Mr. Fogg, revolvers in hand, hastily quitted their prison, and rushed forward where the noise was most clamorous."
+},
+{
+"name_in_text": "Stamp Proctor",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Kearney station",
+"evidence": "Stamp Proctor and Phileas Fogg recognised each other at once."
+},
+{
+"name_in_text": "Yankee",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Kearney station",
+"evidence": "The door of the next car opened, and Colonel Proctor appeared on the platform, attended by a Yankee of his own stamp as his second."
+},
+{
+"name_in_text": "conductor",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Kearney station",
+"evidence": "The conductor was fighting beside Mr. Fogg, when he was shot and fell."
+},
+{
+"name_in_text": "Sioux",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Kearney station",
+"evidence": "The Sioux had at the same time invaded the cars, skipping like enraged monkeys over the roofs"
+},
+{
+"name_in_text": "engineer",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Kearney station",
+"evidence": "The Indians had first mounted the engine, and half stunned the engineer and stoker"
+},
+{
+"name_in_text": "stoker",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Kearney station",
+"evidence": "The Indians had first mounted the engine, and half stunned the engineer and stoker"
+},
+{
+"name_in_text": "Sioux chief",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Kearney station",
+"evidence": "A Sioux chief, wishing to stop the train, but not knowing how to work the regulator, had opened wide instead of closing the steam-valve"
+},
+{
+"name_in_text": "soldiers of the fort",
+"at_name_in_text": "Kearney station",
+"between_from": null,
+"between_to": null,
+"evidence": "The soldiers of the fort, attracted by the shots, hurried up; the Sioux had not expected them, and decamped in a body before the train entirely stopped."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "General Dodge",
+"evidence": "inaugurated on the 23rd of October, 1867, by the chief engineer, General Dodge."
+},
+{
+"name_in_text": "Thomas C. Durant",
+"evidence": "amongst whom was Thomas C. Durant, vice-president of the road"
+},
+{
+"name_in_text": "Amphion",
+"evidence": "more powerful than Amphion’s lyre"
+},
+{
+"name_in_text": "John Bull",
+"evidence": "You have only to try, son of John Bull"
+}
+],
+"notes": "Passepartout uncouples the cars from the runaway locomotive, but when the passengers are counted at Kearney station, he is missing."
+},
+"transport": [
+{
+"mode": "railway",
+"vessel_or_line_name": "Union Pacific Railroad",
+"from": null,
+"to": "Kearney station",
+"evidence": "It was here that the Union Pacific Railroad was inaugurated... but the brakes were worked and at last they stopped, less than a hundred feet from Kearney station."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "23rd of October, 1867",
+"evidence": "inaugurated on the 23rd of October, 1867, by the chief engineer, General Dodge."
+}
+],
+"days_elapsed_or_remaining": "Thirteen hundred and eighty-two miles had been passed over from San Francisco, in three days and three nights; four days and nights more would probably bring them to New York.",
+"schedule_status": "on_time",
+"schedule_detail": "Phileas Fogg was not as yet behind-hand.",
+"evidence": "Phileas Fogg was not as yet behind-hand."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "several guineas",
+"purpose": "winnings from playing whist",
+"evidence": "Fix had begun by winning several guineas, which he seemed likely to lose"
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

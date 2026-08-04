@@ -1,0 +1,254 @@
+{
+"chapter": 32,
+"title": "IN WHICH PHILEAS FOGG ENGAGES IN A DIRECT STRUGGLE WITH BAD FORTUNE",
+"summary_hover": "Phileas Fogg searches the New York docks for a ship to cross the Atlantic and hires the Henrietta to sail to Bordeaux.",
+"summary_detail": "Having missed the steamer for Liverpool, Phileas Fogg and his companions secure lodging in New York. The following day, Fogg scours the docks for a departing vessel and meets Captain Andrew Speedy of the Henrietta. When Speedy steadfastly refuses to sail to Liverpool, Fogg offers him two thousand dollars per passenger to take them to Bordeaux, securing their passage just in time.",
+"places_visited": [
+{
+"name_in_text": "Cunard pier",
+"role": "departure",
+"evidence": "on leaving the Cunard pier, only said: “We will consult about what is best to-morrow."
+},
+{
+"name_in_text": "Hudson",
+"role": "passing_through",
+"evidence": "The party crossed the Hudson in the Jersey City ferryboat"
+},
+{
+"name_in_text": "St. Nicholas Hotel, on Broadway",
+"role": "arrival",
+"evidence": "drove in a carriage to the St. Nicholas Hotel, on Broadway."
+},
+{
+"name_in_text": "New York",
+"role": "setting",
+"evidence": "It was not at New York as at Hong Kong"
+},
+{
+"name_in_text": "Battery",
+"role": "setting",
+"evidence": "espied, anchored at the Battery, a cable’s length off at most, a trading vessel"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Liverpool",
+"evidence": "the Hamburg boats did not go directly to Liverpool or London"
+},
+{
+"name_in_text": "London",
+"evidence": "the Hamburg boats did not go directly to Liverpool or London"
+},
+{
+"name_in_text": "Havre",
+"evidence": "the Hamburg boats did not go directly to Liverpool or London, but to Havre"
+},
+{
+"name_in_text": "Southampton",
+"evidence": "and the additional trip from Havre to Southampton would render Phileas Fogg’s last efforts of no avail."
+},
+{
+"name_in_text": "Cardiff",
+"evidence": "And I am Andrew Speedy, of Cardiff."
+},
+{
+"name_in_text": "Bordeaux",
+"evidence": "You are bound for—Bordeaux."
+},
+{
+"name_in_text": "China",
+"evidence": "To Liverpool? Why not to China?"
+},
+{
+"name_in_text": "Hong Kong",
+"evidence": "It was not at New York as at Hong Kong"
+},
+{
+"name_in_text": "England",
+"evidence": "When they reached England, even if Mr. Fogg did not throw some handfuls of bank-bills into the sea"
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "Gentleman attempting to travel the world, searching for a ship.",
+"evidence": "Phileas Fogg did not betray the least disappointment; but the situation was a grave one."
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant who blames himself for their current predicament.",
+"evidence": "Passepartout was crushed; it overwhelmed him to lose the boat by three-quarters of an hour."
+},
+{
+"name_in_text": "Aouda",
+"role": "Fogg's female companion.",
+"evidence": "inform Aouda to be ready at an instant’s notice."
+},
+{
+"name_in_text": "Andrew Speedy",
+"role": "Captain of the trading vessel Henrietta.",
+"evidence": "He was a man of fifty, a sort of sea-wolf, with big eyes, a complexion of oxidised copper"
+},
+{
+"name_in_text": "Fix",
+"role": "Fogg's inseparable companion and observer.",
+"evidence": "As for Fix, he said to himself that the Bank of England would certainly not come out of this affair well indemnified."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Cunard pier",
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg, however, did not reproach him; and, on leaving the Cunard pier, only said"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "St. Nicholas Hotel, on Broadway",
+"between_from": null,
+"between_to": null,
+"evidence": "Rooms were engaged, and the night passed, briefly to Phileas Fogg, who slept profoundly"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Battery",
+"between_from": null,
+"between_to": null,
+"evidence": "He seemed about to give up all hope, when he espied, anchored at the Battery"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "St. Nicholas Hotel, on Broadway",
+"between_from": null,
+"between_to": null,
+"evidence": "after giving Passepartout instructions to await his return"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "St. Nicholas Hotel, on Broadway",
+"between_from": null,
+"between_to": null,
+"evidence": "but very long to Aouda and the others, whose agitation did not permit them to rest."
+},
+{
+"name_in_text": "Andrew Speedy",
+"at_name_in_text": "Henrietta",
+"between_from": null,
+"between_to": null,
+"evidence": "He ascended to the deck, and asked for the captain, who forthwith presented himself."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "Henrietta",
+"between_from": "St. Nicholas",
+"between_to": "Henrietta",
+"evidence": "hurry to the St. Nicholas, and return with Aouda, Passepartout, and even the inseparable Fix... They were on board when the “Henrietta” made ready to weigh anchor."
+}
+],
+"named_but_not_present": [],
+"notes": null
+},
+"transport": [
+{
+"mode": "steamer",
+"vessel_or_line_name": "China",
+"from": null,
+"to": null,
+"evidence": "The “China,” in leaving, seemed to have carried off Phileas Fogg’s last hope."
+},
+{
+"mode": "steamer",
+"vessel_or_line_name": "Pereire",
+"from": null,
+"to": null,
+"evidence": "The “Pereire,” of the French Transatlantic Company, whose admirable steamers are equal to any in speed and comfort, did not leave until the 14th"
+},
+{
+"mode": "steamer",
+"vessel_or_line_name": "Inman steamer",
+"from": null,
+"to": null,
+"evidence": "The Inman steamer did not depart till the next day, and could not cross the Atlantic in time to save the wager."
+},
+{
+"mode": "other",
+"vessel_or_line_name": "Jersey City ferryboat",
+"from": null,
+"to": null,
+"evidence": "The party crossed the Hudson in the Jersey City ferryboat"
+},
+{
+"mode": "carriage",
+"vessel_or_line_name": null,
+"from": null,
+"to": "St. Nicholas Hotel, on Broadway",
+"evidence": "and drove in a carriage to the St. Nicholas Hotel, on Broadway."
+},
+{
+"mode": "steamer",
+"vessel_or_line_name": "Henrietta",
+"from": "Battery",
+"to": "Bordeaux",
+"evidence": "I am setting out for Bordeaux, and shall go to Bordeaux."
+},
+{
+"mode": "carriage",
+"vessel_or_line_name": "hack",
+"from": "Henrietta",
+"to": "St. Nicholas",
+"evidence": "To disembark from the “Henrietta,” jump into a hack, hurry to the St. Nicholas"
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "14th",
+"evidence": "did not leave until the 14th"
+},
+{
+"as_written": "next day",
+"evidence": "The next day was the 12th of December."
+},
+{
+"as_written": "12th of December",
+"evidence": "The next day was the 12th of December."
+},
+{
+"as_written": "seven in the morning of the 12th to a quarter before nine in the evening of the 21st",
+"evidence": "From seven in the morning of the 12th to a quarter before nine in the evening of the 21st there were nine days"
+}
+],
+"days_elapsed_or_remaining": "nine days, thirteen hours, and forty-five minutes",
+"schedule_status": "behind",
+"schedule_detail": "could not cross the Atlantic in time to save the wager",
+"evidence": "The Inman steamer did not depart till the next day, and could not cross the Atlantic in time to save the wager."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "two hundred dollars",
+"purpose": "A hypothetical payment rejected by the captain for passage to Bordeaux.",
+"evidence": "No, not if you paid me two hundred dollars."
+},
+{
+"amount_as_written": "two thousand",
+"purpose": "The price offered by Fogg per person to travel to Bordeaux.",
+"evidence": "I offer you two thousand."
+},
+{
+"amount_as_written": "eight thousand dollars",
+"purpose": "The total amount the captain would gain by taking the four passengers.",
+"evidence": "There were eight thousand dollars to gain, without changing his route"
+},
+{
+"amount_as_written": "seven thousand pounds",
+"purpose": "Fix's calculation of Fogg's expenses up to this point.",
+"evidence": "more than seven thousand pounds would have been spent!"
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

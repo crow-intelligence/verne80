@@ -1,0 +1,140 @@
+{
+  "chapter": 37,
+  "title": "IN WHICH IT IS SHOWN THAT PHILEAS FOGG GAINED NOTHING BY HIS TOUR AROUND THE WORLD, UNLESS IT WERE HAPPINESS",
+  "summary_hover": "Fogg learns he miscounted a day, rushes to the Reform Club in time to win his wager, and marries Aouda.",
+  "summary_detail": "Passepartout discovers that it is actually Saturday, not Sunday, and drags Fogg to the Reform Club, where Fogg arrives with minutes to spare and wins his twenty-thousand-pound wager. The chapter explains that by travelling constantly eastward Fogg unknowingly gained a full day, seeing the sun cross the meridian eighty times to London's seventy-nine. Though his winnings barely exceed his expenses, Fogg marries Aouda, whose suggestion of marriage had prompted the errand that revealed his error. In the end his real gain from the journey is happiness, not money.",
+  "places_visited": [
+    {
+      "name_in_text": "London",
+      "role": "setting",
+      "evidence": "about five and twenty hours after the arrival of the travellers in London"
+    },
+    {
+      "name_in_text": "Saville Row",
+      "role": "passing_through",
+      "evidence": "In three minutes he was in Saville Row again, and staggered back into\nMr. Fogg’s room."
+    },
+    {
+      "name_in_text": "the Reform Club",
+      "role": "arrival",
+      "evidence": "having run over two dogs and overturned five carriages, reached the\nReform Club."
+    }
+  ],
+  "places_mentioned": [
+    { "name_in_text": "India", "evidence": "by not crossing India. But if I had not\ncrossed India, I should not have saved Aouda" }
+  ],
+  "people": [
+    {
+      "name_in_text": "Phileas Fogg",
+      "role": "the traveller who wins his wager after discovering he gained a day, and marries Aouda",
+      "evidence": "Yes; Phileas Fogg in person."
+    },
+    {
+      "name_in_text": "Passepartout",
+      "role": "Fogg's servant who realises the day was miscounted and drags his master to the Reform Club",
+      "evidence": "Passepartout had been sent by his master to engage the\nservices of the Reverend Samuel Wilson"
+    },
+    {
+      "name_in_text": "Aouda",
+      "role": "the young woman who marries Fogg",
+      "evidence": "That evening, Mr. Fogg, as tranquil and phlegmatic as ever, said to\nAouda"
+    },
+    {
+      "name_in_text": "the cabman",
+      "role": "driver of the cab Fogg takes to the Reform Club",
+      "evidence": "promised a hundred pounds to the cabman"
+    },
+    {
+      "name_in_text": "the Reverend Samuel Wilson",
+      "role": "clergyman Passepartout is sent to about the marriage, but who is not at home",
+      "evidence": "engage the\nservices of the Reverend Samuel Wilson in a certain marriage ceremony"
+    },
+    {
+      "name_in_text": "Fix",
+      "role": "person among whom Fogg divides the remaining thousand pounds, bearing no grudge",
+      "evidence": "between Passepartout\nand the unfortunate Fix, against whom he cherished no grudge"
+    }
+  ],
+  "narrative": {
+    "on_stage": [
+      {
+        "name_in_text": "Passepartout",
+        "at_name_in_text": "the clergyman’s house",
+        "between_from": null,
+        "between_to": null,
+        "evidence": "He soon reached the\nclergyman’s house, but found him not at home."
+      },
+      {
+        "name_in_text": "Passepartout",
+        "at_name_in_text": "Saville Row",
+        "between_from": null,
+        "between_to": null,
+        "evidence": "In three minutes he was in Saville Row again, and staggered back into\nMr. Fogg’s room."
+      },
+      {
+        "name_in_text": "Phileas Fogg",
+        "at_name_in_text": null,
+        "between_from": "his house",
+        "between_to": "the Reform Club",
+        "evidence": "left his\nhouse, jumped into a cab, promised a hundred pounds to the cabman, and,\nhaving run over two dogs and overturned five carriages, reached the\nReform Club."
+      },
+      {
+        "name_in_text": "Aouda",
+        "at_name_in_text": null,
+        "between_from": null,
+        "between_to": null,
+        "evidence": "That evening, Mr. Fogg, as tranquil and phlegmatic as ever, said to\nAouda"
+      }
+    ],
+    "named_but_not_present": [
+      { "name_in_text": "the Reverend Samuel Wilson", "evidence": "He soon reached the\nclergyman’s house, but found him not at home." },
+      { "name_in_text": "Fix", "evidence": "He\ndivided the one thousand pounds that remained between Passepartout\nand the unfortunate Fix" }
+    ],
+    "notes": "Aouda is present in the scene ('said to Aouda') but the chapter names no specific place for her, so her location fields are null. The clergyman is visited by Passepartout but is 'not at home', so he is not physically present."
+  },
+  "transport": [
+    {
+      "mode": "carriage",
+      "vessel_or_line_name": null,
+      "from": "his house",
+      "to": "the Reform Club",
+      "evidence": "jumped into a cab, promised a hundred pounds to the cabman"
+    }
+  ],
+  "time": {
+    "dates_mentioned": [
+      { "as_written": "Saturday, the twenty-first day of December", "evidence": "he had arrived in London on\nSaturday, the twenty-first day of December" },
+      { "as_written": "Friday,\nthe twentieth", "evidence": "when it was really Friday,\nthe twentieth, the seventy-ninth day only from his departure" }
+    ],
+    "days_elapsed_or_remaining": "the seventy-ninth day only from his departure",
+    "schedule_status": "ahead",
+    "schedule_detail": "We arrived twenty-four hours ahead of time; but there are only ten minutes left",
+    "evidence": "We arrived twenty-four hours ahead of time; but there are only\nten minutes left!"
+  },
+  "money": {
+    "amounts": [
+      {
+        "amount_as_written": "a hundred pounds",
+        "purpose": "promised to the cabman for the ride to the Reform Club",
+        "evidence": "promised a hundred pounds to the cabman"
+      },
+      {
+        "amount_as_written": "twenty thousand pounds",
+        "purpose": "the amount of the wager Fogg won",
+        "evidence": "Phileas Fogg had won his wager of twenty thousand pounds!"
+      },
+      {
+        "amount_as_written": "nearly nineteen thousand",
+        "purpose": "the sum Fogg spent on the way",
+        "evidence": "as he had\nspent nearly nineteen thousand on the way, the pecuniary gain was\nsmall."
+      },
+      {
+        "amount_as_written": "one thousand pounds",
+        "purpose": "the sum remaining, divided between Passepartout and Fix",
+        "evidence": "He\ndivided the one thousand pounds that remained between Passepartout\nand the unfortunate Fix"
+      }
+    ],
+    "fogg_remaining_stated": "one thousand pounds"
+  },
+  "notes": "The chapter includes a recap of every conveyance used across the whole journey ('steamers, railways, carriages, yachts, trading-vessels, sledges, elephants'), but these are a retrospective summary, not transport used within this chapter's scene; only the cab is used here."
+}

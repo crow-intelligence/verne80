@@ -1,0 +1,280 @@
+{
+"chapter": 26,
+"title": "IN WHICH PHILEAS FOGG AND PARTY TRAVEL BY THE PACIFIC RAILROAD",
+"summary_hover": "Phileas Fogg and his companions begin their train journey across America, facing a lengthy delay when a massive herd of buffalo crosses the tracks.",
+"summary_detail": "The travelers depart Oakland on the Pacific Railroad, crossing California and entering Nevada. The journey provides stunning views of the Sierra Nevada mountains and comfortable sleeping arrangements in a converted car. However, their progress is interrupted in Nevada by a massive herd of buffalo blocking the tracks for three hours, much to Passepartout's frustration, before they continue into Utah.",
+"places_visited": [
+{
+"name_in_text": "Oakland station",
+"role": "departure",
+"evidence": "The train left Oakland station at six o’clock."
+},
+{
+"name_in_text": "State of California",
+"role": "passing_through",
+"evidence": "while the train sped on across the State of California."
+},
+{
+"name_in_text": "Sacramento",
+"role": "passing_through",
+"evidence": "the travellers passed through Sacramento"
+},
+{
+"name_in_text": "Roclin, Auburn, and Colfax",
+"role": "passing_through",
+"evidence": "passing the junction, Roclin, Auburn, and Colfax"
+},
+{
+"name_in_text": "Sierra Nevada",
+"role": "passing_through",
+"evidence": "entered the range of the Sierra Nevada."
+},
+{
+"name_in_text": "’Cisco",
+"role": "passing_through",
+"evidence": "’Cisco was reached at seven in the morning"
+},
+{
+"name_in_text": "State of Nevada",
+"role": "passing_through",
+"evidence": "The train entered the State of Nevada"
+},
+{
+"name_in_text": "Carson Valley",
+"role": "passing_through",
+"evidence": "entered the State of Nevada through the Carson Valley"
+},
+{
+"name_in_text": "Reno",
+"role": "passing_through",
+"evidence": "at midday reached Reno, where there was a delay of twenty minutes for breakfast."
+},
+{
+"name_in_text": "Humboldt River",
+"role": "passing_through",
+"evidence": "running along Humboldt River, passed northward for several miles by its banks"
+},
+{
+"name_in_text": "Humboldt Range",
+"role": "passing_through",
+"evidence": "passed through the defiles of the Humboldt Range"
+},
+{
+"name_in_text": "Utah",
+"role": "arrival",
+"evidence": "when it penetrated Utah, the region of the Great Salt Lake"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "United States",
+"evidence": "crosses the entire width of the United States."
+},
+{
+"name_in_text": "San Francisco",
+"evidence": "the Central Pacific, between San Francisco and Ogden"
+},
+{
+"name_in_text": "Ogden",
+"evidence": "the Central Pacific, between San Francisco and Ogden"
+},
+{
+"name_in_text": "Omaha",
+"evidence": "and the Union Pacific, between Ogden and Omaha."
+},
+{
+"name_in_text": "New York",
+"evidence": "Five main lines connect Omaha with New York."
+},
+{
+"name_in_text": "Illinois",
+"evidence": "after they were driven from Illinois in 1845"
+},
+{
+"name_in_text": "Nebraska",
+"evidence": "at Omaha, in Nebraska."
+},
+{
+"name_in_text": "Iowa, Kansas, Colorado, and Oregon",
+"evidence": "several branches in Iowa, Kansas, Colorado, and Oregon."
+},
+{
+"name_in_text": "Platte River",
+"evidence": "passes along the left bank of the Platte River"
+},
+{
+"name_in_text": "Laramie territory",
+"evidence": "crosses the Laramie territory"
+},
+{
+"name_in_text": "Wahsatch Mountains",
+"evidence": "and the Wahsatch Mountains"
+},
+{
+"name_in_text": "Great Salt Lake",
+"evidence": "turns the Great Salt Lake, and reaches Salt Lake City"
+},
+{
+"name_in_text": "Salt Lake City",
+"evidence": "reaches Salt Lake City, the Mormon capital"
+},
+{
+"name_in_text": "Tuilla Valley",
+"evidence": "plunges into the Tuilla Valley"
+},
+{
+"name_in_text": "American Desert",
+"evidence": "across the American Desert"
+},
+{
+"name_in_text": "Cedar and Humboldt Mountains",
+"evidence": "Cedar and Humboldt Mountains"
+},
+{
+"name_in_text": "Pacific",
+"evidence": "descends, *viâ* Sacramento, to the Pacific"
+},
+{
+"name_in_text": "Rocky Mountains",
+"evidence": "its grade, even on the Rocky Mountains, never exceeding"
+},
+{
+"name_in_text": "Liverpool",
+"evidence": "take the Atlantic steamer at New York on the 11th for Liverpool."
+},
+{
+"name_in_text": "American River",
+"evidence": "along the American River, which empties into San Pablo Bay."
+},
+{
+"name_in_text": "San Pablo Bay",
+"evidence": "which empties into San Pablo Bay."
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "Passenger on the Pacific Railroad",
+"evidence": "Phileas Fogg, who had the most reason of all to be in a hurry, remained in his seat"
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant",
+"evidence": "Passepartout was furious at the delay they occasioned"
+},
+{
+"name_in_text": "detective",
+"role": "Traveling companion of Passepartout and Fogg",
+"evidence": "Passepartout found himself beside the detective; but he did not talk to him."
+},
+{
+"name_in_text": "Fix",
+"role": "Detective traveling with the party",
+"evidence": "Fix’s manner had not changed; but Passepartout was very reserved"
+},
+{
+"name_in_text": "steward",
+"role": "Train employee",
+"evidence": "At eight o’clock a steward entered the car and announced that the time for going to bed had arrived"
+},
+{
+"name_in_text": "engineer",
+"role": "Driver of the locomotive",
+"evidence": "The engineer did not try to overcome the obstacle, and he was wise."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": "Oakland station",
+"between_to": "Utah",
+"evidence": "Having breakfasted, Mr. Fogg and his companions resumed their places in the car"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": null,
+"between_from": "Oakland station",
+"between_to": "Utah",
+"evidence": "Passepartout found himself beside the detective; but he did not talk to him."
+},
+{
+"name_in_text": "detective",
+"at_name_in_text": null,
+"between_from": "Oakland station",
+"between_to": "Utah",
+"evidence": "Passepartout found himself beside the detective; but he did not talk to him."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": null,
+"between_from": "Oakland station",
+"between_to": "Utah",
+"evidence": "Fix’s manner had not changed; but Passepartout was very reserved"
+},
+{
+"name_in_text": "steward",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": null,
+"evidence": "At eight o’clock a steward entered the car and announced that the time for going to bed had arrived"
+},
+{
+"name_in_text": "engineer",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": null,
+"evidence": "The engineer did not try to overcome the obstacle, and he was wise."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "President Lincoln",
+"evidence": "President Lincoln himself fixed the end of the line at Omaha, in Nebraska."
+}
+],
+"notes": null
+},
+"transport": [
+{
+"mode": "railway",
+"vessel_or_line_name": "Pacific Railroad",
+"from": "Oakland station",
+"to": "Utah",
+"evidence": "IN WHICH PHILEAS FOGG AND PARTY TRAVEL BY THE PACIFIC RAILROAD... The train left Oakland station at six o’clock."
+},
+{
+"mode": "steamer",
+"vessel_or_line_name": "Atlantic steamer",
+"from": "New York",
+"to": "Liverpool",
+"evidence": "take the Atlantic steamer at New York on the 11th for Liverpool."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "1845",
+"evidence": "after they were driven from Illinois in 1845"
+},
+{
+"as_written": "1862",
+"evidence": "It was in 1862 that, in spite of the Southern Members of Congress"
+},
+{
+"as_written": "the 11th",
+"evidence": "take the Atlantic steamer at New York on the 11th for Liverpool."
+}
+],
+"days_elapsed_or_remaining": null,
+"schedule_status": "behind",
+"schedule_detail": "Delayed three hours by buffaloes, expecting to regain the lost time by greater speed.",
+"evidence": "The best course was to wait patiently, and regain the lost time by greater speed when the obstacle was removed. The procession of buffaloes lasted three full hours"
+},
+"money": {
+"amounts": [],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

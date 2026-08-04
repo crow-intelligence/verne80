@@ -1,0 +1,154 @@
+{
+"chapter": 23,
+"title": "IN WHICH PASSEPARTOUT'S NOSE BECOMES OUTRAGEOUSLY LONG",
+"summary_hover": "Penniless in Japan, Passepartout joins an acrobatic troupe. During a performance, he spots Phileas Fogg and Aouda, reuniting to board the American steamer.",
+"summary_detail": "Stranded without money, Passepartout trades his clothes for Japanese garments to afford a small meal. To secure passage across the Pacific, he takes a job in the Honourable William Batulcar's acrobatic troupe as a base for a human pyramid. While performing, he spots Fogg and Aouda in the audience, breaking the formation to rush to them. After Fogg pays for the damages, they all board the American steamer together.",
+"places_visited": [
+{
+"name_in_text": "Japanese quarter",
+"role": "setting",
+"evidence": "He followed the clown, and soon found himself once more in the Japanese quarter."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "America",
+"evidence": "It occurred to him to visit the steamers which were about to leave for America."
+},
+{
+"name_in_text": "San Francisco",
+"evidence": "Once at San Francisco, he would find some means of going on."
+},
+{
+"name_in_text": "Pacific",
+"evidence": "how to traverse the four thousand seven hundred miles of the Pacific"
+},
+{
+"name_in_text": "Japan",
+"evidence": "of the Pacific which lay between Japan and the New World."
+},
+{
+"name_in_text": "New World",
+"evidence": "which lay between Japan and the New World."
+},
+{
+"name_in_text": "UNITED STATES",
+"evidence": "PRIOR TO THEIR DEPARTURE TO THE UNITED STATES"
+},
+{
+"name_in_text": "Empire of the Sun",
+"evidence": "before leaving the Empire of the Sun for the States of the Union."
+},
+{
+"name_in_text": "States of the Union",
+"evidence": "for the States of the Union."
+},
+{
+"name_in_text": "France",
+"evidence": "in France they exhibit foreign clowns"
+},
+{
+"name_in_text": "Paris",
+"evidence": "Yes; a Parisian of Paris."
+},
+{
+"name_in_text": "Europe",
+"evidence": "a show to which Europe is as yet a stranger."
+}
+],
+"people": [
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant, who joins an acrobatic troupe",
+"evidence": "The next morning poor, jaded, famished Passepartout said to himself that he must get something to eat"
+},
+{
+"name_in_text": "Honourable William Batulcar",
+"role": "Proprietor of the acrobatic Japanese troupe",
+"evidence": "This was the Honourable William Batulcar’s establishment."
+},
+{
+"name_in_text": "Mr. Fogg",
+"role": "Passepartout's master, in the audience",
+"evidence": "Mr. Fogg, Aouda, and Passepartout passed through the lobby of the theatre"
+},
+{
+"name_in_text": "Aouda",
+"role": "Passenger traveling with Fogg, in the audience",
+"evidence": "Mr. Fogg, Aouda, and Passepartout passed through the lobby of the theatre"
+},
+{
+"name_in_text": "Phileas Fogg",
+"role": "Passepartout's master",
+"evidence": "Phileas Fogg appeased him by giving him a handful of banknotes."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Japanese quarter",
+"between_from": null,
+"between_to": null,
+"evidence": "He followed the clown, and soon found himself once more in the Japanese quarter."
+},
+{
+"name_in_text": "Honourable William Batulcar",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": null,
+"evidence": "Passepartout entered and asked for Mr. Batulcar, who straightway appeared in person."
+},
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg, Aouda, and Passepartout passed through the lobby of the theatre to the outside"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg, Aouda, and Passepartout passed through the lobby of the theatre to the outside"
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Mikado",
+"evidence": "pay their entertainer with coin bearing the Mikado’s features."
+},
+{
+"name_in_text": "TINGOU",
+"evidence": "UNDER THE DIRECT PATRONAGE OF THE GOD TINGOU!"
+},
+{
+"name_in_text": "Barnum",
+"evidence": "That gentleman was a sort of Barnum"
+}
+],
+"notes": "Fogg and Aouda are revealed to be in the audience near the end of the chapter. No location is specified for their entry other than the theatre."
+},
+"transport": [
+{
+"mode": "steamer",
+"vessel_or_line_name": "American steamer",
+"from": null,
+"to": null,
+"evidence": "stepped upon the American steamer."
+}
+],
+"time": {
+"dates_mentioned": [],
+"days_elapsed_or_remaining": "within a week",
+"schedule_status": "on_time",
+"schedule_detail": "Departing exactly on time at half-past six",
+"evidence": "At half-past six, the very hour of departure, Mr. Fogg and Aouda, followed by Passepartout... stepped upon the American steamer."
+},
+"money": {
+"amounts": [],
+"fogg_remaining_stated": null
+},
+"notes": "Phileas Fogg pays Mr. Batulcar a 'handful of banknotes' for damages, but no specific monetary amount is stated."
+}

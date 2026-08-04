@@ -1,0 +1,182 @@
+{
+"chapter": 21,
+"title": "IN WHICH THE MASTER OF THE "TANKADERE" RUNS GREAT RISK OF LOSING A REWARD OF TWO HUNDRED POUNDS",
+"summary_hover": "Phileas Fogg, Aouda, and Fix brave a violent typhoon aboard the pilot-boat Tankadere, racing to reach Shanghai to catch the Yokohama steamer.",
+"summary_detail": "Determined to catch the Yokohama steamer, Phileas Fogg charters the small pilot-boat Tankadere to take him, Aouda, and Fix from Hong Kong to Shanghai. En route, they endure a terrifying typhoon but hold their course, reaching the Shanghai River just as the American steamer is departing. In a final bid to catch it, Fogg orders the pilot to fire a distress cannon.",
+"places_visited": [
+{
+"name_in_text": "Hong Kong",
+"role": "departure",
+"evidence": "Late in the day they passed through the capricious channels of Hong Kong"
+},
+{
+"name_in_text": "Straits of Fo-Kien",
+"role": "passing_through",
+"evidence": "The “Tankadere” entered the Straits of Fo-Kien"
+},
+{
+"name_in_text": "Tropic of Cancer",
+"role": "passing_through",
+"evidence": "and crossed the Tropic of Cancer."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Yokohama",
+"evidence": "carry his passengers to Yokohama"
+},
+{
+"name_in_text": "Shanghai",
+"evidence": "attempt to reach Shanghai."
+},
+{
+"name_in_text": "America",
+"evidence": "vast extent of America"
+},
+{
+"name_in_text": "England",
+"evidence": "sailing directly from England"
+},
+{
+"name_in_text": "United States",
+"evidence": "sailing directly from England to the United States"
+},
+{
+"name_in_text": "London",
+"evidence": "since he left London"
+},
+{
+"name_in_text": "island of Formosa",
+"evidence": "which separate the island of Formosa from the Chinese coast"
+},
+{
+"name_in_text": "Chinese coast",
+"evidence": "from the Chinese coast"
+},
+{
+"name_in_text": "Shanghai River",
+"evidence": "mouth of Shanghai River."
+}
+],
+"people": [
+{
+"name_in_text": "John Bunsby",
+"role": "Master and pilot of the Tankadere",
+"evidence": "But John Bunsby believed in the “Tankadere,”"
+},
+{
+"name_in_text": "Phileas Fogg",
+"role": "Passenger",
+"evidence": "Phileas Fogg, with body erect and legs wide apart, standing like a sailor"
+},
+{
+"name_in_text": "Aouda",
+"role": "Passenger",
+"evidence": "The young woman, who was seated aft, was profoundly affected"
+},
+{
+"name_in_text": "Fix",
+"role": "Detective traveling with Fogg",
+"evidence": "Fix, seated in the bow, gave himself up to meditation."
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's missing servant",
+"evidence": "Phileas Fogg was also thinking of Passepartout, who had so strangely disappeared."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "John Bunsby",
+"at_name_in_text": null,
+"between_from": "Hong Kong",
+"between_to": "Shanghai River",
+"evidence": "John Bunsby found himself at six o’clock not more than ten miles from the mouth of Shanghai River."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": "Hong Kong",
+"between_to": "Shanghai",
+"evidence": "Phileas Fogg, with body erect and legs wide apart, standing like a sailor, gazed without staggering at the swelling waters."
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": null,
+"between_from": "Hong Kong",
+"between_to": "Shanghai",
+"evidence": "The young woman, who was seated aft, was profoundly affected as she looked out upon the ocean"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": null,
+"between_from": "Hong Kong",
+"between_to": "Shanghai",
+"evidence": "Fix, seated in the bow, gave himself up to meditation."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Passepartout",
+"evidence": "Phileas Fogg was also thinking of Passepartout, who had so strangely disappeared."
+}
+],
+"notes": "The on-stage characters spend the entire chapter in transit aboard the Tankadere."
+},
+"transport": [
+{
+"mode": "other",
+"vessel_or_line_name": "Tankadere",
+"from": "Hong Kong",
+"to": "Shanghai",
+"evidence": "Late in the day they passed through the capricious channels of Hong Kong, and the “Tankadere,” impelled by favourable winds, conducted herself admirably."
+},
+{
+"mode": "steamer",
+"vessel_or_line_name": "Carnatic",
+"from": null,
+"to": "Yokohama",
+"evidence": "if the “Carnatic” was carrying him thither"
+},
+{
+"mode": "steamer",
+"vessel_or_line_name": "American steamer",
+"from": "Shanghai River",
+"to": "Yokohama",
+"evidence": "It was the American steamer, leaving for Yokohama at the appointed time."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "early November",
+"evidence": "and it was now early November."
+},
+{
+"as_written": "8th November",
+"evidence": "At sunrise the next day, which was 8th November, the boat had made more than one hundred miles."
+}
+],
+"days_elapsed_or_remaining": null,
+"schedule_status": "unknown",
+"schedule_detail": "hoping to reach Yokohama without recording any delay",
+"evidence": "Mr. Fogg might hope that he would be able to reach Yokohama without recording any delay in his journal"
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "TWO HUNDRED POUNDS",
+"purpose": "A reward for the master of the Tankadere",
+"evidence": "IN WHICH THE MASTER OF THE "TANKADERE" RUNS GREAT RISK OF LOSING A REWARD OF TWO HUNDRED POUNDS"
+},
+{
+"amount_as_written": "two hundred pounds",
+"purpose": "Reward for the pilot to reach Shanghai in time",
+"evidence": "the reward of two hundred pounds was evidently on the point of escaping him."
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

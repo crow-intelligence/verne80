@@ -1,0 +1,320 @@
+{
+"chapter": 31,
+"title": "IN WHICH FIX, THE DETECTIVE, CONSIDERABLY FURTHERS THE INTERESTS OF PHILEAS FOGG",
+"summary_hover": "Fogg hires a wind-powered sledge to race to Omaha, catching trains to New York only to miss his Liverpool steamer by minutes.",
+"summary_detail": "Stranded and twenty hours behind schedule, Fogg accepts Fix's suggestion to hire a wind-powered sledge driven by an American named Mudge. The sledge races across the frozen plains to Omaha, where the party boards a series of trains to Chicago and then New York. Despite their rapid transit across the country, they arrive at the New York pier just 45 minutes after their steamer has sailed for Liverpool.",
+"places_visited": [
+{
+"name_in_text": "Fort Kearney",
+"role": "departure",
+"evidence": "leave her with Passepartout at Fort Kearney"
+},
+{
+"name_in_text": "Platte River",
+"role": "passing_through",
+"evidence": "he was crossing the Platte River."
+},
+{
+"name_in_text": "Omaha",
+"role": "passing_through",
+"evidence": "Arrived at the station which is in daily communication... the party directed their steps to the Omaha railway station."
+},
+{
+"name_in_text": "State of Iowa",
+"role": "passing_through",
+"evidence": "The train passed rapidly across the State of Iowa"
+},
+{
+"name_in_text": "Council Bluffs",
+"role": "passing_through",
+"evidence": "by Council Bluffs"
+},
+{
+"name_in_text": "Des Moines",
+"role": "passing_through",
+"evidence": "Des Moines"
+},
+{
+"name_in_text": "Iowa City",
+"role": "passing_through",
+"evidence": "and Iowa City."
+},
+{
+"name_in_text": "Mississippi",
+"role": "passing_through",
+"evidence": "it crossed the Mississippi at Davenport"
+},
+{
+"name_in_text": "Davenport",
+"role": "passing_through",
+"evidence": "crossed the Mississippi at Davenport"
+},
+{
+"name_in_text": "Rock Island",
+"role": "passing_through",
+"evidence": "and by Rock Island entered Illinois."
+},
+{
+"name_in_text": "Illinois",
+"role": "passing_through",
+"evidence": "entered Illinois."
+},
+{
+"name_in_text": "Chicago",
+"role": "passing_through",
+"evidence": "it reached Chicago, already risen from its ruins"
+},
+{
+"name_in_text": "Lake Michigan",
+"role": "setting",
+"evidence": "on the borders of its beautiful Lake Michigan."
+},
+{
+"name_in_text": "Indiana",
+"role": "passing_through",
+"evidence": "It traversed Indiana"
+},
+{
+"name_in_text": "Ohio",
+"role": "passing_through",
+"evidence": "Ohio"
+},
+{
+"name_in_text": "Pennsylvania",
+"role": "passing_through",
+"evidence": "Pennsylvania"
+},
+{
+"name_in_text": "New Jersey",
+"role": "passing_through",
+"evidence": "and New Jersey like a flash"
+},
+{
+"name_in_text": "Hudson",
+"role": "passing_through",
+"evidence": "At last the Hudson came into view"
+},
+{
+"name_in_text": "New York",
+"role": "arrival",
+"evidence": "the train stopped in the station on the right bank of the river, before the very pier of the Cunard line... The “China,” for Liverpool, had started"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Liverpool",
+"evidence": "the time that the steamer leaves for Liverpool?"
+},
+{
+"name_in_text": "Europe",
+"evidence": "escort her to Europe by a better route"
+},
+{
+"name_in_text": "England",
+"evidence": "would think himself absolutely safe in England?"
+},
+{
+"name_in_text": "Great Island",
+"evidence": "by Great Island"
+},
+{
+"name_in_text": "Columbus",
+"evidence": "Columbus"
+},
+{
+"name_in_text": "Nebraska",
+"evidence": "an important Nebraska town"
+},
+{
+"name_in_text": "Schuyler",
+"evidence": "Schuyler"
+},
+{
+"name_in_text": "Fremont",
+"evidence": "and Fremont"
+},
+{
+"name_in_text": "Saint Joseph",
+"evidence": "the branch which unites Kearney with Saint Joseph"
+},
+{
+"name_in_text": "Atlantic",
+"evidence": "Atlantic seaboard!"
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "The main traveller",
+"evidence": "Phileas Fogg found himself twenty hours behind time."
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant",
+"evidence": "Passepartout, the involuntary cause of this delay, was desperate."
+},
+{
+"name_in_text": "Fix",
+"role": "Detective who helps arrange transport",
+"evidence": "At this moment the detective approached Mr. Fogg"
+},
+{
+"name_in_text": "Mudge",
+"role": "American owner and driver of the sledge",
+"evidence": "Mr. Fogg and the American, whose name was Mudge, entered a hut"
+},
+{
+"name_in_text": "Aouda",
+"role": "Fogg's travelling companion",
+"evidence": "Not wishing to expose Aouda to the discomforts of travelling"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "Phileas Fogg found himself twenty hours behind time."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "Passepartout, the involuntary cause of this delay, was desperate."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "At this moment the detective approached Mr. Fogg"
+},
+{
+"name_in_text": "Mudge",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "having pointed out the man, who was walking up and down in front of the station, Mr. Fogg went up to him."
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "But Aouda refused to separate from Mr. Fogg"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": "Fort Kearney",
+"between_to": "Omaha",
+"evidence": "At eight o’clock the sledge was ready to start. The passengers took their places on it"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": null,
+"between_from": "Fort Kearney",
+"between_to": "Omaha",
+"evidence": "At eight o’clock the sledge was ready to start. The passengers took their places on it"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": null,
+"between_from": "Fort Kearney",
+"between_to": "Omaha",
+"evidence": "At eight o’clock the sledge was ready to start. The passengers took their places on it"
+},
+{
+"name_in_text": "Mudge",
+"at_name_in_text": null,
+"between_from": "Fort Kearney",
+"between_to": "Omaha",
+"evidence": "Mudge, who was at the rudder, kept in a straight line"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": null,
+"between_from": "Fort Kearney",
+"between_to": "Omaha",
+"evidence": "At eight o’clock the sledge was ready to start. The passengers took their places on it"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": "Omaha",
+"between_to": "New York",
+"evidence": "A train was ready to start when Mr. Fogg and his party reached the station, and they only had time to get into the cars."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": null,
+"between_from": "Omaha",
+"between_to": "New York",
+"evidence": "A train was ready to start when Mr. Fogg and his party reached the station, and they only had time to get into the cars."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": null,
+"between_from": "Omaha",
+"between_to": "New York",
+"evidence": "A train was ready to start when Mr. Fogg and his party reached the station, and they only had time to get into the cars."
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": null,
+"between_from": "Omaha",
+"between_to": "New York",
+"evidence": "A train was ready to start when Mr. Fogg and his party reached the station, and they only had time to get into the cars."
+}
+],
+"named_but_not_present": [],
+"notes": "The chapter primarily covers rapid transit. Aouda is with the 'party' that boards the trains in Omaha and arrives in New York, as evidenced by 'Mr. Fogg and his party'."
+},
+"transport": [
+{
+"mode": "sledge",
+"vessel_or_line_name": null,
+"from": "Fort Kearney",
+"to": "Omaha",
+"evidence": "“No; on a sledge,” replied Fix... The distance between Fort Kearney and Omaha, as the birds fly, is at most two hundred miles... the party directed their steps to the Omaha railway station."
+},
+{
+"mode": "railway",
+"vessel_or_line_name": "Chicago and Rock Island Railroad",
+"from": "Omaha",
+"to": "Chicago",
+"evidence": "Omaha is connected with Chicago by the Chicago and Rock Island Railroad... A train was ready to start... it reached Chicago, already risen from its ruins"
+},
+{
+"mode": "railway",
+"vessel_or_line_name": "Pittsburgh, Fort Wayne, and Chicago Railway",
+"from": "Chicago",
+"to": "New York",
+"evidence": "and the locomotive of the Pittsburgh, Fort Wayne, and Chicago Railway left at full speed... the train stopped in the station on the right bank of the river, before the very pier of the Cunard line."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "the 11th",
+"evidence": "be in New York on the 11th, before nine o’clock in the evening"
+},
+{
+"as_written": "the 10th",
+"evidence": "The next day, which was the 10th, at four o’clock in the evening, it reached Chicago"
+}
+],
+"days_elapsed_or_remaining": "Fogg was twenty hours behind time.",
+"schedule_status": "behind",
+"schedule_detail": "Despite racing across the country, they missed the steamer to Liverpool by 45 minutes.",
+"evidence": "The “China,” for Liverpool, had started three-quarters of an hour before!"
+},
+"money": {
+"amounts": [],
+"fogg_remaining_stated": null
+},
+"notes": "Mudge is rewarded handsomely by Fogg, but no specific amount is stated."
+}

@@ -1,0 +1,292 @@
+{
+"chapter": 28,
+"title": "IN WHICH PASSEPARTOUT DOES NOT SUCCEED IN MAKING ANYBODY LISTEN TO REASON",
+"summary_hover": "The train encounters a ruined suspension bridge, and the engineer proposes jumping it at full speed, much to Passepartout's alarm.",
+"summary_detail": "As the train continues across the Rocky Mountains, Aouda spots Colonel Proctor on board, and the group distracts Fogg with whist to prevent a duel. The journey is halted by a severely damaged suspension bridge over Medicine Bow rapids. Instead of the passengers crossing safely on foot first—as Passepartout vainly attempts to suggest—the engineer successfully drives the entire train across at maximum speed just as the bridge collapses behind them.",
+"places_visited": [
+{
+"name_in_text": "Weber River",
+"role": "passing_through",
+"evidence": "passed northward for an hour as far as Weber River"
+},
+{
+"name_in_text": "Wahsatch Mountains",
+"role": "passing_through",
+"evidence": "took an easterly direction towards the jagged Wahsatch Mountains."
+},
+{
+"name_in_text": "Rocky Mountains",
+"role": "passing_through",
+"evidence": "between this range and the Rocky Mountains"
+},
+{
+"name_in_text": "Bitter Creek Valley",
+"role": "passing_through",
+"evidence": "descending towards Bitter Creek Valley"
+},
+{
+"name_in_text": "Muddy Creek",
+"role": "passing_through",
+"evidence": "it was necessary to cross Muddy Creek"
+},
+{
+"name_in_text": "Green Creek",
+"role": "passing_through",
+"evidence": "Green Creek, and others, upon culverts."
+},
+{
+"name_in_text": "Fort Bridger station",
+"role": "passing_through",
+"evidence": "At ten o’clock at night the train stopped at Fort Bridger station"
+},
+{
+"name_in_text": "Wyoming Territory",
+"role": "passing_through",
+"evidence": "and twenty minutes later entered Wyoming Territory"
+},
+{
+"name_in_text": "Green River station",
+"role": "passing_through",
+"evidence": "they stopped for a quarter of an hour at Green River station."
+},
+{
+"name_in_text": "Bridger Pass",
+"role": "passing_through",
+"evidence": "the train had reached the dividing ridge of the waters at Bridger Pass"
+},
+{
+"name_in_text": "Fort Halleck",
+"role": "passing_through",
+"evidence": "the travellers caught sight for an instant of Fort Halleck"
+},
+{
+"name_in_text": "Medicine Bow",
+"role": "passing_through",
+"evidence": "when the bridge, completely ruined, fell with a crash into the rapids of Medicine Bow."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Great Salt Lake",
+"evidence": "The train, on leaving Great Salt Lake at Ogden"
+},
+{
+"name_in_text": "Ogden",
+"evidence": "The train, on leaving Great Salt Lake at Ogden"
+},
+{
+"name_in_text": "San Francisco",
+"evidence": "nearly nine hundred miles from San Francisco."
+},
+{
+"name_in_text": "Atlantic",
+"evidence": "between the Atlantic and the Pacific."
+},
+{
+"name_in_text": "Pacific",
+"evidence": "between the Atlantic and the Pacific."
+},
+{
+"name_in_text": "New York",
+"evidence": "In four days we shall be in New York."
+},
+{
+"name_in_text": "Europe",
+"evidence": "to get him back living to Europe!"
+},
+{
+"name_in_text": "North Platte River",
+"evidence": "branches of the North Platte River, already appeared."
+},
+{
+"name_in_text": "Laramie Peak",
+"evidence": "the highest being Laramie Peak."
+},
+{
+"name_in_text": "Arkansas River",
+"evidence": "sources of the Arkansas River, one of the great tributaries of the Missouri."
+},
+{
+"name_in_text": "Missouri",
+"evidence": "one of the great tributaries of the Missouri."
+},
+{
+"name_in_text": "Omaha",
+"evidence": "we have telegraphed to Omaha for a train"
+},
+{
+"name_in_text": "Medicine Creek",
+"evidence": "ready to attempt anything to get over Medicine Creek"
+}
+],
+"people": [
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant, who tries to reason with the passengers",
+"evidence": "IN WHICH PASSEPARTOUT DOES NOT SUCCEED IN MAKING ANYBODY LISTEN TO REASON"
+},
+{
+"name_in_text": "Fix",
+"role": "Detective traveling with Fogg",
+"evidence": "Fix longed to get out of this difficult region"
+},
+{
+"name_in_text": "Phileas Fogg",
+"role": "The main traveller, absorbed in whist",
+"evidence": "Phileas Fogg himself to be beyond the danger of delays"
+},
+{
+"name_in_text": "Aouda",
+"role": "Fogg's traveling companion",
+"evidence": "Aouda was experiencing fears from a totally different cause."
+},
+{
+"name_in_text": "Colonel Stamp Proctor",
+"role": "American who insulted Fogg in San Francisco",
+"evidence": "Aouda recognised Colonel Stamp Proctor, the same who had so grossly insulted Phileas Fogg"
+},
+{
+"name_in_text": "steward",
+"role": "Train employee",
+"evidence": "Passepartout was dispatched in search of the steward"
+},
+{
+"name_in_text": "engineer",
+"role": "Train engineer named Forster",
+"evidence": "The engineer and conductor were talking excitedly with a signal-man"
+},
+{
+"name_in_text": "conductor",
+"role": "Train conductor",
+"evidence": "The engineer and conductor were talking excitedly with a signal-man"
+},
+{
+"name_in_text": "signal-man",
+"role": "Railway worker sent from Medicine Bow",
+"evidence": "talking excitedly with a signal-man, whom the station-master at Medicine Bow... had sent on before."
+},
+{
+"name_in_text": "Forster",
+"role": "The engineer of the train",
+"evidence": "when the engineer, a true Yankee, named Forster called out"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": null,
+"between_from": "Great Salt Lake",
+"between_to": "Medicine Bow",
+"evidence": "Passepartout grew more and more impatient as they went on"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": null,
+"between_from": "Great Salt Lake",
+"between_to": "Medicine Bow",
+"evidence": "while Fix longed to get out of this difficult region"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": "Great Salt Lake",
+"between_to": "Medicine Bow",
+"evidence": "was more anxious than Phileas Fogg himself to be beyond the danger of delays"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": null,
+"between_from": "Great Salt Lake",
+"between_to": "Medicine Bow",
+"evidence": "Aouda was experiencing fears from a totally different cause."
+},
+{
+"name_in_text": "Colonel Stamp Proctor",
+"at_name_in_text": null,
+"between_from": "Green River station",
+"between_to": "Medicine Bow",
+"evidence": "Several passengers had got off at Green River, and were walking up and down the platforms; and among these Aouda recognised Colonel Stamp Proctor"
+},
+{
+"name_in_text": "steward",
+"at_name_in_text": null,
+"between_from": "Great Salt Lake",
+"between_to": "Medicine Bow",
+"evidence": "Passepartout was dispatched in search of the steward, and soon returned with two packs of cards"
+},
+{
+"name_in_text": "engineer",
+"at_name_in_text": null,
+"between_from": "Great Salt Lake",
+"between_to": "Medicine Bow",
+"evidence": "The engineer and conductor were talking excitedly with a signal-man"
+},
+{
+"name_in_text": "conductor",
+"at_name_in_text": null,
+"between_from": "Great Salt Lake",
+"between_to": "Medicine Bow",
+"evidence": "The engineer and conductor were talking excitedly with a signal-man"
+},
+{
+"name_in_text": "signal-man",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": null,
+"evidence": "talking excitedly with a signal-man, whom the station-master at Medicine Bow, the next stopping place, had sent on before."
+},
+{
+"name_in_text": "Forster",
+"at_name_in_text": null,
+"between_from": "Great Salt Lake",
+"between_to": "Medicine Bow",
+"evidence": "when the engineer, a true Yankee, named Forster called out, “Gentlemen, perhaps there is a way, after all, to get over.”"
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "station-master",
+"evidence": "whom the station-master at Medicine Bow, the next stopping place, had sent on before."
+}
+],
+"notes": "The characters spend the entire chapter moving across the country by train, jumping the suspension bridge near Medicine Bow at the very end."
+},
+"transport": [
+{
+"mode": "railway",
+"vessel_or_line_name": "train",
+"from": "Ogden",
+"to": "Medicine Bow",
+"evidence": "The train, on leaving Great Salt Lake at Ogden, passed northward... The train leaped, so to speak, from one bank to the other, and the engineer could not stop it until it had gone five miles beyond the station."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "7th December",
+"evidence": "The next day, 7th December, they stopped for a quarter of an hour"
+}
+],
+"days_elapsed_or_remaining": "In four days we shall be in New York.",
+"schedule_status": "unknown",
+"schedule_detail": "Delay is averted by the train jumping the broken bridge.",
+"evidence": "And they passed over! It was like a flash."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "forty-eight thousand dollars per mile",
+"purpose": "government subsidy for laying the railroad in the mountains",
+"evidence": "government granted a subsidy of forty-eight thousand dollars per mile"
+},
+{
+"amount_as_written": "sixteen thousand",
+"purpose": "subsidy allowed for work done on the plains",
+"evidence": "instead of sixteen thousand allowed for the work done on the plains."
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

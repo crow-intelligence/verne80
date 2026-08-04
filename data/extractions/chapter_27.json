@@ -1,0 +1,290 @@
+{
+"chapter": 27,
+"title": "IN WHICH PASSEPARTOUT UNDERGOES, AT A SPEED OF TWENTY MILES AN HOUR, A COURSE OF MORMON HISTORY",
+"summary_hover": "A Mormon missionary lectures on the train as they approach Utah; later, the group briefly visits Salt Lake City.",
+"summary_detail": "As the train travels towards the Great Salt Lake, a Mormon missionary, Elder William Hitch, delivers a lecture on Mormon history in one of the cars, with Passepartout eventually becoming his only listener. The train arrives in Ogden, allowing Fogg and his party time to visit Salt Lake City via a branch line before returning to the train. Just as they depart, a fleeing Mormon boards the train to escape his single, overbearing wife.",
+"places_visited": [
+{
+"name_in_text": "Great Salt Lake",
+"role": "passing_through",
+"evidence": "towards the Great Salt Lake."
+},
+{
+"name_in_text": "Elko",
+"role": "passing_through",
+"evidence": "who had taken the train at Elko"
+},
+{
+"name_in_text": "Utah",
+"role": "setting",
+"evidence": "It had made itself master of Utah, and subjected that territory to the laws of the Union"
+},
+{
+"name_in_text": "Ogden",
+"role": "arrival",
+"evidence": "The train reached Ogden at two o’clock"
+},
+{
+"name_in_text": "Salt Lake City",
+"role": "arrival",
+"evidence": "Mr. Fogg and his party had time to pay a visit to Salt Lake City"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "United States",
+"evidence": "the persecutions of the United States Government against the prophets"
+},
+{
+"name_in_text": "Israel",
+"evidence": "in Israel, a Mormon prophet"
+},
+{
+"name_in_text": "America",
+"evidence": "adopted not only in America"
+},
+{
+"name_in_text": "England",
+"evidence": "but in England, Norway and Sweden, and Germany"
+},
+{
+"name_in_text": "Norway",
+"evidence": "Norway and Sweden"
+},
+{
+"name_in_text": "Sweden",
+"evidence": "Norway and Sweden"
+},
+{
+"name_in_text": "Germany",
+"evidence": "and Germany"
+},
+{
+"name_in_text": "Ohio",
+"evidence": "how a colony was established in Ohio"
+},
+{
+"name_in_text": "Kirkland",
+"evidence": "and a town built at Kirkland"
+},
+{
+"name_in_text": "Independence, Missouri",
+"evidence": "more honourable and honoured than ever, at Independence, Missouri"
+},
+{
+"name_in_text": "Far West",
+"evidence": "and retirement into the Far West."
+},
+{
+"name_in_text": "Illinois",
+"evidence": "after long persecutions, Smith reappeared in Illinois"
+},
+{
+"name_in_text": "Nauvoo",
+"evidence": "founded a community at Nauvoo, on the Mississippi"
+},
+{
+"name_in_text": "Mississippi",
+"evidence": "community at Nauvoo, on the Mississippi"
+},
+{
+"name_in_text": "Carthage",
+"evidence": "being drawn into ambuscade at Carthage"
+},
+{
+"name_in_text": "California",
+"evidence": "who crossed Utah on their way to California"
+},
+{
+"name_in_text": "Vermont",
+"evidence": "Driven from Vermont, driven from Illinois"
+},
+{
+"name_in_text": "Missouri",
+"evidence": "driven from Missouri, driven from Utah"
+},
+{
+"name_in_text": "Dead Sea",
+"evidence": "which is also called the Dead Sea"
+},
+{
+"name_in_text": "Jordan",
+"evidence": "into which flows an American Jordan."
+},
+{
+"name_in_text": "Lake Asphaltite",
+"evidence": "Quite different from Lake Asphaltite"
+},
+{
+"name_in_text": "Weber",
+"evidence": "those which descend through the Jordan, the Weber, and other streams"
+},
+{
+"name_in_text": "Wahsatch Range",
+"evidence": "the spurs of the Wahsatch Range."
+}
+],
+"people": [
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant and only listener to the missionary",
+"evidence": "Passepartout was now the only person left in the car"
+},
+{
+"name_in_text": "Elder William Hitch",
+"role": "Mormon missionary",
+"evidence": "Elder William Hitch, Mormon missionary"
+},
+{
+"name_in_text": "Mr. Fogg",
+"role": "The main traveller",
+"evidence": "Mr. Fogg and his party had time to pay a visit to Salt Lake City"
+},
+{
+"name_in_text": "Fix",
+"role": "Detective",
+"evidence": "Neither Mr. Fogg nor Fix cared to attend."
+},
+{
+"name_in_text": "belated Mormon",
+"role": "Man fleeing a domestic dispute",
+"evidence": "The gentleman who uttered the cries was evidently a belated Mormon."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Ogden",
+"evidence": "Passepartout, about nine o’clock, went out upon the platform to take the air."
+},
+{
+"name_in_text": "Elder William Hitch",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Ogden",
+"evidence": "This personage, who had taken the train at Elko... went from one end of the train to the other"
+},
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "Salt Lake City",
+"between_from": "Ogden",
+"between_to": "station",
+"evidence": "Mr. Fogg and his party had time to pay a visit to Salt Lake City... The travellers, then, were promenading, at three o’clock, about the streets"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Salt Lake City",
+"between_from": "Ogden",
+"between_to": "station",
+"evidence": "Passepartout could not behold without a certain fright these women"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "Salt Lake City",
+"between_from": "Ogden",
+"between_to": "station",
+"evidence": "Neither Mr. Fogg nor Fix cared to attend. ... At four the party found themselves again at the station"
+},
+{
+"name_in_text": "belated Mormon",
+"at_name_in_text": null,
+"between_from": "station",
+"between_to": null,
+"evidence": "He rushed along the track, jumped on the rear platform of the train, and fell, exhausted, into one of the seats."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Joe Smith",
+"evidence": "I tell you that Joe Smith is a martyr"
+},
+{
+"name_in_text": "Hiram",
+"evidence": "his brother Hiram is a martyr"
+},
+{
+"name_in_text": "Brigham Young",
+"evidence": "will also make a martyr of Brigham Young."
+},
+{
+"name_in_text": "Mormon",
+"evidence": "bequeathed them to his son Mormon"
+},
+{
+"name_in_text": "Joseph Smith, junior",
+"evidence": "was made by Joseph Smith, junior, a Vermont farmer"
+},
+{
+"name_in_text": "Abraham",
+"evidence": "a papyrus scroll written by Abraham and several famous Egyptians."
+},
+{
+"name_in_text": "Victor Hugo",
+"evidence": "as Victor Hugo expresses it."
+}
+],
+"notes": "Fix is stated as not attending the lecture, implying he is on the train. The 'party' later visits Salt Lake City, and since 'party' throughout the book typically refers to Fogg, Aouda, Passepartout, and (lately) Fix, they are assumed to be present during the promenade, though Aouda is never explicitly named in this chapter."
+},
+"transport": [
+{
+"mode": "railway",
+"vessel_or_line_name": "train No. 48",
+"from": null,
+"to": "Ogden",
+"evidence": "taking advantage of his presence on train No. 48... The train reached Ogden at two o’clock"
+},
+{
+"mode": "railway",
+"vessel_or_line_name": "branch road",
+"from": "Ogden",
+"to": "Salt Lake City",
+"evidence": "pay a visit to Salt Lake City, connected with Ogden by a branch road"
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "5th of December",
+"evidence": "During the night of the 5th of December"
+},
+{
+"as_written": "1825",
+"evidence": "who revealed himself as a mystical prophet in 1825"
+},
+{
+"as_written": "1837",
+"evidence": "proceeded with the story of Joseph Smith’s bankruptcy in 1837"
+},
+{
+"as_written": "1839",
+"evidence": "and in 1839 founded a community at Nauvoo"
+},
+{
+"as_written": "1843",
+"evidence": "he announced himself, in 1843, as a candidate for the Presidency"
+},
+{
+"as_written": "1853",
+"evidence": "A clay and pebble wall, built in 1853"
+}
+],
+"days_elapsed_or_remaining": null,
+"schedule_status": "unknown",
+"schedule_detail": "The train stopped at Ogden for 6 hours, allowing a side trip to Salt Lake City.",
+"evidence": "The train reached Ogden at two o’clock, where it rested for six hours"
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "two hundred thousand dollars",
+"purpose": "cost to erect a temple in Ohio",
+"evidence": "a temple erected there at a cost of two hundred thousand dollars"
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

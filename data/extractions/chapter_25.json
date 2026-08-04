@@ -1,0 +1,364 @@
+{
+"chapter": 25,
+"title": "IN WHICH A SLIGHT GLIMPSE IS HAD OF SAN FRANCISCO",
+"summary_hover": "Fogg and his companions explore San Francisco, where they accidentally get caught in a violent election riot before catching their train to New York.",
+"summary_detail": "Phileas Fogg, Aouda, and Passepartout arrive in San Francisco. While Fogg and Aouda explore the city and head to the English consulate with Fix, they find themselves caught in the middle of a violent street brawl over the election of a justice of the peace. Fogg is confronted by a belligerent American, Colonel Stamp Proctor, before the party boards the evening train for New York.",
+"places_visited": [
+{
+"name_in_text": "San Francisco",
+"role": "arrival",
+"evidence": "IN WHICH A SLIGHT GLIMPSE IS HAD OF SAN FRANCISCO"
+},
+{
+"name_in_text": "American continent",
+"role": "arrival",
+"evidence": "set foot upon the American continent"
+},
+{
+"name_in_text": "floating quay",
+"role": "passing_through",
+"evidence": "floating quay upon which they disembarked."
+},
+{
+"name_in_text": "Californian capital",
+"role": "setting",
+"evidence": "he had, therefore, an entire day to spend in the Californian capital."
+},
+{
+"name_in_text": "International Hotel",
+"role": "arrival",
+"evidence": "and they set out for the International Hotel."
+},
+{
+"name_in_text": "English consulate",
+"role": "arrival",
+"evidence": "started for the English consulate"
+},
+{
+"name_in_text": "Montgomery Street",
+"role": "passing_through",
+"evidence": "They soon found themselves in Montgomery Street"
+},
+{
+"name_in_text": "station",
+"role": "departure",
+"evidence": "At a quarter before six the travellers reached the station"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Sacramento",
+"evidence": "which ply on the Sacramento and its tributaries."
+},
+{
+"name_in_text": "Mexico",
+"evidence": "extends to Mexico, Chili, Peru, Brazil, Europe, Asia, and all the Pacific islands."
+},
+{
+"name_in_text": "Chili",
+"evidence": "extends to Mexico, Chili, Peru, Brazil, Europe, Asia, and all the Pacific islands."
+},
+{
+"name_in_text": "Peru",
+"evidence": "extends to Mexico, Chili, Peru, Brazil, Europe, Asia, and all the Pacific islands."
+},
+{
+"name_in_text": "Brazil",
+"evidence": "extends to Mexico, Chili, Peru, Brazil, Europe, Asia, and all the Pacific islands."
+},
+{
+"name_in_text": "Europe",
+"evidence": "extends to Mexico, Chili, Peru, Brazil, Europe, Asia, and all the Pacific islands."
+},
+{
+"name_in_text": "Asia",
+"evidence": "extends to Mexico, Chili, Peru, Brazil, Europe, Asia, and all the Pacific islands."
+},
+{
+"name_in_text": "Pacific islands",
+"evidence": "extends to Mexico, Chili, Peru, Brazil, Europe, Asia, and all the Pacific islands."
+},
+{
+"name_in_text": "New World",
+"evidence": "“set foot” upon the New World"
+},
+{
+"name_in_text": "New York",
+"evidence": "first train left for New York"
+},
+{
+"name_in_text": "Chinese quarter",
+"evidence": "beyond appeared the Chinese quarter"
+},
+{
+"name_in_text": "Celestial Empire",
+"evidence": "seemingly imported from the Celestial Empire in a toy-box."
+},
+{
+"name_in_text": "Regent Street",
+"evidence": "which is to San Francisco what Regent Street is to London"
+},
+{
+"name_in_text": "London",
+"evidence": "which is to San Francisco what Regent Street is to London"
+},
+{
+"name_in_text": "Boulevard des Italiens",
+"evidence": "the Boulevard des Italiens to Paris"
+},
+{
+"name_in_text": "Paris",
+"evidence": "the Boulevard des Italiens to Paris"
+},
+{
+"name_in_text": "Broadway",
+"evidence": "and Broadway to New York"
+},
+{
+"name_in_text": "England",
+"evidence": "it did not seem to him as if he had left England at all."
+},
+{
+"name_in_text": "America",
+"evidence": "I will come back to America to find him"
+}
+],
+"people": [
+{
+"name_in_text": "Mr. Fogg",
+"role": "The main traveller",
+"evidence": "Mr. Fogg, Aouda, and Passepartout set foot upon the American continent"
+},
+{
+"name_in_text": "Aouda",
+"role": "Fogg's travelling companion",
+"evidence": "Mr. Fogg, Aouda, and Passepartout set foot upon the American continent"
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant",
+"evidence": "Mr. Fogg, Aouda, and Passepartout set foot upon the American continent"
+},
+{
+"name_in_text": "driver",
+"role": "Driver of the carriage to the hotel",
+"evidence": "Passepartout mounted the box beside the driver"
+},
+{
+"name_in_text": "Fix",
+"role": "Detective",
+"evidence": "he met Fix. The detective seemed wholly taken by surprise."
+},
+{
+"name_in_text": "Colonel Stamp Proctor",
+"role": "Ruffian who assaults the party",
+"evidence": "“Colonel Stamp Proctor.”"
+},
+{
+"name_in_text": "porter",
+"role": "Station porter",
+"evidence": "Mr. Fogg called a porter, and said to him"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "American continent",
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg, Aouda, and Passepartout set foot upon the American continent"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "American continent",
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg, Aouda, and Passepartout set foot upon the American continent"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "American continent",
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg, Aouda, and Passepartout set foot upon the American continent"
+},
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "International Hotel",
+"between_from": "American continent",
+"between_to": "International Hotel",
+"evidence": "Taking a carriage at a charge of three dollars, he and Aouda entered it, while Passepartout mounted the box beside the driver, and they set out for the International Hotel."
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "International Hotel",
+"between_from": "American continent",
+"between_to": "International Hotel",
+"evidence": "Taking a carriage at a charge of three dollars, he and Aouda entered it, while Passepartout mounted the box beside the driver, and they set out for the International Hotel."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "International Hotel",
+"between_from": "American continent",
+"between_to": "International Hotel",
+"evidence": "Taking a carriage at a charge of three dollars, he and Aouda entered it, while Passepartout mounted the box beside the driver, and they set out for the International Hotel."
+},
+{
+"name_in_text": "driver",
+"at_name_in_text": null,
+"between_from": "American continent",
+"between_to": "International Hotel",
+"evidence": "Taking a carriage at a charge of three dollars, he and Aouda entered it, while Passepartout mounted the box beside the driver, and they set out for the International Hotel."
+},
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "English consulate",
+"between_from": "International Hotel",
+"between_to": "English consulate",
+"evidence": "After breakfast, Mr. Fogg, accompanied by Aouda, started for the English consulate"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "English consulate",
+"between_from": "International Hotel",
+"between_to": "English consulate",
+"evidence": "After breakfast, Mr. Fogg, accompanied by Aouda, started for the English consulate"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": null,
+"evidence": "when, “by the greatest chance in the world,” he met Fix."
+},
+{
+"name_in_text": "Colonel Stamp Proctor",
+"at_name_in_text": "Montgomery Street",
+"between_from": null,
+"between_to": null,
+"evidence": "A big brawny fellow with a red beard... “Colonel Stamp Proctor.”"
+},
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "International Hotel",
+"between_from": "Montgomery Street",
+"between_to": "International Hotel",
+"evidence": "An hour after, they were once more suitably attired, and with Aouda returned to the International Hotel."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "International Hotel",
+"between_from": "Montgomery Street",
+"between_to": "International Hotel",
+"evidence": "An hour after, they were once more suitably attired, and with Aouda returned to the International Hotel."
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "International Hotel",
+"between_from": "Montgomery Street",
+"between_to": "International Hotel",
+"evidence": "An hour after, they were once more suitably attired, and with Aouda returned to the International Hotel."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "International Hotel",
+"between_from": null,
+"between_to": null,
+"evidence": "Passepartout was waiting for his master, armed with half a dozen six-barrelled revolvers."
+},
+{
+"name_in_text": "Mr. Fogg",
+"at_name_in_text": "station",
+"between_from": "International Hotel",
+"between_to": "station",
+"evidence": "At a quarter before six the travellers reached the station"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "station",
+"between_from": "International Hotel",
+"between_to": "station",
+"evidence": "At a quarter before six the travellers reached the station"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "station",
+"between_from": "International Hotel",
+"between_to": "station",
+"evidence": "At a quarter before six the travellers reached the station"
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "station",
+"between_from": "International Hotel",
+"between_to": "station",
+"evidence": "At a quarter before six the travellers reached the station"
+},
+{
+"name_in_text": "porter",
+"at_name_in_text": "station",
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg called a porter, and said to him:"
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Camerfield",
+"evidence": "“Hurrah for Camerfield!”"
+},
+{
+"name_in_text": "Mandiboy",
+"evidence": "“Hurrah for Mandiboy!”"
+}
+],
+"notes": "The group travels multiple times within San Francisco, from the docks to the hotel, the consulate, Montgomery Street for a riot, a tailor's, back to the hotel, and finally the train station."
+},
+"transport": [
+{
+"mode": "carriage",
+"vessel_or_line_name": null,
+"from": "floating quay",
+"to": "International Hotel",
+"evidence": "Taking a carriage at a charge of three dollars, he and Aouda entered it... and they set out for the International Hotel."
+},
+{
+"mode": "carriage",
+"vessel_or_line_name": "coach",
+"from": "International Hotel",
+"to": "station",
+"evidence": "the coach which was to convey the passengers and their luggage to the station drew up to the door."
+},
+{
+"mode": "railway",
+"vessel_or_line_name": null,
+"from": "San Francisco",
+"to": "New York",
+"evidence": "first train left for New York... Phileas Fogg got into the train, which started off at full speed."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "1849",
+"evidence": "San Francisco was no longer the legendary city of 1849"
+}
+],
+"days_elapsed_or_remaining": null,
+"schedule_status": "unknown",
+"schedule_detail": "He has an entire day to spend in San Francisco.",
+"evidence": "he had, therefore, an entire day to spend in the Californian capital."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "three dollars",
+"purpose": "charge for the carriage",
+"evidence": "Taking a carriage at a charge of three dollars"
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

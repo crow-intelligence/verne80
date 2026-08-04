@@ -1,0 +1,173 @@
+{
+"chapter": 35,
+"title": "IN WHICH PHILEAS FOGG DOES NOT HAVE TO REPEAT HIS ORDERS TO PASSEPARTOUT TWICE",
+"summary_hover": "Believing himself ruined, Phileas Fogg returns home, where a devastated Aouda unexpectedly proposes marriage to him, which he joyfully accepts.",
+"summary_detail": "Phileas Fogg returns to his house on Saville Row, believing he has lost his wager and his fortune. He locks himself away to settle his affairs, while a guilt-ridden Passepartout keeps watch. During an evening conversation, Fogg apologizes to Aouda for his ruin; in response, she proposes marriage to him, and he happily accepts, sending Passepartout for a clergyman.",
+"places_visited": [
+{
+"name_in_text": "Saville Row",
+"role": "setting",
+"evidence": "The dwellers in Saville Row would have been surprised the next day, if they had been told that Phileas Fogg had returned home."
+},
+{
+"name_in_text": "station",
+"role": "departure",
+"evidence": "After leaving the station, Mr. Fogg gave Passepartout instructions to purchase some provisions"
+},
+{
+"name_in_text": "domicile",
+"role": "arrival",
+"evidence": "and quietly went to his domicile."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Barings",
+"evidence": "the twenty thousand pounds deposited at Barings"
+},
+{
+"name_in_text": "Reform Club",
+"evidence": "and this amount he owed to his friends of the Reform Club."
+},
+{
+"name_in_text": "England",
+"evidence": "probably to arrange for your protection and comfort in England."
+},
+{
+"name_in_text": "Westminster",
+"evidence": "did not set out for his club when Westminster clock struck half-past eleven."
+},
+{
+"name_in_text": "Reform",
+"evidence": "Why should he present himself at the Reform?"
+},
+{
+"name_in_text": "India",
+"evidence": "Madam, you could not remain in India"
+},
+{
+"name_in_text": "Liverpool",
+"evidence": "his master would certainly not have given the detective passage to Liverpool"
+},
+{
+"name_in_text": "Marylebone parish",
+"evidence": "notify the Reverend Samuel Wilson, of Marylebone parish"
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "The gentleman who believes he is ruined and accepts Aouda's marriage proposal.",
+"evidence": "He bore his misfortune with his habitual tranquillity. Ruined!"
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's loyal servant who feels bitterly responsible for the disaster.",
+"evidence": "Passepartout watched all night, like a faithful dog, at his master’s door."
+},
+{
+"name_in_text": "Aouda",
+"role": "Fogg's rescued companion who proposes marriage to him.",
+"evidence": "A room in the house in Saville Row was set apart for Aouda, who was overwhelmed with grief at her protector’s misfortune."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "station",
+"between_from": null,
+"between_to": null,
+"evidence": "After leaving the station, Mr. Fogg gave Passepartout instructions to purchase some provisions"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "domicile",
+"between_from": "station",
+"between_to": "domicile",
+"evidence": "and quietly went to his domicile."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "station",
+"between_from": null,
+"between_to": null,
+"evidence": "After leaving the station, Mr. Fogg gave Passepartout instructions to purchase some provisions"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Saville Row",
+"between_from": "station",
+"between_to": "Saville Row",
+"evidence": "First of all, the worthy fellow had gone up to his room, and had extinguished the gas burner"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "Saville Row",
+"between_from": null,
+"between_to": null,
+"evidence": "A room in the house in Saville Row was set apart for Aouda"
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Fix",
+"evidence": "Yes! if he had warned Mr. Fogg, and had betrayed Fix’s projects to him"
+},
+{
+"name_in_text": "Reverend Samuel Wilson",
+"evidence": "notify the Reverend Samuel Wilson, of Marylebone parish, that evening."
+}
+],
+"notes": null
+},
+"transport": [
+{
+"mode": "on_foot",
+"vessel_or_line_name": null,
+"from": null,
+"to": null,
+"evidence": "Passepartout hurried off as fast as his legs could carry him."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "next day",
+"evidence": "The dwellers in Saville Row would have been surprised the next day"
+},
+{
+"as_written": "Sunday",
+"evidence": "Throughout this day (Sunday) the house in Saville Row was as if uninhabited"
+},
+{
+"as_written": "Saturday, the 21st of December",
+"evidence": "(Saturday, the 21st of December, at a quarter before nine)"
+},
+{
+"as_written": "to-morrow, Monday",
+"evidence": "Will it be for to-morrow, Monday?"
+}
+],
+"days_elapsed_or_remaining": "eighty days",
+"schedule_status": "behind",
+"schedule_detail": "he had lost his wager",
+"evidence": "As Phileas Fogg had not appeared in the saloon on the evening before (Saturday, the 21st of December, at a quarter before nine), he had lost his wager."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "a few pounds",
+"purpose": "The small remainder of cash Fogg still had on hand after his journey.",
+"evidence": "But a few pounds were left of the large sum he had carried with him."
+},
+{
+"amount_as_written": "twenty thousand pounds",
+"purpose": "Fogg's remaining fortune deposited at Barings, owed to his friends for the wager.",
+"evidence": "There only remained of his fortune the twenty thousand pounds deposited at Barings, and this amount he owed to his friends of the Reform Club."
+}
+],
+"fogg_remaining_stated": "There only remained of his fortune the twenty thousand pounds deposited at Barings"
+},
+"notes": null
+}

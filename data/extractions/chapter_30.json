@@ -1,0 +1,249 @@
+{
+"chapter": 30,
+"title": "IN WHICH PHILEAS FOGG SIMPLY DOES HIS DUTY",
+"summary_hover": "Fogg sacrifices his schedule to rescue Passepartout from the Sioux, missing his train but successfully returning with his servant.",
+"summary_detail": "Discovering Passepartout missing after the Sioux attack, Fogg hires thirty soldiers from Fort Kearney to rescue him, knowing the delay will likely cost him his wager. While he is gone, the runaway locomotive returns, and the train departs for Omaha without Fogg, Aouda, or Fix. Fogg returns the next morning, having successfully rescued Passepartout, only to find the train gone.",
+"places_visited": [
+{
+"name_in_text": "Fort Kearney",
+"role": "setting",
+"evidence": "The commanding officer of Fort Kearney was there."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Republican River",
+"evidence": "along the banks of Republican River."
+},
+{
+"name_in_text": "New York",
+"evidence": "lose the steamer at New York"
+},
+{
+"name_in_text": "Arkansas",
+"evidence": "retreat beyond the Arkansas"
+},
+{
+"name_in_text": "Omaha",
+"evidence": "the train from Omaha to San Francisco"
+},
+{
+"name_in_text": "San Francisco",
+"evidence": "the train from Omaha to San Francisco"
+}
+],
+"people": [
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant, captured by the Sioux",
+"evidence": "Three passengers including Passepartout had disappeared."
+},
+{
+"name_in_text": "Colonel Proctor",
+"role": "Wounded passenger",
+"evidence": "Colonel Proctor was one of the most seriously hurt"
+},
+{
+"name_in_text": "Aouda",
+"role": "Fogg's companion, waits for his return",
+"evidence": "Aouda was safe"
+},
+{
+"name_in_text": "Phileas Fogg",
+"role": "The main traveller, leads the rescue",
+"evidence": "and Phileas Fogg, who had been in the thickest of the fight"
+},
+{
+"name_in_text": "Fix",
+"role": "Detective, stays behind while Fogg goes on the rescue",
+"evidence": "Fix was slightly wounded in the arm."
+},
+{
+"name_in_text": "commanding officer of Fort Kearney",
+"role": "Officer who provides soldiers for the rescue",
+"evidence": "The commanding officer of Fort Kearney was there."
+},
+{
+"name_in_text": "captain",
+"role": "Commanding officer providing soldiers",
+"evidence": "“Sir,” said Mr. Fogg to the captain"
+},
+{
+"name_in_text": "sergeant",
+"role": "Leader of the rescue squad",
+"evidence": "Thirty were chosen, and an old sergeant placed at their head."
+},
+{
+"name_in_text": "engineer",
+"role": "Train driver who returns the locomotive",
+"evidence": "carrying off the unconscious engineer and stoker."
+},
+{
+"name_in_text": "stoker",
+"role": "Train worker",
+"evidence": "carrying off the unconscious engineer and stoker."
+},
+{
+"name_in_text": "conductor",
+"role": "Train official who refuses to wait",
+"evidence": "asked the conductor, “Are you going to start?”"
+},
+{
+"name_in_text": "lieutenants",
+"role": "Officer at the fort",
+"evidence": "Calling one of his lieutenants"
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Colonel Proctor",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "He was carried into the station with the other wounded passengers"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "Aouda was safe; and Phileas Fogg... had not received a scratch."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "Aouda was safe; and Phileas Fogg... had not received a scratch."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "Fix was slightly wounded in the arm."
+},
+{
+"name_in_text": "commanding officer of Fort Kearney",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "The commanding officer of Fort Kearney was there."
+},
+{
+"name_in_text": "captain",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "“Sir,” said Mr. Fogg to the captain"
+},
+{
+"name_in_text": "sergeant",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "Thirty were chosen, and an old sergeant placed at their head."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": "Fort Kearney",
+"between_to": null,
+"evidence": "went off with the sergeant and his little squad."
+},
+{
+"name_in_text": "sergeant",
+"at_name_in_text": null,
+"between_from": "Fort Kearney",
+"between_to": null,
+"evidence": "went off with the sergeant and his little squad."
+},
+{
+"name_in_text": "engineer",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "the locomotive returned, running backwards to Fort Kearney."
+},
+{
+"name_in_text": "stoker",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "Neither the engineer nor the stoker was dead... the locomotive returned, running backwards to Fort Kearney."
+},
+{
+"name_in_text": "conductor",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "asked the conductor, “Are you going to start?”"
+},
+{
+"name_in_text": "Colonel Proctor",
+"at_name_in_text": null,
+"between_from": "Fort Kearney",
+"between_to": null,
+"evidence": "Colonel Proctor... had taken their places in the train... The engineer whistled, the train started"
+},
+{
+"name_in_text": "lieutenants",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "Calling one of his lieutenants, he was on the point of ordering a reconnaissance"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "Mr. Fogg was marching at their head"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Fort Kearney",
+"between_from": null,
+"between_to": null,
+"evidence": "and just behind him were Passepartout and the other two travellers"
+}
+],
+"named_but_not_present": [],
+"notes": "Fogg leaves the fort on a rescue mission and returns the next morning. The engineer and stoker, unconscious during the previous chapter, wake up and return the locomotive to the fort. Colonel Proctor departs on the train, while Aouda and Fix remain behind to wait for Fogg."
+},
+"transport": [
+{
+"mode": "railway",
+"vessel_or_line_name": "locomotive",
+"from": null,
+"to": "Fort Kearney",
+"evidence": "the locomotive returned, running backwards to Fort Kearney."
+},
+{
+"mode": "railway",
+"vessel_or_line_name": "train",
+"from": "Fort Kearney",
+"to": null,
+"evidence": "The engineer whistled, the train started, and soon disappeared"
+}
+],
+"time": {
+"dates_mentioned": [],
+"days_elapsed_or_remaining": "The delay of a single day would make him lose the steamer at New York",
+"schedule_status": "behind",
+"schedule_detail": "Missed the train, which left three hours late, ensuring he will miss the New York steamer.",
+"evidence": "The delay of a single day would make him lose the steamer at New York, and his bet would be certainly lost."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "five thousand dollars",
+"purpose": "Reward for the soldiers if they save the prisoners",
+"evidence": "I will divide five thousand dollars among you, if we save the prisoners."
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": null
+}

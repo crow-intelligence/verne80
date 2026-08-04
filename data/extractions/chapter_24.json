@@ -1,0 +1,288 @@
+{
+"chapter": 24,
+"title": "DURING WHICH MR. FOGG AND PARTY CROSS THE PACIFIC OCEAN",
+"summary_hover": "Phileas Fogg reunites with Passepartout in Yokohama, and the entire party boards the steamer General Grant to cross the Pacific.",
+"summary_detail": "After boarding the Yokohama steamer off the coast of Shanghai, Fogg, Aouda, and Fix arrive in Yokohama. There, Fogg discovers Passepartout working in a theatre troupe. Reunited and re-clothed, they board the General Grant to cross the Pacific to San Francisco. During the voyage, Fix and Passepartout agree to a truce, and the ship arrives exactly on schedule.",
+"places_visited": [
+{
+"name_in_text": "Nagasaki",
+"role": "passing_through",
+"evidence": "started at once for Nagasaki and Yokohama."
+},
+{
+"name_in_text": "Yokohama",
+"role": "arrival",
+"evidence": "They reached their destination on the morning of the 14th of November."
+},
+{
+"name_in_text": "Pacific Ocean",
+"role": "passing_through",
+"evidence": "DURING WHICH MR. FOGG AND PARTY CROSS THE PACIFIC OCEAN"
+},
+{
+"name_in_text": "bay of the Golden Gate",
+"role": "passing_through",
+"evidence": "entered the bay of the Golden Gate"
+},
+{
+"name_in_text": "San Francisco",
+"role": "arrival",
+"evidence": "and reached San Francisco."
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "Shanghai",
+"evidence": "What happened when the pilot-boat came in sight of Shanghai will be easily guessed."
+},
+{
+"name_in_text": "Hong Kong",
+"evidence": "what had taken place on the voyage from Hong Kong to Shanghai"
+},
+{
+"name_in_text": "New York",
+"evidence": "reach San Francisco by the 2nd of December, New York by the 11th"
+},
+{
+"name_in_text": "London",
+"evidence": "and London on the 20th"
+},
+{
+"name_in_text": "California",
+"evidence": "a large number of coolies on their way to California"
+},
+{
+"name_in_text": "Japan",
+"evidence": "beyond the fantastic countries of Japan and China"
+},
+{
+"name_in_text": "China",
+"evidence": "Japan and China"
+},
+{
+"name_in_text": "Liverpool",
+"evidence": "transatlantic steamer from New York to Liverpool"
+},
+{
+"name_in_text": "Aden",
+"evidence": "long circuits from London to Aden"
+},
+{
+"name_in_text": "Bombay",
+"evidence": "from Aden to Bombay"
+},
+{
+"name_in_text": "Calcutta",
+"evidence": "from Bombay, from Calcutta to Singapore"
+},
+{
+"name_in_text": "Singapore",
+"evidence": "from Calcutta to Singapore, and from Singapore to Yokohama."
+},
+{
+"name_in_text": "England",
+"evidence": "Mr. Fogg seems to be going back to England."
+}
+],
+"people": [
+{
+"name_in_text": "Phileas Fogg",
+"role": "Passenger completing his journey",
+"evidence": "Phileas Fogg, after paying the stipulated price of his passage"
+},
+{
+"name_in_text": "John Busby",
+"role": "Pilot of the Tankadere",
+"evidence": "after paying the stipulated price of his passage to John Busby"
+},
+{
+"name_in_text": "Aouda",
+"role": "Fogg's traveling companion",
+"evidence": "ascended the steamer with Aouda and Fix"
+},
+{
+"name_in_text": "Fix",
+"role": "Detective following Fogg",
+"evidence": "ascended the steamer with Aouda and Fix"
+},
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant, briefly a mountebank",
+"evidence": "Passepartout, a Frenchman, had really arrived on her the day before."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "John Busby",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": null,
+"evidence": "after paying the stipulated price of his passage to John Busby"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Yokohama",
+"evidence": "ascended the steamer with Aouda and Fix; and they started at once for Nagasaki and Yokohama."
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Yokohama",
+"evidence": "ascended the steamer with Aouda and Fix; and they started at once for Nagasaki and Yokohama."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": null,
+"between_from": null,
+"between_to": "Yokohama",
+"evidence": "ascended the steamer with Aouda and Fix; and they started at once for Nagasaki and Yokohama."
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": "Yokohama",
+"between_from": null,
+"between_to": null,
+"evidence": "They reached their destination on the morning of the 14th of November. Phileas Fogg lost no time in going on board the “Carnatic,”"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Yokohama",
+"between_from": null,
+"between_to": null,
+"evidence": "but the latter, lying on his back, perceived his master in the gallery."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": "Yokohama",
+"between_from": null,
+"between_to": null,
+"evidence": "On reaching Yokohama, the detective, leaving Mr. Fogg, whom he expected to meet again during the day, had repaired at once to the English consulate"
+},
+{
+"name_in_text": "Phileas Fogg",
+"at_name_in_text": null,
+"between_from": "Yokohama",
+"between_to": "San Francisco",
+"evidence": "The steamer which was about to depart from Yokohama to San Francisco belonged to the Pacific Mail Steamship Company"
+},
+{
+"name_in_text": "Aouda",
+"at_name_in_text": null,
+"between_from": "Yokohama",
+"between_to": "San Francisco",
+"evidence": "She often chatted with Passepartout, who did not fail to perceive the state of the lady’s heart"
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": null,
+"between_from": "Yokohama",
+"between_to": "San Francisco",
+"evidence": "On that very day, however, he met Passepartout face to face on the forward deck."
+},
+{
+"name_in_text": "Fix",
+"at_name_in_text": null,
+"between_from": "Yokohama",
+"between_to": "San Francisco",
+"evidence": "His course decided on, he went on board the “General Grant,” and was there when Mr. Fogg and Aouda arrived."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "captain of the Yokohama steamer",
+"evidence": "The signals made by the “Tankadere” had been seen by the captain of the Yokohama steamer"
+},
+{
+"name_in_text": "Honourable Mr. Batulcar",
+"evidence": "Chance, or perhaps a kind of presentiment, at last led him into the Honourable Mr. Batulcar’s theatre."
+}
+],
+"notes": "John Busby is spelled 'Busby' in this chapter, unlike 'Bunsby' in previous chapters. The characters transit from the pilot-boat to the Yokohama steamer, stop in Yokohama, and then depart on the General Grant."
+},
+"transport": [
+{
+"mode": "steamer",
+"vessel_or_line_name": "Yokohama steamer",
+"from": null,
+"to": "Yokohama",
+"evidence": "seen by the captain of the Yokohama steamer... ascended the steamer with Aouda and Fix; and they started at once for Nagasaki and Yokohama."
+},
+{
+"mode": "steamer",
+"vessel_or_line_name": "General Grant",
+"from": "Yokohama",
+"to": "San Francisco",
+"evidence": "The steamer which was about to depart from Yokohama to San Francisco belonged to the Pacific Mail Steamship Company, and was named the “General Grant.”"
+},
+{
+"mode": "railway",
+"vessel_or_line_name": null,
+"from": "San Francisco",
+"to": "New York",
+"evidence": "A railway train from San Francisco to New York"
+},
+{
+"mode": "steamer",
+"vessel_or_line_name": "transatlantic steamer",
+"from": "New York",
+"to": "Liverpool",
+"evidence": "and a transatlantic steamer from New York to Liverpool"
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "14th of November",
+"evidence": "They reached their destination on the morning of the 14th of November."
+},
+{
+"as_written": "2nd of December",
+"evidence": "reach San Francisco by the 2nd of December"
+},
+{
+"as_written": "11th",
+"evidence": "New York by the 11th"
+},
+{
+"as_written": "20th",
+"evidence": "London on the 20th"
+},
+{
+"as_written": "21st of December",
+"evidence": "fatal date of the 21st of December."
+},
+{
+"as_written": "23rd of November",
+"evidence": "passed, on the 23rd of November, the one hundred and eightieth meridian"
+},
+{
+"as_written": "3rd of December",
+"evidence": "Eleven days later, on the 3rd of December, the “General Grant” entered the bay of the Golden Gate"
+}
+],
+"days_elapsed_or_remaining": "exhausted fifty-two of the eighty days in which he was to complete the tour, and there were only twenty-eight left.",
+"schedule_status": "on_time",
+"schedule_detail": "neither gained nor lost a single day",
+"evidence": "Mr. Fogg had neither gained nor lost a single day."
+},
+"money": {
+"amounts": [
+{
+"amount_as_written": "five hundred and fifty pounds",
+"purpose": "an additional sum rewarded to John Busby",
+"evidence": "rewarding that worthy with the additional sum of five hundred and fifty pounds"
+},
+{
+"amount_as_written": "five thousand pounds",
+"purpose": "amount spent by Fogg so far in travelling, rewards, trials, bail, elephants, and all sorts of charges",
+"evidence": "has already spent in travelling, rewards, trials, bail, elephants, and all sorts of charges, more than five thousand pounds."
+}
+],
+"fogg_remaining_stated": null
+},
+"notes": "John Busby is spelled without the 'n' in this chapter. Fogg visits the Carnatic in Yokohama, but it is not used for transit in this chapter."
+}

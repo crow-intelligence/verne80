@@ -1,0 +1,156 @@
+{
+"chapter": 22,
+"title": "IN WHICH PASSEPARTOUT FINDS OUT THAT, EVEN AT THE ANTIPODES, IT IS CONVENIENT TO HAVE SOME MONEY IN ONE'S POCKET",
+"summary_hover": "Passepartout wakes up on the Carnatic bound for Japan, realizes he left Fogg behind, and arrives in Yokohama penniless and hungry.",
+"summary_detail": "Awaking from his opium-induced stupor aboard the Carnatic, Passepartout discovers that Phileas Fogg and Aouda missed the ship because he failed to inform them of its early departure. Arriving in Yokohama, Japan, he finds himself alone with no money. He wanders the exotic streets of the European and Japanese quarters, growing increasingly hungry as night falls.",
+"places_visited": [
+{
+"name_in_text": "Hong Kong",
+"role": "departure",
+"evidence": "The “Carnatic,” setting sail from Hong Kong at half-past six on the 7th of November"
+},
+{
+"name_in_text": "Japan",
+"role": "arrival",
+"evidence": "directed her course at full steam towards Japan."
+},
+{
+"name_in_text": "China",
+"role": "passing_through",
+"evidence": "Passepartout did not wake until they were one hundred and fifty miles away from China."
+},
+{
+"name_in_text": "Yokohama",
+"role": "arrival",
+"evidence": "At dawn on the 13th the “Carnatic” entered the port of Yokohama."
+},
+{
+"name_in_text": "Pacific",
+"role": "setting",
+"evidence": "This is an important port of call in the Pacific"
+},
+{
+"name_in_text": "bay of Yeddo",
+"role": "setting",
+"evidence": "It is situated in the bay of Yeddo"
+},
+{
+"name_in_text": "promontory of the Treaty",
+"role": "setting",
+"evidence": "all the space between the “promontory of the Treaty” and the river."
+},
+{
+"name_in_text": "Benten",
+"role": "arrival",
+"evidence": "The Japanese quarter of Yokohama is called Benten"
+}
+],
+"places_mentioned": [
+{
+"name_in_text": "London",
+"evidence": "until Mr. Fogg reached London again"
+},
+{
+"name_in_text": "North America",
+"evidence": "travellers between North America, China, Japan, and the Oriental islands put in."
+},
+{
+"name_in_text": "Oriental islands",
+"evidence": "and the Oriental islands put in."
+},
+{
+"name_in_text": "Yeddo",
+"evidence": "determined, if necessary, to push on to Yeddo."
+},
+{
+"name_in_text": "Calcutta",
+"evidence": "Here, as at Hong Kong and Calcutta, were mixed crowds"
+},
+{
+"name_in_text": "Europe",
+"evidence": "another Japanese embassy departing for Europe!"
+}
+],
+"people": [
+{
+"name_in_text": "Passepartout",
+"role": "Fogg's servant, stranded on the steamer without money",
+"evidence": "It was Passepartout; and what had happened to him was as follows"
+},
+{
+"name_in_text": "purser",
+"role": "Ship's officer",
+"evidence": "Passepartout had only, however, to ask the purser the number of his master’s state-room."
+}
+],
+"narrative": {
+"on_stage": [
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": null,
+"between_from": "Hong Kong",
+"between_to": "Japan",
+"evidence": "Thus he found himself the next morning on the deck of the “Carnatic,” and eagerly inhaling the exhilarating sea-breeze."
+},
+{
+"name_in_text": "purser",
+"at_name_in_text": null,
+"between_from": "Hong Kong",
+"between_to": "Japan",
+"evidence": "The purser replied that he did not know any passenger by the name of Fogg."
+},
+{
+"name_in_text": "Passepartout",
+"at_name_in_text": "Yokohama",
+"between_from": null,
+"between_to": null,
+"evidence": "Passepartout went timidly ashore on this so curious territory of the Sons of the Sun. He had nothing better to do than, taking chance for his guide, to wander aimlessly through the streets of Yokohama."
+}
+],
+"named_but_not_present": [
+{
+"name_in_text": "Phileas Fogg",
+"evidence": "Two state-rooms in the rear were, however, unoccupied—those which had been engaged by Phileas Fogg."
+},
+{
+"name_in_text": "Fix",
+"evidence": "Shortly after Fix left the opium den, two waiters had lifted the unconscious Passepartout"
+},
+{
+"name_in_text": "Aouda",
+"evidence": "He saw no one who resembled either his master or Aouda."
+}
+],
+"notes": "Waiters and sailors are mentioned in a retrospective explanation of how Passepartout got onto the ship and into his cabin; they are not active in the chapter's present scenes."
+},
+"transport": [
+{
+"mode": "steamer",
+"vessel_or_line_name": "Carnatic",
+"from": "Hong Kong",
+"to": "Japan",
+"evidence": "The “Carnatic,” setting sail from Hong Kong at half-past six on the 7th of November, directed her course at full steam towards Japan."
+}
+],
+"time": {
+"dates_mentioned": [
+{
+"as_written": "7th of November",
+"evidence": "setting sail from Hong Kong at half-past six on the 7th of November"
+},
+{
+"as_written": "13th",
+"evidence": "At dawn on the 13th the “Carnatic” entered the port of Yokohama."
+}
+],
+"days_elapsed_or_remaining": "five or six days",
+"schedule_status": "unknown",
+"schedule_detail": "Fogg missed the steamer, throwing his schedule into doubt.",
+"evidence": "It was his fault, then, that Mr. Fogg and Aouda had missed the steamer."
+},
+"money": {
+"amounts": [],
+"fogg_remaining_stated": null
+},
+"notes": null
+}
