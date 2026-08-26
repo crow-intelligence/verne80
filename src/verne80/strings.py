@@ -87,6 +87,7 @@ CATALOGUE: dict[str, dict[str, str]] = {
         "chapter.previous": "Previous chapter",
         # --- legs ---
         "leg.days": "{n} days",
+        "leg.count": "{n} of the eight legs",
         "leg.table_says": "Fogg's own table says days {from} to {to}",
         "leg.via": "The table names {places} along the way",
         "leg.heading": "{origin} to {destination}",

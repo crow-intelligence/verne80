@@ -1,4 +1,4 @@
-.PHONY: ci format lint typecheck test dashboard serve
+.PHONY: ci format lint typecheck test dashboard fonts vendor-check serve
 
 ci: format lint typecheck test
 
@@ -19,6 +19,15 @@ test:
 # fails if the two drift apart.
 dashboard:
 	uv run python scripts/08_dashboard.py
+
+# One-off. The woff2 are committed, so this only runs when the type changes.
+fonts:
+	uv run python scripts/fetch_fonts.py
+
+# The vendored modules must import each other and nothing else. tests/test_web_page.py
+# asserts the same thing; this is the version you can read the output of.
+vendor-check:
+	@grep -o 'from *"[^"]*"' web/vendor/*.js | sort -u
 
 serve:
 	@echo "http://localhost:8000/"

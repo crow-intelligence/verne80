@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Around the World in Eighty Days — Crow Intelligence</title>
+<meta name="description" content="The route and calendar of Jules Verne's 1872 novel, extracted from the text and shown on a rotating globe." />
+<link rel="canonical" href="https://crowintelligence.org/verne80/" />
+<meta name="theme-color" content="#7a1f1f" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%23f7f5ef' stroke='%237a1f1f' stroke-width='2'/%3E%3Cpath d='M3 16h26M16 3c5 6 5 20 0 26M16 3c-5 6-5 20 0 26' fill='none' stroke='%237a1f1f' stroke-width='1.2'/%3E%3C/svg%3E" />
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_GB" />
+<meta property="og:site_name" content="Crow Intelligence" />
+<meta property="og:title" content="Around the World in Eighty Days" />
+<meta property="og:description" content="Fogg's itinerary, on the globe he went round. Extracted from Gutenberg #103, resolved against Wikidata, checked by hand." />
+<meta property="og:url" content="https://crowintelligence.org/verne80/" />
+<meta property="og:image" content="https://crowintelligence.org/verne80/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="A globe with Phileas Fogg's route drawn across it." />
+<!-- Twitter / X card (no account, so no twitter:site) -->
+<meta name="twitter:card" content="summary_large_image" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Around the World in Eighty Days — the route on a globe",
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "author": { "@type": "Organization", "name": "Crow Intelligence" },
+  "publisher": { "@type": "Organization", "name": "Crow Intelligence" },
+  "isBasedOn": "https://www.gutenberg.org/ebooks/103"
+}
+</script>
+
+<link rel="stylesheet" href="./fonts/fonts.css" />
+<link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+<a class="skip" href="#main" data-i18n="skip.content">Skip to the content</a>
+<a class="skip" href="#itinerary" data-i18n="skip.itinerary">Skip the globe, read the itinerary</a>
+
+<nav class="top-nav" aria-label="Crow Intelligence">
+  <div class="nav-inner">
+    <a class="nav-brand" href="https://crowintelligence.org/" data-i18n="nav.brand">Crow Intelligence</a>
+    <div class="nav-links">
+      <a href="https://crowintelligence.org/portfolio.html" data-i18n="nav.portfolio">Portfolio</a>
+      <a href="https://crowintelligence.org/services.html" data-i18n="nav.services">Services</a>
+      <a href="https://crowintelligence.org/about.html" data-i18n="nav.about">About</a>
+      <a href="https://blog.crowintelligence.org/" data-i18n="nav.blog">Blog</a>
+      <a href="https://crowintelligence.org/contact.html" data-i18n="nav.contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+  <h1 data-i18n="site.title">Around the World in Eighty Days</h1>
+  <p class="lede" data-i18n="site.subtitle">Fogg's itinerary, on the globe he went round</p>
+
+  <div class="provenance" id="provenance"></div>
+
+  <h2>The route</h2>
+  <p class="note" data-i18n="arc.schematic">
+    The lines are great circles: the shortest path over a sphere between the stops Fogg's
+    table names, not the route the ships and trains took.
+  </p>
+
+  <div class="globe-wrap">
+    <div>
+      <div class="stage" id="stage">
+        <canvas role="img" data-i18n-label="globe.aria"
+                aria-label="A globe showing Phileas Fogg's route around the world."></canvas>
+        <svg aria-hidden="true"></svg>
+      </div>
+      <div class="controls">
+        <span class="label" data-i18n="globe.hint">Drag to turn the globe.</span>
+        <button id="rotate" type="button">Turn slowly</button>
+      </div>
+    </div>
+
+    <div class="legend">
+      <h3 data-i18n="layer.heading">What to show</h3>
+      <ul id="legend-modes"></ul>
+      <p class="note" style="font-size: var(--fs-small)">
+        A dot with a broken ring is a place nobody has checked yet.
+      </p>
+    </div>
+  </div>
+
+  <h2 data-i18n="itinerary.heading">The itinerary</h2>
+  <p class="note" data-i18n="itinerary.note">
+    The same nine stops the globe draws, as a list — which is also how the page reads with
+    the pictures switched off.
+  </p>
+
+  <noscript>
+    <p>
+      This page draws a globe with JavaScript. Without it, here is the itinerary Fogg reads
+      out in chapter 3: <strong>London, Suez, Bombay, Calcutta, Hong Kong, Yokohama, San
+      Francisco, New York, London</strong> — eighty days. The underlying data is
+      <a href="./data/journey.json">journey.json</a>.
+    </p>
+  </noscript>
+
+  <ol class="itinerary" id="itinerary"></ol>
+
+  <h2 data-i18n="about.heading">About the project</h2>
+  <p>
+    The novel already contains its own dataset. Fogg keeps an itinerary with a column of
+    gains and losses, and the wager is a route <em>plus</em> a deadline — so the job here is
+    not to impose structure on the text but to make the text's own structure visible.
+  </p>
+  <p>
+    The pipeline splits the work the way it should be split. Deterministic work goes to code
+    — fetching, slicing, joining, geocoding, drawing. Reading comprehension goes to an LLM
+    with a human check: who is where, when, and by what means. The join between the two
+    halves is an evidence quote. Every extracted fact carries a verbatim quotation from its
+    chapter, and a validator greps each one back against the source, so verification is a
+    string match rather than a re-read.
+  </p>
+  <p>
+    <strong>Sources.</strong> Text: Project Gutenberg #103, public domain. Places: Wikidata,
+    CC0, resolved and then reviewed by hand. Coastline: Natural Earth 1:110m land, public
+    domain. Extraction: Google Gemini, with every answer checked against the chapter it came
+    from.
+  </p>
+  <p>
+    <strong>Method.</strong> The globe is an orthographic projection drawn with
+    <code>d3-geo</code>, which clips at the horizon — so a journey round the world closes on
+    itself with none of the seam-splitting a flat map needs. The arcs are great circles
+    between the stops the book names, and the page says so rather than implying a survey.
+  </p>
+  <p>
+    <strong>Not finished.</strong> The dates are still free text in the extraction, so there
+    is no eighty-day scrubber yet, and the 1872-versus-today border toggle is not built.
+    Both are next.
+  </p>
+</main>
+
+<footer>
+  <p>
+    Crow Intelligence ·
+    <a href="mailto:hello@crowintelligence.org" data-i18n="footer.contact">hello@crowintelligence.org</a> ·
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license" data-i18n="footer.licence">CC BY-NC-SA 4.0</a>
+  </p>
+  <p>
+    <span data-i18n="footer.text">Text: Project Gutenberg #103, public domain</span> ·
+    <span data-i18n="footer.gazetteer">Places: Wikidata</span> ·
+    <span data-i18n="footer.coastline">Coastline: Natural Earth, public domain</span>
+  </p>
+  <p data-i18n="footer.fonts">Type: Playfair Display and EB Garamond, SIL Open Font License</p>
+</footer>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>

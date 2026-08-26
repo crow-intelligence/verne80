@@ -1,0 +1,184 @@
+"""The static page: that it is self-contained, and that its wiring still joins up.
+
+None of this needs a browser. What it checks is the class of breakage that a browser
+would show you only if you happened to look at the right part of the page: a string key
+with no string behind it, a file the markup asks for that is not there, a vendored
+module that quietly went back to fetching itself from a CDN.
+
+What it deliberately does not check is anything about how the page *looks*. Canvas
+output, drag, font features and colour contrast are all real and none of them is a
+pytest's business; ``web/globe.js`` opens with the list to run through by eye instead.
+"""
+
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+
+import pytest
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+WEB = REPO_ROOT / "web"
+INDEX = WEB / "index.html"
+SPINE = REPO_ROOT / "data" / "processed" / "route_spine.json"
+
+needs_page = pytest.mark.skipif(
+    not INDEX.exists(), reason="web/index.html not built yet"
+)
+
+
+@pytest.fixture(scope="module")
+def html():
+    return INDEX.read_text(encoding="utf-8")
+
+
+@pytest.fixture(scope="module")
+def strings():
+    return json.loads((WEB / "data" / "strings.json").read_text(encoding="utf-8"))
+
+
+# ------------------------------------------------------- no network at view time
+
+
+@needs_page
+def test_no_vendored_module_still_imports_from_a_cdn():
+    """A missing tile layer degrades. A missing d3-geo is a blank screen."""
+    for path in (WEB / "vendor").glob("*.js"):
+        for target in re.findall(r'from\s*"([^"]+)"', path.read_text(encoding="utf-8")):
+            assert target.startswith("./"), f"{path.name} imports {target}"
+
+
+@needs_page
+def test_the_page_asks_for_nothing_over_the_network(html):
+    """Every stylesheet, module and font is local. Absolute URLs are links out."""
+    for attribute in re.findall(r'(?:src|href)="([^"]+)"', html):
+        if attribute.startswith(("#", "data:", "mailto:", "https://")):
+            continue
+        assert (WEB / attribute.lstrip("./")).exists(), f"missing: {attribute}"
+
+
+@needs_page
+def test_no_stylesheet_or_script_is_loaded_from_someone_elses_server(html):
+    """Only actual fetches count.
+
+    `rel="canonical"` and `rel="license"` are declarations about the page rather than
+    things it goes and gets, so this filters to stylesheets and modules instead of
+    banning absolute URLs outright.
+    """
+    fetched = re.findall(r'<script[^>]*\ssrc="(https?://[^"]+)"', html)
+    fetched += re.findall(
+        r'<link[^>]*\srel="stylesheet"[^>]*\shref="(https?://[^"]+)"', html
+    )
+    assert fetched == [], f"the page would fetch {fetched} at view time"
+
+
+# --------------------------------------------------------------- strings, not markup
+
+
+@needs_page
+def test_every_key_the_markup_asks_for_exists(html, strings):
+    keys = set(re.findall(r'data-i18n(?:-label)?="([^"]+)"', html))
+    assert keys, "the markup should be driven by the catalogue"
+    missing = sorted(key for key in keys if key not in strings["en"])
+    assert missing == [], f"no string for {missing}"
+
+
+@needs_page
+def test_every_key_the_scripts_ask_for_exists(strings):
+    keys: set[str] = set()
+    for path in WEB.glob("*.js"):
+        # The lookbehind matters: without it this also matches getContext("2d") and
+        # createElement("li"), which end in the same two characters.
+        # Only literal keys — `t(`mode.${mode}`)` is built at run time, and the
+        # transport-mode test below is what covers it.
+        keys |= set(
+            re.findall(
+                r'(?<![A-Za-z0-9_$])t\(\s*"([^"]+)"',
+                path.read_text(encoding="utf-8"),
+            )
+        )
+    missing = sorted(key for key in keys if key not in strings["en"])
+    assert missing == [], f"no string for {missing}"
+
+
+@needs_page
+def test_every_transport_mode_has_a_label(strings):
+    journey = json.loads((WEB / "data" / "journey.json").read_text(encoding="utf-8"))
+    for mode in journey["transport_style"]:
+        assert f"mode.{mode}" in strings["en"], mode
+
+
+@needs_page
+def test_no_string_carries_markup(strings):
+    """A tag in a catalogue entry is an injection hole and an untranslatable blob."""
+    for language, entries in strings.items():
+        if not isinstance(entries, dict):
+            continue
+        for key, value in entries.items():
+            assert not re.search(r"<[^>]+>", value), f"{language} {key}"
+
+
+# ---------------------------------------------------------- the no-JavaScript page
+
+
+@needs_page
+def test_the_noscript_stops_are_the_route_the_data_states(html):
+    """Hand-written, because there is no build step to generate it — so it is checked.
+
+    The nine names are the book's and will not change. That makes duplicating them safe
+    and makes leaving them unverified pointless.
+    """
+    block = re.search(r"<noscript>(.*?)</noscript>", html, re.S)
+    assert block, "the page needs to say something with scripting turned off"
+    # Whitespace-collapsed, because the markup wraps and "San Francisco" is allowed to
+    # arrive as "San\n      Francisco".
+    text = " ".join(block.group(1).split())
+    spine = json.loads(SPINE.read_text(encoding="utf-8"))
+    for node in spine["nodes"]:
+        assert node["name_in_text"] in text, node["name_in_text"]
+
+
+# ---------------------------------------------- the credibility anchor and the licence
+
+
+@needs_page
+def test_the_page_names_its_sources(html):
+    for source in ("Gutenberg", "Wikidata", "Natural Earth"):
+        assert source in html, source
+
+
+@needs_page
+def test_the_page_carries_the_licence_the_spec_asks_for(html):
+    assert "by-nc-sa" in html
+    assert "hello@crowintelligence.org" in html
+
+
+@needs_page
+def test_the_page_says_the_arcs_are_schematic(html, strings):
+    """The one sentence that keeps a great circle from reading as a surveyed route."""
+    assert "arc.schematic" in html
+    assert "great circles" in strings["en"]["arc.schematic"]
+
+
+@needs_page
+def test_the_fonts_ship_with_their_licence():
+    """The SIL OFL requires the licence to travel with the files."""
+    fonts = WEB / "fonts"
+    assert list(fonts.glob("*.woff2")), "no fonts self-hosted"
+    for family in ("ebgaramond", "playfairdisplay"):
+        assert (fonts / f"OFL-{family}.txt").exists(), family
+
+
+@needs_page
+def test_every_font_the_stylesheet_names_is_present():
+    css = (WEB / "fonts" / "fonts.css").read_text(encoding="utf-8")
+    for name in re.findall(r"url\('\./([^']+)'\)", css):
+        assert (WEB / "fonts" / name).exists(), name
+
+
+@needs_page
+def test_the_page_offers_a_way_past_the_globe(html):
+    """A canvas is nothing to a screen reader, so the itinerary has to be reachable."""
+    assert 'href="#itinerary"' in html
+    assert 'href="#main"' in html

@@ -1,7 +1,8 @@
-# Changes summary — the globe's data layer
+# Changes summary — the globe
 
-One PR, on branch `globe/payload`. It builds the six JSON files the globe will read and
-nothing that draws them, so the review is a readable data diff rather than a screenshot.
+Two PRs. `globe/payload` builds the six JSON files and nothing that draws them, so its
+review is a readable data diff. `globe/page` draws them: the globe, the typography, the
+itinerary, the chrome.
 
 ## What this PR does
 
@@ -22,13 +23,30 @@ a two-file commit.
 
 ## Bugs found while building it
 
-**Natural Earth is ESRI-wound, and I got this backwards first.** d3-geo reads polygons
-spherically, so a ring wound the wrong way fills its own complement — the ocean inks and the
-continents become holes. My first reading of the data said it was already RFC 7946 and needed
-no flip. It is not. Two independent ground truths settle it: a ring at latitude 60 walked
-eastward measures the area *south* of it, and the 127 rings sum to 28.9% of the sphere, which
-is Earth's land fraction rather than its ocean's. `normalise_winding` reverses all of them,
-and `land_payload` refuses any ring still covering half the sphere afterwards.
+**The winding convention, which I got wrong twice before the page proved it.** d3-geo reads
+polygons spherically, so a ring wound the wrong way fills its own complement: the ocean inks
+and the continents become holes punched in it.
+
+The trap is that **d3-geo wants clockwise exterior rings, the opposite of RFC 7946**. I first
+assumed Natural Earth was already RFC-compliant and needed nothing; then decided it was
+ESRI-wound and normalised it *to* RFC 7946 — which is what actually broke it, and the first
+render of the page came back with a blank white globe. Asking d3 settles it in one line:
+
+```
+geoArea({type:"Polygon", coordinates:[oneDegreeSquareClockwise]})  //  0.000305 — the square
+geoArea({type:"Polygon", coordinates:[sameSquareCounterClockwise]}) // 12.566066 — the world
+```
+
+Natural Earth follows the ESRI convention, so `ne_110m_land` was right for d3 all along and
+`normalise_winding` now leaves all 127 of its rings alone. The function still earns its keep:
+it makes "wound the way d3 reads it" a checked fact, and the historic-borders GeoJSON coming
+next *is* RFC 7946 and will need every ring turned. `ring_area` is now signed so positive is
+the area d3 will fill — the number that decides what you see, not the one a standard prefers.
+
+Two tests pin this down so it cannot drift again: one asserts the clockwise square is the
+small one, quoting the d3 command that proves it; the other asserts Natural Earth needs no
+reversal at all, so a future release that switches convention fails loudly rather than
+quietly painting the sea.
 
 **Three bugs Hypothesis found, all fixed in the module rather than papered over in the test:**
 
@@ -112,7 +130,48 @@ assumption in a projection that has none. Both stay in `reviewmap.py`, which sti
 **Hungarian ships empty**, not machine-translated: 62 keys reported as the translator's
 worklist. An empty key falls back to English visibly; a guessed one reads as finished work.
 
+## PR 2 — `globe/page`
+
+**The page.** `web/index.html`, `style.css`, `globe.js`, `app.js`, `i18n.js`. Canvas for the
+sphere, coastline and arcs; an SVG overlay for the nine stops, so each one gets a focus ring,
+an accessible name and a 28px touch target without any hit-testing on the canvas. Drag to
+turn, auto-rotate after twenty seconds idle with a real pause control, an itinerary as a
+visible ordered list, and the provenance counts above the fold rather than in a footnote.
+
+**Vendored, not fetched.** `d3-geo` 3.1.1 with `d3-array` and `internmap`, 57 KB, each
+bundle's CDN imports rewritten to point at the file next door. `tests/test_web_page.py`
+fails if one goes back to fetching itself.
+
+**`versor` was fetched and then dropped.** It gives "the point you grabbed stays under the
+cursor", which rolls the horizon — wrong for an atlas that reads north-up. The drag moves two
+angles with the roll pinned at zero, the same decision as `globe.shortest_rotation`.
+
+**Type, self-hosted.** Playfair Display and EB Garamond, Latin and Latin-Ext only, 312 KB
+across 8 files — an English reader downloads about 113 KB of that. `scripts/fetch_fonts.py`
+is reproducible and writes both OFL texts beside the fonts, which the licence requires.
+EB Garamond is a variable font and the API serves the same bytes for 400 and 600, so the
+faces are deduplicated by content hash and declared with a weight range; without that the
+page shipped 158 KB twice.
+
+**The camera does not centre on London.** Centring on a stop at 51 degrees north points the
+globe at the Arctic and puts most of the journey over the horizon, so the view sits on
+London's meridian at the route's own mean latitude, about 34.
+
+## What is still only checked by eye
+
+Canvas output, drag, font features and contrast are not a pytest's business. `web/globe.js`
+opens with the list: Antarctica white not black, no clickable dots on the far side, no roll
+while dragging, auto-rotate stopping on touch and never starting under reduced motion,
+old-style figures in the prose and tabular ones in the day column.
+
+Rendered and checked headless during this work: the globe draws, `?lang=hu` falls back to
+English per key, the itinerary lists all nine stops with their modern names, and Queenstown
+is absent from the last leg as intended.
+
+**One thing the render surfaced for the review pile:** Calcutta resolved to *Kolkata
+district* rather than the city, at 0.96 confidence. It is on the route and it is drawn.
+Worth a `corrected_qid` alongside Queenstown and Sydenham.
+
 ## Green
 
-`make ci`: 671 tests pass, ruff format and lint clean, `ty check src` clean, 98% coverage on
-`globe.py`.
+`make ci`: 687 tests pass, ruff format and lint clean, `ty check src` clean, 93% overall.

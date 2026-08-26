@@ -2,14 +2,26 @@ r"""Coastline geometry, wound and rounded so an orthographic globe can draw it.
 
 Three jobs, each a distinct way the same file can be wrong.
 
-**Winding, and this one is not a formality.** d3-geo treats a polygon as *spherical*, so
-a ring wound the wrong way does not draw a mirrored shape — it fills its own complement.
-Get it backwards and the oceans turn to ink while the continents become holes punched in
-them. Natural Earth follows the ESRI shapefile convention, clockwise for an exterior
-ring, and its GeoJSON builds keep it: every one of the 127 rings in ``ne_110m_land`` is
-clockwise, which is the opposite of what RFC 7946 and d3-geo require. So
-:func:`normalise_winding` reverses all of them, and the check in :func:`land_payload` is
-what stops that being a thing somebody has to remember.
+**Winding, and d3 does not do what the standard says.** d3-geo treats a polygon as
+*spherical*, so a ring wound the wrong way does not draw a mirrored shape — it fills its
+own complement, and the ocean floods while the continents become holes punched in it.
+
+The trap is that **d3-geo wants clockwise exterior rings**, which is the opposite of
+RFC 7946. Ask it and it says so:
+
+.. code-block:: javascript
+
+    const square = [[0,0], [0,1], [1,1], [1,0], [0,0]];   // clockwise, one degree
+    geoArea({type: "Polygon", coordinates: [square]});                //  0.000305
+    geoArea({type: "Polygon", coordinates: [square.reverse()]});      // 12.566066
+
+Natural Earth follows the ESRI shapefile convention, which is clockwise, so
+``ne_110m_land`` is **already right for d3**, and :func:`normalise_winding` leaves all
+127 of its rings alone. The function still earns its place twice over: it makes "wound
+the way d3 reads it" a checked fact rather than a lucky one, and the historic-boundary
+layer that comes next is RFC 7946 GeoJSON, wound the other way, where every ring will
+need turning. :func:`ring_area` is signed so that **positive is the area d3 will fill**
+— the number that decides what you see, rather than the one a standard prefers.
 
 **Rounding.** 1:110m resolves nothing finer than a few kilometres, so coordinates past
 two decimal places are noise that costs bytes. :func:`round_coords` drops them, and is
@@ -62,15 +74,16 @@ _FLAT = 1e-12
 def ring_area(ring: Sequence[Sequence[float]]) -> float:
     """The signed spherical area of a ring, in steradians.
 
-    Positive means counter-clockwise on a north-up map — the interior on the left of
-    travel — which is RFC 7946's convention for an exterior ring, and what d3-geo
-    assumes. Negative means clockwise: RFC 7946's convention for a hole, and Natural
-    Earth's for everything.
+    **Positive is the area d3-geo will fill**, which is the number that decides what
+    appears on screen. That means positive is *clockwise* on a north-up map — the
+    interior on the right of travel — because that is d3's convention for an exterior
+    ring, and it is the opposite of RFC 7946's. Negative is counter-clockwise: d3's
+    convention for a hole.
 
-    A negative result is not "a small area, backwards". Read counter-clockwise, such a
+    A negative result is not "a small area, backwards". Read the way d3 reads it, such a
     ring encloses ``SPHERE_AREA + area`` — the complement of what was almost certainly
-    meant. That is exactly the failure mode that inks the oceans, and it is why this
-    returns a signed number rather than a magnitude and a flag.
+    meant. That is the failure mode that inks the oceans, and it is why this returns a
+    signed number rather than a magnitude and a flag.
 
     The sum is the spherical excess (Chamberlain & Duquette 2007), not a planar
     shoelace. A planar formula would be wrong by a factor that grows with latitude, and
@@ -93,21 +106,22 @@ def ring_area(ring: Sequence[Sequence[float]]) -> float:
           longitude step is taken the short way round.
 
     Examples:
-        A one-degree square, counter-clockwise, is about ``(pi/180)**2`` steradians:
+        A one-degree square walked clockwise — the way d3 wants an exterior — encloses
+        about ``(pi/180)**2`` steradians, and ``d3.geoArea`` agrees to six places:
 
-        >>> square = [[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0], [0.0, 0.0]]
-        >>> round(ring_area(square), 9)
+        >>> clockwise = [[0.0, 0.0], [0.0, 1.0], [1.0, 1.0], [1.0, 0.0], [0.0, 0.0]]
+        >>> round(ring_area(clockwise), 9)
         0.000304602
 
         Walk it the other way and only the sign changes:
 
-        >>> round(ring_area(list(reversed(square))), 9)
+        >>> round(ring_area(list(reversed(clockwise))), 9)
         -0.000304602
 
         A degenerate ring encloses nothing:
 
         >>> ring_area([[0.0, 0.0], [0.0, 0.0], [0.0, 0.0]])
-        -0.0
+        0.0
     """
     total = 0.0
     for (lon1, lat1), (lon2, lat2) in zip(ring, ring[1:], strict=False):
@@ -121,19 +135,19 @@ def ring_area(ring: Sequence[Sequence[float]]) -> float:
         step = math.pi if wrapped == -math.pi and step > 0.0 else wrapped
         sines = math.sin(math.radians(lat1)) + math.sin(math.radians(lat2))
         total += step * (2.0 + sines)
-    # Negated: the sum itself integrates with the interior on the *right*, which is the
-    # ESRI convention. Flipping it here means positive is counter-clockwise everywhere
-    # else in this package, and nobody downstream has to hold two conventions at once.
-    return -total / 2.0
+    # Not negated. The sum integrates with the interior on the *right*, which is exactly
+    # d3's reading — so positive is the area that will actually be filled, and no caller
+    # has to hold two conventions at once to know what it will see.
+    return total / 2.0
 
 
 def normalise_winding(polygon: Sequence[Sequence[Sequence[float]]]) -> list[Ring]:
-    """Wind a polygon's rings the way RFC 7946 and d3-geo agree on.
+    """Wind a polygon's rings the way d3-geo reads them.
 
-    Exterior ring counter-clockwise, every hole clockwise. The first ring is taken to
-    be the exterior, which is what GeoJSON says it is. Containment is not re-derived:
-    a file with its rings in the wrong order is broken in a way that reordering them
-    here would hide rather than fix.
+    Exterior ring clockwise, every hole counter-clockwise — d3's convention, and the
+    reverse of RFC 7946's. The first ring is taken to be the exterior, which is what
+    GeoJSON says it is. Containment is not re-derived: a file with its rings in the
+    wrong order is broken in a way that reordering them here would hide, not fix.
 
     Args:
         polygon: A GeoJSON ``Polygon``'s coordinates: exterior ring first, then holes.
@@ -145,22 +159,23 @@ def normalise_winding(polygon: Sequence[Sequence[Sequence[float]]]) -> list[Ring
         - Idempotent: normalising twice is the same as normalising once. A ring with
           no area is left alone, since it has no winding to get wrong.
         - Ring count, and the point count of every ring, are unchanged.
-        - Afterwards the exterior ring's area is non-negative, and every hole's is
-          non-positive.
+        - Afterwards the exterior ring's :func:`ring_area` is non-negative and every
+          hole's is non-positive — that is, the exterior encloses what it looks like it
+          encloses when d3 draws it.
 
     Examples:
-        Natural Earth's clockwise exterior is turned counter-clockwise:
+        An RFC 7946 exterior — counter-clockwise — is turned round for d3:
 
-        >>> clockwise = [[0.0, 0.0], [0.0, 1.0], [1.0, 1.0], [1.0, 0.0], [0.0, 0.0]]
-        >>> round(ring_area(clockwise), 9)
+        >>> counter = [[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0], [0.0, 0.0]]
+        >>> round(ring_area(counter), 9)
         -0.000304602
-        >>> round(ring_area(normalise_winding([clockwise])[0]), 9)
+        >>> round(ring_area(normalise_winding([counter])[0]), 9)
         0.000304602
 
-        One that is already right is left exactly as it was:
+        Natural Earth's own winding is already what d3 wants, and is left untouched:
 
-        >>> counter = list(reversed(clockwise))
-        >>> normalise_winding([counter])[0] == counter
+        >>> clockwise = list(reversed(counter))
+        >>> normalise_winding([clockwise])[0] == clockwise
         True
     """
     out: list[Ring] = []
@@ -248,7 +263,8 @@ def land_payload(geojson: Mapping[str, Any], places: int = 2) -> dict[str, objec
 
     Contract:
         - Every ring is closed and has at least four points.
-        - Exterior rings are counter-clockwise, holes clockwise.
+        - Exterior rings are clockwise and holes counter-clockwise, which is what
+          d3-geo reads as "the inside is in here".
         - No exterior ring exceeds ``SPHERE_AREA / 2``.
 
     Examples:

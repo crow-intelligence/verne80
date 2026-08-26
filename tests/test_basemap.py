@@ -22,9 +22,11 @@ from verne80.sources import LAND
 REPO_ROOT = Path(__file__).resolve().parent.parent
 COASTLINE = REPO_ROOT / LAND.path
 
-# A one-degree square, counter-clockwise on a north-up map: RFC 7946's exterior winding.
-CCW = [[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0], [0.0, 0.0]]
-CW = list(reversed(CCW))
+# A one-degree square. CW is clockwise on a north-up map: what d3-geo reads as an
+# exterior ring, and what Natural Earth ships. CCW is RFC 7946's convention, and the
+# one that floods the ocean if it reaches the canvas unturned.
+CW = [[0.0, 0.0], [0.0, 1.0], [1.0, 1.0], [1.0, 0.0], [0.0, 0.0]]
+CCW = list(reversed(CW))
 
 
 def collection(*polygons):
@@ -40,13 +42,26 @@ def collection(*polygons):
 # --------------------------------------------------------------------- ring_area
 
 
-def test_counter_clockwise_is_positive_and_clockwise_is_negative():
-    assert ring_area(CCW) > 0
-    assert ring_area(CW) < 0
+def test_positive_is_the_area_d3_will_fill():
+    """Clockwise, not counter-clockwise. This is the fact the module exists for.
+
+    Checked against d3-geo itself, the only authority that matters here::
+
+        node --input-type=module -e "
+          import {geoArea} from './web/vendor/d3-geo-3.1.1.js';
+          const sq = [[0,0],[0,1],[1,1],[1,0],[0,0]];
+          console.log(geoArea({type:'Polygon', coordinates:[sq]}));
+          console.log(geoArea({type:'Polygon', coordinates:[[...sq].reverse()]}));
+        "
+        0.000304602...      <- clockwise: the square
+        12.566066...        <- counter-clockwise: the rest of the world
+    """
+    assert ring_area(CW) == pytest.approx(0.000304602, rel=1e-6)
+    assert ring_area(CCW) == pytest.approx(-0.000304602, rel=1e-6)
 
 
 def test_a_hemisphere_is_half_the_sphere():
-    equator = [[float(lon), 0.0] for lon in range(180, -181, -30)]
+    equator = [[float(lon), 0.0] for lon in range(-180, 181, 30)]
     assert ring_area(equator) == pytest.approx(SPHERE_AREA / 2, rel=1e-9)
 
 
@@ -71,19 +86,25 @@ def test_a_ring_crossing_the_antimeridian_is_not_a_ring_round_the_world():
 # ---------------------------------------------------------------- normalise_winding
 
 
-def test_normalising_turns_an_esri_exterior_the_right_way():
-    assert ring_area(normalise_winding([CW])[0]) > 0
+def test_normalising_turns_an_rfc_7946_exterior_round_for_d3():
+    """Which is the state the historic-borders layer will arrive in."""
+    assert ring_area(normalise_winding([CCW])[0]) > 0
+
+
+def test_natural_earths_own_winding_is_left_exactly_alone():
+    """It is already what d3 wants. Turning it is what floods the ocean."""
+    assert normalise_winding([CW])[0] == CW
 
 
 def test_a_hole_is_wound_against_its_exterior():
-    exterior, hole = normalise_winding([CW, CCW])
+    exterior, hole = normalise_winding([CCW, CW])
     assert ring_area(exterior) > 0
     assert ring_area(hole) < 0
 
 
 def test_normalising_never_adds_or_drops_a_point():
-    rings = normalise_winding([CW, CCW])
-    assert [len(ring) for ring in rings] == [len(CW), len(CCW)]
+    rings = normalise_winding([CCW, CW])
+    assert [len(ring) for ring in rings] == [len(CCW), len(CW)]
 
 
 # -------------------------------------------------------------------- round_coords
@@ -122,7 +143,7 @@ def test_a_ring_that_survives_backwards_is_refused():
     # A ring circling the north pole at 80 degrees. The cap inside it is tiny, but read
     # the other way round it is everything south of 80 — which is 12.5 of the sphere's
     # 12.6 steradians. This is a small polar island digitised backwards.
-    polar = [[float(lon), 80.0] for lon in range(0, 361, 20)]
+    polar = [[float(lon), 80.0] for lon in range(360, -1, -20)]
     with pytest.raises(ValueError, match="more than half the sphere"):
         land_payload(collection([polar]))
 
@@ -148,9 +169,9 @@ def test_a_multipolygon_feature_is_unpacked():
 def test_the_committed_coastline_survives_the_winding_trap():
     """The whole reason this module exists.
 
-    Natural Earth ships clockwise exterior rings. Drawn as-is by d3-geo they would fill
-    the sea and leave the land blank, and the giveaway is arithmetic rather than visual:
-    afterwards the rings must add up to Earth's land fraction, not to its ocean's.
+    The giveaway is arithmetic rather than visual: read the way d3 reads them, the rings
+    must add up to Earth's land fraction and not to its ocean's. A file wound the other
+    way passes every structural check and then paints the sea instead of the shore.
     """
     payload = land_payload(json.loads(COASTLINE.read_text(encoding="utf-8")))
     exteriors = [ring_area(rings[0]) for rings in payload["coordinates"]]
@@ -159,6 +180,27 @@ def test_the_committed_coastline_survives_the_winding_trap():
     assert max(exteriors) < SPHERE_AREA / 2
     land_fraction = sum(exteriors) / SPHERE_AREA
     assert 0.27 < land_fraction < 0.31, f"{land_fraction:.3f} is not Earth's land"
+
+
+@pytest.mark.skipif(
+    not COASTLINE.exists(), reason="run scripts/00_fetch.py --only land"
+)
+def test_natural_earth_needs_no_turning_and_this_records_that():
+    """If a future Natural Earth release switches to RFC 7946, this is what says so.
+
+    The pipeline would keep working — normalise_winding would simply start reversing
+    rings — but the fact would have changed, and a silently changed fact is how a module
+    docstring ends up lying.
+    """
+    raw = json.loads(COASTLINE.read_text(encoding="utf-8"))
+    turned = 0
+    for feature in raw["features"]:
+        # The whole polygon, not each ring alone: the first ring is the exterior and the
+        # rest are holes, and a hole handed in as an exterior is correctly reversed.
+        polygon = feature["geometry"]["coordinates"]
+        before = [[list(point) for point in ring] for ring in polygon]
+        turned += sum(a != b for a, b in zip(normalise_winding(polygon), before))
+    assert turned == 0, f"{turned} rings had to be reversed; Natural Earth has changed"
 
 
 @pytest.mark.skipif(
