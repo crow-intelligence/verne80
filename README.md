@@ -24,11 +24,12 @@ uv sync --all-extras
 The pipeline is four stages that communicate only through the filesystem.
 
 ```bash
-uv run python scripts/00_fetch.py       # Gutenberg #103 -> data/raw/pg103.txt
+uv run python scripts/00_fetch.py       # Gutenberg #103 + the coastline -> data/raw/
 uv run python scripts/01_chapters.py    # -> data/chapters/chapter_01.txt .. _37.txt + index.json
 uv run python scripts/02_prompts.py     # -> data/prompts/chapter_NN.txt (paste these into Gemini)
 #   ... paste each prompt into the Gemini UI, save the JSON to data/extractions/chapter_NN.json
 uv run python scripts/03_validate.py    # schema + evidence-quote check -> data/review/
+uv run python scripts/08_dashboard.py   # -> web/data/*.json, the six files the globe reads
 ```
 
 See `data/prompts/README.md` for the paste workflow.
@@ -49,10 +50,27 @@ See `data/prompts/README.md` for the paste workflow.
   inline diff.
 - **A schema that does not pressure the model.** Money is null by default; an empty `amounts`
   array is the correct and expected answer for most chapters.
+- **A globe that needs no antimeridian.** `d3.geoOrthographic` clips at the horizon, so a
+  circumnavigation closes on itself with none of the unwrap-and-split machinery a Mercator
+  map needs. The route is drawn on a sphere because that is the shape of the journey.
+- **Pins that cannot disagree with the line they sit on.** A waypoint's position and the arc
+  it sits on come from the same interpolation, so "on the route" is true by construction and
+  a property test asserts it rather than a screenshot.
+- **A place that contradicts its own leg is not drawn.** The curation puts Queenstown
+  six-tenths of the way from New York to London; the gazetteer put it in New Zealand. The
+  export withholds the pin and says why, which needs no opinion about which source is wrong.
 
 ## Data
 
-`data/raw/` and `data/chapters/` are committed. Gutenberg's URL is mutable, and the evidence
+`data/raw/` and `data/chapters/` are committed. So is `web/data/`: GitHub Pages serves what
+is in the repository and there is no build step at deploy time, so the derived payloads have
+to be here — and a diff on `web/data/places.json` is then the reviewable record of what a
+gazetteer change actually did. `tests/test_dashboard_data.py` re-runs the export and fails if
+the committed files have drifted from the inputs they claim to come from.
+
+`data/raw/ne_110m_land.geojson` is Natural Earth 1:110m land, pinned to release v5.1.2 and
+kept untouched for the same reason as the novel: a basemap that can change under a committed
+derived file is a provenance record that has stopped recording anything. Gutenberg's URL is mutable, and the evidence
 quotes are joined to this exact wording — committing the text makes the repo reproducible offline
 and turns any change to the splitter into a reviewable diff. `data/extractions/` is committed too:
 hand-verified project data, expensive to regenerate. `data/prompts/*.txt` and `data/review/` are
@@ -65,12 +83,13 @@ regenerable and ignored.
 - [x] Fetch and slice Gutenberg #103 into 37 chapters
 - [x] Render the 37 extraction prompts
 - [x] Schema validation + evidence-quote validator
-- [ ] Wikidata place resolution -> `data/review/places.csv` with a confirmed column
+- [x] Wikidata place resolution -> `data/review/places.csv` with a confirmed column
 - [ ] Itinerary: order stops, attach dates, compute the running gain/loss
 
 **Dashboard**
 
-- [ ] Route + coordinates + hover summaries on a modern basemap
+- [x] The data the globe reads: `scripts/08_dashboard.py` -> `web/data/*.json`
+- [ ] Route + coordinates + hover summaries on an orthographic globe
 - [ ] Timeline scrubber and the ahead/behind ledger
 - [ ] Historic (1872) vs current borders toggle
 - [ ] Transport modes, mentioned-vs-visited places, detail panel
@@ -79,6 +98,13 @@ regenerable and ignored.
 **Maintenance**
 
 - [ ] Tune `NEAR_MISS_RATIO` from the first full validation run
+
+## Attribution
+
+- Text: [Project Gutenberg #103](https://www.gutenberg.org/ebooks/103), public domain.
+- Places: [Wikidata](https://www.wikidata.org/), CC0.
+- Coastline: [Natural Earth](https://www.naturalearthdata.com/) 1:110m land, public domain.
+  No permission is required and no credit is demanded; the credit is given anyway.
 
 ## Made by
 

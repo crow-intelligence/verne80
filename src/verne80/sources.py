@@ -1,8 +1,14 @@
-"""Where the raw text comes from, and where it lands on disk.
+"""Where the raw material comes from, and where it lands on disk.
 
-One frozen record per source text. The download itself lives in ``scripts/00_fetch.py``
+One frozen record per source. The download itself lives in ``scripts/00_fetch.py``
 — this module only describes what to fetch, so it stays importable without touching the
 network or the filesystem.
+
+Two kinds of source, and the difference is not cosmetic. :class:`GutenbergSource` is a
+text whose *wording* everything downstream is joined to, so it is fetched once and never
+touched again. :class:`GeoJSONSource` is geometry the map draws; it is equally a
+provenance record, but it also carries the licence and the attribution line, because a
+basemap is somebody's work and the footer has to say so.
 """
 
 from __future__ import annotations
@@ -10,7 +16,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-__all__ = ["BOOK", "DEFAULT_RAW_DIR", "GutenbergSource"]
+__all__ = [
+    "BOOK",
+    "DEFAULT_RAW_DIR",
+    "GeoJSONSource",
+    "GutenbergSource",
+    "LAND",
+    "SOURCES",
+]
 
 DEFAULT_RAW_DIR = Path("data/raw")
 
@@ -34,12 +47,29 @@ class GutenbergSource:
         title: The work's title, for run logs and provenance records.
         expected_chapters: How many chapters the text must split into. Asserted rather
             than discovered, so a changed edition is an error and not a silent surprise.
+        min_bytes: Below this, the response is an error page rather than a book.
+            Gutenberg answers a missing file with a 200 and a paragraph of HTML, so
+            the size check is the only thing that catches it.
     """
 
     gutenberg_id: int
     slug: str
     title: str
     expected_chapters: int
+    min_bytes: int = 100_000
+
+    @property
+    def name(self) -> str:
+        """The identifier ``--only`` matches on.
+
+        Returns:
+            The short name.
+
+        Examples:
+            >>> BOOK.name
+            'book'
+        """
+        return "book"
 
     @property
     def urls(self) -> tuple[str, ...]:
@@ -75,9 +105,85 @@ class GutenbergSource:
         return DEFAULT_RAW_DIR / f"{self.slug}.txt"
 
 
+@dataclass(frozen=True, slots=True)
+class GeoJSONSource:
+    """One GeoJSON layer, and the local file it is cached as.
+
+    The licence and attribution are fields rather than a note in a README because the
+    footer has to print them and a footer that quotes a README drifts from it. Natural
+    Earth asks for no permission and no credit; the credit is given anyway, and stating
+    that here is what makes it a decision rather than an oversight.
+
+    Attributes:
+        name: The identifier ``--only`` matches on, e.g. ``"land"``.
+        slug: The stem of the local filename.
+        title: What the layer is, for run logs.
+        url: Where to fetch it.
+        licence: The licence, as the footer should print it.
+        attribution: The credit line, as the footer should print it.
+        min_bytes: Below this, the response is an error page rather than geometry.
+    """
+
+    name: str
+    slug: str
+    title: str
+    url: str
+    licence: str
+    attribution: str
+    min_bytes: int = 10_000
+
+    @property
+    def urls(self) -> tuple[str, ...]:
+        """The download URLs, so a caller can treat every source the same way.
+
+        A GeoJSON layer has exactly one URL, where a Gutenberg text has three shapes to
+        try. Returning a tuple of one keeps the fetch loop from having to know which
+        kind it is holding.
+
+        Returns:
+            The single URL, in a tuple.
+
+        Examples:
+            >>> len(LAND.urls)
+            1
+        """
+        return (self.url,)
+
+    @property
+    def path(self) -> Path:
+        """Where the untouched download is kept.
+
+        Returns:
+            The path under :data:`DEFAULT_RAW_DIR`.
+
+        Examples:
+            >>> LAND.path
+            PosixPath('data/raw/ne_110m_land.geojson')
+        """
+        return DEFAULT_RAW_DIR / f"{self.slug}.geojson"
+
+
 BOOK = GutenbergSource(
     gutenberg_id=103,
     slug="pg103",
     title="Around the World in Eighty Days",
     expected_chapters=37,
 )
+
+# Land only, not countries. The globe's first phase draws no borders, so one dissolved
+# MultiPolygon is the whole requirement — and pinned to a commit rather than to
+# ``master``, because a basemap that changes under a committed derived file is a
+# provenance record that has stopped recording anything.
+LAND = GeoJSONSource(
+    name="land",
+    slug="ne_110m_land",
+    title="Natural Earth 1:110m land",
+    url=(
+        "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/"
+        "v5.1.2/geojson/ne_110m_land.geojson"
+    ),
+    licence="public domain",
+    attribution="Natural Earth",
+)
+
+SOURCES: tuple[GutenbergSource | GeoJSONSource, ...] = (BOOK, LAND)
