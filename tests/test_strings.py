@@ -1,4 +1,4 @@
-"""The catalogue: the two things that actually break a translated page."""
+"""The string table: the things that break a page silently."""
 
 from __future__ import annotations
 
@@ -6,97 +6,77 @@ import hypothesis.strategies as st
 from hypothesis import given, settings
 
 from verne80.strings import (
-    CATALOGUE,
-    DEFAULT_LANGUAGE,
-    LANGUAGES,
-    catalogue_payload,
-    check_catalogue,
-    missing_keys,
+    LANGUAGE,
+    STRINGS,
+    check_strings,
     placeholder_names,
+    strings_payload,
 )
 
 
-class TestTheShippedCatalogue:
-    def test_english_is_complete_and_sound(self):
-        assert check_catalogue() == []
-
-    def test_every_offered_language_has_an_entry(self):
-        for code, _ in LANGUAGES:
-            assert code in CATALOGUE
-
-    def test_hungarian_is_empty_rather_than_guessed(self):
-        """An empty key falls back visibly. A guessed one reads as finished work."""
-        assert CATALOGUE["hu"] == {}
-        assert missing_keys()["hu"] == sorted(CATALOGUE["en"])
+class TestTheShippedTable:
+    def test_it_is_sound(self):
+        assert check_strings() == []
 
     def test_no_string_smuggles_in_markup(self):
-        """A tag in a catalogue is an injection hole and an untranslatable blob."""
+        """The page sets textContent, so a tag would print as angle brackets."""
         assert not [
-            key
-            for key, value in CATALOGUE["en"].items()
-            if "<" in value and ">" in value
+            key for key, value in STRINGS.items() if "<" in value and ">" in value
         ]
 
     def test_the_placeholders_the_page_relies_on_are_present(self):
-        english = CATALOGUE["en"]
-        assert placeholder_names(english["chapter.of"]) == {"n", "total"}
-        assert placeholder_names(english["leg.table_says"]) == {"from", "to"}
-        assert "who" in placeholder_names(english["track.absent"])
+        assert placeholder_names(STRINGS["chapter.of"]) == {"n", "total"}
+        assert placeholder_names(STRINGS["prov.line"]) == {
+            "plotted",
+            "total",
+            "confirmed",
+        }
+        assert "who" in placeholder_names(STRINGS["track.absent"])
+
+    def test_the_reader_is_never_shown_the_word_leg(self):
+        """`leg` is the data's word, `stage` the reader's. This is the boundary."""
+        offenders = [
+            key
+            for key, value in STRINGS.items()
+            if " leg " in f" {value.lower()} " or " legs " in f" {value.lower()} "
+        ]
+        assert offenders == []
+
+    def test_the_stage_keys_exist_and_the_leg_keys_do_not(self):
+        assert "stage.count" in STRINGS
+        assert not [key for key in STRINGS if key.startswith("leg.")]
 
 
-class TestParity:
-    def test_a_lost_placeholder_is_caught(self):
-        problems = check_catalogue({"en": {"d": "Day {n}"}, "hu": {"d": "Nap"}})
-        assert problems == ["hu 'd' is missing the placeholder {n}"]
+class TestTheChecks:
+    def test_markup_is_caught(self):
+        assert check_strings({"x": "see <a href='#'>this</a>"}) == [
+            "'x' contains markup — split it into two keys, or do without"
+        ]
 
-    def test_an_invented_placeholder_is_caught(self):
-        problems = check_catalogue({"en": {"d": "Day"}, "hu": {"d": "{n}. nap"}})
-        assert "has a placeholder {n}" in problems[0]
+    def test_a_blank_is_caught(self):
+        assert "is empty" in check_strings({"x": "   "})[0]
 
-    def test_a_translation_with_no_original_is_caught(self):
-        problems = check_catalogue({"en": {}, "hu": {"stray": "x"}})
-        assert "has no en original" in problems[0]
+    def test_an_unmatched_brace_is_caught(self):
+        """`day {n` prints as written, which is how a count becomes furniture."""
+        assert "unmatched brace" in check_strings({"day": "day {n"})[0]
 
-    def test_reordering_a_placeholder_is_fine(self):
-        """Word order is exactly what a translator is for."""
-        assert (
-            check_catalogue({"en": {"d": "{n} of {t}"}, "hu": {"d": "{t}-ból {n}"}})
-            == []
-        )
-
-    def test_an_untranslated_key_is_not_a_problem(self):
-        """It falls back, and missing_keys is where it gets reported."""
-        assert check_catalogue({"en": {"a": "A", "b": "B"}, "hu": {"a": "Á"}}) == []
+    def test_a_sound_table_has_nothing_to_say(self):
+        assert check_strings({"day": "Day {n} of {total}"}) == []
 
 
 class TestThePayload:
-    def test_every_offered_language_gets_an_object_even_when_empty(self):
-        payload = catalogue_payload()
-        for code, _ in LANGUAGES:
-            assert isinstance(payload[code], dict)
+    def test_it_names_the_language_once(self):
+        """So the markup, the JSON-LD and the OpenGraph locale have one source."""
+        assert strings_payload()["language"] == LANGUAGE
 
-    def test_the_default_language_is_named_in_the_payload(self):
-        assert catalogue_payload()["default"] == DEFAULT_LANGUAGE
+    def test_it_carries_no_language_picker(self):
+        """One language and a picker for it is a control that does nothing."""
+        payload = strings_payload()
+        assert "languages" not in payload
+        assert "default" not in payload
 
-    def test_a_language_not_offered_is_left_out(self):
-        payload = catalogue_payload(
-            {"en": {"a": "A"}, "fr": {"a": "A"}}, (("en", "En"),)
-        )
-        assert "fr" not in payload
-
-
-@given(
-    st.dictionaries(
-        st.text(min_size=1, max_size=8, alphabet="abcd."),
-        st.text(min_size=0, max_size=20, alphabet="abc {n}{t}"),
-        max_size=8,
-    )
-)
-@settings(max_examples=200)
-def test_a_catalogue_translated_into_itself_is_always_sound(english):
-    """Copying English into Hungarian is a bad translation and a valid one."""
-    assume_clean = {k: v.replace("<", "").replace(">", "") for k, v in english.items()}
-    assert check_catalogue({"en": assume_clean, "hu": dict(assume_clean)}) == []
+    def test_the_strings_travel_under_one_key(self):
+        assert strings_payload({"a": "A"})["strings"] == {"a": "A"}
 
 
 @given(st.text(max_size=60))
@@ -104,3 +84,16 @@ def test_a_catalogue_translated_into_itself_is_always_sound(english):
 def test_placeholder_names_never_raises_and_never_invents(text):
     for name in placeholder_names(text):
         assert "{" + name + "}" in text
+
+
+@given(
+    st.dictionaries(
+        st.text(min_size=1, max_size=8, alphabet="abcd."),
+        st.text(min_size=1, max_size=20, alphabet="abc {n}{t}"),
+        max_size=8,
+    )
+)
+@settings(max_examples=200)
+def test_checking_never_raises_on_arbitrary_tables(table):
+    for problem in check_strings(table):
+        assert problem.startswith("'")

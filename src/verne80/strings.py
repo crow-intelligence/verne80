@@ -1,163 +1,178 @@
-r"""Every user-facing string the page shows, in one place, keyed by language.
+r"""Every user-facing string the page shows, in one place.
 
-The house rule says keep these centralised so that a Hungarian version is a translation
-job and not a rewrite. No Crow project has actually done it — the lyrics dashboard has
-its Hungarian prose typed directly into the markup — so this is the precedent rather
-than a copy of one.
+The house rule is that user-facing text lives in one file and never in the markup, so
+that changing what the page says is an edit here rather than a hunt through HTML and
+JavaScript. This is the whole of what the reader reads, apart from the chapter
+summaries, which are content and live in the data.
 
-Two halves, and only one of them is here.
+The page is English and there is no second language. That is a decision rather than an
+omission: an empty translation catalogue and a one-item language picker are machinery
+for a thing nobody is building, and they read on the page as a control that does
+nothing. If a translation is ever wanted, the shape to come back to is a mapping of
+language to this same table, plus ``summary`` in ``chapters.json`` gaining a language
+key beside ``hover`` and ``detail``. Both are a day's work from here and neither is
+worth carrying meanwhile.
 
-**Chrome** — buttons, headings, labels, the provenance sentence — lives in
-:data:`CATALOGUE`. It is Python rather than a hand-written JavaScript object so that
-:func:`check_catalogue` can assert the two things that actually break a translation:
-that no key has gone missing, and that a translated string still has the same
-placeholders as the English it replaced. A translator who drops ``{n}`` from a day count
-produces a page that says "day of" and no test would otherwise notice.
+Two conventions are load-bearing.
 
-**Content** — the chapter summaries — is language-keyed inside the data instead, as
-``summary.en.hover``. Adding Hungarian there is an edit to a JSON file: no markup
-changes, no code changes, nothing to re-wire.
+**No HTML in a string, ever.** A catalogue entry carrying ``<a href=…>`` is an
+injection hole and an unreadable blob at the same time. A sentence that needs a link or
+an emphasis is split into two keys with the markup built between them, or it does
+without. :func:`check_strings` enforces this, and it is why the "About the project"
+prose here has no italics: one emphasised word is not worth two keys.
 
-Two conventions that are load-bearing:
-
-**No HTML in a string, ever.** A catalogue entry carrying ``<a href=…>`` is an injection
-hole and an untranslatable blob at the same time. A sentence that needs a link is split
-into a ``.before`` and an ``.after`` key, and the anchor is built in JavaScript between
-them. :func:`check_catalogue` enforces this.
-
-**A place's printed name is not translatable.** ``name_in_text`` is a quotation from the
-English text of Gutenberg #103. The Hungarian translation of the novel spells its places
-differently, and asserting those spellings without the Hungarian text in hand would be
-inventing data to fill a schema. So the Hungarian build shows the same
-``name_in_text``, alongside the modern name, and translates the prose around it.
+**A printed name is a quotation and is never rewritten.** ``name_in_text`` throughout
+this project is what Gutenberg #103 printed, and the text is not consistent with
+itself: chapters 20 and 21 call the pilot of the *Tankadere* John Bunsby, and chapter
+24 calls him John Busby. The extraction is faithful and the book is not. Tidying that
+away in the data would destroy the evidence; the place to reconcile it is a display
+roster, where both spellings survive and one of them is chosen to show.
 """
 
 from __future__ import annotations
 
 import re
-from collections.abc import Mapping, Sequence
 
 __all__ = [
-    "CATALOGUE",
-    "DEFAULT_LANGUAGE",
-    "LANGUAGES",
-    "catalogue_payload",
-    "check_catalogue",
-    "missing_keys",
+    "LANGUAGE",
+    "STRINGS",
+    "check_strings",
     "placeholder_names",
+    "strings_payload",
 ]
 
-DEFAULT_LANGUAGE = "en"
-
-# Offered in the language picker. Hungarian is listed with an empty catalogue rather
-# than a machine translation: an empty key falls back to English visibly, where a
-# guessed one reads as finished work nobody wrote.
-LANGUAGES: tuple[tuple[str, str], ...] = (("en", "English"), ("hu", "Magyar"))
+# Stated so the markup, the JSON-LD and the OpenGraph locale have one source between
+# them, rather than three literals that can drift.
+LANGUAGE = "en"
 
 _PLACEHOLDER = re.compile(r"\{(\w+)\}")
 _MARKUP = re.compile(r"<[^>]+>")
 
-CATALOGUE: dict[str, dict[str, str]] = {
-    "en": {
-        # --- the page itself ---
-        "site.title": "Around the World in Eighty Days",
-        "site.subtitle": "Fogg's itinerary, on the globe he went round",
-        "site.description": (
-            "The route and calendar of Jules Verne's 1872 novel, extracted from the "
-            "text and shown on a rotating globe."
-        ),
-        # --- site chrome ---
-        "nav.brand": "Crow Intelligence",
-        "nav.portfolio": "Portfolio",
-        "nav.services": "Services",
-        "nav.about": "About",
-        "nav.blog": "Blog",
-        "nav.contact": "Contact",
-        "skip.content": "Skip to the content",
-        "skip.itinerary": "Skip the globe, read the itinerary",
-        # --- the globe ---
-        "globe.aria": "A globe showing Phileas Fogg's route around the world.",
-        "globe.hint": "Drag to turn the globe.",
-        "globe.rotate.pause": "Stop turning",
-        "globe.rotate.play": "Turn slowly",
-        # --- the chapter stepper ---
-        "chapter.heading": "Chapter {n}. {title}",
-        "chapter.of": "Chapter {n} of {total}",
-        "chapter.next": "Next chapter",
-        "chapter.previous": "Previous chapter",
-        # --- legs ---
-        "leg.days": "{n} days",
-        "leg.count": "{n} of the eight legs",
-        "leg.table_says": "Fogg's own table says days {from} to {to}",
-        "leg.via": "The table names {places} along the way",
-        "leg.heading": "{origin} to {destination}",
-        # --- transport modes ---
-        "mode.steamer": "steamer",
-        "mode.railway": "rail",
-        "mode.elephant": "elephant",
-        "mode.sledge": "sledge",
-        "mode.carriage": "carriage",
-        "mode.on_foot": "on foot",
-        "mode.other": "other",
-        # --- the schedule chip ---
-        "schedule.ahead": "ahead of the itinerary",
-        "schedule.behind": "behind the itinerary",
-        "schedule.on_time": "on time",
-        "schedule.unknown": "the chapter does not say",
-        # --- the three tracks ---
-        "track.stated": "stated in chapter {n}",
-        "track.carried": "carried from chapter {n}",
-        "track.inferred": "inferred from where the chapter is set",
-        "track.absent": "{who} has not appeared yet",
-        # --- places ---
-        "place.unchecked": "nobody has checked this yet",
-        "place.doubtful": "resolved at {score}, below the {threshold} we trust",
-        "place.renamed": "{old}, now {new}",
-        "place.chapters": "named in chapters {numbers}",
-        "place.unlocated": "no modern place has been matched to this name",
-        # --- layers ---
-        "layer.heading": "What to show",
-        "layer.itinerary": "The route",
-        "layer.interior": "Places inside London",
-        "layer.named": "Named in the book, not yet classified",
-        "layer.named.note": (
-            "These are every other place the novel names. None has been reviewed, and "
-            "some are resolved to the wrong continent."
-        ),
-        # --- the itinerary list ---
-        "itinerary.heading": "The itinerary",
-        "itinerary.note": (
-            "The same nine stops the globe draws, as a list — which is also how the "
-            "page reads with the pictures switched off."
-        ),
-        # --- honesty, above the fold ---
-        "arc.schematic": (
-            "The lines are great circles: the shortest path over a sphere between the "
-            "stops Fogg's table names, not the route the ships and trains took. The "
-            "Suez leg went through a canal, and the Indian and American legs by rail."
-        ),
-        "prov.line": (
-            "{plotted} places are drawn, of {total} the book names. {confirmed} have "
-            "been checked by a human."
-        ),
-        "prov.doubtful": "{n} of {located} resolutions scored below {threshold}.",
-        "prov.unlocated": (
-            "{n} names have no coordinate at all — some, like Kholby, have no modern "
-            "place to match."
-        ),
-        "prov.rings": "A pin with a broken ring is one nobody has checked.",
-        # --- the closing section ---
-        "about.heading": "About the project",
-        "footer.contact": "hello@crowintelligence.org",
-        "footer.licence": "CC BY-NC-SA 4.0",
-        "footer.text": "Text: Project Gutenberg #103, public domain",
-        "footer.gazetteer": "Places: Wikidata",
-        "footer.coastline": "Coastline: Natural Earth, public domain",
-        "footer.fonts": "Type: Playfair Display and EB Garamond, SIL Open Font License",
-    },
-    # Empty on purpose. check_catalogue reports every key as the translator's worklist,
-    # and until they are filled the page falls back to English one key at a time.
-    "hu": {},
+STRINGS: dict[str, str] = {
+    # --- the page itself ---
+    "site.title": "Around the World in Eighty Days",
+    "site.subtitle": "Fogg's itinerary, on the globe he went round",
+    "site.description": (
+        "The route and calendar of Jules Verne's 1872 novel, extracted from the text "
+        "and shown on a rotating globe."
+    ),
+    # --- site chrome ---
+    "nav.brand": "Crow Intelligence",
+    "nav.portfolio": "Portfolio",
+    "nav.services": "Services",
+    "nav.about": "About",
+    "nav.blog": "Blog",
+    "nav.contact": "Contact",
+    "skip.content": "Skip to the content",
+    "skip.itinerary": "Skip the globe, read the itinerary",
+    # --- the globe ---
+    "route.heading": "The route",
+    "globe.aria": "A globe showing Phileas Fogg's route around the world.",
+    "globe.hint": "Drag to turn the globe.",
+    "globe.rotate.pause": "Stop turning",
+    "globe.rotate.play": "Turn slowly",
+    # --- the chapter browser ---
+    "chapter.heading": "Chapter {n}. {title}",
+    "chapter.of": "Chapter {n} of {total}",
+    "chapter.next": "Next chapter",
+    "chapter.previous": "Previous chapter",
+    # --- stages ---
+    # `stage.*` is the reader's word for one run between two stops. `leg` stays the
+    # data's word — journey.legs, RouteLeg, RoutePoint.leg, the leg column in
+    # places.csv — and this table is the one place the two vocabularies meet. "Leg" is
+    # ordinary English for it and opaque to anyone who did not grow up with it; "stage"
+    # is the older word, as in a stagecoach, and says what it means.
+    "stage.days": "{n} days",
+    "stage.count": "{n} of the eight stages",
+    "stage.via": "The table names {places} along the way",
+    # --- transport modes ---
+    "mode.steamer": "steamer",
+    "mode.railway": "rail",
+    "mode.elephant": "elephant",
+    "mode.sledge": "sledge",
+    "mode.carriage": "carriage",
+    "mode.on_foot": "on foot",
+    "mode.other": "other",
+    # --- the schedule chip ---
+    "schedule.ahead": "ahead of the itinerary",
+    "schedule.behind": "behind the itinerary",
+    "schedule.on_time": "on time",
+    "schedule.unknown": "the chapter does not say",
+    # --- the three tracks ---
+    "track.stated": "stated in chapter {n}",
+    "track.carried": "carried from chapter {n}",
+    "track.inferred": "inferred from where the chapter is set",
+    "track.absent": "{who} has not appeared yet",
+    # --- places ---
+    "place.doubtful": "resolved at {score}, below the {threshold} we trust",
+    "place.renamed": "{old}, now {new}",
+    "place.chapters": "named in chapters {numbers}",
+    "place.unlocated": "no modern place has been matched to this name",
+    # --- the key beside the globe ---
+    "legend.heading": "The key",
+    # --- the itinerary list ---
+    "itinerary.heading": "The itinerary",
+    "itinerary.note": (
+        "The same nine stops the globe draws, as a list — which is also how the page "
+        "reads with the pictures switched off."
+    ),
+    # --- honesty, above the fold ---
+    "arc.schematic": (
+        "The lines are great circles: the shortest path over a sphere between the "
+        "stops Fogg's table names, not the route the ships and trains took. The Suez "
+        "stage "
+        "went through a canal, and the Indian and American stages by rail."
+    ),
+    "prov.line": (
+        "{plotted} places are drawn, of {total} the book names. {confirmed} have been "
+        "checked by a human."
+    ),
+    "prov.doubtful": "{n} of {located} resolutions scored below {threshold}.",
+    "prov.unlocated": (
+        "{n} names have no coordinate at all — some, like Kholby, have no modern place "
+        "to match."
+    ),
+    "prov.rings": "A dot with a broken ring is a place nobody has checked yet.",
+    # --- the closing section ---
+    # Split into a label and a body wherever the paragraph opens with a bolded word,
+    # because the bold is markup and markup does not go in a string.
+    "about.heading": "About the project",
+    "about.dataset": (
+        "The novel already contains its own dataset. Fogg keeps an itinerary with a "
+        "column of gains and losses, and the wager is a route as well as a deadline — "
+        "so the job here is not to impose structure on the text but to make the text's "
+        "own structure visible."
+    ),
+    "about.pipeline": (
+        "The pipeline splits the work the way it should be split. Deterministic work "
+        "goes to code: fetching, slicing, joining, geocoding, drawing. Reading "
+        "comprehension goes to a language model with a human check: who is where, "
+        "when, and by what means. The join between the two halves is an evidence "
+        "quote. Every "
+        "extracted fact carries a verbatim quotation from its chapter, and a validator "
+        "greps each one back against the source, so verification is a string match "
+        "rather than a re-read."
+    ),
+    "about.sources.label": "Sources.",
+    "about.sources": (
+        "Text: Project Gutenberg #103, public domain. Places: Wikidata, CC0, resolved "
+        "and then reviewed by hand. Coastline: Natural Earth 1:110m land, public "
+        "domain. Extraction: Google Gemini, with every answer checked against the "
+        "chapter it came from."
+    ),
+    "about.method.label": "Method.",
+    "about.method": (
+        "The globe is an orthographic projection drawn with d3-geo, which clips at the "
+        "horizon — so a journey round the world closes on itself with none of the "
+        "seam-splitting a flat map needs. The arcs are great circles between the stops "
+        "the book names, and the page says so rather than implying a survey."
+    ),
+    "footer.contact": "hello@crowintelligence.org",
+    "footer.licence": "CC BY-NC-SA 4.0",
+    "footer.text": "Text: Project Gutenberg #103, public domain",
+    "footer.gazetteer": "Places: Wikidata",
+    "footer.coastline": "Coastline: Natural Earth, public domain",
+    "footer.fonts": "Type: Playfair Display and EB Garamond, SIL Open Font License",
 }
 
 
@@ -165,7 +180,7 @@ def placeholder_names(text: str) -> frozenset[str]:
     """The ``{name}`` slots a string expects to be filled.
 
     Args:
-        text: A catalogue string.
+        text: A string from the table.
 
     Returns:
         The placeholder names, without braces.
@@ -179,136 +194,73 @@ def placeholder_names(text: str) -> frozenset[str]:
     return frozenset(_PLACEHOLDER.findall(text))
 
 
-def missing_keys(
-    catalogue: Mapping[str, Mapping[str, str]] | None = None,
-    reference: str = DEFAULT_LANGUAGE,
-) -> dict[str, list[str]]:
-    """What each language still has to translate.
+def check_strings(strings: dict[str, str] | None = None) -> list[str]:
+    """Everything wrong with the table, phrased so each line names its own fix.
+
+    Three checks, and each one catches something a reader would otherwise see. Markup in
+    a value would reach the page as literal angle brackets, because the page sets
+    ``textContent`` and never ``innerHTML`` — which is deliberate, and is why the rule
+    exists. An empty value renders as a gap with no clue where it came from. And a
+    malformed placeholder — ``{n`` for ``{n}``, or a stray brace — is printed verbatim,
+    which is how a day count ends up reading "day {n".
+
+    What cannot be checked here is whether a call site actually supplies each
+    placeholder; that is what ``tests/test_web_page.py`` greps for.
 
     Args:
-        catalogue: The catalogue. Defaults to :data:`CATALOGUE`.
-        reference: The language every other is measured against. Default ``"en"``.
+        strings: The table. Defaults to :data:`STRINGS`.
 
     Returns:
-        Language to its untranslated keys, sorted. A language with nothing outstanding
-        is omitted, so an empty result means the catalogue is complete.
+        The problems, sorted. Empty means the table is sound.
 
     Examples:
-        >>> missing_keys({"en": {"a": "A", "b": "B"}, "hu": {"a": "Á"}})
-        {'hu': ['b']}
-        >>> missing_keys({"en": {"a": "A"}, "hu": {"a": "Á"}})
-        {}
-    """
-    source = catalogue if catalogue is not None else CATALOGUE
-    expected = set(source.get(reference, {}))
-    out = {}
-    for language, entries in source.items():
-        if language == reference:
-            continue
-        outstanding = sorted(expected - set(entries))
-        if outstanding:
-            out[language] = outstanding
-    return out
+        A tag that would print as angle brackets:
 
+        >>> check_strings({"x": "see <a href='#'>this</a>"})
+        ["'x' contains markup — split it into two keys, or do without"]
 
-def check_catalogue(
-    catalogue: Mapping[str, Mapping[str, str]] | None = None,
-    reference: str = DEFAULT_LANGUAGE,
-) -> list[str]:
-    """Everything wrong with a catalogue, phrased so each line names its own fix.
+        A brace that never closes:
 
-    Checks the three things that break a translated page and that nothing else would
-    catch: a key nobody has ever written in the reference language, a translation whose
-    placeholders no longer match the original, and markup smuggled into a string.
+        >>> check_strings({"day": "day {n"})
+        ["'day' has an unmatched brace — a placeholder is printed as written"]
 
-    A missing translation is not a problem — it is expected, it falls back, and
-    :func:`missing_keys` is where it gets reported.
+        And a table with nothing wrong:
 
-    Args:
-        catalogue: The catalogue. Defaults to :data:`CATALOGUE`.
-        reference: The language every other is measured against. Default ``"en"``.
-
-    Returns:
-        The problems, sorted. Empty means the catalogue is sound.
-
-    Examples:
-        A translation that has lost a placeholder:
-
-        >>> check_catalogue({"en": {"day": "Day {n}"}, "hu": {"day": "Nap"}})
-        ["hu 'day' is missing the placeholder {n}"]
-
-        A string with a tag in it:
-
-        >>> check_catalogue({"en": {"x": "see <a href='#'>this</a>"}})
-        ["en 'x' contains markup — split it into .before and .after keys instead"]
-
-        And one with nothing wrong:
-
-        >>> check_catalogue({"en": {"day": "Day {n}"}, "hu": {"day": "{n}. nap"}})
+        >>> check_strings({"day": "Day {n} of {total}"})
         []
     """
-    source = catalogue if catalogue is not None else CATALOGUE
+    table = STRINGS if strings is None else strings
     problems: list[str] = []
-    expected = source.get(reference, {})
-
-    for language, entries in source.items():
-        for key, value in entries.items():
-            if _MARKUP.search(value):
-                problems.append(
-                    f"{language} {key!r} contains markup — split it into .before and "
-                    ".after keys instead"
-                )
-            if language == reference:
-                continue
-            if key not in expected:
-                problems.append(
-                    f"{language} {key!r} has no {reference} original — either it is a "
-                    f"typo or the {reference} key was deleted"
-                )
-                continue
-            wanted = placeholder_names(expected[key])
-            got = placeholder_names(value)
-            for name in sorted(wanted - got):
-                problems.append(
-                    f"{language} {key!r} is missing the placeholder {{{name}}}"
-                )
-            for name in sorted(got - wanted):
-                problems.append(
-                    f"{language} {key!r} has a placeholder {{{name}}} the "
-                    f"{reference} original does not"
-                )
+    for key, value in table.items():
+        if _MARKUP.search(value):
+            problems.append(
+                f"{key!r} contains markup — split it into two keys, or do without"
+            )
+        if not value.strip():
+            problems.append(f"{key!r} is empty — a blank renders as a gap with no clue")
+        if "{" in _PLACEHOLDER.sub("", value) or "}" in _PLACEHOLDER.sub("", value):
+            problems.append(
+                f"{key!r} has an unmatched brace — a placeholder is printed as written"
+            )
     return sorted(problems)
 
 
-def catalogue_payload(
-    catalogue: Mapping[str, Mapping[str, str]] | None = None,
-    languages: Sequence[tuple[str, str]] = LANGUAGES,
-) -> dict[str, object]:
-    """The catalogue as ``web/data/strings.json``.
+def strings_payload(strings: dict[str, str] | None = None) -> dict[str, object]:
+    """The table as ``web/data/strings.json``.
 
     Args:
-        catalogue: The catalogue. Defaults to :data:`CATALOGUE`.
-        languages: Code and label for each language the picker offers.
+        strings: The table. Defaults to :data:`STRINGS`.
 
     Returns:
-        The payload: the default language, the offered languages, and one object of
-        strings per language.
-
-    Contract:
-        - Every language in ``languages`` has an object, empty if untranslated, so the
-          front end never has to distinguish "not offered" from "not yet written".
+        The payload: which language this is, and the strings.
 
     Examples:
-        >>> payload = catalogue_payload({"en": {"a": "A"}}, (("en", "English"),))
-        >>> payload["default"], payload["en"]
+        >>> payload = strings_payload({"a": "A"})
+        >>> payload["language"], payload["strings"]
         ('en', {'a': 'A'})
     """
-    source = catalogue if catalogue is not None else CATALOGUE
-    payload: dict[str, object] = {
+    return {
         "generated_by": "scripts/08_dashboard.py",
-        "default": DEFAULT_LANGUAGE,
-        "languages": [{"code": code, "label": label} for code, label in languages],
+        "language": LANGUAGE,
+        "strings": dict(STRINGS if strings is None else strings),
     }
-    for code, _ in languages:
-        payload[code] = dict(source.get(code, {}))
-    return payload

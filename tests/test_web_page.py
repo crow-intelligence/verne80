@@ -35,7 +35,8 @@ def html():
 
 @pytest.fixture(scope="module")
 def strings():
-    return json.loads((WEB / "data" / "strings.json").read_text(encoding="utf-8"))
+    payload = json.loads((WEB / "data" / "strings.json").read_text(encoding="utf-8"))
+    return payload["strings"]
 
 
 # ------------------------------------------------------- no network at view time
@@ -80,7 +81,7 @@ def test_no_stylesheet_or_script_is_loaded_from_someone_elses_server(html):
 def test_every_key_the_markup_asks_for_exists(html, strings):
     keys = set(re.findall(r'data-i18n(?:-label)?="([^"]+)"', html))
     assert keys, "the markup should be driven by the catalogue"
-    missing = sorted(key for key in keys if key not in strings["en"])
+    missing = sorted(key for key in keys if key not in strings)
     assert missing == [], f"no string for {missing}"
 
 
@@ -98,7 +99,7 @@ def test_every_key_the_scripts_ask_for_exists(strings):
                 path.read_text(encoding="utf-8"),
             )
         )
-    missing = sorted(key for key in keys if key not in strings["en"])
+    missing = sorted(key for key in keys if key not in strings)
     assert missing == [], f"no string for {missing}"
 
 
@@ -106,17 +107,14 @@ def test_every_key_the_scripts_ask_for_exists(strings):
 def test_every_transport_mode_has_a_label(strings):
     journey = json.loads((WEB / "data" / "journey.json").read_text(encoding="utf-8"))
     for mode in journey["transport_style"]:
-        assert f"mode.{mode}" in strings["en"], mode
+        assert f"mode.{mode}" in strings, mode
 
 
 @needs_page
 def test_no_string_carries_markup(strings):
-    """A tag in a catalogue entry is an injection hole and an untranslatable blob."""
-    for language, entries in strings.items():
-        if not isinstance(entries, dict):
-            continue
-        for key, value in entries.items():
-            assert not re.search(r"<[^>]+>", value), f"{language} {key}"
+    """A tag in the table is an injection hole and prints as angle brackets."""
+    for key, value in strings.items():
+        assert not re.search(r"<[^>]+>", value), key
 
 
 # ---------------------------------------------------------- the no-JavaScript page
@@ -158,7 +156,7 @@ def test_the_page_carries_the_licence_the_spec_asks_for(html):
 def test_the_page_says_the_arcs_are_schematic(html, strings):
     """The one sentence that keeps a great circle from reading as a surveyed route."""
     assert "arc.schematic" in html
-    assert "great circles" in strings["en"]["arc.schematic"]
+    assert "great circles" in strings["arc.schematic"]
 
 
 @needs_page
@@ -175,6 +173,35 @@ def test_every_font_the_stylesheet_names_is_present():
     css = (WEB / "fonts" / "fonts.css").read_text(encoding="utf-8")
     for name in re.findall(r"url\('\./([^']+)'\)", css):
         assert (WEB / "fonts" / name).exists(), name
+
+
+@needs_page
+def test_the_page_has_no_roadmap_prose(html):
+    """The page says what it shows, not what it does not.
+
+    Data honesty stays — the provenance box counts what nobody has checked, and
+    `arc.schematic` says the lines are not a survey. What goes is anything about what
+    has not been built. This test is what keeps it from creeping back.
+    """
+    body = re.sub(r"<!--.*?-->", "", html, flags=re.S).lower()
+    for phrase in (
+        "not finished",
+        "not built",
+        "coming soon",
+        "is next",
+        "are next",
+        "todo",
+        "not yet built",
+        "for now",
+    ):
+        assert phrase not in body, f"the page still says {phrase!r}"
+
+
+@needs_page
+def test_every_heading_comes_from_the_table(html):
+    """A hardcoded heading is the crack the rest of the prose gets back in through."""
+    for heading in re.findall(r"<h2([^>]*)>", html):
+        assert "data-i18n" in heading, f"<h2{heading}> is hardcoded"
 
 
 @needs_page

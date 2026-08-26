@@ -128,9 +128,9 @@ class TestTheChaptersAsCommitted:
 
     def test_every_chapter_carries_both_summary_lengths(self, committed):
         for entry in committed["chapters"]["chapters"]:
-            english = entry["summary"]["en"]
-            assert english["hover"] and english["detail"]
-            assert len(english["hover"]) < len(english["detail"])
+            summary = entry["summary"]
+            assert summary["hover"] and summary["detail"]
+            assert len(summary["hover"]) < len(summary["detail"])
 
     def test_fix_is_absent_rather_than_in_london_before_he_appears(self, committed):
         """positions.json says `unknown`; the panel must not read that as a place."""

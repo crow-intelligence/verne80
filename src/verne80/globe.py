@@ -648,8 +648,8 @@ def chapters_payload(
         - Every chapter present in ``extractions`` appears exactly once, in order.
         - A track whose source is ``unknown`` carries no coordinates at all. Fix has not
           appeared before chapter 6, and absent is not the same as being in London.
-        - Summaries are language-keyed, so a translation is a data edit rather than a
-          change to the page.
+        - Summaries are flat. There is one language, and a nesting level kept for a
+          translation nobody is writing is a hole in the shape of a feature.
     """
     by_chapter = {
         int(entry["chapter"]): entry
@@ -667,10 +667,8 @@ def chapters_payload(
                 "chapter": number,
                 "title": extraction.title,
                 "summary": {
-                    "en": {
-                        "hover": extraction.summary_hover,
-                        "detail": extraction.summary_detail,
-                    }
+                    "hover": extraction.summary_hover,
+                    "detail": extraction.summary_detail,
                 },
                 "transport": [
                     {

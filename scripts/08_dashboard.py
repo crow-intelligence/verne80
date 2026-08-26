@@ -37,7 +37,7 @@ from verne80.position import load_tracks
 from verne80.review import read_table
 from verne80.route import parse_itinerary
 from verne80.sources import LAND
-from verne80.strings import catalogue_payload, check_catalogue, missing_keys
+from verne80.strings import check_strings, strings_payload
 
 DEFAULT_CHAPTERS_DIR = Path("data/chapters")
 DEFAULT_EXTRACTIONS = Path("data/extractions")
@@ -99,7 +99,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     chapters = chapters_payload(extractions, positions, journey["legs"], tracks)
     land = land_payload(json.loads(args.land.read_text(encoding="utf-8")))
-    strings = catalogue_payload()
+    strings = strings_payload()
 
     blocking = _blocking(journey, chapters, table.rows)
     for line in blocking:
@@ -140,10 +140,8 @@ def main(argv: list[str] | None = None) -> int:
     )
     print(f"  chapters  {len(chapters['chapters'])}, {len(chapters['tracks'])} tracks")
 
-    for problem in check_catalogue():
+    for problem in check_strings():
         print(f"  strings   {problem}", file=sys.stderr)
-    for language, keys in missing_keys().items():
-        print(f"  strings   {language} is untranslated: {len(keys)} keys to write")
 
     if warnings:
         print("  ---")

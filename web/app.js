@@ -1,7 +1,7 @@
 /* Load the six payloads, wire the page, and say plainly what is not yet checked. */
 
 import { createGlobe } from "./globe.js";
-import { chooseLanguage, localise, t } from "./i18n.js";
+import { localise, t, useStrings } from "./i18n.js";
 
 async function load(name) {
   const response = await fetch(`./data/${name}.json`);
@@ -14,7 +14,7 @@ async function main() {
     ["strings", "journey", "land", "places", "provenance"].map(load),
   );
 
-  chooseLanguage(strings);
+  useStrings(strings);
   localise();
 
   renderProvenance(provenance);
@@ -89,7 +89,7 @@ function renderLegend(journey) {
     // The count, not every leg's phrasing run together — the itinerary below already
     // quotes each leg's own words, and repeating them here read as noise.
     const legs = journey.legs.filter((leg) => leg.primary_mode === mode);
-    label.textContent = `${t(`mode.${mode}`)} — ${t("leg.count", { n: legs.length })}`;
+    label.textContent = `${t(`mode.${mode}`)} — ${t("stage.count", { n: legs.length })}`;
     item.append(label);
     list.append(item);
   }
@@ -131,14 +131,14 @@ function renderItinerary(journey, places) {
       const onward = document.createElement("p");
       onward.className = "onward";
       const via = leg.via_as_written.length
-        ? ` ${t("leg.via", { places: leg.via_as_written.join(", ") })}.`
+        ? ` ${t("stage.via", { places: leg.via_as_written.join(", ") })}.`
         : "";
       const waypoints = leg.waypoints
         .map((point) => named.get(point.key)?.name_in_text)
         .filter(Boolean);
       const drawn = waypoints.length ? ` Drawn through ${waypoints.join(", ")}.` : "";
       onward.textContent =
-        `${leg.mode_as_written}, ${t("leg.days", { n: leg.days })}.${via}${drawn}`;
+        `${leg.mode_as_written}, ${t("stage.days", { n: leg.days })}.${via}${drawn}`;
       item.append(onward);
     }
     list.append(item);

@@ -89,11 +89,10 @@ regenerable and ignored.
 **Dashboard**
 
 - [x] The data the globe reads: `scripts/08_dashboard.py` -> `web/data/*.json`
-- [ ] Route + coordinates + hover summaries on an orthographic globe
+- [x] Route + coordinates on an orthographic globe, with transport modes per stage
+- [ ] Chapter browser: summaries, characters, and the places each chapter names
 - [ ] Timeline scrubber and the ahead/behind ledger
 - [ ] Historic (1872) vs current borders toggle
-- [ ] Transport modes, mentioned-vs-visited places, detail panel
-- [ ] Hungarian translation
 
 **Maintenance**
 

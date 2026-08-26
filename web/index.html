@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Around the World in Eighty Days — Crow Intelligence</title>
-<meta name="description" content="The route and calendar of Jules Verne's 1872 novel, extracted from the text and shown on a rotating globe." />
+<meta name="description" data-i18n-content="site.description" content="The route and calendar of Jules Verne's 1872 novel, extracted from the text and shown on a rotating globe." />
 <link rel="canonical" href="https://crowintelligence.org/verne80/" />
 <meta name="theme-color" content="#7a1f1f" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%23f7f5ef' stroke='%237a1f1f' stroke-width='2'/%3E%3Cpath d='M3 16h26M16 3c5 6 5 20 0 26M16 3c-5 6-5 20 0 26' fill='none' stroke='%237a1f1f' stroke-width='1.2'/%3E%3C/svg%3E" />
@@ -62,7 +62,7 @@
 
   <div class="provenance" id="provenance"></div>
 
-  <h2>The route</h2>
+  <h2 data-i18n="route.heading">The route</h2>
   <p class="note" data-i18n="arc.schematic">
     The lines are great circles: the shortest path over a sphere between the stops Fogg's
     table names, not the route the ships and trains took.
@@ -82,11 +82,9 @@
     </div>
 
     <div class="legend">
-      <h3 data-i18n="layer.heading">What to show</h3>
+      <h3 data-i18n="legend.heading">The key</h3>
       <ul id="legend-modes"></ul>
-      <p class="note" style="font-size: var(--fs-small)">
-        A dot with a broken ring is a place nobody has checked yet.
-      </p>
+      <p class="note" data-i18n="prov.rings" style="font-size: var(--fs-small)"></p>
     </div>
   </div>
 
@@ -96,6 +94,9 @@
     the pictures switched off.
   </p>
 
+  <!-- Hardcoded on purpose: a data-i18n inside <noscript> would need the JavaScript
+       that is switched off to fill it. tests/test_web_page.py checks these nine names
+       against route_spine.json so the duplication cannot rot. -->
   <noscript>
     <p>
       This page draws a globe with JavaScript. Without it, here is the itinerary Fogg reads
@@ -108,36 +109,10 @@
   <ol class="itinerary" id="itinerary"></ol>
 
   <h2 data-i18n="about.heading">About the project</h2>
-  <p>
-    The novel already contains its own dataset. Fogg keeps an itinerary with a column of
-    gains and losses, and the wager is a route <em>plus</em> a deadline — so the job here is
-    not to impose structure on the text but to make the text's own structure visible.
-  </p>
-  <p>
-    The pipeline splits the work the way it should be split. Deterministic work goes to code
-    — fetching, slicing, joining, geocoding, drawing. Reading comprehension goes to an LLM
-    with a human check: who is where, when, and by what means. The join between the two
-    halves is an evidence quote. Every extracted fact carries a verbatim quotation from its
-    chapter, and a validator greps each one back against the source, so verification is a
-    string match rather than a re-read.
-  </p>
-  <p>
-    <strong>Sources.</strong> Text: Project Gutenberg #103, public domain. Places: Wikidata,
-    CC0, resolved and then reviewed by hand. Coastline: Natural Earth 1:110m land, public
-    domain. Extraction: Google Gemini, with every answer checked against the chapter it came
-    from.
-  </p>
-  <p>
-    <strong>Method.</strong> The globe is an orthographic projection drawn with
-    <code>d3-geo</code>, which clips at the horizon — so a journey round the world closes on
-    itself with none of the seam-splitting a flat map needs. The arcs are great circles
-    between the stops the book names, and the page says so rather than implying a survey.
-  </p>
-  <p>
-    <strong>Not finished.</strong> The dates are still free text in the extraction, so there
-    is no eighty-day scrubber yet, and the 1872-versus-today border toggle is not built.
-    Both are next.
-  </p>
+  <p data-i18n="about.dataset"></p>
+  <p data-i18n="about.pipeline"></p>
+  <p><strong data-i18n="about.sources.label"></strong> <span data-i18n="about.sources"></span></p>
+  <p><strong data-i18n="about.method.label"></strong> <span data-i18n="about.method"></span></p>
 </main>
 
 <footer>

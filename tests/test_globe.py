@@ -388,9 +388,9 @@ class TestTheChapters:
             LONDON, SUEZ, 0.5
         )
 
-    def test_summaries_are_language_keyed_so_a_translation_is_a_data_edit(self):
+    def test_the_summary_is_flat_because_there_is_one_language(self):
         payload = self.build([])
-        assert payload["chapters"][0]["summary"]["en"]["hover"] == "One sentence."
+        assert payload["chapters"][0]["summary"]["hover"] == "One sentence."
 
 
 # --------------------------------------------------------------- the provenance
