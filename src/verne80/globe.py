@@ -43,6 +43,7 @@ from pathlib import Path
 from typing import Any
 
 from verne80.normalize import place_key
+from verne80.people import Cast, Folded
 from verne80.position import PlaceKind, PositionSource, Track
 from verne80.review import is_confirmed, is_rejected
 from verne80.reviewmap import LOW_CONFIDENCE
@@ -628,18 +629,35 @@ def chapters_payload(
     positions: JsonObject,
     legs: Sequence[JsonObject],
     tracks: Sequence[Track],
+    cast: Cast,
+    nodes: Sequence[JsonObject] = (),
+    drawn: Mapping[str, JsonObject] | None = None,
+    held: Mapping[str, JsonObject] | None = None,
 ) -> dict[str, object]:
-    """One entry per chapter: what happens, who is where, and how we know.
+    """One entry per chapter: what happens, where, and who is there.
 
     The track pins are placed here, in Python, by the same interpolation that sampled
     the arcs — so a pin is on the line by construction, and the join is checkable in a
-    test rather than only by looking at a browser.
+    test rather than only by looking at a browser. The two name joins are here for the
+    same reason: :func:`~verne80.normalize.place_key` and
+    :func:`~verne80.normalize.match_key` are a sixty-codepoint typography fold apiece,
+    and a second copy of either in JavaScript would drift silently — a dot quietly
+    missing rather than an exception.
+
+    Coordinates are *not* copied in. A chapter's place carries its key, and the page
+    looks the position up in ``places.json``, which it has already loaded. Duplicating
+    266 coordinate pairs costs twenty kilobytes and buys nothing.
 
     Args:
         extractions: Chapter number to :class:`~verne80.schema.ChapterExtraction`.
         positions: ``positions.json``, as loaded.
         legs: The legs from :func:`journey_payload`, for their arcs.
         tracks: The roster from :func:`~verne80.position.load_tracks`.
+        cast: The display roster from :func:`~verne80.people.load_cast`.
+        nodes: The nodes from :func:`journey_payload`, so a chapter's place can say
+            whether it is one of the nine stops rather than a place beside them.
+        drawn: ``places_payload()["places"]``, keyed by place key.
+        held: ``places_payload()["listed"]``, keyed by place key.
 
     Returns:
         The chapters payload.
@@ -650,6 +668,13 @@ def chapters_payload(
           appeared before chapter 6, and absent is not the same as being in London.
         - Summaries are flat. There is one language, and a nesting level kept for a
           translation nobody is writing is a hole in the shape of a feature.
+        - ``focus`` is Fogg's own position or ``None``. It is never a mean of the
+          chapter's places: the midpoint of Pillaji and Saville Row is a viewpoint
+          nobody chose.
+        - Every place a chapter names appears in ``places``, plotted or not, with the
+          reason attached when not — the same rule ``places_payload`` follows.
+        - A person's printed spelling always survives, in ``name_in_text`` and, where a
+          chapter prints two, in ``also_printed``.
     """
     by_chapter = {
         int(entry["chapter"]): entry
@@ -657,11 +682,25 @@ def chapters_payload(
         if entry.get("chapter") is not None
     }
     arcs = {int(leg["index"]): leg for leg in legs}
+    on_route = {str(node["key"]) for node in nodes}
+    roster: dict[str, dict[str, str]] = {}
 
     out = []
     for number in sorted(extractions):
         extraction = extractions[number]
         resolved = by_chapter.get(number, {})
+        track_rows = [_track_entry(row, arcs) for row in resolved.get("tracks") or ()]
+        present = _folded(
+            (item.name_in_text for item in extraction.narrative.on_stage), cast, roster
+        )
+        elsewhere = _folded(
+            (item.name_in_text for item in extraction.narrative.named_but_not_present),
+            cast,
+            roster,
+        )
+        places = _chapter_places(
+            resolved.get("mentions") or {}, on_route, drawn or {}, held or {}
+        )
         out.append(
             {
                 "chapter": number,
@@ -670,6 +709,7 @@ def chapters_payload(
                     "hover": extraction.summary_hover,
                     "detail": extraction.summary_detail,
                 },
+                "focus": _focus(track_rows),
                 "transport": [
                     {
                         "mode": item.mode.value,
@@ -684,18 +724,113 @@ def chapters_payload(
                     "detail": extraction.time.schedule_detail,
                 },
                 "scene_places": list(resolved.get("scene_places") or ()),
-                "mentions": dict(resolved.get("mentions") or {}),
-                "tracks": [
-                    _track_entry(row, arcs) for row in resolved.get("tracks") or ()
-                ],
+                "places": places,
+                "place_counts": {
+                    "named": len(places),
+                    "plotted": sum(1 for place in places if place["plotted"]),
+                    "by_class": _tally(str(place["class"]) for place in places),
+                },
+                "present": present,
+                "named_elsewhere": elsewhere,
+                "people_counts": {
+                    "present": len(present),
+                    "present_named": sum(
+                        1 for one in present if one["kind"] == "person"
+                    ),
+                    "present_roles": sum(1 for one in present if one["kind"] == "role"),
+                    "named_elsewhere": len(elsewhere),
+                },
+                "tracks": track_rows,
             }
         )
 
     return {
         "generated_by": "scripts/08_dashboard.py",
         "tracks": [{"key": track.key, "display": track.display} for track in tracks],
+        "cast": [roster[key] for key in sorted(roster)],
         "chapters": out,
     }
+
+
+def _folded(
+    names: Iterable[str], cast: Cast, roster: dict[str, dict[str, str]]
+) -> list[dict[str, object]]:
+    """Fold a chapter's printed names, keeping the order and every spelling.
+
+    ``on_stage`` holds one row per person *per place*, so a chapter that moves somebody
+    about names them several times — chapter 4 puts Fogg in four places. Deduped by
+    identity, in the order the chapter first names them.
+
+    Where one chapter prints a person two ways, both survive: chapter 29 has Colonel
+    Proctor and Stamp Proctor, and dropping either would be tidying a quotation.
+    """
+    first: dict[str, Folded] = {}
+    extra: dict[str, list[str]] = {}
+    for name in names:
+        one = cast.fold(name)
+        roster.setdefault(
+            one.key, {"key": one.key, "display": one.display, "kind": one.kind}
+        )
+        if one.key not in first:
+            first[one.key] = one
+            extra[one.key] = []
+        elif one.name_in_text != first[one.key].name_in_text:
+            if one.name_in_text not in extra[one.key]:
+                extra[one.key].append(one.name_in_text)
+    return [
+        {
+            "key": one.key,
+            "display": one.display,
+            "name_in_text": one.name_in_text,
+            "kind": one.kind,
+            "also_printed": extra[key],
+        }
+        for key, one in first.items()
+    ]
+
+
+def _chapter_places(
+    mentions: Mapping[str, str],
+    on_route: set[str],
+    drawn: Mapping[str, JsonObject],
+    held: Mapping[str, JsonObject],
+) -> list[dict[str, object]]:
+    """One entry per place a chapter names, plotted or not.
+
+    ``class`` is where the place sits relative to the party — behind them, ahead of
+    them, where they are, or off the route entirely. That is a *temporal* judgement and
+    is not the same thing as :attr:`~verne80.position.PlaceKind.OFF_ROUTE`: Aden is
+    temporally off-route in most chapters and still has a pin.
+    """
+    out = []
+    for name, temporal in mentions.items():
+        key = place_key(name)
+        entry = drawn.get(key)
+        withheld = held.get(key)
+        out.append(
+            {
+                "key": key,
+                "name_in_text": name,
+                "class": temporal,
+                "plotted": entry is not None,
+                "on_route": key in on_route,
+                "reason": None if entry else (withheld or {}).get("reason"),
+            }
+        )
+    return out
+
+
+def _focus(track_rows: Sequence[JsonObject]) -> dict[str, object] | None:
+    """Where to turn the globe for a chapter: Fogg's own position, or nowhere.
+
+    Not an average of the chapter's places. A mean of Pillaji and Saville Row is a
+    viewpoint nobody chose, and a globe that swings to it is asserting something the
+    text does not say. When Fogg has no position the globe simply does not move.
+    """
+    for row in track_rows:
+        if row.get("track") == "fogg" and row.get("lon") is not None:
+            return {"lon": row["lon"], "lat": row["lat"], "from": "fogg"}
+    return None
 
 
 def provenance(

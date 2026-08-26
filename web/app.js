@@ -1,7 +1,14 @@
-/* Load the six payloads, wire the page, and say plainly what is not yet checked. */
+/* Load the payloads, wire the page, and say plainly what is not yet checked.
+ *
+ * One piece of state: which chapter, held in the URL hash. Tabs set the hash; a single
+ * hashchange listener is the only thing that renders. Deep link, click and Back all go
+ * down the same path, which is the only way this stays checkable by hand.
+ */
 
 import { createGlobe } from "./globe.js";
 import { localise, t, useStrings } from "./i18n.js";
+
+const NAMES = ["strings", "journey", "land", "places", "chapters", "provenance"];
 
 async function load(name) {
   const response = await fetch(`./data/${name}.json`);
@@ -10,12 +17,22 @@ async function load(name) {
 }
 
 async function main() {
-  const [strings, journey, land, places, provenance] = await Promise.all(
-    ["strings", "journey", "land", "places", "provenance"].map(load),
+  const loaded = Object.fromEntries(
+    (await Promise.all(NAMES.map(load))).map((payload, index) => [
+      NAMES[index],
+      payload,
+    ]),
   );
+  const { strings, journey, land, places, chapters, provenance } = loaded;
 
   useStrings(strings);
   localise();
+
+  // The chapter payload carries place keys, not coordinates: the fold that produced them
+  // is a sixty-codepoint typography normalisation and lives in Python, where a test can
+  // see it. The positions are here already, so looking them up costs nothing.
+  const located = new Map(places.places.map((place) => [place.key, place]));
+  const byNumber = new Map(chapters.chapters.map((entry) => [entry.chapter, entry]));
 
   renderProvenance(provenance);
   renderLegend(journey);
@@ -28,29 +45,441 @@ async function main() {
     journey,
     onIdleChange: () => setToggleLabel(toggle, globe),
   });
+  lightHandler = (key) => globe.light(key);
   setToggleLabel(toggle, globe);
   toggle.addEventListener("click", () => {
     globe.setPaused(!globe.isPaused());
     setToggleLabel(toggle, globe);
   });
+
+  const tabs = buildChapterBar(chapters.chapters);
+
+  function render() {
+    const wanted = readHash();
+    const entry = wanted === null ? null : byNumber.get(wanted) || null;
+    for (const [number, tab] of tabs) {
+      const on = entry !== null && number === entry.chapter;
+      tab.setAttribute("aria-selected", String(on));
+      tab.tabIndex = on ? 0 : -1;
+    }
+    // With no chapter selected nothing is a tab stop, so the first one becomes one.
+    if (!entry && tabs.size) [...tabs.values()][0].tabIndex = 0;
+
+    const preview = document.querySelector("#preview");
+    preview.textContent = entry ? entry.summary.hover : t("chapters.pick");
+
+    if (!entry) {
+      globe.clearPlaces();
+      renderOverviewPanel(journey);
+      document.querySelector("#announce").textContent = "";
+      return;
+    }
+
+    globe.showPlaces(
+      entry.places.map((place) => ({ ...place, ...(located.get(place.key) || {}) })),
+      entry.focus,
+    );
+    if (entry.focus) globe.turnTo(entry.focus.lon, entry.focus.lat);
+    renderPanel(entry, chapters, journey, located);
+    document.querySelector("#announce").textContent = t("chapter.heading", {
+      n: entry.chapter,
+      title: entry.title,
+    });
+  }
+
+  window.addEventListener("hashchange", render);
+  render();
 }
 
-/* WCAG 2.2.2 wants a mechanism to stop motion that runs for more than five seconds. A
- * prefers-reduced-motion query is a default, not a control, so this is a real button. */
+/** `#/ch/12` is a chapter; anything else, a typo included, is the whole route. */
+function readHash() {
+  const match = /^#\/ch\/(\d+)$/.exec(location.hash);
+  return match ? Number(match[1]) : null;
+}
+
+function buildChapterBar(chapters) {
+  const list = document.querySelector("#chapterbar .tabs");
+  const tabs = new Map();
+  for (const entry of chapters) {
+    const tab = document.createElement("a");
+    tab.className = "tab tabular";
+    tab.href = `#/ch/${entry.chapter}`;
+    tab.id = `tab-${entry.chapter}`;
+    tab.role = "tab";
+    tab.tabIndex = -1;
+    tab.textContent = String(entry.chapter);
+    tab.title = entry.title;
+    // The preview follows the pointer without committing to a chapter, so the bar can
+    // be read as a table of contents rather than only stepped through.
+    tab.addEventListener("mouseenter", () => {
+      document.querySelector("#preview").textContent = entry.summary.hover;
+    });
+    list.append(tab);
+    tabs.set(entry.chapter, tab);
+  }
+  document.querySelector("#panel").setAttribute("aria-labelledby", "tab-1");
+
+  /* Roving tabindex: one Tab stop for thirty-seven chapters, and the arrows move within
+   * them. Thirty-seven stops would make the rest of the page unreachable by keyboard. */
+  list.addEventListener("keydown", (event) => {
+    const numbers = [...tabs.keys()];
+    const here = numbers.indexOf(Number(event.target.id?.replace("tab-", "")));
+    const go = {
+      ArrowLeft: here - 1,
+      ArrowRight: here + 1,
+      Home: 0,
+      End: numbers.length - 1,
+    }[event.key];
+    if (go !== undefined && go >= 0 && go < numbers.length) {
+      event.preventDefault();
+      const next = tabs.get(numbers[go]);
+      next.tabIndex = 0;
+      next.focus();
+      location.hash = next.getAttribute("href");
+    } else if (event.key === "Escape") {
+      location.hash = "#/";
+    } else if (event.key === " ") {
+      event.preventDefault();
+      event.target.click();
+    }
+  });
+  return tabs;
+}
+
+function renderOverviewPanel(journey) {
+  const panel = document.querySelector("#panel");
+  panel.replaceChildren();
+  // Not the "pick a chapter" line: the preview strip above the globe already says it,
+  // and saying it twice in one screenful reads as a page that has lost its place.
+  const stops = document.createElement("p");
+  stops.className = "label";
+  stops.textContent = journey.nodes
+    .map((node) => node.name_in_text)
+    .filter((name, index, all) => all.indexOf(name) === index)
+    .join(" · ");
+  panel.append(stops);
+}
+
+function renderPanel(entry, chapters, journey, located) {
+  const panel = document.querySelector("#panel");
+  panel.replaceChildren();
+  panel.setAttribute("aria-labelledby", `tab-${entry.chapter}`);
+
+  const count = document.createElement("p");
+  count.className = "label tabular";
+  count.textContent = t("chapter.of", {
+    n: entry.chapter,
+    total: chapters.chapters.length,
+  });
+  panel.append(count, stepper(entry, chapters.chapters.length));
+
+  const title = document.createElement("h3");
+  title.tabIndex = -1;
+  title.textContent = entry.title;
+  panel.append(title);
+
+  panel.append(paragraph(entry.summary.detail));
+
+  panel.append(section("where.heading", whereTheyAre(entry, chapters.tracks)));
+  panel.append(section("day.heading", eightyDays(entry, journey)));
+  panel.append(section("people.present.heading", cast(entry.present, true)));
+  panel.append(
+    section("people.elsewhere.heading", cast(entry.named_elsewhere, false)),
+  );
+  panel.append(section("place.heading", chapterPlaces(entry, located)));
+  panel.append(section("transport.heading", travel(entry)));
+}
+
+function stepper(entry, total) {
+  const row = document.createElement("div");
+  row.className = "stepper";
+  const back = document.createElement("a");
+  back.textContent = t("chapter.previous");
+  back.href = `#/ch/${Math.max(1, entry.chapter - 1)}`;
+  const on = document.createElement("a");
+  on.textContent = t("chapter.next");
+  on.href = `#/ch/${Math.min(total, entry.chapter + 1)}`;
+  const all = document.createElement("a");
+  all.textContent = t("chapters.overview");
+  all.href = "#/";
+  row.append(back, on, all);
+  return row;
+}
+
+/* The three tracks, with how we know shown beside each. A carried row is dimmed, which
+ * is the same "nobody is asserting this" channel as a pin's broken ring. */
+function whereTheyAre(entry, tracks) {
+  const display = new Map(tracks.map((track) => [track.key, track.display]));
+  const list = document.createElement("ul");
+  list.className = "plain";
+  for (const row of entry.tracks) {
+    const item = document.createElement("li");
+    const who = display.get(row.track) || row.track;
+    if (row.source === "unknown") {
+      item.textContent = t("track.absent", { who });
+      item.className = "faint";
+    } else {
+      const how =
+        row.source === "carried"
+          ? t("track.carried", { n: row.stated_at_chapter })
+          : row.source === "inferred"
+            ? t("track.inferred")
+            : t("track.stated", { n: row.stated_at_chapter });
+      /* Only a node, never `place_name_in_text`. A carried row's printed place comes
+       * from the chapter that stated it, and for Fix in chapter 9 that is "station" —
+       * true of that chapter and meaningless here. */
+      const at = row.at_node;
+      item.textContent = at ? `${who} — ${at} · ${how}` : `${who} — ${how}`;
+      if (row.source === "carried") item.className = "faint";
+    }
+    list.append(item);
+  }
+  return list;
+}
+
+/* What the eighty days can honestly be told from.
+ *
+ * The table gives a budget per stage. `along` orders pins along a line and is not time —
+ * verne80.position.RoutePoint says so at length — so there is no interpolated day here,
+ * no percentage and no progress bar. The sentence about a budget is what stops "days 20
+ * to 23" being read as "it is day 21".
+ */
+function eightyDays(entry, journey) {
+  const wrap = document.createDocumentFragment();
+  const fogg = entry.tracks.find((row) => row.track === "fogg");
+  const leg = fogg && fogg.leg !== null ? journey.legs[fogg.leg] : null;
+  if (!leg) {
+    wrap.append(paragraph(t("day.no_window")));
+  } else {
+    const nodes = journey.nodes;
+    wrap.append(
+      paragraph(
+        t("day.window", {
+          origin: nodes[leg.origin].name_in_text,
+          destination: nodes[leg.destination].name_in_text,
+          from: leg.day_from,
+          to: leg.day_to,
+        }),
+      ),
+    );
+    wrap.append(note(t("day.not_a_date")));
+  }
+  if (entry.schedule.status === "unknown") {
+    wrap.append(paragraph(t("day.silent")));
+    return wrap;
+  }
+  const status = t(`schedule.${entry.schedule.status}`);
+  wrap.append(
+    paragraph(
+      entry.schedule.detail
+        ? t("day.says_detail", { status, detail: entry.schedule.detail })
+        : t("day.says", { status }),
+    ),
+  );
+  return wrap;
+}
+
+/* People the book names, and people the book only describes.
+ *
+ * The two are kept apart because merging them would assert that the engineer of one
+ * chapter is the engineer of another. There are nine engineers and they are nine men.
+ */
+function cast(people, present) {
+  const wrap = document.createDocumentFragment();
+  if (!people.length) {
+    wrap.append(note(t("people.elsewhere.none")));
+    return wrap;
+  }
+  const named = people.filter((one) => one.kind === "person");
+  const roles = people.filter((one) => one.kind === "role");
+
+  if (named.length) {
+    const list = document.createElement("ul");
+    list.className = "plain";
+    for (const one of named) {
+      const item = document.createElement("li");
+      item.textContent = one.display;
+      // The printed spelling is a quotation and survives the fold. Where it differs
+      // from the display name, or where one chapter prints two, say so.
+      const printed = [one.name_in_text, ...one.also_printed].filter(
+        (name) => name !== one.display,
+      );
+      if (printed.length) {
+        const quoted = document.createElement("span");
+        quoted.className = "faint";
+        quoted.textContent = ` — ${t("people.printed_as", {
+          names: printed.join(", "),
+        })}`;
+        item.append(quoted);
+      }
+      list.append(item);
+    }
+    wrap.append(list);
+  }
+
+  if (roles.length) {
+    const line = document.createElement("p");
+    line.className = "faint";
+    line.textContent = roles.map((one) => one.display).join(", ");
+    wrap.append(line);
+    if (present) wrap.append(note(t("people.roles.note")));
+  }
+  return wrap;
+}
+
+/* Every place the chapter names, drawn or not, with the reason attached when not.
+ *
+ * This list is the accessible twin of the marks on the globe: the SVG overlay is
+ * aria-hidden, because nineteen dot labels read in projection order is noise, and a
+ * named, classed, reasoned list is the same information in a usable order.
+ */
+function chapterPlaces(entry, located) {
+  const wrap = document.createDocumentFragment();
+  const list = document.createElement("ul");
+  list.className = "places";
+  for (const place of entry.places) {
+    const item = document.createElement("li");
+    item.className = `place is-${place.class}`;
+    if (!place.plotted) item.classList.add("unplotted");
+
+    const name = document.createElement("span");
+    name.className = "name";
+    name.textContent = place.name_in_text;
+    item.append(name);
+
+    const said = document.createElement("span");
+    said.className = "faint";
+    const resolved = located.get(place.key);
+    /* A modern name only for the places the curation vouches for — the nine stops and
+     * the waypoints. The other 177 are resolved and unreviewed, and some of those
+     * resolutions are wrong in ways that a rename makes worse rather than better:
+     * Benares comes back as Lal Bahadur Shastri Airport. Printing nothing is the honest
+     * answer until somebody has looked. */
+    const modern =
+      resolved &&
+      resolved.tier === "itinerary" &&
+      resolved.name_changed &&
+      resolved.modern_name !== place.name_in_text
+        ? `, ${resolved.modern_name}`
+        : "";
+    said.textContent = ` — ${t(`place.class.${place.class}`)}${modern}`;
+    item.append(said);
+
+    /* The sub-line: why this one is not drawn, how far the resolution is to be
+     * trusted, and where else the book names it. A place that turns up in nine
+     * chapters is a different kind of thing from one named once in passing. */
+    const aside = [];
+    if (!place.plotted && place.reason) aside.push(t(`place.${place.reason}`));
+    if (resolved && resolved.doubtful) {
+      aside.push(
+        t("place.doubtful", {
+          score: resolved.confidence,
+          threshold: provenanceThreshold,
+        }),
+      );
+    }
+    if (resolved && resolved.chapters && resolved.chapters.length > 1) {
+      aside.push(t("place.chapters", { numbers: resolved.chapters.join(", ") }));
+    }
+    if (aside.length) {
+      const why = document.createElement("span");
+      why.className = "faint reason";
+      why.textContent = aside.join(" · ");
+      item.append(why);
+    }
+    if (place.plotted) {
+      item.addEventListener("mouseenter", () => globeLight(place.key));
+      item.addEventListener("mouseleave", () => globeLight(null));
+    }
+    list.append(item);
+  }
+  wrap.append(list);
+  wrap.append(
+    note(
+      t("place.count", {
+        plotted: entry.place_counts.plotted,
+        named: entry.place_counts.named,
+      }),
+    ),
+  );
+  return wrap;
+}
+
+function travel(entry) {
+  if (!entry.transport.length) return note(t("transport.none"));
+  const list = document.createElement("ul");
+  list.className = "plain";
+  for (const item of entry.transport) {
+    const row = document.createElement("li");
+    row.innerHTML = dashSwatch(item.mode);
+    const label = document.createElement("span");
+    const parts = [t(`mode.${item.mode}`)];
+    if (item.vessel) parts.push(item.vessel);
+    if (item.from && item.to) {
+      parts.push(t("transport.between", { from: item.from, to: item.to }));
+    }
+    label.textContent = parts.join(" · ");
+    row.append(label);
+    list.append(row);
+  }
+  return list;
+}
+
+let provenanceThreshold = 0.7;
+let lightHandler = () => {};
+function globeLight(key) {
+  lightHandler(key);
+}
+
+/* ------------------------------------------------------------------ shared bits */
+
+function section(key, body) {
+  const wrap = document.createElement("section");
+  const heading = document.createElement("h3");
+  heading.textContent = t(key);
+  wrap.append(heading, body);
+  return wrap;
+}
+
+function paragraph(text) {
+  const node = document.createElement("p");
+  node.textContent = text;
+  return node;
+}
+
+function note(text) {
+  const node = document.createElement("p");
+  node.className = "note";
+  node.textContent = text;
+  return node;
+}
+
+/* The dash is what carries the key into greyscale and into print, so it is drawn rather
+ * than named. Not TRANSPORT_STYLE's glyphs: they include ● and ▲, which neither of the
+ * page's two typefaces has, so those chips would fall back mid-line. */
+let styleFor = () => ({});
+function dashSwatch(mode) {
+  const style = styleFor(mode);
+  return (
+    `<svg width="34" height="12" aria-hidden="true">` +
+    `<line x1="1" y1="6" x2="33" y2="6" stroke="var(${style.colour})" ` +
+    `stroke-width="${style.width || 2}" stroke-linecap="round" ` +
+    `stroke-dasharray="${(style.dash || []).join(" ")}"/></svg>`
+  );
+}
+
 function setToggleLabel(button, globe) {
   const paused = globe?.isPaused?.() ?? true;
   button.textContent = t(paused ? "globe.rotate.play" : "globe.rotate.pause");
   button.setAttribute("aria-pressed", String(paused));
 }
 
-/* Above the fold and not in a <details>. A reader deserves to know what has been checked
- * before they believe a dot, not after they go looking. */
 function renderProvenance(record) {
+  provenanceThreshold = record.doubtful_below;
   const box = document.querySelector("#provenance");
   const counts = record.places;
   const unlocated =
     (counts.by_reason?.none_found ?? 0) + (counts.by_reason?.not_queried ?? 0);
-
   const lines = [
     t("prov.line", {
       plotted: counts.plotted,
@@ -63,57 +492,50 @@ function renderProvenance(record) {
       threshold: record.doubtful_below,
     }),
     t("prov.unlocated", { n: unlocated }),
-    t("prov.rings"),
   ];
-  for (const line of lines) {
-    const p = document.createElement("p");
-    p.textContent = line;
-    box.append(p);
-  }
+  for (const line of lines) box.append(paragraph(line));
 }
 
-/* Every mode gets its dash drawn, not just its colour named — that is what keeps the key
- * readable in greyscale, in print, and to a reader who does not separate these hues. */
 function renderLegend(journey) {
-  const list = document.querySelector("#legend-modes");
-  const used = [...new Set(journey.legs.map((leg) => leg.primary_mode))];
-  for (const mode of used) {
-    const style = journey.transport_style[mode] || {};
+  styleFor = (mode) => journey.transport_style[mode] || {};
+  const modes = document.querySelector("#legend-modes");
+  for (const mode of [...new Set(journey.legs.map((leg) => leg.primary_mode))]) {
     const item = document.createElement("li");
-    item.innerHTML =
-      `<svg width="46" height="12" aria-hidden="true">` +
-      `<line x1="1" y1="6" x2="45" y2="6" stroke="var(${style.colour})" ` +
-      `stroke-width="${style.width || 2}" stroke-linecap="round" ` +
-      `stroke-dasharray="${(style.dash || []).join(" ")}"/></svg>`;
+    item.innerHTML = dashSwatch(mode);
     const label = document.createElement("span");
-    // The count, not every leg's phrasing run together — the itinerary below already
-    // quotes each leg's own words, and repeating them here read as noise.
     const legs = journey.legs.filter((leg) => leg.primary_mode === mode);
-    label.textContent = `${t(`mode.${mode}`)} — ${t("stage.count", { n: legs.length })}`;
+    label.textContent = `${t(`mode.${mode}`)} — ${t("stage.count", {
+      n: legs.length,
+    })}`;
     item.append(label);
-    list.append(item);
+    modes.append(item);
+  }
+
+  const places = document.querySelector("#legend-places");
+  for (const name of ["here", "past", "future", "cyclic", "off_route"]) {
+    const item = document.createElement("li");
+    item.className = `place is-${name}`;
+    const swatch = document.createElement("span");
+    swatch.className = "swatch";
+    const label = document.createElement("span");
+    label.textContent = t(`place.class.${name}`);
+    item.append(swatch, label);
+    places.append(item);
   }
 }
 
-/* The itinerary as a real, visible list, built from the same journey.json the globe reads.
- * This is the screen-reader experience, the print experience, the "I would rather just read
- * it" experience, and what a search engine sees. It cannot disagree with the globe because
- * there is only one source for both. */
 function renderItinerary(journey, places) {
   const list = document.querySelector("#itinerary");
   const named = new Map(places.places.map((place) => [place.key, place]));
 
   journey.nodes.forEach((node, position) => {
     const item = document.createElement("li");
-
     const day = document.createElement("span");
     day.className = "day-badge tabular";
-    day.textContent = `day ${node.day}`;
-
+    day.textContent = t("stage.day", { n: node.day });
     const name = document.createElement("span");
     name.className = "stop-name";
     name.textContent = node.name_in_text;
-
     item.append(day, name);
 
     if (node.name_changed && node.modern_name !== node.name_in_text) {
@@ -137,8 +559,9 @@ function renderItinerary(journey, places) {
         .map((point) => named.get(point.key)?.name_in_text)
         .filter(Boolean);
       const drawn = waypoints.length ? ` Drawn through ${waypoints.join(", ")}.` : "";
-      onward.textContent =
-        `${leg.mode_as_written}, ${t("stage.days", { n: leg.days })}.${via}${drawn}`;
+      onward.textContent = `${leg.mode_as_written}, ${t("stage.days", {
+        n: leg.days,
+      })}.${via}${drawn}`;
       item.append(onward);
     }
     list.append(item);

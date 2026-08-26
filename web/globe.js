@@ -4,9 +4,12 @@
  * SVG means making the browser re-parse every path's `d` on every frame of a drag. Canvas
  * streams straight into path commands and touches no DOM at all.
  *
- * SVG for the stops because nine circles get :focus-visible, role, aria-label and a real
- * touch target for nothing, and moving nine `cx` attributes per frame costs nothing either.
- * So there is no hit-testing on the canvas anywhere.
+ * SVG for the marks because moving a few dozen `cx` attributes per frame costs nothing,
+ * where re-parsing path data does. So there is no hit-testing on the canvas anywhere.
+ *
+ * The overlay is aria-hidden, deliberately. A screen reader given nineteen dot labels in
+ * projection order gets noise; the panel's list of places, and the itinerary below the
+ * globe, are the accessible representation and they carry more than a label could.
  *
  * The drag moves two angles and pins the roll at zero. A minimal-rotation drag (versor) is
  * lovely on a free-tumbling globe and wrong on an atlas: it spins the third angle and tilts
@@ -19,6 +22,10 @@
  *   - Dragging is smooth, and never rolls the horizon.
  *   - Auto-rotate stops the moment you touch it, and never starts under reduced motion.
  *   - Old-style figures in the prose; lining, tabular figures in the day column.
+ *   - Stepping 22 to 26 crosses the Pacific eastward, not the long way round the world.
+ *   - A drag part-way through a turn stops the turn immediately.
+ *   - Under reduced motion the globe jumps between chapters and never tweens.
+ *   - The off-route diamonds read as a faint scatter rather than as claims.
  * ---------------------------------------------------------------------------------------
  */
 
@@ -31,6 +38,19 @@ import {
 
 const DEGREES_PER_SECOND = 6;
 const IDLE_BEFORE_ROTATING = 20000;
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+/* How a chapter's places are drawn. Shape first and colour second, because the page may
+ * be printed grey and because the nine stops already own "large, paper-filled,
+ * ink-ringed" — a chapter mark has to be tellable from those without relying on hue. */
+const PLACE_MARK = {
+  here: { radius: 6, halo: 10 },
+  past: { radius: 4 },
+  future: { radius: 4 },
+  cyclic: { radius: 4 },
+  off_route: { radius: 5, diamond: true },
+  unknown: { radius: 5, diamond: true },
+};
 const SPHERE = { type: "Sphere" };
 const GRATICULE = geoGraticule10();
 
@@ -53,8 +73,14 @@ export function createGlobe(stage, { land, journey, onIdleChange }) {
   let spinning = false;
   let lastIdle = performance.now();
   let paused = prefersReducedMotion();
+  let turning = null;
+  let marks = [];
+  let litKey = null;
 
   const stops = mergeRepeats(journey.nodes).map(buildStop);
+  const chapterLayer = document.createElementNS(SVG_NS, "g");
+  // Under the stops, so a route stop is never hidden by a mark for the same place.
+  svg.append(chapterLayer);
   for (const stop of stops) svg.append(stop.group);
 
   /* Canvas cannot read `var(--ocean)`, so the colours are resolved from the stylesheet at
@@ -143,6 +169,13 @@ export function createGlobe(stage, { land, journey, onIdleChange }) {
    * negated rotation — so "is this stop on the near side?" is one distance comparison. */
   function placeStops() {
     const centre = [-rotation[0], -rotation[1]];
+    for (const mark of marks) {
+      const visible = geoDistance(mark.point, centre) < Math.PI / 2;
+      mark.group.classList.toggle("behind", !visible);
+      if (!visible) continue;
+      const [x, y] = projection(mark.point);
+      mark.group.setAttribute("transform", `translate(${x.toFixed(1)},${y.toFixed(1)})`);
+    }
     for (const stop of stops) {
       const node = stop.node;
       if (node.lat === null) {
@@ -195,6 +228,8 @@ export function createGlobe(stage, { land, journey, onIdleChange }) {
 
   function interacted() {
     lastIdle = performance.now();
+    // A turn in flight is the page's idea; a drag is the reader's, and the reader wins.
+    turning = null;
     if (spinning) {
       spinning = false;
       onIdleChange?.(false);
@@ -205,6 +240,21 @@ export function createGlobe(stage, { land, journey, onIdleChange }) {
   function frame(now) {
     const elapsed = now - previous;
     previous = now;
+
+    if (turning) {
+      const share = Math.min(1, (now - turning.start) / turning.ms);
+      const eased = easeInOut(share);
+      rotation = [
+        turning.fromLon + turning.dLon * eased,
+        turning.fromLat + turning.dLat * eased,
+        0,
+      ];
+      if (share >= 1) turning = null;
+      draw();
+      requestAnimationFrame(frame);
+      return;
+    }
+
     const idle = now - lastIdle > IDLE_BEFORE_ROTATING;
     const wanted = idle && !paused && !document.hidden && !dragging;
     if (wanted !== spinning) {
@@ -232,10 +282,83 @@ export function createGlobe(stage, { land, journey, onIdleChange }) {
       if (!value) lastIdle = 0;
       interactedIfResuming(value);
     },
-    turnTo(node) {
-      rotation = [-node.lon, -node.lat, 0];
-      interacted();
-      draw();
+    /* Turn to a point, taking the short way and keeping the horizon level.
+     *
+     * Two angles, roll pinned at zero — the same choice as the drag, and for the same
+     * reason. Slerping the great circle between the two viewpoints and deriving a
+     * rotation from it spins the third angle and tips the world over. */
+    turnTo(lon, lat) {
+      lastIdle = performance.now();
+      turning = null;
+      const target = [-lon, -lat];
+      if (paused || prefersReducedMotion()) {
+        rotation = [target[0], target[1], 0];
+        draw();
+        return;
+      }
+      const swing = geoDistance([-rotation[0], -rotation[1]], [lon, lat]);
+      turning = {
+        fromLon: rotation[0],
+        fromLat: rotation[1],
+        dLon: shortestRotation(rotation[0], target[0]),
+        dLat: target[1] - rotation[1],
+        start: performance.now(),
+        // Proportional to how far you just moved, so a hop across India and a leap
+        // across the Pacific do not take the same time and pretend to be equal.
+        ms: clamp((swing * 180) / Math.PI * 6, 250, 1200),
+      };
+    },
+
+    /* Show one chapter's places, or none. Rebuilt rather than diffed: a chapter names a
+     * couple of dozen places at most, and a diff would be more code than it saves. */
+    showPlaces(places, focus) {
+      chapterLayer.replaceChildren();
+      marks = [];
+
+      /* The party's own position, drawn from Fogg's resolved pin rather than from the
+       * chapter's `here` class. `here` is a judgement about a place the chapter
+       * *mentions*, and a chapter almost never mentions where it already is — nine
+       * times in the whole book. Without this the globe would centre on the party and
+       * then not say which dot they were. */
+      if (focus) {
+        const party = buildMark({ key: "__party__", class: "here", ...focus });
+        party.group.classList.add("party");
+        chapterLayer.append(party.group);
+        marks.push(party);
+      }
+      const routeStops = new Set(journey.nodes.map((node) => node.key));
+      for (const place of places || []) {
+        if (!place.plotted || place.lon === undefined) continue;
+        // A stop already has a dot. Marking its class on the existing one beats drawing
+        // a second dot on the same pixel.
+        if (routeStops.has(place.key)) {
+          const stop = stops.find((one) => one.node.key === place.key);
+          if (stop) stop.group.dataset.placeClass = place.class;
+          continue;
+        }
+        const mark = buildMark(place);
+        chapterLayer.append(mark.group);
+        marks.push(mark);
+      }
+      svg.classList.toggle("chapter", Boolean(places && places.length));
+      placeStops();
+    },
+
+    clearPlaces() {
+      litKey = null;
+      chapterLayer.replaceChildren();
+      marks = [];
+      for (const stop of stops) delete stop.group.dataset.placeClass;
+      svg.classList.remove("chapter");
+    },
+
+    /* Light one mark, so hovering the panel's list points at the globe. The list is the
+     * accessible representation; this is the direction that matters. */
+    light(key) {
+      if (litKey === key) return;
+      litKey = key;
+      for (const mark of marks) mark.group.classList.toggle("is-lit", mark.key === key);
+      for (const stop of stops) stop.group.classList.toggle("is-lit", stop.node.key === key);
     },
   };
 
@@ -282,6 +405,56 @@ function buildStop(node) {
 
   group.append(hit, pin, label);
   return { node, group, label };
+}
+
+/* The Python original — verne80.globe.shortest_rotation — is doctested, and this is the
+ * same four operations. Getting it wrong does not look like a bug: the globe sails 340
+ * degrees east instead of 20 west, and reads as the page showing off. */
+function shortestRotation(current, target) {
+  return ((target - current + 540) % 360) - 180;
+}
+
+function easeInOut(t) {
+  return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
+}
+
+function buildMark(place) {
+  const style = PLACE_MARK[place.class] || PLACE_MARK.unknown;
+  const group = document.createElementNS(SVG_NS, "g");
+  group.setAttribute("class", `place is-${place.class}`);
+
+  if (style.halo) {
+    const halo = document.createElementNS(SVG_NS, "circle");
+    halo.setAttribute("class", "halo");
+    halo.setAttribute("r", String(style.halo));
+    group.append(halo);
+  }
+
+  if (style.diamond) {
+    // A different shape, not a different colour: off-route is the one class that has to
+    // read as "not on the route" with the hue taken away.
+    const r = style.radius;
+    const diamond = document.createElementNS(SVG_NS, "path");
+    diamond.setAttribute("class", "mark");
+    diamond.setAttribute("d", `M0,${-r} L${r},0 L0,${r} L${-r},0 Z`);
+    group.append(diamond);
+  } else if (place.class === "cyclic") {
+    // London, which the route visits twice: half behind and half ahead, drawn as such.
+    const r = style.radius;
+    const ring = document.createElementNS(SVG_NS, "circle");
+    ring.setAttribute("class", "mark");
+    ring.setAttribute("r", String(r));
+    const half = document.createElementNS(SVG_NS, "path");
+    half.setAttribute("class", "half");
+    half.setAttribute("d", `M0,${-r} A${r},${r} 0 0 1 0,${r} Z`);
+    group.append(ring, half);
+  } else {
+    const dot = document.createElementNS(SVG_NS, "circle");
+    dot.setAttribute("class", "mark");
+    dot.setAttribute("r", String(style.radius));
+    group.append(dot);
+  }
+  return { key: place.key, point: [place.lon, place.lat], group };
 }
 
 function clamp(value, low, high) {

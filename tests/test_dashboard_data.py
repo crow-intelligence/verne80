@@ -28,6 +28,8 @@ INPUTS = (
     REPO_ROOT / "data" / "review" / "places.csv",
     REPO_ROOT / "data" / "processed" / "positions.json",
     REPO_ROOT / "data" / "raw" / "ne_110m_land.geojson",
+    REPO_ROOT / "src" / "verne80" / "people.json",
+    REPO_ROOT / "src" / "verne80" / "tracks.json",
 )
 
 needs_data = pytest.mark.skipif(
@@ -230,6 +232,107 @@ class TestTheProvenanceAsCommitted:
         assert any(
             "great circles" in note for note in committed["provenance"]["warnings"]
         )
+
+
+@needs_data
+class TestTheCastAsCommitted:
+    def test_every_chapter_puts_somebody_on_stage(self, committed):
+        for entry in committed["chapters"]["chapters"]:
+            assert entry["present"], entry["chapter"]
+
+    def test_the_counts_agree_with_the_lists(self, committed):
+        for entry in committed["chapters"]["chapters"]:
+            counts = entry["people_counts"]
+            assert counts["present"] == len(entry["present"])
+            assert counts["named_elsewhere"] == len(entry["named_elsewhere"])
+            assert (
+                counts["present_named"] + counts["present_roles"] == counts["present"]
+            )
+            places = entry["place_counts"]
+            assert places["named"] == len(entry["places"])
+            assert places["plotted"] == sum(1 for p in entry["places"] if p["plotted"])
+
+    def test_chapter_24_prints_john_busby_and_files_him_under_bunsby(self, committed):
+        """Gutenberg #103's own inconsistency, reconciled without being erased."""
+        chapter = _chapter(committed, 24)
+        busby = [one for one in chapter["present"] if one["key"] == "bunsby"]
+        assert busby, "the pilot of the Tankadere should be on stage in chapter 24"
+        assert busby[0]["name_in_text"] == "John Busby"
+        assert busby[0]["display"] == "John Bunsby"
+
+    def test_chapter_29_keeps_both_spellings_of_proctor(self, committed):
+        chapter = _chapter(committed, 29)
+        proctor = [one for one in chapter["present"] if one["key"] == "proctor"][0]
+        assert proctor["also_printed"] == ["Stamp Proctor"]
+
+    def test_chapter_26_lists_fix_and_the_detective_as_two_people(self, committed):
+        keys = {one["key"] for one in _chapter(committed, 26)["present"]}
+        assert {"fix", "detective"} <= keys
+
+    def test_no_role_is_ever_given_a_persons_key(self, committed):
+        """A role folded onto a person would merge nine engineers into one man."""
+        kinds: dict[str, set[str]] = {}
+        for entry in committed["chapters"]["chapters"]:
+            for one in entry["present"] + entry["named_elsewhere"]:
+                kinds.setdefault(one["key"], set()).add(one["kind"])
+        assert not [key for key, seen in kinds.items() if len(seen) > 1]
+
+    def test_the_globe_has_somewhere_to_turn_for_every_chapter(self, committed):
+        for entry in committed["chapters"]["chapters"]:
+            assert entry["focus"] is not None, entry["chapter"]
+            assert entry["focus"]["from"] == "fogg"
+
+
+@needs_data
+class TestTheChapterPlacesAsCommitted:
+    def test_every_plotted_place_exists_in_places_json(self, committed):
+        """The join lives in one payload and is consumed against another.
+
+        Nothing else would notice it rotting: a missing key is a dot that quietly
+        fails to appear, not an error anybody sees.
+        """
+        drawn = {place["key"] for place in committed["places"]["places"]}
+        for entry in committed["chapters"]["chapters"]:
+            for place in entry["places"]:
+                if place["plotted"]:
+                    assert place["key"] in drawn, (entry["chapter"], place["key"])
+
+    def test_a_held_back_place_gives_the_reason_places_json_gives(self, committed):
+        listed = {e["key"]: e["reason"] for e in committed["places"]["listed"]}
+        for entry in committed["chapters"]["chapters"]:
+            for place in entry["places"]:
+                if not place["plotted"] and place["key"] in listed:
+                    assert place["reason"] == listed[place["key"]]
+
+    def test_a_place_that_is_a_stop_is_marked_as_one(self, committed):
+        nodes = {node["key"] for node in committed["journey"]["nodes"]}
+        for entry in committed["chapters"]["chapters"]:
+            for place in entry["places"]:
+                assert place["on_route"] == (place["key"] in nodes)
+
+    def test_every_class_the_data_uses_is_one_the_page_can_draw(self, committed):
+        """Five marks are designed. A sixth class would render as nothing at all."""
+        seen = {
+            place["class"]
+            for entry in committed["chapters"]["chapters"]
+            for place in entry["places"]
+        }
+        assert seen <= {"here", "past", "future", "cyclic", "off_route", "unknown"}
+
+
+@needs_data
+def test_the_provenance_hashes_the_curation_files_too(committed):
+    """tracks.json was read and not hashed: an edit without a rebuild was invisible."""
+    hashed = {Path(entry["path"]).name for entry in committed["provenance"]["inputs"]}
+    assert {"people.json", "tracks.json"} <= hashed
+
+
+def _chapter(committed, number):
+    return next(
+        entry
+        for entry in committed["chapters"]["chapters"]
+        if entry["chapter"] == number
+    )
 
 
 @needs_data

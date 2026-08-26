@@ -23,6 +23,7 @@ from verne80.globe import (
     shortest_rotation,
     to_geojson_point,
 )
+from verne80.people import load_cast
 from verne80.route import spine_from_nodes
 from verne80.schema import TransportMode
 
@@ -72,6 +73,18 @@ class FakeTime:
 
 
 @dataclass(frozen=True)
+class FakeOnStage:
+    name_in_text: str
+    at_name_in_text: str | None = None
+
+
+@dataclass(frozen=True)
+class FakeNarrative:
+    on_stage: tuple = ()
+    named_but_not_present: tuple = ()
+
+
+@dataclass(frozen=True)
 class FakeExtraction:
     """Only the fields the payload reads, so a test states its own inputs."""
 
@@ -83,6 +96,12 @@ class FakeExtraction:
     summary_hover: str = "One sentence."
     summary_detail: str = "Rather more than one sentence."
     time: object = FakeTime()
+    narrative: object = FakeNarrative()
+
+
+@dataclass(frozen=True)
+class FakeNamedElsewhere:
+    name_in_text: str
 
 
 @dataclass(frozen=True)
@@ -359,16 +378,29 @@ class TestTheChapterJoin:
 
 
 class TestTheChapters:
-    def build(self, tracks):
+    def build(self, tracks, extraction=None, mentions=None):
         journey = journey_payload(
             THREE_STOPS, rows(row("london"), row("suez"), row("bombay"))
         )
-        positions = {"chapters": [{"chapter": 1, "scene_places": [], "tracks": tracks}]}
+        positions = {
+            "chapters": [
+                {
+                    "chapter": 1,
+                    "scene_places": [],
+                    "mentions": mentions or {},
+                    "tracks": tracks,
+                }
+            ]
+        }
         return chapters_payload(
-            {1: FakeExtraction(1)},
+            {1: extraction or FakeExtraction(1)},
             positions,
             journey["legs"],
             [FakeTrack("fogg", "Fogg")],
+            load_cast(),
+            journey["nodes"],
+            {"suez": {"key": "suez"}},
+            {"kholby": {"key": "kholby", "reason": "none_found"}},
         )
 
     def test_a_track_that_has_not_appeared_gets_no_pin(self):
@@ -391,6 +423,102 @@ class TestTheChapters:
     def test_the_summary_is_flat_because_there_is_one_language(self):
         payload = self.build([])
         assert payload["chapters"][0]["summary"]["hover"] == "One sentence."
+
+    def test_the_globe_turns_to_foggs_own_position(self):
+        payload = self.build(
+            [{"track": "fogg", "leg": 0, "along": 0.5, "source": "stated"}]
+        )
+        focus = payload["chapters"][0]["focus"]
+        assert focus["from"] == "fogg"
+        assert [focus["lon"], focus["lat"]] == interpolate_great_circle(
+            LONDON, SUEZ, 0.5
+        )
+
+    def test_with_fogg_unplaced_the_globe_does_not_move(self):
+        """Not the mean of the chapter's places: that is a viewpoint nobody chose."""
+        payload = self.build(
+            [{"track": "fix", "leg": 0, "along": 0.5, "source": "stated"}]
+        )
+        assert payload["chapters"][0]["focus"] is None
+
+    def test_a_person_named_in_several_places_is_listed_once(self):
+        """One `on_stage` row per person per place: chapter 4 moves Fogg four times."""
+        extraction = FakeExtraction(
+            1,
+            narrative=FakeNarrative(
+                on_stage=(
+                    FakeOnStage("Phileas Fogg"),
+                    FakeOnStage("Phileas Fogg"),
+                    FakeOnStage("Passepartout"),
+                )
+            ),
+        )
+        present = self.build([], extraction)["chapters"][0]["present"]
+        assert [one["key"] for one in present] == ["fogg", "passepartout"]
+
+    def test_two_printed_spellings_in_one_chapter_are_both_kept(self):
+        """Chapter 29 really does print Colonel Proctor and Stamp Proctor."""
+        extraction = FakeExtraction(
+            1,
+            narrative=FakeNarrative(
+                on_stage=(
+                    FakeOnStage("Colonel Proctor"),
+                    FakeOnStage("Stamp Proctor"),
+                )
+            ),
+        )
+        present = self.build([], extraction)["chapters"][0]["present"]
+        assert len(present) == 1
+        assert present[0]["name_in_text"] == "Colonel Proctor"
+        assert present[0]["also_printed"] == ["Stamp Proctor"]
+
+    def test_a_role_is_never_folded_onto_a_person(self):
+        """Chapter 26 has Fix and a detective on stage, and they are two men."""
+        extraction = FakeExtraction(
+            1,
+            narrative=FakeNarrative(
+                on_stage=(FakeOnStage("Fix"), FakeOnStage("detective"))
+            ),
+        )
+        present = self.build([], extraction)["chapters"][0]["present"]
+        assert [one["kind"] for one in present] == ["person", "role"]
+        assert len({one["key"] for one in present}) == 2
+
+    def test_who_is_talked_about_is_kept_apart_from_who_is_there(self):
+        extraction = FakeExtraction(
+            1,
+            narrative=FakeNarrative(
+                on_stage=(FakeOnStage("Phileas Fogg"),),
+                named_but_not_present=(FakeNamedElsewhere("Byron"),),
+            ),
+        )
+        chapter = self.build([], extraction)["chapters"][0]
+        assert [one["display"] for one in chapter["present"]] == ["Phileas Fogg"]
+        assert [one["display"] for one in chapter["named_elsewhere"]] == ["Byron"]
+
+    def test_a_place_the_chapter_names_carries_the_key_places_json_uses(self):
+        chapter = self.build([], None, {"Suez": "here"})["chapters"][0]
+        assert chapter["places"][0]["key"] == "suez"
+        assert chapter["places"][0]["plotted"] is True
+
+    def test_an_unplottable_place_is_carried_with_its_reason(self):
+        """Kholby has no modern referent. Missing is the answer; silence is not."""
+        chapter = self.build([], None, {"Kholby": "off_route"})["chapters"][0]
+        place = chapter["places"][0]
+        assert place["plotted"] is False
+        assert place["reason"] == "none_found"
+
+    def test_a_place_that_is_a_route_stop_says_so(self):
+        """So the class marks the existing dot instead of a second one on top of it."""
+        chapter = self.build([], None, {"Suez": "here"})["chapters"][0]
+        assert chapter["places"][0]["on_route"] is True
+
+    def test_the_counts_agree_with_the_lists(self):
+        chapter = self.build([], None, {"Suez": "here", "Kholby": "off_route"})[
+            "chapters"
+        ][0]
+        assert chapter["place_counts"]["named"] == 2
+        assert chapter["place_counts"]["plotted"] == 1
 
 
 # --------------------------------------------------------------- the provenance

@@ -33,7 +33,8 @@ from verne80.globe import (
     places_payload,
     provenance,
 )
-from verne80.position import load_tracks
+from verne80.people import PEOPLE_JSON, check_cast, load_cast
+from verne80.position import TRACKS_JSON, load_tracks
 from verne80.review import read_table
 from verne80.route import parse_itinerary
 from verne80.sources import LAND
@@ -55,11 +56,23 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--places", type=Path, default=DEFAULT_PLACES)
     parser.add_argument("--positions", type=Path, default=DEFAULT_POSITIONS)
     parser.add_argument("--land", type=Path, default=LAND.path)
+    parser.add_argument("--people", type=Path, default=PEOPLE_JSON)
+    parser.add_argument("--tracks", type=Path, default=TRACKS_JSON)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     args = parser.parse_args(argv)
 
     chapter_three = args.chapters_dir / "chapter_03.txt"
-    inputs = [chapter_three, args.places, args.positions, args.land]
+    # The two curation files are inputs like any other. tracks.json was read and not
+    # hashed, which meant a curation edit without a rebuild was invisible to the
+    # freshness test — the exact shape of the bug that let 05_places blank a column.
+    inputs = [
+        chapter_three,
+        args.places,
+        args.positions,
+        args.land,
+        args.people,
+        args.tracks,
+    ]
     for path in inputs:
         if not path.exists():
             print(f"  FAIL  {path} not found — {_who_makes(path)}", file=sys.stderr)
@@ -91,13 +104,23 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     positions = json.loads(args.positions.read_text(encoding="utf-8"))
-    tracks = load_tracks()
+    tracks = load_tracks(args.tracks)
+    cast = load_cast(args.people)
 
     journey = journey_payload(spine, table.rows)
     places = places_payload(
         table.rows, chapters_by_place(extractions.values()), journey["legs"]
     )
-    chapters = chapters_payload(extractions, positions, journey["legs"], tracks)
+    chapters = chapters_payload(
+        extractions,
+        positions,
+        journey["legs"],
+        tracks,
+        cast,
+        journey["nodes"],
+        {str(place["key"]): place for place in places["places"]},
+        {str(entry["key"]): entry for entry in places["listed"]},
+    )
     land = land_payload(json.loads(args.land.read_text(encoding="utf-8")))
     strings = strings_payload()
 
@@ -138,10 +161,17 @@ def main(argv: list[str] | None = None) -> int:
         f"  held back {counts['listed']} "
         f"({', '.join(f'{n} {why}' for why, n in counts['by_reason'].items())})"
     )
-    print(f"  chapters  {len(chapters['chapters'])}, {len(chapters['tracks'])} tracks")
+    people = chapters["cast"]
+    named = sum(1 for one in people if one["kind"] == "person")
+    print(
+        f"  chapters  {len(chapters['chapters'])}, {len(chapters['tracks'])} tracks, "
+        f"{len(people)} in the cast ({named} named, {len(people) - named} by role)"
+    )
 
     for problem in check_strings():
         print(f"  strings   {problem}", file=sys.stderr)
+    for problem in check_cast(cast):
+        print(f"  cast      {problem}", file=sys.stderr)
 
     if warnings:
         print("  ---")

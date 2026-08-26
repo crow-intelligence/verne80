@@ -1,0 +1,143 @@
+{
+  "_comment": [
+    "What to call a person, when the book calls them several things.",
+    "",
+    "name_in_text is a quotation from Gutenberg #103 and is never rewritten. The payload",
+    "carries both the printed spelling and a display name, and where a chapter prints two",
+    "spellings of one person it carries both of those too. John Bunsby is 'John Busby' in",
+    "chapter 24 because that is how #103 spells him there: the book is inconsistent, the",
+    "extraction is faithful, and the reconciliation belongs here rather than in the data.",
+    "",
+    "Aliases match under match_key — exactly, the way Track.matches does. No substring",
+    "matching, no surname matching: 'Smith' must not fold Joe Smith the Mormon prophet",
+    "onto the Rev. Decimus Smith, who is a different man in a different chapter.",
+    "",
+    "Only names the book spells more than one way are listed. Of 159 names on stage or",
+    "named elsewhere, 145 are printed one way only and need nothing; they pass through",
+    "with display = name_in_text. Curating them anyway would be a second copy of the",
+    "extraction, kept by hand, for no gain.",
+    "",
+    "roles[] is the other half, and it is a list of exceptions rather than a list of",
+    "roles. The rule is that this translation capitalises a proper name, so a name that",
+    "starts lower case — 'engineer', 'conductor', 'the cabman' — is somebody the book",
+    "identifies only by what they are. That rule is right 146 times out of 159. These are",
+    "the thirteen it gets wrong: capitalised because they carry a proper adjective or name",
+    "a people, but generic all the same.",
+    "",
+    "Roles are never folded across chapters. The engineer of chapter 26 is not the",
+    "engineer of chapter 34; there are nine engineers and they are nine men. Chapter 26 is",
+    "the case that proves it: Fix and a detective are both on stage, and they are not the",
+    "same person."
+  ],
+
+  "people": [
+    {
+      "person": "fogg",
+      "display": "Phileas Fogg",
+      "track": "fogg",
+      "aliases": ["Phileas Fogg", "Mr. Phileas Fogg", "Mr. Fogg", "Monsieur Fogg",
+                  "Fogg", "Phileas Fogg, Esquire"],
+      "why": "printed 'Phileas Fogg' 51 times and 'Mr. Fogg' 17; chapter 19 names both, and Passepartout calls him 'Monsieur Fogg' once"
+    },
+    {
+      "person": "passepartout",
+      "display": "Passepartout",
+      "track": "passepartout",
+      "aliases": ["Passepartout", "Jean Passepartout", "Jean"],
+      "why": "his full name is given once, in chapter 1, when he introduces himself"
+    },
+    {
+      "person": "fix",
+      "display": "Fix",
+      "track": "fix",
+      "aliases": ["Fix", "Mr. Fix", "Detective Fix"],
+      "why": "printed one way throughout; the aliases are kept in step with tracks.json, which a test checks in both directions"
+    },
+    {
+      "person": "cromarty",
+      "display": "Sir Francis Cromarty",
+      "track": null,
+      "aliases": ["Sir Francis Cromarty", "Sir Francis"],
+      "why": "in full in chapters 11 to 13, shortened in chapter 14 once he is a companion rather than an introduction"
+    },
+    {
+      "person": "proctor",
+      "display": "Colonel Stamp Proctor",
+      "track": null,
+      "aliases": ["Colonel Stamp Proctor", "Colonel Proctor", "Stamp Proctor"],
+      "why": "all three spellings are used, and chapter 29 uses two of them in the same chapter — the one case where a fold has to keep both quotations"
+    },
+    {
+      "person": "bunsby",
+      "display": "John Bunsby",
+      "track": null,
+      "aliases": ["John Bunsby", "John Busby"],
+      "why": "chapters 20 and 21 print Bunsby; chapter 24 of Gutenberg #103 prints Busby. The source is inconsistent and both spellings are kept"
+    },
+    {
+      "person": "speedy",
+      "display": "Andrew Speedy",
+      "track": null,
+      "aliases": ["Andrew Speedy", "Captain Speedy"],
+      "why": "named in chapter 32, then by rank in chapter 33 once he has been locked in his own cabin"
+    },
+    {
+      "person": "batulcar",
+      "display": "Honourable William Batulcar",
+      "track": null,
+      "aliases": ["Honourable William Batulcar", "Honourable Mr. Batulcar"],
+      "why": "the acrobat troupe's proprietor, in full and then abbreviated within chapter 23"
+    },
+    {
+      "person": "forster",
+      "display": "James Forster",
+      "track": null,
+      "aliases": ["James Forster", "Forster"],
+      "why": "the servant dismissed in chapter 1 over the shaving water, named in full once and by surname once"
+    },
+    {
+      "person": "stuart",
+      "display": "Andrew Stuart",
+      "track": null,
+      "aliases": ["Andrew Stuart", "Stuart"],
+      "why": "chapter 3 introduces the whist players in full; later chapters use surnames"
+    },
+    {
+      "person": "ralph",
+      "display": "Gauthier Ralph",
+      "track": null,
+      "aliases": ["Gauthier Ralph", "Ralph"],
+      "why": "ditto. Of the five Reform Club members only Stuart and Ralph are ever printed surname-only, so only these two need folding"
+    },
+    {
+      "person": "wilson",
+      "display": "Reverend Samuel Wilson",
+      "track": null,
+      "aliases": ["Reverend Samuel Wilson", "the Reverend Samuel Wilson"],
+      "why": "the clergyman of the last chapter, with and without the article"
+    },
+    {
+      "person": "joseph_smith",
+      "display": "Joe Smith",
+      "track": null,
+      "aliases": ["Joe Smith", "Joseph Smith, junior"],
+      "why": "the Mormon prophet of Elder Hitch's sermon in chapter 27. Shown as 'Joe Smith' because that is what the book prints; his own name is never the display name unless the book uses it. Not folded on the surname either: Rev. Decimus Smith is a different man in chapter 9"
+    }
+  ],
+
+  "roles": [
+    {"name": "British consul", "why": "a post, capitalised for the adjective — chapter 6 has one at Suez"},
+    {"name": "English engineers", "why": "a plural trade, not a person"},
+    {"name": "Indian", "why": "names a people"},
+    {"name": "Hindoos or Indians", "why": "names two peoples, and is not anybody"},
+    {"name": "Indian dancing-girls", "why": "a group at the Bombay pagoda"},
+    {"name": "Papuans", "why": "names a people"},
+    {"name": "Sioux", "why": "names a people; the attack on the train in chapter 29"},
+    {"name": "Sioux chief", "why": "a rank within it, and the book never names him"},
+    {"name": "Mormon", "why": "names a faith"},
+    {"name": "Yankee", "why": "a nickname for a kind of person, not for a person"},
+    {"name": "Parsee", "why": "names a community. Chapters 12 and 14 may well mean the same elephant guide, but the book never names him, and asserting continuity across a two-chapter gap is the invention this pipeline refuses elsewhere"},
+    {"name": "Parsee guide", "why": "ditto, with his job attached"},
+    {"name": "Parsee relation", "why": "ditto, with his family attached"}
+  ]
+}

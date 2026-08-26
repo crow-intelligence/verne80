@@ -195,7 +195,7 @@ p { max-width: var(--measure); }
 
 .globe-wrap {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 250px;
+  grid-template-columns: minmax(0, 1fr) 340px;
   gap: var(--sp-4);
   align-items: start;
 }
@@ -323,4 +323,147 @@ footer p { max-width: none; margin: var(--sp-1) 0; }
   :root { --paper: #fff; --card-bg: #fff; }
   body { font-size: 11pt; }
   /* The dash channel is what carries the legend into greyscale. */
+}
+
+/* ------------------------------------------------------------- the chapter bar */
+
+.chapterbar {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  padding: var(--sp-2) 0;
+  margin-bottom: var(--sp-4);
+  z-index: 5;
+}
+/* Sticky only where it fits on one or two rows. On a phone thirty-seven tabs wrap to
+ * four rows, and four rows of sticky is most of the screen. */
+@media (min-width: 821px) {
+  .chapterbar { position: sticky; top: 0; }
+}
+
+.chapterbar .tabs { display: flex; flex-wrap: wrap; gap: 4px; }
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+  padding: 0 var(--sp-1);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: var(--card-bg);
+  font-size: var(--fs-label);
+  text-decoration: none;
+}
+.tab:hover { border-color: var(--accent); color: var(--accent); }
+.tab[aria-selected="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper);
+}
+
+.chapterbar .preview {
+  margin: var(--sp-2) 0 0;
+  color: var(--muted);
+  font-size: var(--fs-small);
+  max-width: var(--measure);
+  min-height: 2.4em;
+}
+
+/* ------------------------------------------------------------------- the panel */
+
+.panel { font-size: var(--fs-small); }
+@media (min-width: 821px) {
+  /* Clears the sticky chapter bar, so a heading never hides behind it. */
+  .panel { position: sticky; top: 88px; max-height: calc(100vh - 100px); overflow-y: auto; }
+}
+.panel h3 {
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  margin: var(--sp-3) 0 var(--sp-1);
+}
+.panel > h3:first-of-type {
+  /* The chapter's own heading, as printed: eighty characters of capitals. */
+  font-size: var(--fs-h3);
+  line-height: 1.25;
+}
+.panel p { max-width: none; margin: 0 0 var(--sp-2); }
+.panel section { border-top: 1px solid var(--line); padding-top: var(--sp-2); }
+.panel .note { font-size: var(--fs-label); line-height: 1.5; }
+.panel ul.plain { list-style: none; margin: 0 0 var(--sp-2); padding: 0; }
+.panel ul.plain li { display: flex; gap: var(--sp-2); align-items: baseline; }
+.panel ul.plain li svg { flex: none; }
+/* Dimmed rather than hidden: the same "nobody is asserting this" channel as a pin's
+ * broken ring, applied to a position carried forward from an earlier chapter. */
+.panel .faint { color: var(--muted); }
+.panel li.faint { opacity: 0.75; }
+
+.stepper { display: flex; gap: var(--sp-3); margin-bottom: var(--sp-2); }
+.stepper a { font-size: var(--fs-label); letter-spacing: var(--ls-label); text-transform: uppercase; }
+
+/* ---------------------------------------------------- a chapter's places */
+
+/* Shape first, colour second. The nine stops own large-and-paper-filled, so these have
+ * to be tellable from them and from each other with the hue taken away — in print, in
+ * greyscale, and for a reader who does not separate these colours. */
+.place .mark { fill: var(--muted); stroke: none; }
+.place .halo { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+.place.is-here .mark { fill: var(--accent); }
+.place.is-past .mark { fill: var(--muted); opacity: 0.6; }
+.place.is-future .mark { fill: var(--paper); stroke: var(--ink); stroke-width: 1.5; }
+.place.is-cyclic .mark { fill: var(--paper); stroke: var(--ink); stroke-width: 1.5; }
+.place.is-cyclic .half { fill: var(--ink); stroke: none; }
+.place.is-off_route .mark,
+.place.is-unknown .mark { fill: none; stroke: var(--muted); stroke-width: 1.2; opacity: 0.75; }
+.place.behind { display: none; }
+.place.is-lit .mark { stroke: var(--accent); stroke-width: 2; }
+
+/* In chapter mode the stop labels stay but recede: they are what keeps the globe legible
+ * while a reader is looking at Kholby, and the chapter's own marks are small enough not
+ * to fight them. The day numbers go, because in a chapter they mean nothing. */
+.stage svg.chapter .stop text { opacity: 0.45; font-size: 11px; }
+.stage svg.chapter .stop text .day { display: none; }
+.stage svg.chapter .stop[data-place-class] text { opacity: 1; }
+.stop.is-lit circle.pin { stroke: var(--accent); }
+
+/* Where the party is. Drawn from Fogg's own pin, and the only ringed mark on the globe —
+ * there is exactly one of them, so it can afford to be the loudest thing there. */
+.place.party .mark { fill: var(--accent); }
+.place.party .halo { stroke: var(--accent); stroke-width: 2; }
+
+/* The key's own swatches, drawn with the same rules. */
+.legend ul.places { margin-top: var(--sp-2); }
+.legend ul.places li { grid-template-columns: 20px 1fr; }
+.legend .swatch { width: 12px; height: 12px; border-radius: 50%; background: var(--muted); }
+.legend .is-here .swatch { background: var(--accent); box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--accent); }
+.legend .is-past .swatch { opacity: 0.6; }
+.legend .is-future .swatch { background: var(--paper); border: 1.5px solid var(--ink); }
+.legend .is-cyclic .swatch { background: linear-gradient(90deg, var(--ink) 50%, var(--paper) 50%); border: 1.5px solid var(--ink); }
+.legend .is-off_route .swatch { background: none; border: 1px solid var(--muted); border-radius: 0; transform: rotate(45deg); width: 10px; height: 10px; }
+
+.panel ul.places { list-style: none; margin: 0 0 var(--sp-2); padding: 0; }
+.panel ul.places li { padding: 2px 0; border-left: 3px solid transparent; padding-left: var(--sp-2); }
+.panel ul.places li.is-here { border-left-color: var(--accent); }
+.panel ul.places li:hover { background: var(--card-bg); }
+.panel ul.places li.unplotted .name { color: var(--muted); }
+.panel ul.places .reason { display: block; font-size: var(--fs-label); }
+
+/* --------------------------------------------------------------- for a reader
+ * who cannot see the globe at all. */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media print {
+  .chapterbar { display: none; }
+  .panel { position: static; max-height: none; overflow: visible; }
 }

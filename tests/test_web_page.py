@@ -209,3 +209,91 @@ def test_the_page_offers_a_way_past_the_globe(html):
     """A canvas is nothing to a screen reader, so the itinerary has to be reachable."""
     assert 'href="#itinerary"' in html
     assert 'href="#main"' in html
+
+
+# ------------------------------------------------- every key defined is a key used
+
+# Prefixes whose keys are chosen at run time from an enum or a data value, so a grep
+# cannot see them. Each is covered by a completeness test below instead.
+DYNAMIC = ("mode.", "schedule.", "track.", "place.class.")
+
+# Reasons and one-off keys the page reaches through a computed name.
+COMPUTED = {
+    "place.off_route",
+    "place.floating_interior",
+    "place.none_found",
+    "place.not_queried",
+    "place.rejected",
+    "place.contradicts_its_leg",
+}
+
+
+@needs_page
+def test_every_key_defined_is_a_key_used(strings):
+    """A defined-and-unused key is how the last twenty-five accumulated.
+
+    The chapter payload shipped for a phase with nothing reading it, and half the table
+    described a panel that did not exist. Neither was visible until somebody went
+    looking. This is what makes it visible.
+    """
+    used = (WEB / "index.html").read_text(encoding="utf-8")
+    for path in sorted(WEB.glob("*.js")):
+        used += path.read_text(encoding="utf-8")
+    unused = sorted(
+        key
+        for key in strings
+        if key not in used and key not in COMPUTED and not key.startswith(DYNAMIC)
+    )
+    assert unused == [], f"defined and never used: {unused}"
+
+
+@needs_page
+def test_every_key_used_is_a_key_defined(strings, html):
+    """The other direction. A missing key renders as its own name."""
+    used = set(re.findall(r'data-i18n(?:-label|-content)?="([^"]+)"', html))
+    for path in sorted(WEB.glob("*.js")):
+        used |= set(
+            re.findall(
+                r'(?<![A-Za-z0-9_$])t\(\s*"([^"]+)"',
+                path.read_text(encoding="utf-8"),
+            )
+        )
+    assert sorted(key for key in used if key not in strings) == []
+
+
+@needs_page
+def test_every_schedule_status_has_a_label(strings):
+    from verne80.schema import ScheduleStatus
+
+    for status in ScheduleStatus:
+        assert f"schedule.{status.value}" in strings, status
+
+
+@needs_page
+def test_every_position_source_has_a_label(strings):
+    """Except `stated`, which the panel words differently — assert that too."""
+    from verne80.position import PositionSource
+
+    for source in PositionSource:
+        key = (
+            "track.absent"
+            if source is PositionSource.UNKNOWN
+            else f"track.{source.value}"
+        )
+        assert key in strings, source
+
+
+@needs_page
+def test_every_temporal_class_has_a_label(strings):
+    """Including UNKNOWN, which the data does not use yet but the enum allows."""
+    from verne80.position import TemporalClass
+
+    for temporal in TemporalClass:
+        assert f"place.class.{temporal.value}" in strings, temporal
+
+
+@needs_page
+def test_every_reason_a_place_is_held_back_has_a_label(strings):
+    listed = json.loads((WEB / "data" / "places.json").read_text(encoding="utf-8"))
+    for entry in listed["listed"]:
+        assert f"place.{entry['reason']}" in strings, entry["reason"]

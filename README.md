@@ -59,6 +59,10 @@ See `data/prompts/README.md` for the paste workflow.
 - **A place that contradicts its own leg is not drawn.** The curation puts Queenstown
   six-tenths of the way from New York to London; the gazetteer put it in New Zealand. The
   export withholds the pin and says why, which needs no opinion about which source is wrong.
+- **A printed name is a quotation, and the book contradicts itself.** Chapters 20 and 21
+  call the pilot of the *Tankadere* John Bunsby; chapter 24 of Gutenberg #103 calls him John
+  Busby. The extraction is faithful to both. A display roster reconciles them at the point of
+  reading, and carries both spellings so the evidence survives.
 
 ## Data
 
@@ -90,7 +94,7 @@ regenerable and ignored.
 
 - [x] The data the globe reads: `scripts/08_dashboard.py` -> `web/data/*.json`
 - [x] Route + coordinates on an orthographic globe, with transport modes per stage
-- [ ] Chapter browser: summaries, characters, and the places each chapter names
+- [x] Chapter browser: summaries, characters, and the places each chapter names
 - [ ] Timeline scrubber and the ahead/behind ledger
 - [ ] Historic (1872) vs current borders toggle
 

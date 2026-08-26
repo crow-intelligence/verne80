@@ -62,11 +62,15 @@
 
   <div class="provenance" id="provenance"></div>
 
-  <h2 data-i18n="route.heading">The route</h2>
-  <p class="note" data-i18n="arc.schematic">
-    The lines are great circles: the shortest path over a sphere between the stops Fogg's
-    table names, not the route the ships and trains took.
-  </p>
+  <h2 data-i18n="chapters.heading">The chapters</h2>
+  <p class="note" data-i18n="chapters.note"></p>
+
+  <div class="chapterbar" id="chapterbar">
+    <div class="tabs" role="tablist" data-i18n-label="chapters.bar.label"></div>
+    <p class="preview" id="preview"></p>
+  </div>
+
+  <p class="visually-hidden" id="announce" aria-live="polite" aria-atomic="true"></p>
 
   <div class="globe-wrap">
     <div>
@@ -79,14 +83,19 @@
         <span class="label" data-i18n="globe.hint">Drag to turn the globe.</span>
         <button id="rotate" type="button">Turn slowly</button>
       </div>
+      <div class="legend">
+        <h3 data-i18n="legend.heading">The key</h3>
+        <ul id="legend-modes" class="modes"></ul>
+        <ul id="legend-places" class="places"></ul>
+        <p class="note" data-i18n="prov.rings"></p>
+      </div>
     </div>
 
-    <div class="legend">
-      <h3 data-i18n="legend.heading">The key</h3>
-      <ul id="legend-modes"></ul>
-      <p class="note" data-i18n="prov.rings" style="font-size: var(--fs-small)"></p>
-    </div>
+    <div class="panel" id="panel" role="tabpanel"></div>
   </div>
+
+  <h2 data-i18n="route.heading">The route</h2>
+  <p class="note" data-i18n="arc.schematic"></p>
 
   <h2 data-i18n="itinerary.heading">The itinerary</h2>
   <p class="note" data-i18n="itinerary.note">

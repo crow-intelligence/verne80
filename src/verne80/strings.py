@@ -72,10 +72,70 @@ STRINGS: dict[str, str] = {
     "globe.rotate.pause": "Stop turning",
     "globe.rotate.play": "Turn slowly",
     # --- the chapter browser ---
+    "chapters.heading": "The chapters",
+    "chapters.note": (
+        "Thirty-seven chapters. Pick one and the globe turns to where the party "
+        "is, and the places that chapter names appear around them."
+    ),
+    "chapters.bar.label": "Chapters",
+    "chapters.pick": "Pick a chapter to follow the party.",
+    "chapters.overview": "Whole route",
     "chapter.heading": "Chapter {n}. {title}",
     "chapter.of": "Chapter {n} of {total}",
-    "chapter.next": "Next chapter",
-    "chapter.previous": "Previous chapter",
+    "chapter.next": "Next",
+    "chapter.previous": "Previous",
+    # --- where the party is ---
+    "where.heading": "Where the party is",
+    # --- the eighty days ---
+    "day.heading": "The eighty days",
+    "day.window": (
+        "Fogg is on the stage from {origin} to {destination}. His own table budgets "
+        "days {from} to {to} for it."
+    ),
+    # The sentence that stops "days 20 to 23" being read as "it is day 21". `along`
+    # orders pins along a line; it is not time, and RoutePoint's docstring is explicit
+    # that it must not reach this page as a percentage of anything.
+    "day.not_a_date": (
+        "The table is a budget, not a diary — the chapter does not date itself."
+    ),
+    "day.no_window": "The chapter does not put Fogg on any stage of the itinerary.",
+    "day.says": "The chapter says he is {status}.",
+    "day.says_detail": "The chapter says he is {status}: {detail}",
+    # `schedule.unknown` reads as a clause, not a state, so it cannot be dropped into
+    # "he is {status}" — that composes to "he is the chapter does not say".
+    "day.silent": "The chapter does not say whether he is ahead or behind.",
+    # --- who is in it ---
+    "people.present.heading": "Who is in this chapter",
+    "people.elsewhere.heading": "Talked about, not here",
+    "people.elsewhere.none": "Nobody is talked about who is not in the chapter.",
+    "people.roles.note": (
+        "The book names these by what they are rather than who they are, so each one "
+        "belongs to its own chapter — the engineer of one is not the engineer of "
+        "another."
+    ),
+    # The display name is ours; the printed one is the book's. Saying "printed here as"
+    # rather than "also printed" is right in both cases — the chapter that calls him
+    # Mr. Fogg, and the chapter that calls him two things at once.
+    "people.printed_as": "printed here as {names}",
+    # --- the places a chapter names ---
+    "place.heading": "Places this chapter names",
+    "place.count": "{plotted} of {named} have a place on the globe.",
+    "place.class.here": "where the party is",
+    "place.class.past": "behind them",
+    "place.class.future": "ahead of them",
+    "place.class.cyclic": "behind them and ahead of them",
+    "place.class.off_route": "off the route",
+    "place.class.unknown": "unplaced",
+    "place.off_route": "a region or an institution, not somewhere to stand",
+    "place.floating_interior": "somewhere inside wherever the party already is",
+    "place.none_found": "no modern place has been matched to this name",
+    "place.not_queried": "not yet looked up",
+    "place.rejected": "the resolution was rejected and nothing has replaced it",
+    "place.contradicts_its_leg": "resolved somewhere its own stage never goes",
+    # --- how they travel ---
+    "transport.heading": "How they travel",
+    "transport.none": "The chapter names no journey.",
+    "transport.between": "{from} to {to}",
     # --- stages ---
     # `stage.*` is the reader's word for one run between two stops. `leg` stays the
     # data's word — journey.legs, RouteLeg, RoutePoint.leg, the leg column in
@@ -83,6 +143,7 @@ STRINGS: dict[str, str] = {
     # ordinary English for it and opaque to anyone who did not grow up with it; "stage"
     # is the older word, as in a stagecoach, and says what it means.
     "stage.days": "{n} days",
+    "stage.day": "day {n}",
     "stage.count": "{n} of the eight stages",
     "stage.via": "The table names {places} along the way",
     # --- transport modes ---
@@ -107,7 +168,6 @@ STRINGS: dict[str, str] = {
     "place.doubtful": "resolved at {score}, below the {threshold} we trust",
     "place.renamed": "{old}, now {new}",
     "place.chapters": "named in chapters {numbers}",
-    "place.unlocated": "no modern place has been matched to this name",
     # --- the key beside the globe ---
     "legend.heading": "The key",
     # --- the itinerary list ---
