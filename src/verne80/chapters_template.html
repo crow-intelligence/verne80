@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{ strings.chapters.page_title }}</title>
+<meta name="description" data-i18n-content="chapters.page_description" content="{{ strings.chapters.page_description }}" />
+<link rel="canonical" href="{{ page.url }}" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="author" content="Crow Intelligence" />
+<meta name="theme-color" content="#7a1f1f" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%23f7f5ef' stroke='%237a1f1f' stroke-width='2'/%3E%3Cpath d='M3 16h26M16 3c5 6 5 20 0 26M16 3c-5 6-5 20 0 26' fill='none' stroke='%237a1f1f' stroke-width='1.2'/%3E%3C/svg%3E" />
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="en_GB" />
+<meta property="og:site_name" content="Crow Intelligence" />
+<meta property="og:title" content="Around the World in 80 Days" />
+<meta property="og:description" content="An AI-made map and chapter-by-chapter summary of Jules Verne's 1872 novel." />
+<meta property="og:url" content="{{ page.url }}" />
+<meta property="og:image" content="{{ page.card }}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="{{ strings.site.card_alt }}" />
+<!-- Twitter / X card (no account, so no twitter:site) -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ strings.chapters.page_heading }}" />
+<meta name="twitter:description" content="{{ strings.chapters.page_description }}" />
+<meta name="twitter:image" content="{{ page.card }}" />
+<meta name="twitter:image:alt" content="{{ strings.site.card_alt }}" />
+
+{{ block.jsonld }}
+
+<link rel="stylesheet" href="{{ page.base }}/fonts/fonts.css" />
+<link rel="stylesheet" href="{{ page.base }}/style.css" />
+
+<!-- The site's cookie consent and analytics loader. Root-absolute because it is the
+     site's file, not this page's: it resolves once this directory is copied into
+     crowintelligence.org. Analytics stays blocked until opt-in. -->
+<script defer src="/consent.js"></script>
+</head>
+<body class="reading">
+
+
+<nav class="top-nav" aria-label="Crow Intelligence">
+  <div class="nav-inner">
+    <a class="nav-brand" href="https://crowintelligence.org/" data-i18n="nav.brand">{{ strings.nav.brand }}</a>
+    <div class="nav-links">
+      <a href="https://crowintelligence.org/portfolio.html" data-i18n="nav.portfolio">{{ strings.nav.portfolio }}</a>
+      <a href="https://crowintelligence.org/services.html" data-i18n="nav.services">{{ strings.nav.services }}</a>
+      <a href="https://crowintelligence.org/about.html" data-i18n="nav.about">{{ strings.nav.about }}</a>
+      <a href="https://blog.crowintelligence.org/" data-i18n="nav.blog">{{ strings.nav.blog }}</a>
+      <a href="https://crowintelligence.org/contact.html" data-i18n="nav.contact">{{ strings.nav.contact }}</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+  <p class="crumb"><a href="{{ page.base }}/" data-i18n="chapters.back">{{ strings.chapters.back }}</a></p>
+
+  <h1 class="chapters-title" data-i18n="chapters.page_heading">{{ strings.chapters.page_heading }}</h1>
+  <p class="lede" data-i18n="chapters.page_lede">{{ strings.chapters.page_lede }}</p>
+
+  <div class="chapters-all" id="chapters-all">
+{{ block.chapters }}
+  </div>
+
+  <p class="crumb"><a href="{{ page.base }}/">{{ strings.chapters.back }} &rarr;</a></p>
+</main>
+
+<footer>
+  <p>
+    Crow Intelligence ·
+    <a href="mailto:hello@crowintelligence.org" data-i18n="footer.contact">{{ strings.footer.contact }}</a> ·
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license" data-i18n="footer.licence">{{ strings.footer.licence }}</a>
+  </p>
+  <p>
+    <span data-i18n="footer.text">{{ strings.footer.text }}</span> ·
+    <span data-i18n="footer.gazetteer">{{ strings.footer.gazetteer }}</span> ·
+    <span data-i18n="footer.coastline">{{ strings.footer.coastline }}</span>
+  </p>
+  <p data-i18n="footer.fonts">{{ strings.footer.fonts }}</p>
+</footer>
+
+</body>
+</html>

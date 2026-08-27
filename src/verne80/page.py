@@ -50,22 +50,35 @@ from verne80.strings import (
 )
 
 __all__ = [
+    "CHAPTERS_TEMPLATE",
+    "CHAPTERS_WORD_FLOOR",
     "TEMPLATE",
     "WORD_FLOOR",
     "check_template",
     "fill",
     "render",
+    "render_chapters",
     "visible_text",
 ]
 
 TEMPLATE = Path(__file__).with_name("page_template.html")
+CHAPTERS_TEMPLATE = Path(__file__).with_name("chapters_template.html")
 
-# The floor the page must clear with scripting switched off. It carries about 6,200
-# words after this module runs, and would fall to roughly 520 if the chapter block
-# failed to render — so the gap between passing and failing is an order of magnitude and
-# nobody has to argue about the exact figure. Deliberately blunt: it will not notice one
-# chapter going missing, and the test that names each chapter is what does.
-WORD_FLOOR = 3000
+# The floors each page must clear with scripting switched off, and the reason there are
+# two of them.
+#
+# The thirty-seven summaries were written out below the globe for one release. They came
+# to 5,566 words — ninety per cent of that page — and made it unreadable for the person
+# it was built for. They are their own page now, and the numbers follow: the globe keeps
+# its title, subtitle, headings, itinerary and closing section, about 640 words; the
+# summaries page carries about 5,600.
+#
+# Each floor sits far enough below its page that ordinary editing never reaches it, and
+# far enough above what a failed block would leave that the failure is unambiguous.
+# Deliberately blunt: neither notices one chapter going missing, and the test that names
+# every chapter is what does.
+WORD_FLOOR = 400
+CHAPTERS_WORD_FLOOR = 3000
 
 # The novel on Wikidata. Verified rather than assumed: Q1219561 is the literary work,
 # its author is Q33977 (Jules Verne), it is dated 1872, and its title is recorded as
@@ -268,7 +281,6 @@ def render(
 
     blocks = {
         "jsonld": _jsonld(provenance),
-        "chapters": _chapter_sections(chapters),
         "itinerary": _itinerary(journey, places),
         "checked": _escape(
             fill(
@@ -288,6 +300,57 @@ def render(
         "updated": UPDATED,
     }
 
+    return _substitute(source, facts, blocks)
+
+
+def render_chapters(chapters: Mapping[str, Any], template: str | None = None) -> str:
+    """The thirty-seven summaries, as a page of their own.
+
+    Everything the globe's panel says about a chapter in passing, written down: what
+    happens, who is there, where it reaches, how they travel. It carries no
+    JavaScript, which makes it fast and takes a category of breakage off it entirely.
+
+    Args:
+        chapters: ``chapters.json``, as loaded.
+        template: The template source. Defaults to the shipped one.
+
+    Returns:
+        The HTML.
+
+    Raises:
+        ValueError: If the template is unsound, or a token survives substitution.
+
+    Contract:
+        - Every chapter's title and summary appear in the output, anchored ``#ch-N``.
+        - Every chapter links back to the same chapter on the globe.
+    """
+    source = (
+        CHAPTERS_TEMPLATE.read_text(encoding="utf-8") if template is None else template
+    )
+    problems = check_template(source)
+    if problems:
+        raise ValueError("; ".join(problems))
+
+    facts = {
+        # One level down, so the shared stylesheet, the fonts and the payloads are all
+        # reached with `..`. The consent script stays root-absolute: it is the site's
+        # file and resolves from the domain root wherever this page sits.
+        "url": SITE_URL + "chapters/",
+        "home": SITE_URL,
+        "base": "..",
+        "card": SITE_URL + "assets/og.png",
+        "language": LANGUAGE,
+        "published": PUBLISHED,
+        "updated": UPDATED,
+    }
+    blocks = {"jsonld": _chapters_jsonld(), "chapters": _chapter_sections(chapters)}
+    return _substitute(source, facts, blocks)
+
+
+def _substitute(
+    source: str, facts: Mapping[str, str], blocks: Mapping[str, str]
+) -> str:
+    """Fill the three namespaces, and refuse a page with a token left in it."""
     page = _STRING_TOKEN.sub(lambda m: _escape(STRINGS[m.group(1)]), source)
     page = _PAGE_TOKEN.sub(lambda m: _escape(facts[m.group(1)]), page)
     page = _BLOCK_TOKEN.sub(lambda m: blocks[m.group(1)], page)
@@ -351,7 +414,8 @@ def _chapter_sections(chapters: Mapping[str, Any]) -> str:
             f"{_escape(entry['title'])}</h3>\n"
             f"  <p>{_escape(entry['summary']['detail'])}</p>\n"
             f'  <dl class="chapter-facts">\n{rows}\n  </dl>\n'
-            f'  <p class="chapter-back"><a class="to-globe" href="#globe" '
+            f'  <p class="chapter-back">'
+            f'<a class="to-globe" href="../#ch-{number}" '
             f'data-chapter="{number}">'
             f"{_escape(fill('chapter.on_globe', n=number))}</a></p>\n"
             f"</article>"
@@ -433,6 +497,67 @@ def _itinerary(journey: Mapping[str, Any], places: Mapping[str, Any]) -> str:
             line += f'\n    <p class="onward">{_escape(onward)}</p>'
         out.append(line + "</li>")
     return "\n".join(out)
+
+
+def _chapters_jsonld() -> str:
+    """The summaries page, said to be part of the globe rather than a rival to it.
+
+    Lean on purpose. It repeats the book it is about and names its parent, and it does
+    not repeat the dataset: one page should claim that, and it is the one carrying it.
+    """
+    graph = [
+        {
+            "@type": "WebPage",
+            "@id": SITE_URL + "chapters/#webpage",
+            "url": SITE_URL + "chapters/",
+            "name": STRINGS["chapters.page_title"],
+            "description": STRINGS["chapters.page_description"],
+            "inLanguage": LANGUAGE,
+            "datePublished": PUBLISHED,
+            "dateModified": UPDATED,
+            "license": LICENCE,
+            "isPartOf": {"@id": SITE_URL + "#webpage"},
+            "author": {"@id": ORGANISATION},
+            "publisher": {"@id": ORGANISATION},
+            "breadcrumb": {"@id": SITE_URL + "chapters/#breadcrumb"},
+            "about": {"@id": SITE_URL + "#book"},
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": SITE_URL + "chapters/#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Crow Intelligence",
+                    "item": "https://crowintelligence.org/",
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": STRINGS["site.title"],
+                    "item": SITE_URL,
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": STRINGS["chapters.page_heading"],
+                },
+            ],
+        },
+        {
+            "@type": "Organization",
+            "@id": ORGANISATION,
+            "name": "Crow Intelligence",
+            "url": "https://crowintelligence.org/",
+        },
+    ]
+    body = json.dumps(
+        {"@context": "https://schema.org", "@graph": graph},
+        ensure_ascii=False,
+        indent=2,
+    )
+    return f'<script type="application/ld+json">\n{body}\n</script>'
 
 
 def _jsonld(provenance: Mapping[str, Any]) -> str:

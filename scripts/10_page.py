@@ -22,7 +22,16 @@ import json
 import sys
 from pathlib import Path
 
-from verne80.page import TEMPLATE, WORD_FLOOR, check_template, render, visible_text
+from verne80.page import (
+    CHAPTERS_TEMPLATE,
+    CHAPTERS_WORD_FLOOR,
+    TEMPLATE,
+    WORD_FLOOR,
+    check_template,
+    render,
+    render_chapters,
+    visible_text,
+)
 
 DEFAULT_DATA = Path("web/data")
 DEFAULT_OUT = Path("web/index.html")
@@ -34,6 +43,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Build the page.")
     parser.add_argument("--data", type=Path, default=DEFAULT_DATA)
     parser.add_argument("--template", type=Path, default=TEMPLATE)
+    parser.add_argument("--chapters-template", type=Path, default=CHAPTERS_TEMPLATE)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     args = parser.parse_args(argv)
 
@@ -50,7 +60,8 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     source = args.template.read_text(encoding="utf-8")
-    problems = check_template(source)
+    chapters_source = args.chapters_template.read_text(encoding="utf-8")
+    problems = check_template(source) + check_template(chapters_source)
     for problem in problems:
         print(f"  FAIL  {problem}", file=sys.stderr)
     if problems:
@@ -67,24 +78,37 @@ def main(argv: list[str] | None = None) -> int:
         loaded["provenance"],
         source,
     )
+    summaries = render_chapters(loaded["chapters"], chapters_source)
+
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(page, encoding="utf-8")
+    summaries_out = args.out.parent / "chapters" / "index.html"
+    summaries_out.parent.mkdir(parents=True, exist_ok=True)
+    summaries_out.write_text(summaries, encoding="utf-8")
 
-    words = len(visible_text(page).split())
-    print(f"  wrote {args.out} ({len(page.encode()):,} bytes)")
+    written = (
+        (args.out, page, WORD_FLOOR),
+        (summaries_out, summaries, CHAPTERS_WORD_FLOOR),
+    )
+    for path, text, _ in written:
+        print(f"  wrote {path} ({len(text.encode()):,} bytes)")
     print("  ---")
     print(f"  chapters  {len(loaded['chapters']['chapters'])} written out in full")
     print(f"  stops     {len(loaded['journey']['nodes'])} in the itinerary")
-    print(
-        f"  words     {words:,} with JavaScript switched off (floor is {WORD_FLOOR:,})"
-    )
-    if words < WORD_FLOOR:
-        print(
-            f"  FAIL  {words} words is below the floor — a block did not render",
-            file=sys.stderr,
-        )
-        return 1
-    return 0
+
+    # The number this whole stage exists to move. Watch it rather than trusting it.
+    short = False
+    for path, text, floor in written:
+        words = len(visible_text(text).split())
+        print(f"  words     {words:>6,} in {path}  (floor {floor:,})")
+        if words < floor:
+            print(
+                f"  FAIL  {path} says {words} words with JavaScript switched off — "
+                "a block did not render",
+                file=sys.stderr,
+            )
+            short = True
+    return 1 if short else 0
 
 
 if __name__ == "__main__":

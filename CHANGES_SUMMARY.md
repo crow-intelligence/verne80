@@ -331,6 +331,45 @@ for every entry.
 
 **The cross-repo copy.** `make publish` fixes the *how*, not the *did you remember*.
 
+## PR 5, corrected — the summaries move, and the selector works again
+
+**The chapter selector was broken and I said it worked.** `render()` is a closure inside
+`main()`; `go()` was declared at module scope and called it. Every tab click threw
+`ReferenceError: render is not defined`. Five paths were dead — clicks, the arrow keys,
+Escape, the panel's prev/next, the show-on-globe links — while the initial load and the
+Back button went on working. That is exactly why the deep-link check I ran came back
+clean: it exercised the one path that could not fail.
+
+`go()` dispatches the `hashchange` event the page already listens for. Three lines, no
+closure coupling, and it restores the property the module docstring claimed and I had
+broken: one listener is the only thing that renders.
+
+**A guard, because this class of bug was invisible to every test here.**
+`test_no_module_function_calls_into_the_main_closure` collects the names declared inside
+`main()` and fails if a module-scope function calls one. Calls only, never bare
+identifiers — this file has module-scope functions taking parameters named `chapters` and
+`journey` — and it strips comments first, because four of this file's own explanations
+say the word `render()`, including the one describing the bug.
+
+**The 37 chapters came off the page.** Written out below the globe they were 5,566 words:
+**90% of the page**, and a wall in front of the thing a reader came for. They are
+`/verne/chapters/` now — their own title, description and canonical, anchored per
+chapter, carrying no JavaScript at all because they are prose.
+
+The numbers: the globe is back to **616 words** with scripting off and the summaries page
+carries **5,654**. The word floor splits accordingly, 400 and 3,000, each an order of
+magnitude above what a failed block would leave.
+
+**The tab bar earns its keep in both modes.** The hrefs are `./chapters/#ch-12`, so with
+scripting off the 37 tabs are a working table of contents into the summaries rather than
+37 fragments naming nothing; with scripting on the click is prevented and the globe turns
+in place. Same link, same meaning.
+
+Verified by clicking this time, not by loading: a probe page driving the real handlers
+reports click, arrow left and right, Home, End, Escape and the panel's Next all landing on
+the right chapter with no console errors — and the same probe against the old `go()`
+reproduces the `ReferenceError` exactly.
+
 ## Green
 
-`make ci`: 783 tests pass, ruff format and lint clean, `ty check src` clean, 94% overall.
+`make ci`: 789 tests pass, ruff format and lint clean, `ty check src` clean, 94% overall.

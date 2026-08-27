@@ -105,15 +105,28 @@ STRINGS: dict[str, str] = {
     "globe.hint": "Drag to turn the globe.",
     "globe.rotate.pause": "Stop turning",
     "globe.rotate.play": "Turn slowly",
-    # --- the chapters, written out ---
-    "chapters.all.heading": "The book, chapter by chapter",
-    "chapters.all.note": (
-        "All thirty-seven, in the order Verne wrote them: what happens, who is there, "
-        "and where the chapter's geography reaches."
+    "chapters.jump": "Read all thirty-seven chapter summaries",
+    # --- the summaries, which are a page of their own ---
+    # Written out below the globe they came to 5,566 words: ninety per cent of the
+    # page, and a wall between a reader and what they came for. They are their own
+    # page now, which is closer to what they always were — reading the book in summary
+    # is a different errand from turning a globe.
+    "chapters.page_title": ("All 37 Chapter Summaries — Around the World in 80 Days"),
+    "chapters.page_description": (
+        "Every chapter of Jules Verne's 1872 novel summarised, with the people in it "
+        "and the places it names — from the wager at the Reform Club to the day Fogg "
+        "gains crossing the date line."
     ),
-    "chapters.jump": "Read all thirty-seven, written out below.",
+    "chapters.page_heading": "All thirty-seven chapters, summarised",
+    "chapters.page_lede": (
+        "What happens in each chapter of Around the World in Eighty Days, who is "
+        "there, and where its geography reaches. Summarised from the text of Project "
+        "Gutenberg #103; the names and places are extracted from the chapter they "
+        "appear in."
+    ),
+    "chapters.back": "Back to the globe",
     "chapter.on_globe": "Show chapter {n} on the globe",
-    "chapter.read_below": "Read this chapter written out",
+    "chapter.read_below": "Read this chapter in full",
     "people.by_role": "Named by role: {names}",
     # --- the chapter browser ---
     "chapters.heading": "The chapters",

@@ -83,7 +83,7 @@
   <h2 data-i18n="chapters.heading">{{ strings.chapters.heading }}</h2>
   <p class="note" data-i18n="chapters.note">{{ strings.chapters.note }}</p>
 
-  <p class="note"><a href="#chapters-all" data-i18n="chapters.jump">{{ strings.chapters.jump }}</a></p>
+  <p class="note"><a class="read-on" href="./chapters/" data-i18n="chapters.jump">{{ strings.chapters.jump }}</a></p>
 
   <p class="page-error" id="page-error" hidden></p>
 
@@ -142,12 +142,7 @@
 {{ block.itinerary }}
   </ol>
 
-  <h2 data-i18n="chapters.all.heading">{{ strings.chapters.all.heading }}</h2>
-  <p class="note" data-i18n="chapters.all.note">{{ strings.chapters.all.note }}</p>
-
-  <div class="chapters-all" id="chapters-all">
-{{ block.chapters }}
-  </div>
+  <p class="note"><a class="read-on" href="./chapters/">{{ strings.chapters.jump }} &rarr;</a></p>
 
   <h2 data-i18n="about.heading">{{ strings.about.heading }}</h2>
   <p class="about-lede" data-i18n="about.ai">{{ strings.about.ai }}</p>

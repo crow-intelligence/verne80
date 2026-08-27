@@ -38,6 +38,11 @@ def html():
 
 
 @pytest.fixture(scope="module")
+def summaries():
+    return CHAPTERS_PAGE.read_text(encoding="utf-8")
+
+
+@pytest.fixture(scope="module")
 def strings():
     payload = json.loads((WEB / "data" / "strings.json").read_text(encoding="utf-8"))
     return payload["strings"]
@@ -280,6 +285,7 @@ def test_every_key_defined_is_a_key_used(strings):
     # no data-i18n, so their strings are used by page.py rather than by the markup.
     used = (WEB / "index.html").read_text(encoding="utf-8")
     used += TEMPLATE.read_text(encoding="utf-8")
+    used += CHAPTERS_TEMPLATE.read_text(encoding="utf-8")
     used += (REPO_ROOT / "src" / "verne80" / "page.py").read_text(encoding="utf-8")
     for path in sorted(WEB.glob("*.js")):
         used += path.read_text(encoding="utf-8")
@@ -372,6 +378,8 @@ def test_the_card_is_the_size_the_head_says_it_is(html):
 # ------------------------------------- what the page says with no JavaScript at all
 
 TEMPLATE = REPO_ROOT / "src" / "verne80" / "page_template.html"
+CHAPTERS_TEMPLATE = REPO_ROOT / "src" / "verne80" / "chapters_template.html"
+CHAPTERS_PAGE = WEB / "chapters" / "index.html"
 
 
 @needs_page
@@ -390,23 +398,57 @@ def test_the_page_says_what_it_says_without_javascript(html):
     """
     words = len(page.visible_text(html).split())
     assert words >= page.WORD_FLOOR, (
-        f"the page says {words} words with JavaScript switched off. It said 107 before "
-        "the chapter sections and 6,200 after. A number this low means a block did "
-        "not render. Run `make dashboard && make page` and read web/index.html."
+        f"the globe says {words} words with scripting off, and it said 107 "
+        "before the strings and the itinerary were baked in. A number this low means a "
+        "block did not render. Run `make dashboard && make page`."
     )
 
 
 @needs_page
-def test_every_chapter_reaches_the_raw_html(html):
-    """The precise counterpart to the blunt floor."""
+def test_the_summaries_page_says_the_whole_book(summaries):
+    """The 5,566 words that were 90% of the globe, on a page of their own now."""
+    words = len(page.visible_text(summaries).split())
+    assert words >= page.CHAPTERS_WORD_FLOOR, f"only {words} words — a block is missing"
+
+
+@needs_page
+def test_every_chapter_reaches_the_raw_html(summaries):
+    """The counterpart to the blunt floor: one chapter missing costs 90 words."""
     payload = json.loads((WEB / "data" / "chapters.json").read_text(encoding="utf-8"))
-    readable = page.visible_text(html)
+    readable = page.visible_text(summaries)
     for entry in payload["chapters"]:
-        assert f'id="ch-{entry["chapter"]}"' in html, entry["chapter"]
-        assert " ".join(entry["title"].split()) in readable, entry["chapter"]
-        assert " ".join(entry["summary"]["detail"].split()) in readable, entry[
-            "chapter"
-        ]
+        number = entry["chapter"]
+        assert f'id="ch-{number}"' in summaries, number
+        assert " ".join(entry["title"].split()) in readable, number
+        assert " ".join(entry["summary"]["detail"].split()) in readable, number
+
+
+@needs_page
+def test_the_two_pages_link_to_each_other(html, summaries):
+    """Two files that have to agree, so a test holds them together.
+
+    The globe sends a reader to the summaries twice — under the chapter bar and after
+    the itinerary — and every summary sends them back to that chapter on the globe. A
+    one-way link is how a second page becomes an orphan.
+    """
+    assert html.count('href="./chapters/"') >= 2
+    payload = json.loads((WEB / "data" / "chapters.json").read_text(encoding="utf-8"))
+    for entry in payload["chapters"]:
+        assert f'href="../#ch-{entry["chapter"]}"' in summaries, entry["chapter"]
+
+
+@needs_page
+def test_the_summaries_page_needs_no_javascript_of_its_own(summaries):
+    """It is prose. A script on it would only be a way for it to break."""
+    scripts = re.findall(r"<script([^>]*)>", summaries)
+    for attributes in scripts:
+        assert 'type="application/ld+json"' in attributes or "/consent.js" in attributes
+
+
+@needs_page
+def test_the_summaries_page_reaches_the_shared_assets_one_level_up(summaries):
+    for path in re.findall(r'(?:href|src)="(\.\./[^"#]*)"', summaries):
+        assert (CHAPTERS_PAGE.parent / path).resolve().exists(), path
 
 
 @needs_page
@@ -418,6 +460,56 @@ def test_the_itinerary_is_in_the_file_not_only_in_the_script(html):
 
 
 # ----------------------------------------------- the page is generated, and checked
+
+
+@needs_page
+def test_no_module_function_calls_into_the_main_closure():
+    """The bug that got past every test here, made impossible to repeat.
+
+    `go()` was declared at module scope and called `render()`, a closure inside
+    `main()`. Every tab click threw a ReferenceError, while the initial load and Back
+    went on working — so a test that opened a URL and read the DOM passed and proved
+    nothing about clicking.
+
+    Only calls are flagged, never bare identifiers: this file has module-scope functions
+    taking parameters named `chapters` and `journey`, which are also names inside
+    `main()`, and nobody calls those.
+    """
+    source = _without_comments((WEB / "app.js").read_text(encoding="utf-8"))
+    start = source.index("async function main() {")
+    end = source.index("\n}\n", start)
+    inside, outside = source[start:end], source[:start] + source[end:]
+
+    declared = set(re.findall(r"\n  (?:function|const|let) (\w+)", inside))
+    at_module_scope = set(re.findall(r"\n(?:function|const|let) (\w+)", outside))
+    private = declared - at_module_scope
+
+    called = set(re.findall(r"(?<![\w.$])(\w+)\s*\(", outside))
+    reaching = sorted(private & called)
+    assert reaching == [], (
+        f"{reaching} live inside main() and are called from module scope, which throws "
+        "a ReferenceError the moment a reader clicks anything"
+    )
+
+
+def _without_comments(source: str) -> str:
+    """JavaScript with its comments removed, so prose does not read as code.
+
+    This file explains itself at length, and four of those explanations say the word
+    `render()` — including the one describing the bug. A scanner that cannot tell a
+    sentence from a call finds them all.
+
+    Crude on purpose: block comments go, and so does any line that begins with `//` or
+    with the `*` of a continued block. A trailing `// note` survives, which can only
+    make the scan miss a call, never invent one.
+    """
+    import re as _re
+
+    source = _re.sub(r"/\*.*?\*/", "", source, flags=_re.S)
+    return "\n".join(
+        "" if line.lstrip().startswith(("//", "*")) else line
+        for line in source.splitlines()
+    )
 
 
 @needs_page
@@ -437,12 +529,19 @@ def test_the_committed_page_still_matches_its_template_and_payloads():
     assert rebuilt == (WEB / "index.html").read_text(encoding="utf-8"), (
         "web/index.html is stale — run `make dashboard && make page` and commit both"
     )
+    assert page.render_chapters(
+        loaded["chapters"], CHAPTERS_TEMPLATE.read_text(encoding="utf-8")
+    ) == CHAPTERS_PAGE.read_text(encoding="utf-8"), (
+        "web/chapters/index.html is stale — run `make page` and commit it"
+    )
 
 
 @needs_page
-def test_the_template_leaves_no_element_for_javascript_to_fill():
+@pytest.mark.parametrize("which", ["page_template.html", "chapters_template.html"])
+def test_the_template_leaves_no_element_for_javascript_to_fill(which):
     """Thirteen elements were empty in the markup and filled only at run time."""
-    assert page.check_template(TEMPLATE.read_text(encoding="utf-8")) == []
+    source = (REPO_ROOT / "src" / "verne80" / which).read_text(encoding="utf-8")
+    assert page.check_template(source) == []
 
 
 @needs_page
@@ -468,11 +567,13 @@ def test_the_repository_name_is_not_the_deployed_slug(html):
 
 
 @needs_page
-def test_the_router_and_the_sections_agree_on_the_hash(html):
+def test_the_router_and_the_tab_bar_agree_on_the_hash(html):
     """Two halves of one decision, in two files, so a test holds them together."""
     router = (WEB / "app.js").read_text(encoding="utf-8")
     assert r"/^#ch-(\d+)$/" in router
-    assert 'id="ch-1"' in html
+    # The tab points at the summary and the click never follows it: a table of contents
+    # with scripting off, a tab with it on.
+    assert "./chapters/#ch-${entry.chapter}" in router
 
 
 # ------------------------------------------------- the head, and the structured data

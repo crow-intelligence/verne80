@@ -65,9 +65,10 @@ See `data/prompts/README.md` for the paste workflow.
   six-tenths of the way from New York to London; the gazetteer put it in New Zealand. The
   export withholds the pin and says why, which needs no opinion about which source is wrong.
 - **A page that says what it says before any script runs.** A crawler executing no
-  JavaScript used to read 107 words of it — the navigation and three button labels. It
-  reads 6,200 now, because `index.html` is generated with every string and all 37 chapter
-  summaries already in the file. A test holds the floor.
+  JavaScript used to read 107 words of it — the navigation and three button labels. The
+  globe reads 616 now and `/verne/chapters/`, which carries all 37 summaries, reads 5,654.
+  Both are generated from templates with every string already in the file, and a floor on
+  each of them is a test.
 - **Borders that move while the route stays put.** The globe carries two eras of
   political boundary — 1880 and today — as hairlines over the coastline. There is no 1872
   file: the source offers 53 years and the nearest is eight after the novel, which the
