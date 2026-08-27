@@ -1,5 +1,10 @@
 # Third-party data shipped with this project
 
+This file covers the repository, `data/raw/` included — the untouched downloads that are
+kept as the provenance record and are never published. **The published copy carries its
+own**, at `web/NOTICE`, scoped to exactly the files that ship: a licence left behind in
+another repository is a licence that did not travel.
+
 verne80 is MIT (see LICENSE) and the page it produces is published under CC BY-NC-SA 4.0.
 Two of the geometry layers it draws come from elsewhere, and one of them is copyleft.
 

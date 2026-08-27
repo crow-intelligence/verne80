@@ -34,8 +34,16 @@ uv run python scripts/10_page.py        # -> web/index.html, with every word alr
 ```
 
 `make publish` copies `web/` into the site repository as `projects/verne/`, which the
-deploy turns into <https://crowintelligence.org/verne/>. The directory basename is the
-URL slug, which is why it is `verne` and not the repository's own name.
+deploy turns into <https://crowintelligence.org/verne/>.
+
+**`web/` is self-contained, with two things worth knowing.** Every relative reference
+resolves inside it — the fonts are self-hosted, d3 is vendored, and nothing is fetched
+from a CDN — and `web/NOTICE` carries the licences for the parts that came from somebody
+else, including the GPL-3.0 border geometry. But it wants one file from the site,
+`/consent.js`, which is the cookie-consent loader every microsite on the domain loads;
+and **the directory has to be named `verne`**, because the canonical URL, the OpenGraph
+tags and the structured data all state the page's own address. If that address ever
+changes it is one constant, `SITE_URL` in `src/verne80/strings.py`, and a rebuild.
 
 See `data/prompts/README.md` for the paste workflow.
 

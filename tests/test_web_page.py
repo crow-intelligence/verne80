@@ -681,3 +681,91 @@ def _references(node, out=None):
         for item in node:
             _references(item, out)
     return out
+
+
+# --------------------------------------- the licences travel with the files they cover
+
+NOTICE = WEB / "NOTICE"
+
+# What counts as somebody else's work, and the word that must name it in the NOTICE.
+# Keyed to the directory rather than to a list, so a new vendored thing fails the build
+# instead of quietly shipping unlicensed.
+THIRD_PARTY = (
+    ("data/borders_1880.json", "GPL-3.0"),
+    ("data/borders_modern.json", "Natural Earth"),
+    ("data/land.json", "Natural Earth"),
+)
+
+
+@needs_page
+def test_the_notice_ships_with_the_files_it_covers():
+    """A licence in another repository is a licence that did not travel.
+
+    `data/borders_1880.json` is GPL-3.0. The fonts carry their OFL text and the vendored
+    modules carry their ISC text, both inside this directory — the one file where the
+    licence is actually copyleft was the one relying on a NOTICE at the repository root,
+    which nobody copying `web/` would ever take with them.
+    """
+    assert NOTICE.exists(), "web/ ships a GPL-3.0 file; it must ship the licence too"
+    notice = NOTICE.read_text(encoding="utf-8")
+
+    for name, licence in THIRD_PARTY:
+        assert (WEB / name).exists(), name
+        assert name in notice, f"{name} ships and the NOTICE does not name it"
+        assert licence in notice, f"{name} is {licence} and the NOTICE does not say so"
+
+
+@needs_page
+def test_every_vendored_module_is_named_in_the_notice():
+    notice = NOTICE.read_text(encoding="utf-8")
+    for module in sorted((WEB / "vendor").glob("*.js")):
+        stem = module.name.split("-")[0]
+        assert stem in notice, f"{module.name} ships and the NOTICE does not name it"
+
+
+@needs_page
+def test_every_typeface_is_named_in_the_notice():
+    """The OFL requires its text to travel with the fonts. It does; this says which."""
+    notice = NOTICE.read_text(encoding="utf-8")
+    families = {face.name.split("-")[0] for face in (WEB / "fonts").glob("*.woff2")}
+    assert families, "no fonts self-hosted"
+    for family in families:
+        licence = WEB / "fonts" / f"OFL-{family}.txt"
+        assert licence.exists(), f"{family} ships without its OFL text"
+        assert licence.name in notice, f"{licence.name} is not named in the NOTICE"
+
+
+@needs_page
+def test_nothing_in_the_directory_reaches_outside_it(html, summaries):
+    """The question that prompted all of this: copy web/ and is everything there?
+
+    Every relative reference must resolve inside this directory. The one exception is
+    `/consent.js`, which is the site's own file and is meant to resolve from the domain
+    root — and it is already allowed by name in SITE_ASSETS above.
+    """
+    from urllib.parse import urldefrag
+
+    sources = (
+        list(WEB.rglob("*.html")) + list(WEB.rglob("*.css")) + list(WEB.rglob("*.js"))
+    )
+    checked = 0
+    for path in sources:
+        text = path.read_text(encoding="utf-8")
+        refs = re.findall(r'(?:href|src)="([^"]+)"', text)
+        refs += re.findall(r'url\(["\']?([^"\')]+)', text)
+        refs += re.findall(r'from\s*"([^"]+)"', text)
+        for ref in refs:
+            ref = urldefrag(ref)[0]
+            if not ref or ref.startswith(("data:", "mailto:", "http", "//", "/")):
+                continue
+            target = (path.parent / ref).resolve()
+            assert target.exists(), f"{path.name} wants {ref}, which is not here"
+            # `target == WEB` is the chapters page linking back up with `../`: inside
+            # by any reasonable reading, and outside by `parents` alone.
+            inside = target == WEB.resolve() or WEB.resolve() in target.parents
+            assert inside, f"{path.name} reaches outside the directory: {ref}"
+            checked += 1
+    assert checked > 50, (
+        f"only {checked} references checked — the scan missed something"
+    )
+    del html, summaries
