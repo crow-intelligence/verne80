@@ -41,6 +41,10 @@ Homepage = "https://crowintelligence.org/"
 Repository = "https://github.com/crow-intelligence/verne80"
 
 [project.optional-dependencies]
+# The share card, and nothing else. A normal install has no reason to carry an imaging
+# library, and scripts/09_og_card.py says so when it is missing rather than failing on
+# an import nobody expected.
+og = ["pillow>=10"]
 dev = [
     "pytest>=8",
     "pytest-cov",
