@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from pathlib import Path
 
 import hypothesis.strategies as st
 import pytest
@@ -23,7 +24,8 @@ from verne80.globe import (
     shortest_rotation,
     to_geojson_point,
 )
-from verne80.people import load_cast
+from verne80.people import PEOPLE_JSON, load_cast
+from verne80.position import TRACKS_JSON
 from verne80.route import spine_from_nodes
 from verne80.schema import TransportMode
 
@@ -541,6 +543,34 @@ def test_the_provenance_carries_no_timestamp():
     record = provenance([], {"total": 0}, journey_payload(THREE_STOPS, {}), [])
     assert "generated_at" not in record
     assert not any("time" in key for key in record)
+
+
+def test_the_provenance_names_inputs_as_the_repository_does():
+    """The record is published, so it must not say where the build ran.
+
+    The curation files are package data, reached through ``Path(__file__)``, so
+    they arrive absolute. They have to come out relative like everything else.
+    """
+    journey = journey_payload(THREE_STOPS, {})
+    inputs = [Path("data/raw/ne_110m_land.geojson"), PEOPLE_JSON, TRACKS_JSON]
+    record = provenance(inputs, {"total": 0}, journey, [])
+    recorded = [entry["path"] for entry in record["inputs"]]
+
+    assert recorded == [
+        "data/raw/ne_110m_land.geojson",
+        "src/verne80/people.json",
+        "src/verne80/tracks.json",
+    ]
+    assert not any(one.startswith("/") for one in recorded)
+    assert not any(str(Path.home()) in one for one in recorded)
+
+
+def test_an_input_from_outside_the_checkout_keeps_only_its_name():
+    """No path outside the repository is meaningful to a reader of the record."""
+    record = provenance(
+        [Path("/etc/hostname")], {"total": 0}, journey_payload(THREE_STOPS, {}), []
+    )
+    assert record["inputs"][0]["path"] == "hostname"
 
 
 # -------------------------------------------------------------------- properties

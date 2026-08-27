@@ -102,6 +102,13 @@ DRIFT_RATIO = 1.0
 # nobody has to wonder whether 6371 was a considered figure or a remembered one.
 EARTH_RADIUS_KM = 6371.0088
 
+# The checkout this file sits in — ``src/verne80/globe.py``, so two levels up from the
+# package. Used only to write inputs into the provenance record as the repository names
+# them; see :func:`_repo_relative`. Installed as a wheel there is no checkout above the
+# package and the path lands in site-packages, which is why that helper degrades to the
+# file name rather than trusting this.
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+
 # How a leg is drawn. Colour carries the mode; the dash pattern carries it a second
 # time, because colour alone is not a channel everyone can read and this page may be
 # printed in grey. The legend prints the dash, so a reader with no colour at all still
@@ -846,20 +853,24 @@ def provenance(
     changed. A build date, if one is ever wanted, is the git commit's.
 
     Args:
-        inputs: The files this build read.
+        inputs: The files this build read. Recorded by their repository-relative
+            path, not the absolute one this machine happens to use — the record
+            is published, so see :func:`_repo_relative` for what that guarantees.
         places_counts: The ``counts`` from :func:`places_payload`.
         journey: The payload from :func:`journey_payload`.
         warnings: Anything the reader of the page should be told.
 
     Returns:
-        The provenance record.
+        The provenance record. An input that does not exist is still listed, with
+        ``sha256`` and ``bytes`` of ``None`` — a missing input is a fact about the
+        build, not a reason to leave a gap in the record.
     """
     located = sum(1 for node in journey["nodes"] if node["lat"] is not None)
     return {
         "generated_by": "scripts/08_dashboard.py",
         "inputs": [
             {
-                "path": str(path),
+                "path": _repo_relative(path),
                 "sha256": _sha256(path),
                 "bytes": path.stat().st_size if path.exists() else None,
             }
@@ -1072,6 +1083,30 @@ def _sha256(path: Path) -> str | None:
     if not path.exists():
         return None
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _repo_relative(path: Path) -> str:
+    """An input's path as the repository sees it, never as this machine sees it.
+
+    ``provenance.json`` is published on the web, so an absolute path in it says
+    where the build ran rather than what it read — meaningless to a reader, and
+    someone's home directory. Most inputs arrive already relative because they
+    come from the scripts' defaults; the curation files do not, because they are
+    package data found through ``Path(__file__)``.
+
+    Args:
+        path: The file, relative to the working directory or absolute.
+
+    Returns:
+        The path relative to the repository root when the file sits inside it —
+        ``src/verne80/people.json``, using forward slashes on every platform.
+        Otherwise the bare file name, which the neighbouring ``sha256`` and
+        ``bytes`` identify well enough. The file need not exist.
+    """
+    try:
+        return path.resolve().relative_to(_REPO_ROOT).as_posix()
+    except ValueError:
+        return path.name
 
 
 def _to_vector(point: Sequence[float]) -> tuple[float, float, float]:
