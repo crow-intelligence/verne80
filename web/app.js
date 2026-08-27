@@ -1,8 +1,13 @@
 /* Load the payloads, wire the page, and say plainly what is not yet checked.
  *
- * One piece of state: which chapter, held in the URL hash. Tabs set the hash; a single
- * hashchange listener is the only thing that renders. Deep link, click and Back all go
- * down the same path, which is the only way this stays checkable by hand.
+ * One piece of state: which chapter, held in the URL hash as `#ch-12`.
+ *
+ * That hash names a real element — the chapter written out four thousand words down the
+ * page — which is exactly what makes the tab bar work with scripting switched off, and
+ * exactly what must not happen with it switched on: a tab click has to turn the globe
+ * where it stands. So a click is prevented, the URL is pushed, and render() is called.
+ * Back arrives as popstate and a pasted link as hashchange. Three doors, one room, and
+ * the room is still render().
  */
 
 import { createGlobe } from "./globe.js";
@@ -105,13 +110,32 @@ async function main() {
   }
 
   window.addEventListener("hashchange", render);
+  window.addEventListener("popstate", render);
+
+  /* Each written-out chapter links back up to the globe. Here the scroll is wanted, so
+   * it is done explicitly — and without `behavior: "smooth"`, which is why this needs
+   * no reduced-motion guard. */
+  for (const link of document.querySelectorAll("a.to-globe")) {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      go(`#ch-${link.dataset.chapter}`);
+      document.querySelector("#globe").scrollIntoView({ block: "start" });
+    });
+  }
   render();
 }
 
-/** `#/ch/12` is a chapter; anything else, a typo included, is the whole route. */
+/** `#ch-12` is a chapter; anything else — a skip link, a typo, nothing — is the route. */
 function readHash() {
-  const match = /^#\/ch\/(\d+)$/.exec(location.hash);
+  const match = /^#ch-(\d+)$/.exec(location.hash);
   return match ? Number(match[1]) : null;
+}
+
+/* Change the state without letting the browser jump to the section the hash names. */
+function go(hash) {
+  if (location.hash === hash) return render();
+  history.pushState(null, "", hash || location.pathname + location.search);
+  render();
 }
 
 function buildChapterBar(chapters) {
@@ -120,11 +144,15 @@ function buildChapterBar(chapters) {
   for (const entry of chapters) {
     const tab = document.createElement("a");
     tab.className = "tab tabular";
-    tab.href = `#/ch/${entry.chapter}`;
+    tab.href = `#ch-${entry.chapter}`;
     tab.id = `tab-${entry.chapter}`;
     tab.role = "tab";
     tab.tabIndex = -1;
     tab.textContent = String(entry.chapter);
+    tab.addEventListener("click", (event) => {
+      event.preventDefault();
+      go(tab.getAttribute("href"));
+    });
     tab.title = entry.title;
     // The preview follows the pointer without committing to a chapter, so the bar can
     // be read as a table of contents rather than only stepped through.
@@ -141,20 +169,20 @@ function buildChapterBar(chapters) {
   list.addEventListener("keydown", (event) => {
     const numbers = [...tabs.keys()];
     const here = numbers.indexOf(Number(event.target.id?.replace("tab-", "")));
-    const go = {
+    const to = {
       ArrowLeft: here - 1,
       ArrowRight: here + 1,
       Home: 0,
       End: numbers.length - 1,
     }[event.key];
-    if (go !== undefined && go >= 0 && go < numbers.length) {
+    if (to !== undefined && to >= 0 && to < numbers.length) {
       event.preventDefault();
-      const next = tabs.get(numbers[go]);
+      const next = tabs.get(numbers[to]);
       next.tabIndex = 0;
       next.focus();
-      location.hash = next.getAttribute("href");
+      go(next.getAttribute("href"));
     } else if (event.key === "Escape") {
-      location.hash = "#/";
+      go("");
     } else if (event.key === " ") {
       event.preventDefault();
       event.target.click();
@@ -207,19 +235,29 @@ function renderPanel(entry, chapters, journey, located) {
   panel.append(section("transport.heading", travel(entry)));
 }
 
+function anchor(text, hash) {
+  const link = document.createElement("a");
+  link.textContent = text;
+  link.href = hash || location.pathname;
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    go(hash);
+  });
+  return link;
+}
+
 function stepper(entry, total) {
   const row = document.createElement("div");
   row.className = "stepper";
-  const back = document.createElement("a");
-  back.textContent = t("chapter.previous");
-  back.href = `#/ch/${Math.max(1, entry.chapter - 1)}`;
-  const on = document.createElement("a");
-  on.textContent = t("chapter.next");
-  on.href = `#/ch/${Math.min(total, entry.chapter + 1)}`;
-  const all = document.createElement("a");
-  all.textContent = t("chapters.overview");
-  all.href = "#/";
-  row.append(back, on, all);
+  const back = anchor(t("chapter.previous"), `#ch-${Math.max(1, entry.chapter - 1)}`);
+  const on = anchor(t("chapter.next"), `#ch-${Math.min(total, entry.chapter + 1)}`);
+  const all = anchor(t("chapters.overview"), "");
+  // Down to the same chapter written out in full — the pairing that turns a duplicate
+  // into two views of one thing.
+  const read = document.createElement("a");
+  read.textContent = t("chapter.read_below");
+  read.href = `#ch-${entry.chapter}`;
+  row.append(back, on, all, read);
   return row;
 }
 
@@ -574,8 +612,11 @@ function renderLegend(journey) {
   }
 }
 
+/* The itinerary is written into the page at build time, so this replaces rather than
+ * appends — otherwise a reader with scripting on would see all nine stops twice. */
 function renderItinerary(journey, places) {
   const list = document.querySelector("#itinerary");
+  list.replaceChildren();
   const named = new Map(places.places.map((place) => [place.key, place]));
 
   journey.nodes.forEach((node, position) => {
@@ -620,6 +661,13 @@ function renderItinerary(journey, places) {
 
 main().catch((error) => {
   console.error(error);
-  const box = document.querySelector("#provenance");
-  if (box) box.textContent = `The data would not load: ${error.message}`;
+  /* This used to write into #provenance, which no longer exists — so until now a
+   * payload that failed to load produced a silently blank page. The page itself is
+   * fully rendered at build time, so a failure here costs the globe and nothing else,
+   * and saying so is better than leaving a dead interface. */
+  const box = document.querySelector("#page-error");
+  if (box) {
+    box.textContent = `The globe could not load its data: ${error.message}`;
+    box.hidden = false;
+  }
 });

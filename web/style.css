@@ -528,3 +528,62 @@ h1.cover {
   font-style: italic;
   color: var(--ink);
 }
+
+/* ------------------------------------------- the chapters, written out in full */
+
+/* The section that exists because a crawler running no JavaScript used to read 107
+ * words of this page. It is also, straightforwardly, what a reader who does not want
+ * to click thirty-seven tabs is after. */
+
+.chapters-all { max-width: var(--measure); }
+
+.chapter {
+  border-top: 1px solid var(--line);
+  padding-top: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+.chapter h3 {
+  /* Gutenberg prints these in capitals and a printed title is a quotation, so they are
+   * set small with a little letterspacing rather than rewritten into title case. */
+  font-size: 1.05rem;
+  line-height: 1.35;
+  letter-spacing: 0.015em;
+  margin: 0 0 var(--sp-2);
+}
+.chapter-number {
+  color: var(--accent);
+  margin-right: var(--sp-2);
+}
+.chapter p { margin: 0 0 var(--sp-2); }
+
+.chapter-facts {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+.chapter-facts dt {
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  margin-top: var(--sp-2);
+}
+.chapter-facts dd { margin: 0; }
+
+.chapter-back { font-size: var(--fs-label); }
+.chapter-back a { letter-spacing: var(--ls-label); text-transform: uppercase; }
+
+/* Shown only when the payloads fail. Until now the handler wrote into an element that
+ * had been deleted, so a failure was a blank page that said nothing. */
+.page-error {
+  border-left: 3px solid var(--accent);
+  background: var(--card-bg);
+  padding: var(--sp-2) var(--sp-3);
+  margin-bottom: var(--sp-3);
+  max-width: var(--measure);
+}
+
+@media print {
+  /* The written-out chapters are the part of this page that prints usefully. */
+  .chapters-all { max-width: none; }
+  .chapter { break-inside: avoid; }
+}

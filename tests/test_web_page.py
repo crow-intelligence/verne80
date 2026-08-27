@@ -19,6 +19,9 @@ from pathlib import Path
 
 import pytest
 
+from verne80 import page
+from verne80.strings import SITE_URL
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 WEB = REPO_ROOT / "web"
 INDEX = WEB / "index.html"
@@ -51,11 +54,19 @@ def test_no_vendored_module_still_imports_from_a_cdn():
             assert target.startswith("./"), f"{path.name} imports {target}"
 
 
+# Root-absolute paths are the *site's* files, not this page's: they resolve only once
+# this directory is copied to crowintelligence.org. There is exactly one, and naming it
+# here is what stops a second arriving unnoticed.
+SITE_ASSETS = {"/consent.js"}
+
+
 @needs_page
 def test_the_page_asks_for_nothing_over_the_network(html):
     """Every stylesheet, module and font is local. Absolute URLs are links out."""
     for attribute in re.findall(r'(?:src|href)="([^"]+)"', html):
         if attribute.startswith(("#", "data:", "mailto:", "https://")):
+            continue
+        if attribute in SITE_ASSETS:
             continue
         assert (WEB / attribute.lstrip("./")).exists(), f"missing: {attribute}"
 
@@ -118,6 +129,9 @@ def test_the_head_matches_the_string_table(html, strings):
     for pattern, key in (
         (r'<meta name="description"[^>]*content="([^"]*)"', "site.description"),
         (r'<meta property="og:title" content="([^"]*)"', "site.title"),
+        (r'<meta name="twitter:title" content="([^"]*)"', "site.title"),
+        (r'<meta name="twitter:description" content="([^"]*)"', "site.subtitle"),
+        (r'<meta property="og:image:alt" content="([^"]*)"', "site.card_alt"),
     ):
         found = re.search(pattern, html)
         assert found, pattern
@@ -262,7 +276,11 @@ def test_every_key_defined_is_a_key_used(strings):
     described a panel that did not exist. Neither was visible until somebody went
     looking. This is what makes it visible.
     """
+    # The corpus includes the builder and the template: the written-out chapters carry
+    # no data-i18n, so their strings are used by page.py rather than by the markup.
     used = (WEB / "index.html").read_text(encoding="utf-8")
+    used += TEMPLATE.read_text(encoding="utf-8")
+    used += (REPO_ROOT / "src" / "verne80" / "page.py").read_text(encoding="utf-8")
     for path in sorted(WEB.glob("*.js")):
         used += path.read_text(encoding="utf-8")
     unused = sorted(
@@ -349,3 +367,216 @@ def test_the_card_is_the_size_the_head_says_it_is(html):
         for key in ("width", "height")
     }
     assert (declared["width"], declared["height"]) == (1200, 630)
+
+
+# ------------------------------------- what the page says with no JavaScript at all
+
+TEMPLATE = REPO_ROOT / "src" / "verne80" / "page_template.html"
+
+
+@needs_page
+def test_the_page_says_what_it_says_without_javascript(html):
+    """107 words was 15% of what a rendering crawler saw. This is the floor now.
+
+    Three numbers set it. The page carries about 6,200 words after the chapter sections,
+    so a floor of 3,000 leaves half the value as headroom and no editorial trim will
+    reach it. If the chapter block silently failed to render the page would fall to
+    about 520, so the gap between passing and failing is an order of magnitude and
+    nobody has to argue the figure.
+
+    What this does not catch is one chapter going missing, which costs about 90 words.
+    That is deliberate — the test below names each chapter, and a blunt floor should not
+    pretend to do a precise test's job.
+    """
+    words = len(page.visible_text(html).split())
+    assert words >= page.WORD_FLOOR, (
+        f"the page says {words} words with JavaScript switched off. It said 107 before "
+        "the chapter sections and 6,200 after. A number this low means a block did "
+        "not render. Run `make dashboard && make page` and read web/index.html."
+    )
+
+
+@needs_page
+def test_every_chapter_reaches_the_raw_html(html):
+    """The precise counterpart to the blunt floor."""
+    payload = json.loads((WEB / "data" / "chapters.json").read_text(encoding="utf-8"))
+    readable = page.visible_text(html)
+    for entry in payload["chapters"]:
+        assert f'id="ch-{entry["chapter"]}"' in html, entry["chapter"]
+        assert " ".join(entry["title"].split()) in readable, entry["chapter"]
+        assert " ".join(entry["summary"]["detail"].split()) in readable, entry[
+            "chapter"
+        ]
+
+
+@needs_page
+def test_the_itinerary_is_in_the_file_not_only_in_the_script(html):
+    journey = json.loads((WEB / "data" / "journey.json").read_text(encoding="utf-8"))
+    readable = page.visible_text(html)
+    for node in journey["nodes"]:
+        assert node["name_in_text"] in readable, node["name_in_text"]
+
+
+# ----------------------------------------------- the page is generated, and checked
+
+
+@needs_page
+def test_the_committed_page_still_matches_its_template_and_payloads():
+    """The same freshness contract the payloads have, for the same reason."""
+    loaded = {
+        name: json.loads((WEB / "data" / f"{name}.json").read_text(encoding="utf-8"))
+        for name in ("chapters", "journey", "places", "provenance")
+    }
+    rebuilt = page.render(
+        loaded["chapters"],
+        loaded["journey"],
+        loaded["places"],
+        loaded["provenance"],
+        TEMPLATE.read_text(encoding="utf-8"),
+    )
+    assert rebuilt == (WEB / "index.html").read_text(encoding="utf-8"), (
+        "web/index.html is stale — run `make dashboard && make page` and commit both"
+    )
+
+
+@needs_page
+def test_the_template_leaves_no_element_for_javascript_to_fill():
+    """Thirteen elements were empty in the markup and filled only at run time."""
+    assert page.check_template(TEMPLATE.read_text(encoding="utf-8")) == []
+
+
+@needs_page
+def test_no_token_survives_into_the_page(html):
+    assert "{{" not in html and "}}" not in html
+
+
+# --------------------------------------------------------- the address, stated once
+
+
+@needs_page
+def test_every_absolute_self_reference_uses_the_one_constant(html):
+    """Four URLs said /verne80/ while the deployed directory is /verne/."""
+    ours = re.findall(r"https://crowintelligence\.org/verne[^\"'< ]*", html)
+    assert ours, "the page should state its own address"
+    assert [one for one in ours if not one.startswith(SITE_URL)] == []
+
+
+@needs_page
+def test_the_repository_name_is_not_the_deployed_slug(html):
+    """A GitHub link to the repo is fine; crowintelligence.org/verne80 is a 404."""
+    assert "crowintelligence.org/verne80" not in html
+
+
+@needs_page
+def test_the_router_and_the_sections_agree_on_the_hash(html):
+    """Two halves of one decision, in two files, so a test holds them together."""
+    router = (WEB / "app.js").read_text(encoding="utf-8")
+    assert r"/^#ch-(\d+)$/" in router
+    assert 'id="ch-1"' in html
+
+
+# ------------------------------------------------- the head, and the structured data
+
+
+@needs_page
+def test_the_page_loads_the_sites_consent_script(html):
+    """Every other microsite on the domain carries it. This one did not."""
+    assert '<script defer src="/consent.js"></script>' in html
+
+
+@needs_page
+def test_the_page_preloads_the_faces_the_first_screenful_needs(html):
+    preloads = re.findall(r'<link rel="preload" href="\./fonts/([^"]+)"', html)
+    assert set(preloads) == {
+        "ebgaramond-400-600-n-lat.woff2",
+        "playfairdisplay-400-n-lat.woff2",
+    }
+    for name in preloads:
+        assert (WEB / "fonts" / name).exists(), name
+    # A font preload without crossorigin is discarded and quietly fetched twice.
+    assert html.count('as="font"\n      type="font/woff2" crossorigin') == 2
+
+
+@needs_page
+def test_the_structured_data_parses_and_names_what_it_should(html):
+    """A malformed graph is invisible until Search Console complains, weeks later."""
+    block = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
+    assert block, "the page should carry structured data"
+    graph = json.loads(block.group(1))["@graph"]
+
+    kinds = {node["@type"] for node in graph}
+    assert kinds == {
+        "WebPage",
+        "ImageObject",
+        "Book",
+        "Dataset",
+        "BreadcrumbList",
+        "Organization",
+    }
+
+    defined = {node["@id"] for node in graph}
+    for node in graph:
+        for value in _references(node):
+            assert value in defined or value.startswith("https://"), value
+
+    dataset = next(node for node in graph if node["@type"] == "Dataset")
+    for part in dataset["distribution"]:
+        assert part["contentUrl"].startswith(SITE_URL), part["contentUrl"]
+        name = part["contentUrl"].rsplit("/", 1)[-1]
+        assert (WEB / "data" / name).exists(), name
+
+
+@needs_page
+def test_the_dataset_claims_no_licence_it_does_not_hold(html):
+    """borders_1880.json is GPL-3.0; calling it CC BY-NC-SA would be a false claim."""
+    block = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
+    dataset = next(
+        node
+        for node in json.loads(block.group(1))["@graph"]
+        if node["@type"] == "Dataset"
+    )
+    listed = {part["contentUrl"].rsplit("/", 1)[-1] for part in dataset["distribution"]}
+    assert "borders_1880.json" not in listed
+    assert "land.json" not in listed and "borders_modern.json" not in listed
+
+
+@needs_page
+def test_the_book_is_identified_by_the_right_wikidata_entity(html):
+    """Q1219561 is the novel. The films and the play have their own identifiers."""
+    block = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
+    book = next(
+        node for node in json.loads(block.group(1))["@graph"] if node["@type"] == "Book"
+    )
+    assert "https://www.wikidata.org/wiki/Q1219561" in book["sameAs"]
+    assert book["author"]["sameAs"] == "https://www.wikidata.org/wiki/Q33977"
+
+
+@needs_page
+def test_the_preview_card_is_what_the_site_grid_expects():
+    """Its only consumer is another repository, which loads none of these fonts."""
+    import xml.etree.ElementTree as ElementTree
+
+    card = WEB / "preview.svg"
+    assert card.exists()
+    root = ElementTree.parse(card).getroot()
+    assert root.get("viewBox") == "0 0 560 440"
+    raw = card.read_text(encoding="utf-8")
+    assert "@font-face" not in raw and "xlink:href" not in raw
+    assert "http" not in raw.replace("http://www.w3.org/2000/svg", "")
+
+
+def _references(node, out=None):
+    """Every `@id` this node points at, however deeply nested."""
+    out = [] if out is None else out
+    if isinstance(node, dict):
+        for key, value in node.items():
+            if key == "@id":
+                continue
+            if isinstance(value, dict) and set(value) == {"@id"}:
+                out.append(value["@id"])
+            else:
+                _references(value, out)
+    elif isinstance(node, list):
+        for item in node:
+            _references(item, out)
+    return out

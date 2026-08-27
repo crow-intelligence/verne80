@@ -35,7 +35,10 @@ import re
 
 __all__ = [
     "LANGUAGE",
+    "PUBLISHED",
+    "SITE_URL",
     "STRINGS",
+    "UPDATED",
     "check_strings",
     "placeholder_names",
     "strings_payload",
@@ -44,6 +47,21 @@ __all__ = [
 # Stated so the markup, the JSON-LD and the OpenGraph locale have one source between
 # them, rather than three literals that can drift.
 LANGUAGE = "en"
+
+# The address the page is published at — note `/verne/`, not `/verne80/`. The repository
+# keeps its name; the deployed directory does not, and the site's deploy is a plain
+# recursive copy in which the directory basename *is* the URL slug.
+#
+# Stated here for the same reason LANGUAGE is, only more so: the canonical link, og:url,
+# og:image and six JSON-LD identifiers all say it. Four literals that can drift is how a
+# page ends up canonicalising to a 404, which is what this one did until now.
+SITE_URL = "https://crowintelligence.org/verne/"
+
+# Hand-bumped, never `date.today()`. A generated page whose dateModified moves with the
+# clock is a file that diffs on every rebuild — which is exactly what
+# tests/test_dashboard_data.py refuses for the payloads, and the page is no different.
+PUBLISHED = "2026-08-27"
+UPDATED = "2026-08-27"
 
 _PLACEHOLDER = re.compile(r"\{(\w+)\}")
 _MARKUP = re.compile(r"<[^>]+>")
@@ -54,10 +72,11 @@ STRINGS: dict[str, str] = {
     # that spelling; the cover, the browser tab and everyone typing it into a search
     # box use the numeral.
     "site.title": "Around the World in 80 Days",
-    "site.page_title": "Around the World in 80 Days — Jules Verne's Route Mapped",
+    "site.page_title": ("Around the World in 80 Days: Route Map and Chapter Summaries"),
     "site.subtitle": (
         "An AI-made map and chapter-by-chapter summary of Jules Verne's 1872 novel"
     ),
+    "site.card_alt": "A globe with Phileas Fogg's route drawn across it.",
     "site.description": (
         "An interactive globe of Jules Verne's 1872 novel, made with AI. All 37 "
         "chapters summarised, every place the book names mapped, and Fogg's route "
@@ -86,6 +105,16 @@ STRINGS: dict[str, str] = {
     "globe.hint": "Drag to turn the globe.",
     "globe.rotate.pause": "Stop turning",
     "globe.rotate.play": "Turn slowly",
+    # --- the chapters, written out ---
+    "chapters.all.heading": "The book, chapter by chapter",
+    "chapters.all.note": (
+        "All thirty-seven, in the order Verne wrote them: what happens, who is there, "
+        "and where the chapter's geography reaches."
+    ),
+    "chapters.jump": "Read all thirty-seven, written out below.",
+    "chapter.on_globe": "Show chapter {n} on the globe",
+    "chapter.read_below": "Read this chapter written out",
+    "people.by_role": "Named by role: {names}",
     # --- the chapter browser ---
     "chapters.heading": "The chapters",
     "chapters.note": (

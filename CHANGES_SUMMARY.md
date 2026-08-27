@@ -255,6 +255,82 @@ by comparison to other sources before using in academic work."* Quoted verbatim 
 method paragraph now states as neutral method that the route is drawn as great circles
 between the stops the book names; say the word and that goes too.
 
+## PR 5 — findable by search engines, and by machines
+
+**The measurement this was all for.** A crawler that executes no JavaScript read **107
+words** of this page: the navigation, the skip links, three button labels. Not the
+subtitle, not the About section, not one chapter summary — thirteen `data-i18n` elements
+were empty in the markup and filled only at run time, and the 2,926 words of summaries
+appeared in the file zero times. Google renders JavaScript; the crawlers that feed
+language models generally do not. **It reads 6,202 now.**
+
+**`web/index.html` is generated**, from `src/verne80/page_template.html` and the payloads,
+committed and freshness-tested exactly like `web/data/*.json`. Every `data-i18n` element
+carries both the attribute the run-time filler uses *and* an explicit `{{ strings.KEY }}`
+token, and `check_template()` refuses to build if the two disagree — because the
+alternative, finding elements by pattern and filling them, fails silently, which is the
+bug being closed.
+
+**All 37 chapters are written out** below the globe: title, summary, who is in it, who is
+spoken of, where it reaches, how they travel. Places are grouped by where they sit
+relative to the party rather than listed one by one — chapter 29 names twenty-four.
+
+**`#/ch/12` became `#ch-12`**, matching the section's id. The 37-tab bar stops being 37
+dead fragments with scripting off and becomes a table of contents; with scripting on the
+click is prevented and the URL pushed, so the globe turns in place. The hash means the
+same thing either way, which is the point.
+
+**The URL.** Four absolute URLs said `/verne80/` and the deployed directory is `/verne/` —
+the page was canonicalising to a 404. `SITE_URL` in `strings.py` is now the only literal.
+
+**Structured data**: a `@graph` of six nodes built in Python so it cannot be malformed —
+`WebPage`, `ImageObject`, `Book`, `Dataset`, `BreadcrumbList`, and an `Organization` stub
+carrying the site's real `@id` so it merges with the record the rest of the site emits
+rather than dangling. The `Book` cites **Q1219561**, verified as the novel: author Q33977,
+1872, *Le Tour du monde en quatre-vingts jours*. The films have their own identifiers.
+
+**Two bugs, neither of them SEO.** This was the only page on the domain with no
+`consent.js`. And `app.js` wrote its fatal-error message into `#provenance`, an element
+PR 4 deleted — so a payload failure produced a silently blank page. Both fixed.
+
+**Also:** the long-tail title, two font preloads with `crossorigin` (a font preload without
+it is discarded and quietly fetched twice), `robots` with `max-image-preview:large`, the
+`twitter:*` set, and `web/preview.svg` for the site's projects grid.
+
+### Deliberately not done
+
+`/verne/robots.txt`, `/verne/llms.txt` and `/verne/sitemap.xml` would all be reachable and
+referenced by nothing. Subdirectory robots files are ignored by every crawler;
+llmstxt.org specifies the origin root, and the root one picks this page up automatically.
+Writing them would look like a control and be none.
+
+Named `Allow:` lines for GPTBot and friends change nothing — `User-agent: * / Allow: /`
+already permits every bot that exists, and the only reason to name a crawler is to
+*dis*allow it. `<meta name="keywords">` has been dead since 2009. Minification would have
+to be committed, since the deploy is `cp -r`, which makes the file unreviewable to save
+bytes against 844 KB of payload JSON.
+
+### The site repository
+
+Branch `verne/page` in `crow-intelligence.github.io`, **prepared and not pushed**: the
+`projects/verne/` tree, and one dict in `PROJECTS`. Verified by building the site — that
+dict puts `/verne/` into `sitemap-projects.xml`, the root `llms.txt`, `feed.xml` and
+`projects.html` at once. Without it the page is unreachable: the sitemap plugin walks
+content objects, not the output directory.
+
+### What needs a human
+
+**CC BY-NC-SA on a `Dataset`.** Accepted by Google Dataset Search, but the non-commercial
+clause makes many aggregators treat it as not-open. Worth reconsidering separately if
+dataset reuse is a goal.
+
+**`llm_summary` for `PROJECTS`.** The site's Aporia entries have it and the template
+prefers it over `description`; project entries do not. Five characters to add, but doing
+it for one project leaves the data model inconsistent in a new way. Its own PR, backfilled
+for every entry.
+
+**The cross-repo copy.** `make publish` fixes the *how*, not the *did you remember*.
+
 ## Green
 
-`make ci`: 765 tests pass, ruff format and lint clean, `ty check src` clean, 94% overall.
+`make ci`: 783 tests pass, ruff format and lint clean, `ty check src` clean, 94% overall.

@@ -29,8 +29,13 @@ uv run python scripts/01_chapters.py    # -> data/chapters/chapter_01.txt .. _37
 uv run python scripts/02_prompts.py     # -> data/prompts/chapter_NN.txt (paste these into Gemini)
 #   ... paste each prompt into the Gemini UI, save the JSON to data/extractions/chapter_NN.json
 uv run python scripts/03_validate.py    # schema + evidence-quote check -> data/review/
-uv run python scripts/08_dashboard.py   # -> web/data/*.json, the six files the globe reads
+uv run python scripts/08_dashboard.py   # -> web/data/*.json, the payloads the globe reads
+uv run python scripts/10_page.py        # -> web/index.html, with every word already in it
 ```
+
+`make publish` copies `web/` into the site repository as `projects/verne/`, which the
+deploy turns into <https://crowintelligence.org/verne/>. The directory basename is the
+URL slug, which is why it is `verne` and not the repository's own name.
 
 See `data/prompts/README.md` for the paste workflow.
 
@@ -59,6 +64,10 @@ See `data/prompts/README.md` for the paste workflow.
 - **A place that contradicts its own leg is not drawn.** The curation puts Queenstown
   six-tenths of the way from New York to London; the gazetteer put it in New Zealand. The
   export withholds the pin and says why, which needs no opinion about which source is wrong.
+- **A page that says what it says before any script runs.** A crawler executing no
+  JavaScript used to read 107 words of it — the navigation and three button labels. It
+  reads 6,200 now, because `index.html` is generated with every string and all 37 chapter
+  summaries already in the file. A test holds the floor.
 - **Borders that move while the route stays put.** The globe carries two eras of
   political boundary — 1880 and today — as hairlines over the coastline. There is no 1872
   file: the source offers 53 years and the nearest is eight after the novel, which the
