@@ -59,6 +59,10 @@ See `data/prompts/README.md` for the paste workflow.
 - **A place that contradicts its own leg is not drawn.** The curation puts Queenstown
   six-tenths of the way from New York to London; the gazetteer put it in New Zealand. The
   export withholds the pin and says why, which needs no opinion about which source is wrong.
+- **Borders that move while the route stays put.** The globe carries two eras of
+  political boundary — 1880 and today — as hairlines over the coastline. There is no 1872
+  file: the source offers 53 years and the nearest is eight after the novel, which the
+  page states rather than rounds away.
 - **A printed name is a quotation, and the book contradicts itself.** Chapters 20 and 21
   call the pilot of the *Tankadere* John Bunsby; chapter 24 of Gutenberg #103 calls him John
   Busby. The extraction is faithful to both. A display roster reconciles them at the point of
@@ -96,13 +100,16 @@ regenerable and ignored.
 - [x] Route + coordinates on an orthographic globe, with transport modes per stage
 - [x] Chapter browser: summaries, characters, and the places each chapter names
 - [ ] Timeline scrubber and the ahead/behind ledger
-- [ ] Historic (1872) vs current borders toggle
+- [x] Historic (1880) vs present-day borders toggle
 
 **Maintenance**
 
 - [ ] Tune `NEAR_MISS_RATIO` from the first full validation run
 
 ## Attribution
+
+Some of what this repository ships is not MIT. `web/data/borders_1880.json` is derived
+from a GPL-3.0 source and travels under that licence; see `NOTICE`.
 
 - Text: [Project Gutenberg #103](https://www.gutenberg.org/ebooks/103), public domain.
 - Places: [Wikidata](https://www.wikidata.org/), CC0.

@@ -44,7 +44,8 @@ USER_AGENT = (
 
 CSS_URL = (
     "https://fonts.googleapis.com/css2"
-    "?family=EB+Garamond:ital,wght@0,400;0,600;1,400"
+    "?family=Abril+Fatface"
+    "&family=EB+Garamond:ital,wght@0,400;0,600;1,400"
     "&family=Playfair+Display:ital,wght@0,400;1,400"
     "&display=swap"
 )
@@ -57,6 +58,13 @@ SHORT_SUBSET = {"latin": "lat", "latin-ext": "ext"}
 
 # The licence file for each family, so the OFL requirement travels with the bytes.
 LICENCES = {
+    # One weight, one style, used for exactly one thing: the numeral in the title. A fat
+    # Didone is what a Victorian title page put a number in, and Playfair — which is a
+    # Didone too, just not a fat one — cannot carry that on its own.
+    "Abril Fatface": (
+        "abrilfatface",
+        "https://raw.githubusercontent.com/google/fonts/main/ofl/abrilfatface/OFL.txt",
+    ),
     "EB Garamond": (
         "ebgaramond",
         "https://raw.githubusercontent.com/google/fonts/main/ofl/ebgaramond/OFL.txt",

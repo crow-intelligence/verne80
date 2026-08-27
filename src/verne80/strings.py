@@ -50,12 +50,28 @@ _MARKUP = re.compile(r"<[^>]+>")
 
 STRINGS: dict[str, str] = {
     # --- the page itself ---
-    "site.title": "Around the World in Eighty Days",
-    "site.subtitle": "Fogg's itinerary, on the globe he went round",
-    "site.description": (
-        "The route and calendar of Jules Verne's 1872 novel, extracted from the text "
-        "and shown on a rotating globe."
+    # 80, not Eighty. The book's own title spells it out and the About section keeps
+    # that spelling; the cover, the browser tab and everyone typing it into a search
+    # box use the numeral.
+    "site.title": "Around the World in 80 Days",
+    "site.page_title": "Around the World in 80 Days — Jules Verne's Route Mapped",
+    "site.subtitle": (
+        "An AI-made map and chapter-by-chapter summary of Jules Verne's 1872 novel"
     ),
+    "site.description": (
+        "An interactive globe of Jules Verne's 1872 novel, made with AI. All 37 "
+        "chapters summarised, every place the book names mapped, and Fogg's route "
+        "drawn stage by stage."
+    ),
+    # The cover, echoing the book's own title page: two lines and an enormous numeral.
+    # Splitting a sentence across keys is what the rules here forbid, and this is the
+    # exception that proves them — these are not prose, they are four pieces of
+    # typography set at four sizes. The heading still reads "Around the World in 80
+    # Days" to a screen reader, because the whitespace between them is real markup.
+    "title.line1": "Around the World",
+    "title.in": "in",
+    "title.eighty": "80",
+    "title.days": "Days",
     # --- site chrome ---
     "nav.brand": "Crow Intelligence",
     "nav.portfolio": "Portfolio",
@@ -66,7 +82,6 @@ STRINGS: dict[str, str] = {
     "skip.content": "Skip to the content",
     "skip.itinerary": "Skip the globe, read the itinerary",
     # --- the globe ---
-    "route.heading": "The route",
     "globe.aria": "A globe showing Phileas Fogg's route around the world.",
     "globe.hint": "Drag to turn the globe.",
     "globe.rotate.pause": "Stop turning",
@@ -168,6 +183,16 @@ STRINGS: dict[str, str] = {
     "place.doubtful": "resolved at {score}, below the {threshold} we trust",
     "place.renamed": "{old}, now {new}",
     "place.chapters": "named in chapters {numbers}",
+    # --- the borders ---
+    "borders.heading": "Borders",
+    "borders.label": "Which political borders to draw",
+    "borders.none": "None",
+    "borders.1880": "1880",
+    "borders.today": "Today",
+    "borders.note": (
+        "The historic layer is 1880 — the nearest year the source offers, eight years "
+        "after the novel."
+    ),
     # --- the key beside the globe ---
     "legend.heading": "The key",
     # --- the itinerary list ---
@@ -176,56 +201,58 @@ STRINGS: dict[str, str] = {
         "The same nine stops the globe draws, as a list — which is also how the page "
         "reads with the pictures switched off."
     ),
-    # --- honesty, above the fold ---
-    "arc.schematic": (
-        "The lines are great circles: the shortest path over a sphere between the "
-        "stops Fogg's table names, not the route the ships and trains took. The Suez "
-        "stage "
-        "went through a canal, and the Indian and American stages by rail."
-    ),
-    "prov.line": (
-        "{plotted} places are drawn, of {total} the book names. {confirmed} have been "
-        "checked by a human."
-    ),
-    "prov.doubtful": "{n} of {located} resolutions scored below {threshold}.",
-    "prov.unlocated": (
-        "{n} names have no coordinate at all — some, like Kholby, have no modern place "
-        "to match."
-    ),
-    "prov.rings": "A dot with a broken ring is a place nobody has checked yet.",
     # --- the closing section ---
     # Split into a label and a body wherever the paragraph opens with a bolded word,
     # because the bold is markup and markup does not go in a string.
     "about.heading": "About the project",
+    "about.ai": "This project is made by AI tools with minimal human intervention.",
+    "about.origin": (
+        "The idea came from my son. We read Verne's book together over the summer of "
+        "2026 and kept checking the stages of the journey on a globe — so this is "
+        "that globe, with the book's own itinerary drawn on it."
+    ),
+    "about.how": (
+        "Gemini extracted the named entities from the text — the people and the "
+        "places — and wrote the chapter summaries. Claude Code did the rest: the "
+        "pipeline that slices and checks the book, the joins, the globe, and this "
+        "page."
+    ),
     "about.dataset": (
         "The novel already contains its own dataset. Fogg keeps an itinerary with a "
         "column of gains and losses, and the wager is a route as well as a deadline — "
-        "so the job here is not to impose structure on the text but to make the text's "
-        "own structure visible."
+        "so the job here is not to impose structure on the text but to make the "
+        "text's own structure visible. Every extracted fact carries a verbatim "
+        "quotation from its chapter, and a validator greps each one back against the "
+        "source, so verification is a string match rather than a re-read."
     ),
-    "about.pipeline": (
-        "The pipeline splits the work the way it should be split. Deterministic work "
-        "goes to code: fetching, slicing, joining, geocoding, drawing. Reading "
-        "comprehension goes to a language model with a human check: who is where, "
-        "when, and by what means. The join between the two halves is an evidence "
-        "quote. Every "
-        "extracted fact carries a verbatim quotation from its chapter, and a validator "
-        "greps each one back against the source, so verification is a string match "
-        "rather than a re-read."
+    # Filled from provenance.json at render time, so the sentence cannot drift away
+    # from the build it describes.
+    "about.checked": (
+        "The names were checked. The matches from those names to modern places were "
+        "not: {plotted} of the {total} places the book names have coordinates and are "
+        "drawn, and {doubtful} of those resolutions scored below {threshold}."
     ),
     "about.sources.label": "Sources.",
     "about.sources": (
-        "Text: Project Gutenberg #103, public domain. Places: Wikidata, CC0, resolved "
-        "and then reviewed by hand. Coastline: Natural Earth 1:110m land, public "
-        "domain. Extraction: Google Gemini, with every answer checked against the "
-        "chapter it came from."
+        "Text: Project Gutenberg #103, public domain — the novel's own title is "
+        "Around the World in Eighty Days. Places: Wikidata, CC0. Coastline and "
+        "present-day borders: Natural Earth 1:110m, public domain. Historic borders: "
+        "historical-basemaps by Andr\u00e9 Ourednik, GPL-3.0. Extraction and "
+        "summaries: Google Gemini."
+    ),
+    "about.borders.label": "The borders.",
+    "about.borders": (
+        "The historic layer is 1880. There is no 1872 file and no 1870 one: the "
+        "source offers 53 years and the nearest to the novel is eight years after it. "
+        "Its own README says of the collection, \u201cIt is work in progress: verify "
+        "the maps by comparison to other sources before using in academic work.\u201d"
     ),
     "about.method.label": "Method.",
     "about.method": (
-        "The globe is an orthographic projection drawn with d3-geo, which clips at the "
-        "horizon — so a journey round the world closes on itself with none of the "
-        "seam-splitting a flat map needs. The arcs are great circles between the stops "
-        "the book names, and the page says so rather than implying a survey."
+        "The globe is an orthographic projection drawn with d3-geo, which clips at "
+        "the horizon — so a journey round the world closes on itself with none of the "
+        "seam-splitting a flat map needs. The route is drawn as great circles between "
+        "the stops the book names."
     ),
     "footer.contact": "hello@crowintelligence.org",
     "footer.licence": "CC BY-NC-SA 4.0",

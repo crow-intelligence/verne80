@@ -32,6 +32,7 @@
   --land: #fbf9f2;
   --land-edge: #9a917d;
   --graticule: rgba(74, 67, 55, 0.22);
+  --border: #9c8f74;
   --sphere-edge: #8a8271;
 
   /* --- transport modes ---
@@ -231,9 +232,6 @@ p { max-width: var(--measure); }
   stroke: var(--ink);
   stroke-width: 2;
 }
-/* A broken ring means nobody has checked this resolution. Every pin has one today; they
- * disappear one at a time as the review lands, which is a progress bar you cannot fake. */
-.stop.unchecked circle.pin { stroke-dasharray: 3 2.5; }
 .stop text {
   font-family: var(--text);
   font-size: 13px;
@@ -466,4 +464,67 @@ footer p { max-width: none; margin: var(--sp-1) 0; }
 @media print {
   .chapterbar { display: none; }
   .panel { position: static; max-height: none; overflow: visible; }
+}
+
+/* ------------------------------------------------------------------- the cover */
+
+/* The book's own title page, echoed rather than copied: two lines, a tiny "in", and a
+ * numeral doing the shouting. Playfair carries the words and Abril Fatface the 80,
+ * because a Didone at display size is what a Victorian title page actually was. */
+h1.cover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+  margin: var(--sp-4) 0 var(--sp-2);
+  line-height: 0.95;
+}
+.cover-world {
+  font-size: clamp(2rem, 7vw, 4.1rem);
+  letter-spacing: -0.01em;
+}
+.cover-days {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: clamp(0.4rem, 1.6vw, 1.1rem);
+}
+.cover-small {
+  font-size: clamp(1.1rem, 3vw, 1.9rem);
+  font-style: italic;
+  color: var(--muted);
+}
+.cover-eighty {
+  font-family: "Abril Fatface", var(--display);
+  font-size: clamp(4rem, 15vw, 9rem);
+  line-height: 0.82;
+  color: var(--accent);
+}
+.lede { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* ------------------------------------------------------------ the border control */
+
+.segmented { display: inline-flex; }
+.segmented button {
+  border-right-width: 0;
+  min-width: 58px;
+}
+.segmented button:last-child { border-right-width: 1px; }
+.segmented button[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper);
+}
+.borders-note {
+  font-size: var(--fs-label);
+  text-align: center;
+  margin: var(--sp-1) auto 0;
+}
+
+.about-lede {
+  font-family: var(--display);
+  font-size: var(--fs-sub);
+  font-style: italic;
+  color: var(--ink);
 }

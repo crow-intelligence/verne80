@@ -16,26 +16,36 @@ RFC 7946. Ask it and it says so:
     geoArea({type: "Polygon", coordinates: [square.reverse()]});      // 12.566066
 
 Natural Earth follows the ESRI shapefile convention, which is clockwise, so
-``ne_110m_land`` is **already right for d3**, and :func:`normalise_winding` leaves all
-127 of its rings alone. The function still earns its place twice over: it makes "wound
-the way d3 reads it" a checked fact rather than a lucky one, and the historic-boundary
-layer that comes next is RFC 7946 GeoJSON, wound the other way, where every ring will
-need turning. :func:`ring_area` is signed so that **positive is the area d3 will fill**
-— the number that decides what you see, rather than the one a standard prefers.
+``ne_110m_land`` is **already right for d3** and :func:`normalise_winding` leaves all
+127 of its rings alone. An earlier version of this paragraph went on to predict that
+the historic-boundary layer would be RFC 7946 and would need every ring turned. It is
+not and it does not: all 539 exterior rings of ``world_1880`` are clockwise too,
+because it was exported from a shapefile rather than re-wound to the standard. The
+prediction is gone and :func:`~tests.test_basemap` records the fact instead, which is
+the difference between a docstring that is checked and one that is remembered.
+
+:func:`normalise_winding` still earns its place, and now for a reason rather than a
+guess: two of the 1880 file's 31 holes are wound as exteriors, and d3 would fill those
+as land instead of punching them out. :func:`ring_area` is signed so that **positive is
+the area d3 will fill** — the number that decides what you see, rather than the one a
+standard prefers.
 
 **Rounding.** 1:110m resolves nothing finer than a few kilometres, so coordinates past
 two decimal places are noise that costs bytes. :func:`round_coords` drops them, and is
 deliberately *only* a rounding: it never changes the number of rings, so the property
-that it moves no vertex more than half a step is testable on its own.
+that it moves no vertex more than half a step is testable on its own. The borders are
+rounded harder still — see :data:`BORDER_PLACES`.
 
 **Hygiene.** Rounding can collapse a small island onto a single point. Those rings are
-left in place by :func:`round_coords` and discarded by :func:`land_payload`, so
+left in place by :func:`round_coords` and discarded by :func:`outline_payload`, so
 "shrinking coordinates" and "discarding shapes" stay two separate, separately checkable
 decisions rather than one function that quietly does both.
 
-The output is land, not countries. The first phase of the globe draws no borders, so one
-dissolved MultiPolygon is the entire requirement — and a file with no country in it
-cannot be read as making a claim about which country anything is in.
+**The output carries no country name, and that is deliberate for both layers it
+serves.** For the coastline it is simply not needed. For the borders it is the design:
+they are drawn as hairlines rather than filled shapes, so nothing is ever labelled, and
+a file with no country in it cannot be read as making a claim about which country
+anything is in. Whether the Raj was India is not a question this repository answers.
 """
 
 from __future__ import annotations
@@ -46,8 +56,10 @@ from typing import Any
 
 __all__ = [
     "Ring",
+    "BORDER_PLACES",
     "SPHERE_AREA",
-    "land_payload",
+    "outline_payload",
+    "unnamed_features",
     "normalise_winding",
     "ring_area",
     "round_coords",
@@ -64,6 +76,14 @@ Ring = list[list[float]]
 # The area of a unit sphere, in steradians. An exterior ring larger than half of this is
 # the tell that it is wound backwards and is describing everything it does not enclose.
 SPHERE_AREA = 4.0 * math.pi
+
+# How hard the border layers are rounded. About 11 km, against roughly 30 km to the
+# pixel at the size this globe draws — so a third of a pixel, and nothing visible is
+# lost. It takes the 1880 layer from 152 KB gzipped to about 92, which is the
+# difference between the borders being the largest thing on the page and merely a large
+# one.  The coastline stays at two places. A border that follows a coast is then out by
+# up to a kilometre, which is a thirtieth of a pixel and not worth the bytes to fix.
+BORDER_PLACES = 1
 
 # Below this a ring bounds nothing — under a square metre on Earth. Such a ring has no
 # winding to speak of, and reversing it on the sign of its own rounding error would make
@@ -239,17 +259,64 @@ def round_coords(
     return out
 
 
-def land_payload(geojson: Mapping[str, Any], places: int = 2) -> dict[str, object]:
-    """Dissolve a coastline FeatureCollection into one MultiPolygon the globe can draw.
+def unnamed_features(
+    geojson: Mapping[str, Any], field: str = "NAME"
+) -> list[Mapping[str, Any]]:
+    """The features the source declined to attribute to anyone.
 
-    Natural Earth's land layer arrives as 127 separate features, each carrying the same
-    three properties, all of which say only that it is land. Nothing on the globe tells
-    them apart, so they are merged: one geometry, one fill, and no per-feature
-    bookkeeping to imply a distinction the data does not make.
+    63 of the 236 features in ``world_1880`` have ``NAME``, ``SUBJECTO``, ``PARTOF`` and
+    ``ABBREVN`` all null. They are reported rather than silently skipped, because 27% of
+    a file going missing is a fact about the source and not a detail of the rendering.
 
     Args:
-        geojson: A GeoJSON ``FeatureCollection`` of ``Polygon`` features.
-        places: Decimal places to keep. Default ``2``.
+        geojson: A GeoJSON ``FeatureCollection``.
+        field: The property carrying the name. Default ``"NAME"``, which is what both
+            border layers use.
+
+    Returns:
+        The features with no name, in file order.
+
+    Examples:
+        >>> unnamed_features({"features": [
+        ...     {"properties": {"NAME": "Luxembourg"}},
+        ...     {"properties": {"NAME": None}},
+        ... ]})
+        [{'properties': {'NAME': None}}]
+    """
+    return [
+        feature
+        for feature in (geojson.get("features") or ())
+        if not str((feature.get("properties") or {}).get(field) or "").strip()
+    ]
+
+
+def outline_payload(
+    geojson: Mapping[str, Any],
+    places: int = 2,
+    drop_unnamed: bool = False,
+    name_field: str = "NAME",
+) -> dict[str, object]:
+    """Dissolve a FeatureCollection into one MultiPolygon the globe can draw.
+
+    Serves both geometry layers. Natural Earth's land arrives as 127 features carrying
+    three properties between them, all of which say only that it is land; the border
+    layers arrive as a couple of hundred countries. Either way nothing on the globe
+    tells the features apart — the coastline is one fill and the borders are one stroke
+    — so they are merged, and no per-feature bookkeeping is kept to imply a distinction
+    the drawing does not make.
+
+    Args:
+        geojson: A GeoJSON ``FeatureCollection`` of ``Polygon`` or ``MultiPolygon``
+            features.
+        places: Decimal places to keep. Default ``2``; the borders use
+            :data:`BORDER_PLACES`.
+        drop_unnamed: Skip features the source did not name. Off by default, because for
+            the coastline every feature is unnamed and dropping them would leave
+            nothing. On for the borders, where an unnamed feature is a boundary the
+            source itself declined to attribute — and where the largest of them, an
+            1880 Antarctica reaching from pole to 63 degrees south across every
+            longitude, draws as a straight line right round the globe.
+        name_field: Which property carries the name. Default ``"NAME"``.
 
     Returns:
         A GeoJSON ``MultiPolygon`` geometry — a valid standalone file, so it opens in a
@@ -269,7 +336,7 @@ def land_payload(geojson: Mapping[str, Any], places: int = 2) -> dict[str, objec
 
     Examples:
         >>> square = [[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0], [0.0, 0.0]]
-        >>> payload = land_payload({
+        >>> payload = outline_payload({
         ...     "type": "FeatureCollection",
         ...     "features": [
         ...         {"geometry": {"type": "Polygon", "coordinates": [square]}}
@@ -280,11 +347,14 @@ def land_payload(geojson: Mapping[str, Any], places: int = 2) -> dict[str, objec
 
         A collection with nothing drawable in it is an error, not an empty globe:
 
-        >>> land_payload({"type": "FeatureCollection", "features": []})
+        >>> outline_payload({"type": "FeatureCollection", "features": []})
         Traceback (most recent call last):
         ValueError: no drawable polygon in the coastline — 0 features, 0 rings survived
     """
     features = list(geojson.get("features") or ())
+    if drop_unnamed:
+        skip = {id(one) for one in unnamed_features(geojson, name_field)}
+        features = [feature for feature in features if id(feature) not in skip]
     polygons: list[list[Ring]] = []
     kept = 0
     for feature in features:
@@ -326,8 +396,15 @@ def land_payload(geojson: Mapping[str, Any], places: int = 2) -> dict[str, objec
 def _is_drawable(ring: Sequence[Sequence[float]]) -> bool:
     """Whether a ring still bounds an area after rounding.
 
-    Four points is the minimum for a closed ring around a triangle. Below that the
-    rounding has collapsed an island to a line or a dot, and drawing it would put a
-    zero-area smudge on the globe.
+    Four points is the minimum for a closed ring around a triangle — but four points
+    are not an area, and counting them was all this used to do while the sentence
+    above claimed otherwise. Ten rings in the 1880 borders round onto a straight line
+    at one decimal place: still closed, still four points or more, and enclosing
+    exactly nothing. They reached the payload as zero-area exteriors, which is how a
+    ring ends up with a winding that cannot be corrected because it has none.
+
+    So the area is checked too, against the threshold :func:`normalise_winding` uses
+    for "no winding to get wrong". At one decimal place that discards a handful of
+    slivers a third of a pixel wide; at two it discards nothing.
     """
-    return len(ring) >= 4 and ring[0] == ring[-1]
+    return len(ring) >= 4 and ring[0] == ring[-1] and abs(ring_area(ring)) > _FLAT

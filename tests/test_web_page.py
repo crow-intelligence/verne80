@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import re
+import struct
 from pathlib import Path
 
 import pytest
@@ -104,6 +105,33 @@ def test_every_key_the_scripts_ask_for_exists(strings):
 
 
 @needs_page
+def test_the_head_matches_the_string_table(html, strings):
+    """The title and the description are in the markup twice over, on purpose.
+
+    A crawler that runs no JavaScript still has to read them, so they are written into
+    the head rather than filled by `localise()`. That is a duplicate, and a duplicate
+    nobody checks is a duplicate that drifts.
+    """
+    title = re.search(r"<title>(.*?)</title>", html, re.S)
+    assert title and title.group(1).strip() == strings["site.page_title"]
+
+    for pattern, key in (
+        (r'<meta name="description"[^>]*content="([^"]*)"', "site.description"),
+        (r'<meta property="og:title" content="([^"]*)"', "site.title"),
+    ):
+        found = re.search(pattern, html)
+        assert found, pattern
+        assert found.group(1) == strings[key], key
+
+
+@needs_page
+def test_every_border_era_has_a_label(strings):
+    """The control builds its own labels from the era names."""
+    for era in ("none", "1880", "today"):
+        assert f"borders.{era}" in strings, era
+
+
+@needs_page
 def test_every_transport_mode_has_a_label(strings):
     journey = json.loads((WEB / "data" / "journey.json").read_text(encoding="utf-8"))
     for mode in journey["transport_style"]:
@@ -150,13 +178,6 @@ def test_the_page_names_its_sources(html):
 def test_the_page_carries_the_licence_the_spec_asks_for(html):
     assert "by-nc-sa" in html
     assert "hello@crowintelligence.org" in html
-
-
-@needs_page
-def test_the_page_says_the_arcs_are_schematic(html, strings):
-    """The one sentence that keeps a great circle from reading as a surveyed route."""
-    assert "arc.schematic" in html
-    assert "great circles" in strings["arc.schematic"]
 
 
 @needs_page
@@ -215,7 +236,12 @@ def test_the_page_offers_a_way_past_the_globe(html):
 
 # Prefixes whose keys are chosen at run time from an enum or a data value, so a grep
 # cannot see them. Each is covered by a completeness test below instead.
-DYNAMIC = ("mode.", "schedule.", "track.", "place.class.")
+DYNAMIC = ("mode.", "schedule.", "track.", "place.class.", "borders.")
+
+# Written into the markup rather than filled at run time, because a crawler has to see
+# them without executing anything. test_the_head_matches_the_string_table is what stops
+# the two copies drifting.
+HEAD = {"site.page_title", "site.title", "site.description"}
 
 # Reasons and one-off keys the page reaches through a computed name.
 COMPUTED = {
@@ -242,7 +268,10 @@ def test_every_key_defined_is_a_key_used(strings):
     unused = sorted(
         key
         for key in strings
-        if key not in used and key not in COMPUTED and not key.startswith(DYNAMIC)
+        if key not in used
+        and key not in COMPUTED
+        and key not in HEAD
+        and not key.startswith(DYNAMIC)
     )
     assert unused == [], f"defined and never used: {unused}"
 
@@ -297,3 +326,26 @@ def test_every_reason_a_place_is_held_back_has_a_label(strings):
     listed = json.loads((WEB / "data" / "places.json").read_text(encoding="utf-8"))
     for entry in listed["listed"]:
         assert f"place.{entry['reason']}" in strings, entry["reason"]
+
+
+@needs_page
+def test_the_share_card_the_head_promises_exists():
+    """It did not, for three phases. Every share unfurled without an image."""
+    card = WEB / "assets" / "og.png"
+    assert card.exists(), "run scripts/09_og_card.py"
+
+    # The PNG header, rather than Pillow: the dimensions are asserted against what the
+    # markup declares, and a test should not need the library that made the file.
+    header = card.read_bytes()[:24]
+    assert header[:8] == b"\x89PNG\r\n\x1a\n"
+    width, height = struct.unpack(">II", header[16:24])
+    assert (width, height) == (1200, 630)
+
+
+@needs_page
+def test_the_card_is_the_size_the_head_says_it_is(html):
+    declared = {
+        key: int(re.search(rf'"og:image:{key}" content="(\d+)"', html).group(1))
+        for key in ("width", "height")
+    }
+    assert (declared["width"], declared["height"]) == (1200, 630)

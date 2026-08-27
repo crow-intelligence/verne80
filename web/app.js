@@ -8,7 +8,20 @@
 import { createGlobe } from "./globe.js";
 import { localise, t, useStrings } from "./i18n.js";
 
-const NAMES = ["strings", "journey", "land", "places", "chapters", "provenance"];
+const NAMES = [
+  "strings",
+  "journey",
+  "land",
+  "borders_1880",
+  "borders_modern",
+  "places",
+  "chapters",
+  "provenance",
+];
+
+/* Which border layers exist, in the order the control offers them. `none` is first
+ * because it is the absence of a layer rather than one of them. */
+const ERAS = ["none", "1880", "today"];
 
 async function load(name) {
   const response = await fetch(`./data/${name}.json`);
@@ -28,13 +41,15 @@ async function main() {
   useStrings(strings);
   localise();
 
+  provenanceThreshold = provenance.doubtful_below;
+
   // The chapter payload carries place keys, not coordinates: the fold that produced them
   // is a sixty-codepoint typography normalisation and lives in Python, where a test can
   // see it. The positions are here already, so looking them up costs nothing.
   const located = new Map(places.places.map((place) => [place.key, place]));
   const byNumber = new Map(chapters.chapters.map((entry) => [entry.chapter, entry]));
 
-  renderProvenance(provenance);
+  renderChecked(provenance);
   renderLegend(journey);
   renderItinerary(journey, places);
 
@@ -43,8 +58,10 @@ async function main() {
   const globe = createGlobe(stage, {
     land,
     journey,
+    borders: { 1880: loaded.borders_1880, today: loaded.borders_modern },
     onIdleChange: () => setToggleLabel(toggle, globe),
   });
+  buildBorderControl(globe);
   lightHandler = (key) => globe.light(key);
   setToggleLabel(toggle, globe);
   toggle.addEventListener("click", () => {
@@ -474,26 +491,59 @@ function setToggleLabel(button, globe) {
   button.setAttribute("aria-pressed", String(paused));
 }
 
-function renderProvenance(record) {
-  provenanceThreshold = record.doubtful_below;
-  const box = document.querySelector("#provenance");
+/* The counts used to sit above the globe. They are one sentence in the closing section
+ * now, filled from the build rather than typed, so the numbers cannot drift away from
+ * the payload they describe. */
+function renderChecked(record) {
   const counts = record.places;
-  const unlocated =
-    (counts.by_reason?.none_found ?? 0) + (counts.by_reason?.not_queried ?? 0);
-  const lines = [
-    t("prov.line", {
-      plotted: counts.plotted,
-      total: counts.total,
-      confirmed: counts.confirmed === 0 ? "None" : counts.confirmed,
-    }),
-    t("prov.doubtful", {
-      n: counts.doubtful,
-      located: counts.plotted,
-      threshold: record.doubtful_below,
-    }),
-    t("prov.unlocated", { n: unlocated }),
-  ];
-  for (const line of lines) box.append(paragraph(line));
+  document.querySelector("#about-checked").textContent = t("about.checked", {
+    plotted: counts.plotted,
+    total: counts.total,
+    doubtful: counts.doubtful,
+    threshold: record.doubtful_below,
+  });
+}
+
+/* Borders are a display preference, not content, so they live in localStorage rather
+ * than in the hash — the same reasoning felsozsolca uses for its theme. `?borders=`
+ * overrides it, so a link can still carry the comparison to somebody else. */
+function buildBorderControl(globe) {
+  const group = document.querySelector("#borders");
+  const asked = new URLSearchParams(location.search).get("borders");
+  let remembered = null;
+  try {
+    remembered = localStorage.getItem("borders");
+  } catch {
+    // A browser refusing storage is not a reason to fail to draw a globe.
+  }
+  let era = [asked, remembered, "1880"].find((one) => ERAS.includes(one)) || "1880";
+
+  const buttons = new Map();
+  for (const name of ERAS) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = t(`borders.${name === "none" ? "none" : name}`);
+    button.addEventListener("click", () => choose(name));
+    group.append(button);
+    buttons.set(name, button);
+  }
+
+  function choose(name) {
+    era = name;
+    for (const [key, button] of buttons) {
+      button.setAttribute("aria-pressed", String(key === name));
+    }
+    globe.setBorders(name === "none" ? null : name);
+    // The note explains what the historic layer is, so it belongs to that layer rather
+    // than sitting under the control saying it about whatever is currently drawn.
+    document.querySelector(".borders-note").hidden = name !== "1880";
+    try {
+      localStorage.setItem("borders", name);
+    } catch {
+      // Nothing to do, and nothing worth telling the reader about.
+    }
+  }
+  choose(era);
 }
 
 function renderLegend(journey) {

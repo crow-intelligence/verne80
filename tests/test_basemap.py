@@ -11,16 +11,22 @@ import pytest
 from hypothesis import HealthCheck, given, settings
 
 from verne80.basemap import (
+    BORDER_PLACES,
     SPHERE_AREA,
-    land_payload,
     normalise_winding,
+    outline_payload,
     ring_area,
     round_coords,
+    unnamed_features,
 )
-from verne80.sources import LAND
+from verne80.sources import BORDERS_1880, BORDERS_MODERN, LAND
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 COASTLINE = REPO_ROOT / LAND.path
+BORDER_FILES = {
+    "1880": REPO_ROOT / BORDERS_1880.path,
+    "modern": REPO_ROOT / BORDERS_MODERN.path,
+}
 
 # A one-degree square. CW is clockwise on a north-up map: what d3-geo reads as an
 # exterior ring, and what Natural Earth ships. CCW is RFC 7946's convention, and the
@@ -120,17 +126,17 @@ def test_a_rounded_ring_is_still_closed():
         assert ring[0] == ring[-1]
 
 
-# --------------------------------------------------------------------- land_payload
+# --------------------------------------------------------------------- outline_payload
 
 
 def test_an_empty_collection_is_an_error_not_a_blank_globe():
     with pytest.raises(ValueError, match="no drawable polygon"):
-        land_payload({"type": "FeatureCollection", "features": []})
+        outline_payload({"type": "FeatureCollection", "features": []})
 
 
 def test_a_speck_that_rounds_away_is_dropped_not_drawn():
     speck = [[0.0, 0.0], [0.001, 0.0], [0.0, 0.001], [0.0, 0.0]]
-    payload = land_payload(collection([CCW], [speck]))
+    payload = outline_payload(collection([CCW], [speck]))
     assert len(payload["coordinates"]) == 1
 
 
@@ -145,11 +151,11 @@ def test_a_ring_that_survives_backwards_is_refused():
     # 12.6 steradians. This is a small polar island digitised backwards.
     polar = [[float(lon), 80.0] for lon in range(360, -1, -20)]
     with pytest.raises(ValueError, match="more than half the sphere"):
-        land_payload(collection([polar]))
+        outline_payload(collection([polar]))
 
 
 def test_a_multipolygon_feature_is_unpacked():
-    payload = land_payload(
+    payload = outline_payload(
         {
             "type": "FeatureCollection",
             "features": [
@@ -173,7 +179,7 @@ def test_the_committed_coastline_survives_the_winding_trap():
     must add up to Earth's land fraction and not to its ocean's. A file wound the other
     way passes every structural check and then paints the sea instead of the shore.
     """
-    payload = land_payload(json.loads(COASTLINE.read_text(encoding="utf-8")))
+    payload = outline_payload(json.loads(COASTLINE.read_text(encoding="utf-8")))
     exteriors = [ring_area(rings[0]) for rings in payload["coordinates"]]
 
     assert all(area > 0 for area in exteriors)
@@ -207,7 +213,7 @@ def test_natural_earth_needs_no_turning_and_this_records_that():
     not COASTLINE.exists(), reason="run scripts/00_fetch.py --only land"
 )
 def test_every_committed_ring_is_closed_and_has_an_inside():
-    payload = land_payload(json.loads(COASTLINE.read_text(encoding="utf-8")))
+    payload = outline_payload(json.loads(COASTLINE.read_text(encoding="utf-8")))
     for rings in payload["coordinates"]:
         for ring in rings:
             assert ring[0] == ring[-1]
@@ -264,3 +270,115 @@ def test_area_is_always_a_finite_number(ring):
     """
     area = ring_area(ring)
     assert math.isfinite(area)
+
+
+# ------------------------------------------------------ the two border layers
+
+
+needs_borders = pytest.mark.skipif(
+    not all(path.exists() for path in BORDER_FILES.values()),
+    reason="run scripts/00_fetch.py --only borders-1880 --only borders-modern",
+)
+
+
+@needs_borders
+@pytest.mark.parametrize("era", sorted(BORDER_FILES))
+def test_the_borders_need_no_turning_either(era):
+    """The fact a docstring in this module used to get wrong, now checked instead.
+
+    It predicted that the historic layer would be RFC 7946 and would need every ring
+    turned. All 539 exterior rings of ``world_1880`` are clockwise — d3's convention —
+    because the file was exported from a shapefile rather than re-wound to the standard.
+    If a future release of either source switches convention, this fails rather than
+    quietly painting the sea.
+    """
+    raw = json.loads(BORDER_FILES[era].read_text(encoding="utf-8"))
+    backwards = 0
+    for feature in raw["features"]:
+        geometry = feature.get("geometry") or {}
+        parts = (
+            [geometry["coordinates"]]
+            if geometry.get("type") == "Polygon"
+            else list(geometry.get("coordinates") or ())
+        )
+        for part in parts:
+            if part and ring_area(part[0]) < 0:
+                backwards += 1
+    assert backwards == 0, f"{backwards} exterior rings are wound the other way now"
+
+
+@needs_borders
+@pytest.mark.parametrize("era", sorted(BORDER_FILES))
+def test_a_border_layer_covers_the_land_and_not_the_ocean(era):
+    """Same giveaway as the coastline: the rings must add up to Earth's land."""
+    raw = json.loads(BORDER_FILES[era].read_text(encoding="utf-8"))
+    payload = outline_payload(raw, BORDER_PLACES, drop_unnamed=True)
+    exteriors = [ring_area(rings[0]) for rings in payload["coordinates"]]
+    assert all(area > 0 for area in exteriors)
+    assert max(exteriors) < SPHERE_AREA / 2
+    # Below the coastline's 29% because the unnamed features are dropped, and in 1880
+    # that includes an Antarctica worth about 5% of the sphere.
+    assert 0.20 < sum(exteriors) / SPHERE_AREA < 0.31
+
+
+@needs_borders
+def test_the_1880_antarctica_is_dropped_because_it_draws_as_a_straight_rule():
+    """The case the unnamed-feature rule exists for.
+
+    The source gives 1880 an Antarctica reaching from the pole to 63 degrees south
+    across every longitude, and attributes it to nobody. As a hairline that is a
+    straight line right round the globe, which reads as a bug rather than as a border.
+    """
+    raw = json.loads(BORDER_FILES["1880"].read_text(encoding="utf-8"))
+    dropped = unnamed_features(raw)
+    assert len(dropped) == 63
+
+    def southern_span(feature):
+        lats = [
+            point[1]
+            for part in feature["geometry"]["coordinates"]
+            for ring in part
+            for point in ring
+        ]
+        return min(lats)
+
+    assert min(southern_span(one) for one in dropped) == pytest.approx(-90.0)
+
+    kept = outline_payload(raw, BORDER_PLACES, drop_unnamed=True)
+    lowest = min(
+        point[1] for rings in kept["coordinates"] for ring in rings for point in ring
+    )
+    assert lowest > -80, "something still reaches the pole"
+
+
+def test_an_unnamed_feature_is_only_dropped_when_asked():
+    """Off by default.
+
+    Every feature in the coastline is unnamed, and dropping them all would leave an
+    empty globe.
+    """
+    named = {
+        "properties": {"NAME": "Luxembourg"},
+        "geometry": {"type": "Polygon", "coordinates": [CW]},
+    }
+    blank = {
+        "properties": {"NAME": None},
+        "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+                [[10.0, 10.0], [10.0, 11.0], [11.0, 11.0], [11.0, 10.0], [10.0, 10.0]]
+            ],
+        },
+    }
+    collection = {"type": "FeatureCollection", "features": [named, blank]}
+    assert len(outline_payload(collection)["coordinates"]) == 2
+    assert len(outline_payload(collection, drop_unnamed=True)["coordinates"]) == 1
+
+
+def test_a_name_of_only_whitespace_counts_as_no_name():
+    collection = {"features": [{"properties": {"NAME": "   "}}]}
+    assert len(unnamed_features(collection)) == 1
+
+
+def test_a_feature_with_no_properties_at_all_counts_as_unnamed():
+    assert len(unnamed_features({"features": [{}]})) == 1

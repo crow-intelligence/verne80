@@ -26,10 +26,11 @@ class TestTheShippedTable:
 
     def test_the_placeholders_the_page_relies_on_are_present(self):
         assert placeholder_names(STRINGS["chapter.of"]) == {"n", "total"}
-        assert placeholder_names(STRINGS["prov.line"]) == {
+        assert placeholder_names(STRINGS["about.checked"]) == {
             "plotted",
             "total",
-            "confirmed",
+            "doubtful",
+            "threshold",
         }
         assert "who" in placeholder_names(STRINGS["track.absent"])
 

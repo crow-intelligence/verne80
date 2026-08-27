@@ -21,7 +21,16 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 WEB_DATA = REPO_ROOT / "web" / "data"
 SCRIPTS = REPO_ROOT / "scripts"
 
-PAYLOADS = ("journey", "places", "chapters", "land", "strings", "provenance")
+PAYLOADS = (
+    "journey",
+    "places",
+    "chapters",
+    "land",
+    "borders_1880",
+    "borders_modern",
+    "strings",
+    "provenance",
+)
 
 INPUTS = (
     REPO_ROOT / "data" / "chapters" / "chapter_03.txt",
@@ -30,6 +39,8 @@ INPUTS = (
     REPO_ROOT / "data" / "raw" / "ne_110m_land.geojson",
     REPO_ROOT / "src" / "verne80" / "people.json",
     REPO_ROOT / "src" / "verne80" / "tracks.json",
+    REPO_ROOT / "data" / "raw" / "world_1880.geojson",
+    REPO_ROOT / "data" / "raw" / "ne_110m_admin_0_countries.geojson",
 )
 
 needs_data = pytest.mark.skipif(
@@ -333,6 +344,62 @@ def _chapter(committed, number):
         for entry in committed["chapters"]["chapters"]
         if entry["chapter"] == number
     )
+
+
+@needs_data
+class TestTheBordersAsCommitted:
+    @pytest.mark.parametrize("era", ["borders_1880", "borders_modern"])
+    def test_each_era_is_one_dissolved_multipolygon(self, committed, era):
+        """Hairlines, so one geometry — not one path per country on every frame."""
+        assert committed[era]["type"] == "MultiPolygon"
+        assert len(committed[era]["coordinates"]) > 100
+
+    def test_the_1880_layer_draws_no_rule_across_the_southern_ocean(self, committed):
+        """The 1880 source hands Antarctica to nobody and stretches it round the world.
+
+        Its edge sits at 63 degrees south across every longitude, so as a hairline it
+        is a straight rule right round the globe — which reads as a bug rather than as
+        a border. Dropping the features the source declined to name removes it.
+
+        The modern layer is exempt and stays: Natural Earth names Antarctica, and its
+        polygon closes at the pole itself, which an orthographic projection collapses
+        to a point rather than to a line.
+        """
+        lowest = min(
+            point[1]
+            for rings in committed["borders_1880"]["coordinates"]
+            for ring in rings
+            for point in ring
+        )
+        assert lowest > -80
+
+    def test_the_modern_layer_keeps_the_antarctica_the_source_names(self, committed):
+        lowest = min(
+            point[1]
+            for rings in committed["borders_modern"]["coordinates"]
+            for ring in rings
+            for point in ring
+        )
+        assert lowest == pytest.approx(-90.0)
+
+    def test_the_provenance_records_what_was_dropped_and_why(self, committed):
+        borders = committed["provenance"]["borders"]
+        assert borders["unnamed_features_dropped"]["borders_1880"] == 63
+        assert borders["unnamed_features_dropped"]["borders_modern"] == 0
+        assert borders["decimal_places"] == 1
+
+    def test_the_provenance_records_the_copyleft(self, committed):
+        """A licence nobody records is a licence somebody breaches."""
+        licences = committed["provenance"]["borders"]["licences"]
+        assert licences["borders-1880"] == "GPL-3.0"
+        assert licences["borders-modern"] == "public domain"
+
+    def test_the_provenance_hashes_both_border_sources(self, committed):
+        hashed = {Path(one["path"]).name for one in committed["provenance"]["inputs"]}
+        assert {
+            "world_1880.geojson",
+            "ne_110m_admin_0_countries.geojson",
+        } <= hashed
 
 
 @needs_data

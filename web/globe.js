@@ -54,7 +54,7 @@ const PLACE_MARK = {
 const SPHERE = { type: "Sphere" };
 const GRATICULE = geoGraticule10();
 
-export function createGlobe(stage, { land, journey, onIdleChange }) {
+export function createGlobe(stage, { land, journey, borders, onIdleChange }) {
   const canvas = stage.querySelector("canvas");
   const svg = stage.querySelector("svg");
   const context = canvas.getContext("2d");
@@ -74,6 +74,7 @@ export function createGlobe(stage, { land, journey, onIdleChange }) {
   let lastIdle = performance.now();
   let paused = prefersReducedMotion();
   let turning = null;
+  let era = null;
   let marks = [];
   let litKey = null;
 
@@ -94,6 +95,7 @@ export function createGlobe(stage, { land, journey, onIdleChange }) {
       land: read("--land", "#fffdf8"),
       landEdge: read("--land-edge", "#cfc9ba"),
       graticule: read("--graticule", "rgba(90,83,70,.16)"),
+      border: read("--border", "#9a917d"),
       sphereEdge: read("--sphere-edge", "#b5ad9b"),
       modes: Object.fromEntries(
         Object.entries(journey.transport_style).map(([mode, style_]) => [
@@ -142,6 +144,22 @@ export function createGlobe(stage, { land, journey, onIdleChange }) {
     context.strokeStyle = ink.landEdge;
     context.lineWidth = 0.7;
     context.stroke();
+
+    /* Political borders, over the land and under the route. One path for the whole
+     * layer, not one per country: they are drawn as hairlines and nothing is labelled,
+     * so a dissolved geometry costs a single path build per frame instead of three
+     * hundred. Dashed, so that a border and a coastline stay tellable apart in print
+     * and in grey. */
+    const layer = era && borders[era];
+    if (layer) {
+      context.beginPath();
+      path(layer);
+      context.strokeStyle = ink.border;
+      context.lineWidth = 0.7;
+      context.setLineDash([3, 2]);
+      context.stroke();
+      context.setLineDash([]);
+    }
 
     for (const leg of journey.legs) {
       if (!leg.arc.length) continue;
@@ -309,6 +327,12 @@ export function createGlobe(stage, { land, journey, onIdleChange }) {
       };
     },
 
+    /* Which era of border to draw, or none at all. */
+    setBorders(name) {
+      era = name && borders[name] ? name : null;
+      draw();
+    },
+
     /* Show one chapter's places, or none. Rebuilt rather than diffed: a chapter names a
      * couple of dozen places at most, and a diff would be more code than it saves. */
     showPlaces(places, focus) {
@@ -383,7 +407,11 @@ function mergeRepeats(nodes) {
 function buildStop(node) {
   const svgNS = "http://www.w3.org/2000/svg";
   const group = document.createElementNS(svgNS, "g");
-  group.setAttribute("class", `stop ${node.status === "confirmed" ? "" : "unchecked"}`);
+  // No unchecked class. The pins used to carry a broken ring meaning "nobody has
+  // checked this resolution", and the sentence explaining it has been taken off the
+  // page — an unexplained notation is worse than none. `status` is still in the
+  // payload, so the ring can come back the day places.csv is reviewed.
+  group.setAttribute("class", "stop");
 
   // An invisible larger circle underneath, so a 7px dot still has a 28px touch target.
   const hit = document.createElementNS(svgNS, "circle");

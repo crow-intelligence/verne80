@@ -172,6 +172,89 @@ is absent from the last leg as intended.
 district* rather than the city, at 0.96 confidence. It is on the route and it is drawn.
 Worth a `corrected_qid` alongside Queenstown and Sydenham.
 
+## PR 4 — `globe/page` (continued): the cover, the caveats, and the borders
+
+**The title echoes the Penguin cover** — two lines and an enormous numeral, Playfair for
+the words and Abril Fatface (OFL, ~20 KB) for the 80 alone. The layout is the cover's;
+the lettering is not, because that artwork is Penguin's. The heading still reads "Around
+the World in 80 Days" to a screen reader, because the whitespace between the four spans
+is real markup.
+
+**SEO.** A subtitle saying what the page is, a 56-character `<title>`, a 160-character
+description, and JSON-LD that describes the page as a `WebSite` *about* a `Book` rather
+than as the book. The head's title and description are written into the markup rather
+than filled by JavaScript, so a crawler that executes nothing still reads them — and a
+test asserts the two copies match the string table.
+
+**The `og:image` had been a 404 since the first commit.** Every share of this page has
+unfurled without a card. `scripts/09_og_card.py` draws one with Pillow behind an optional
+`og` extra; a test checks the PNG header rather than importing the library that made it.
+
+**Removed:** the provenance box, the broken-ring note and the vestigial "The route"
+heading with its great-circle sentence. The counts now live in one sentence in About,
+filled from `provenance.json` so they cannot drift. The dashed rings went with their
+explanation — an unexplained notation is worse than none — but `status` stays in the
+payload, so the ring returns the day `places.csv` is reviewed.
+
+**About the project** is rewritten from `about.txt`: made by AI with minimal human
+intervention, the idea from the author's son, Gemini for the entities and the summaries,
+Claude Code for the rest.
+
+## The borders
+
+Two eras, as hairlines over the coastline: **1880** and today, with a three-way control
+that persists in `localStorage` and takes a `?borders=` override so a link can carry the
+comparison. Default 1880.
+
+**There is no 1872 file.** The source offers 53 years and the nearest to the novel is
+1880, eight years after. The page says so under the control and again in About.
+
+**The winding, which this module's docstring got wrong.** `basemap.py` predicted that the
+historic layer would be RFC 7946 and would need every ring turned. It is not and it does
+not — all 539 exterior rings of `world_1880` are clockwise, the same as Natural Earth,
+because the file was exported from a shapefile. The prediction is deleted and a test
+records the fact instead. `normalise_winding` still earns its place: two of the file's 31
+holes are wound as exteriors, which d3 would fill as land.
+
+**`_is_drawable` was not doing what its own docstring said.** It promised "whether a ring
+still bounds an area" and only counted points. Ten rings in the 1880 borders round onto a
+straight line at one decimal place — closed, four points or more, enclosing exactly
+nothing — and reached the payload as zero-area exteriors whose winding could not be
+corrected because they had none. It now checks the area too. The coastline is unaffected;
+`land.json` is byte-identical.
+
+**`land_payload` is now `outline_payload`**, because it serves two layers. Its closing
+principle survives and improves: the output carries no country name, and for borders
+drawn as hairlines that is the design rather than a limitation.
+
+### Decisions that change what you see
+
+**Unnamed features are dropped — 63 of the 1880 file's 236.** The largest is an
+Antarctica the source attributes to nobody, spanning every longitude from −90° to −63.2°;
+as a hairline that is a straight rule right round the globe. An unlabelled boundary
+asserts a border the source itself declined to attribute. Every one of them keeps its
+coastline from the land layer. Natural Earth *names* Antarctica, so the modern layer keeps
+it — and its polygon closes at the pole, which an orthographic projection collapses to a
+point rather than a line.
+
+**`BORDER_PLACES = 1`** — about 11 km against roughly 30 km to the pixel, so a third of a
+pixel. Takes the 1880 layer from 152 KB gzipped to 80. The coastline stays at two places.
+
+### What needs a human
+
+**The GPL-3.0 judgement.** `historical-basemaps` carries a plain, unmodified GPL-3.0 and
+no separate data licence. verne80 is MIT and the page is CC BY-NC-SA 4.0.
+`web/data/borders_1880.json` ships under GPL-3.0 with a `NOTICE` naming André Ourednik.
+Whether copyleft in fact reaches a rounded, re-wound, feature-filtered extract of geometry
+is a question of law, not of fact. It is recorded, not resolved.
+
+**The 1880 layer's accuracy.** Its own README: *"It is work in progress: verify the maps
+by comparison to other sources before using in academic work."* Quoted verbatim in About.
+
+**The arcs are described nowhere on the globe.** The caveat was deleted on request. About's
+method paragraph now states as neutral method that the route is drawn as great circles
+between the stops the book names; say the word and that goes too.
+
 ## Green
 
-`make ci`: 687 tests pass, ruff format and lint clean, `ty check src` clean, 93% overall.
+`make ci`: 765 tests pass, ruff format and lint clean, `ty check src` clean, 94% overall.

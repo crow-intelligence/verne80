@@ -18,6 +18,8 @@ from pathlib import Path
 
 __all__ = [
     "BOOK",
+    "BORDERS_1880",
+    "BORDERS_MODERN",
     "DEFAULT_RAW_DIR",
     "GeoJSONSource",
     "GutenbergSource",
@@ -186,4 +188,47 @@ LAND = GeoJSONSource(
     attribution="Natural Earth",
 )
 
-SOURCES: tuple[GutenbergSource | GeoJSONSource, ...] = (BOOK, LAND)
+# The world as Verne's readers knew it. There is no 1872 file and no 1870 one: the
+# collection offers 53 years and the nearest to the novel is 1880, eight years after.
+# That gap is stated on the page rather than rounded away, because "the borders of 1872"
+# would be a claim about a file that does not exist.
+#
+# Pinned to a commit, not to a branch: the repository has no tags and no releases, so
+# `master` is not a pin. This file has been byte-identical since December 2023.
+#
+# GPL-3.0, which is unusual for geodata and is the reason NOTICE exists. The repository
+# carries a plain unmodified copy of the licence and no separate data terms, so the
+# derived layer travels with the same licence and the author is credited by name.
+BORDERS_1880 = GeoJSONSource(
+    name="borders-1880",
+    slug="world_1880",
+    title="Historical basemaps: world borders, 1880",
+    url=(
+        "https://raw.githubusercontent.com/aourednik/historical-basemaps/"
+        "62d8f1a03a71f2d3ff17f2d166f7553f256bce68/geojson/world_1880.geojson"
+    ),
+    licence="GPL-3.0",
+    attribution="André Ourednik, historical-basemaps",
+    min_bytes=500_000,
+)
+
+# The world now, from the same release as the coastline, so the two cannot drift apart.
+BORDERS_MODERN = GeoJSONSource(
+    name="borders-modern",
+    slug="ne_110m_admin_0_countries",
+    title="Natural Earth 1:110m country borders",
+    url=(
+        "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/"
+        "v5.1.2/geojson/ne_110m_admin_0_countries.geojson"
+    ),
+    licence="public domain",
+    attribution="Natural Earth",
+    min_bytes=400_000,
+)
+
+SOURCES: tuple[GutenbergSource | GeoJSONSource, ...] = (
+    BOOK,
+    LAND,
+    BORDERS_1880,
+    BORDERS_MODERN,
+)

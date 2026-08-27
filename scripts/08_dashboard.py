@@ -1,17 +1,17 @@
-"""Join the pipeline's four artefacts into the six files the globe reads.
+"""Join the pipeline's artefacts into the eight files the globe reads.
 
 Every ingredient already exists — Fogg's itinerary, the resolved places, the per-chapter
-positions, the extracted summaries — and this is the join that has never been made. It
-reads nothing from the network and decides nothing new; it puts things beside each other
-and counts what it found.
+positions, the extracted summaries, the coastline and two eras of border — and this is
+the join. It reads nothing from the network and decides nothing new; it puts things
+beside each other and counts what it found.
 
 **It warns, it does not refuse.** No place in ``places.csv`` has been confirmed by a
 human yet, and gating the build on that would make the dashboard hostage to a review
 that has not happened. So a zero-confirmation build is loud and legal, the counts travel
-with the payload, and the page prints them above the fold rather than hiding them in a
-footnote. What *does* stop the build is structural: a route with nothing to draw, a
-chapter with no extraction, a position off the end of the itinerary. Those produce a
-wrong page rather than an unchecked one.
+in ``provenance.json``, and the page states them in its closing section. What *does*
+stop the build is structural: a route with nothing to draw, a chapter with no
+extraction, a position off the end of the itinerary. Those produce a wrong page rather
+than an unchecked one.
 
 Run: ``uv run python scripts/08_dashboard.py``
 """
@@ -24,7 +24,7 @@ import json
 import sys
 from pathlib import Path
 
-from verne80.basemap import land_payload
+from verne80.basemap import BORDER_PLACES, outline_payload, unnamed_features
 from verne80.extractions import load_all
 from verne80.globe import (
     chapters_by_place,
@@ -37,7 +37,7 @@ from verne80.people import PEOPLE_JSON, check_cast, load_cast
 from verne80.position import TRACKS_JSON, load_tracks
 from verne80.review import read_table
 from verne80.route import parse_itinerary
-from verne80.sources import LAND
+from verne80.sources import BORDERS_1880, BORDERS_MODERN, LAND
 from verne80.strings import check_strings, strings_payload
 
 DEFAULT_CHAPTERS_DIR = Path("data/chapters")
@@ -56,6 +56,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--places", type=Path, default=DEFAULT_PLACES)
     parser.add_argument("--positions", type=Path, default=DEFAULT_POSITIONS)
     parser.add_argument("--land", type=Path, default=LAND.path)
+    parser.add_argument("--borders-1880", type=Path, default=BORDERS_1880.path)
+    parser.add_argument("--borders-modern", type=Path, default=BORDERS_MODERN.path)
     parser.add_argument("--people", type=Path, default=PEOPLE_JSON)
     parser.add_argument("--tracks", type=Path, default=TRACKS_JSON)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
@@ -72,6 +74,8 @@ def main(argv: list[str] | None = None) -> int:
         args.land,
         args.people,
         args.tracks,
+        args.borders_1880,
+        args.borders_modern,
     ]
     for path in inputs:
         if not path.exists():
@@ -121,7 +125,20 @@ def main(argv: list[str] | None = None) -> int:
         {str(place["key"]): place for place in places["places"]},
         {str(entry["key"]): entry for entry in places["listed"]},
     )
-    land = land_payload(json.loads(args.land.read_text(encoding="utf-8")))
+    land = outline_payload(json.loads(args.land.read_text(encoding="utf-8")))
+
+    # Two eras of political border, drawn as hairlines over the coastline. Unnamed
+    # features are dropped from both: a boundary the source declined to attribute is a
+    # line nobody drew, and the largest of them — an 1880 Antarctica reaching across
+    # every longitude — renders as a straight rule right round the globe.
+    historic = json.loads(args.borders_1880.read_text(encoding="utf-8"))
+    modern = json.loads(args.borders_modern.read_text(encoding="utf-8"))
+    borders_1880 = outline_payload(historic, BORDER_PLACES, drop_unnamed=True)
+    borders_modern = outline_payload(modern, BORDER_PLACES, drop_unnamed=True)
+    skipped = {
+        "borders_1880": len(unnamed_features(historic)),
+        "borders_modern": len(unnamed_features(modern)),
+    }
     strings = strings_payload()
 
     blocking = _blocking(journey, chapters, table.rows)
@@ -132,6 +149,15 @@ def main(argv: list[str] | None = None) -> int:
 
     warnings = _warnings(places["counts"], journey, places["listed"])
     record = provenance(inputs, places["counts"], journey, warnings)
+    record["borders"] = {
+        "eras": {"1880": BORDERS_1880.title, "modern": BORDERS_MODERN.title},
+        "decimal_places": BORDER_PLACES,
+        "unnamed_features_dropped": skipped,
+        "licences": {
+            BORDERS_1880.name: BORDERS_1880.licence,
+            BORDERS_MODERN.name: BORDERS_MODERN.licence,
+        },
+    }
 
     written = _write(
         args.out,
@@ -139,6 +165,8 @@ def main(argv: list[str] | None = None) -> int:
         places=places,
         chapters=chapters,
         land=land,
+        borders_1880=borders_1880,
+        borders_modern=borders_modern,
         strings=strings,
         provenance=record,
     )
@@ -161,6 +189,12 @@ def main(argv: list[str] | None = None) -> int:
         f"  held back {counts['listed']} "
         f"({', '.join(f'{n} {why}' for why, n in counts['by_reason'].items())})"
     )
+    for era, payload in (("1880", borders_1880), ("modern", borders_modern)):
+        rings = sum(len(one) for one in payload["coordinates"])
+        print(
+            f"  borders   {era:<6} {len(payload['coordinates']):>3} polygons, "
+            f"{rings:>3} rings, {skipped[f'borders_{era}']} unnamed features dropped"
+        )
     people = chapters["cast"]
     named = sum(1 for one in people if one["kind"] == "person")
     print(
@@ -289,6 +323,10 @@ def _who_makes(path: Path) -> str:
         "places.csv": "run scripts/05_places.py then scripts/07_gazetteer.py",
         "positions.json": "run scripts/06_positions.py",
         "ne_110m_land.geojson": "run scripts/00_fetch.py --only land",
+        "world_1880.geojson": "run scripts/00_fetch.py --only borders-1880",
+        "ne_110m_admin_0_countries.geojson": (
+            "run scripts/00_fetch.py --only borders-modern"
+        ),
     }
     return stage.get(path.name, "check the path")
 

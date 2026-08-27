@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Around the World in Eighty Days — Crow Intelligence</title>
-<meta name="description" data-i18n-content="site.description" content="The route and calendar of Jules Verne's 1872 novel, extracted from the text and shown on a rotating globe." />
+<title>Around the World in 80 Days — Jules Verne's Route Mapped</title>
+<meta name="description" data-i18n-content="site.description" content="An interactive globe of Jules Verne's 1872 novel, made with AI. All 37 chapters summarised, every place the book names mapped, and Fogg's route drawn stage by stage." />
 <link rel="canonical" href="https://crowintelligence.org/verne80/" />
 <meta name="theme-color" content="#7a1f1f" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%23f7f5ef' stroke='%237a1f1f' stroke-width='2'/%3E%3Cpath d='M3 16h26M16 3c5 6 5 20 0 26M16 3c-5 6-5 20 0 26' fill='none' stroke='%237a1f1f' stroke-width='1.2'/%3E%3C/svg%3E" />
@@ -12,8 +12,8 @@
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_GB" />
 <meta property="og:site_name" content="Crow Intelligence" />
-<meta property="og:title" content="Around the World in Eighty Days" />
-<meta property="og:description" content="Fogg's itinerary, on the globe he went round. Extracted from Gutenberg #103, resolved against Wikidata, checked by hand." />
+<meta property="og:title" content="Around the World in 80 Days" />
+<meta property="og:description" content="An AI-made map and chapter-by-chapter summary of Jules Verne's 1872 novel." />
 <meta property="og:url" content="https://crowintelligence.org/verne80/" />
 <meta property="og:image" content="https://crowintelligence.org/verne80/assets/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -25,13 +25,21 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "CreativeWork",
-  "name": "Around the World in Eighty Days — the route on a globe",
+  "@type": "WebSite",
+  "name": "Around the World in 80 Days — Jules Verne's Route Mapped",
+  "description": "An AI-made map and chapter-by-chapter summary of Jules Verne's 1872 novel.",
+  "url": "https://crowintelligence.org/verne80/",
   "inLanguage": "en",
   "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
-  "author": { "@type": "Organization", "name": "Crow Intelligence" },
-  "publisher": { "@type": "Organization", "name": "Crow Intelligence" },
-  "isBasedOn": "https://www.gutenberg.org/ebooks/103"
+  "creator": { "@type": "Organization", "name": "Crow Intelligence", "url": "https://crowintelligence.org/" },
+  "about": {
+    "@type": "Book",
+    "name": "Around the World in Eighty Days",
+    "alternateName": "Le tour du monde en quatre-vingts jours",
+    "author": { "@type": "Person", "name": "Jules Verne" },
+    "datePublished": "1872",
+    "sameAs": "https://www.gutenberg.org/ebooks/103"
+  }
 }
 </script>
 
@@ -57,10 +65,18 @@
 </nav>
 
 <main id="main">
-  <h1 data-i18n="site.title">Around the World in Eighty Days</h1>
-  <p class="lede" data-i18n="site.subtitle">Fogg's itinerary, on the globe he went round</p>
-
-  <div class="provenance" id="provenance"></div>
+  <!-- The cover, not a sentence in four pieces: each span is set at its own size, and
+       the whitespace between them is real so the accessible name still reads
+       "Around the World in 80 Days". -->
+  <h1 class="cover">
+    <span class="cover-world" data-i18n="title.line1">Around the World</span>
+    <span class="cover-days">
+      <span class="cover-small" data-i18n="title.in">in</span>
+      <span class="cover-eighty" data-i18n="title.eighty">80</span>
+      <span class="cover-small" data-i18n="title.days">Days</span>
+    </span>
+  </h1>
+  <p class="lede" data-i18n="site.subtitle"></p>
 
   <h2 data-i18n="chapters.heading">The chapters</h2>
   <p class="note" data-i18n="chapters.note"></p>
@@ -83,19 +99,21 @@
         <span class="label" data-i18n="globe.hint">Drag to turn the globe.</span>
         <button id="rotate" type="button">Turn slowly</button>
       </div>
+      <div class="controls">
+        <span class="label" data-i18n="borders.heading">Borders</span>
+        <div class="segmented" id="borders" role="group"
+             data-i18n-label="borders.label"></div>
+      </div>
+      <p class="note borders-note" data-i18n="borders.note"></p>
       <div class="legend">
         <h3 data-i18n="legend.heading">The key</h3>
         <ul id="legend-modes" class="modes"></ul>
         <ul id="legend-places" class="places"></ul>
-        <p class="note" data-i18n="prov.rings"></p>
       </div>
     </div>
 
     <div class="panel" id="panel" role="tabpanel"></div>
   </div>
-
-  <h2 data-i18n="route.heading">The route</h2>
-  <p class="note" data-i18n="arc.schematic"></p>
 
   <h2 data-i18n="itinerary.heading">The itinerary</h2>
   <p class="note" data-i18n="itinerary.note">
@@ -118,9 +136,13 @@
   <ol class="itinerary" id="itinerary"></ol>
 
   <h2 data-i18n="about.heading">About the project</h2>
+  <p class="about-lede" data-i18n="about.ai"></p>
+  <p data-i18n="about.origin"></p>
+  <p data-i18n="about.how"></p>
   <p data-i18n="about.dataset"></p>
-  <p data-i18n="about.pipeline"></p>
+  <p id="about-checked"></p>
   <p><strong data-i18n="about.sources.label"></strong> <span data-i18n="about.sources"></span></p>
+  <p><strong data-i18n="about.borders.label"></strong> <span data-i18n="about.borders"></span></p>
   <p><strong data-i18n="about.method.label"></strong> <span data-i18n="about.method"></span></p>
 </main>
 
